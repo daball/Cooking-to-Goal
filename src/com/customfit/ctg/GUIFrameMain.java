@@ -31,7 +31,7 @@ public class GUIFrameMain extends JFrame{
 		panel.setLayout(new BorderLayout());
 		panel.add(titlePanel(), BorderLayout.NORTH);
 		panel.add(centerPanel(), BorderLayout.CENTER);
-//		panel.add(new ButtonPanel());
+		panel.add(new GUIMainButtonPanel(), BorderLayout.CENTER);
 		
 		this.add(panel);
 		
