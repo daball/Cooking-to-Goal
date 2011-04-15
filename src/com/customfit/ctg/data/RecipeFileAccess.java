@@ -1,4 +1,4 @@
-/**
+ /**
  * 
  */
 package com.customfit.ctg.data;
@@ -21,23 +21,56 @@ public class RecipeFileAccess implements FileAccessDriverInterface<Recipe> {
 
 	@Override
 	public boolean saveObject(Recipe recipe) {
-		FileWriter writer;
-		try
-		{
-			writer = new FileWriter("./app_data/recipes/" + recipe.getName() + "-serialized.xml", false);
+		FileOutputStream fOut;
+		try	{
+			//open file
+			fOut = new FileOutputStream("./app_data/recipes/" + recipe.getName() + "-serialized.xml", false);
 		}
-		catch (Exception ex)
-		{
+		catch (IOException ex) {
 			System.err.println("There was a problem creating file at " + "./app_data/recipes/" + recipe.getName() + "-serialized.xml. Message:");
 			System.err.println(ex.getMessage());
+			System.err.println("Stack trace:");
+			System.err.println(ex.getStackTrace());
 			return false;
 		}
-			ObjectOutputStream outStream = new ObjectOutputStream();
 		
-		// TODO Auto-generated method stub
+		ObjectOutputStream oStream;
+		try {
+			//open object stream at file
+			oStream = new ObjectOutputStream(fOut);
+		}
+		catch (IOException ex) {
+			System.err.println("There was creating a serializablre recipe object stream named after " + recipe.getName() + ". Message:");
+			System.err.println(ex.getMessage());
+			System.err.println("Stack trace:");
+			System.err.println(ex.getStackTrace());
+			return false;
+		}
 		
+		try	{
+			//write object
+			oStream.writeObject(recipe);
+		}
+		catch (IOException ex) {
+			System.err.println("There was writing a serializablre recipe object named " + recipe.getName() + " to a file stream. Message:");
+			System.err.println(ex.getMessage());
+			System.err.println("Stack trace:");
+			System.err.println(ex.getStackTrace());
+			return false;
+		}
+		
+		try {
+			//close file
+			fOut.close();
+		}
+		catch (IOException ex) {
+			System.err.println("There was a problem closing file at " + "./app_data/recipes/" + recipe.getName() + "-serialized.xml. Message:");
+			System.err.println(ex.getMessage());
+			System.err.println("Stack trace:");
+			System.err.println(ex.getStackTrace());
+			return false;
+		}
+				
 		return true;
 	}
-
-
 }
