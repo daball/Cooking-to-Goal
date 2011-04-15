@@ -54,7 +54,7 @@ public class GUIFrameMain extends JFrame{
 	
 		
 		panel.add(new GUIMainMenuRecipes());
-		panel.add(new GUIMainMenuRecipes());
+		panel.add(new GUIMainMenuMealMenu());
 		
 		return panel;
 	}

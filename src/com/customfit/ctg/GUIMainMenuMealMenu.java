@@ -13,19 +13,19 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-public class GUIMainMenuRecipes extends JPanel  {
+public class GUIMainMenuMealMenu extends JPanel  {
 	private JLabel lblRecipe;
-	private JButton btnAdd;
+	private JButton btnRemove;
 	private JList listRecipes;
 	
 	String[] defaultList = { "test1", "test2", "test3", "test4",
 	"test5" };
 	
-	GUIMainMenuRecipes() {
-		lblRecipe = new JLabel("Recipes");
+	GUIMainMenuMealMenu() {
+		lblRecipe = new JLabel("Weekly Menu");
 		
-		btnAdd = new JButton("Add");
-		btnAdd.addActionListener(new ButtonListener("add"));
+		btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(new ButtonListener("remove"));
 		
 		listRecipes = new JList(defaultList);
 		listRecipes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
@@ -44,7 +44,8 @@ public class GUIMainMenuRecipes extends JPanel  {
 		
 		this.add(lblRecipe);
 		this.add(simplePanel);
-		this.add(btnAdd);
+		this.add(btnRemove);
+		
 	}
 	
 	private class ButtonListener implements ActionListener {
@@ -55,7 +56,7 @@ public class GUIMainMenuRecipes extends JPanel  {
 			
 		}
 		public void actionPerformed(ActionEvent e) {
-			if(whichButton.equalsIgnoreCase("add")) {
+			if(whichButton.equalsIgnoreCase("remove")) {
 				if (listRecipes.isSelectionEmpty()) {
 					System.out.println("You didn't select anything!");
 				}
