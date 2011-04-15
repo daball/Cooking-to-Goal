@@ -37,7 +37,7 @@ public class Recipe implements Serializable{
 				  String description,
 				  String instructions,
 				  int servingSize,
-				  int rating,
+				  double rating,
 				  Map<Ingredient, Integer> ingredients,
 				  NutritionFacts nutrition
 				  ){
