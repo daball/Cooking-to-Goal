@@ -22,15 +22,24 @@ public class RecipeFileAccess implements FileAccessDriverInterface<Recipe> {
 	@Override
 	public boolean saveObject(Recipe recipe) {
 		FileOutputStream fOut;
+	    
+	    File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+	    
+	    if (!destDir.exists()) destDir.mkdirs();
+	    
 		try	{
 			//open file
-			fOut = new FileOutputStream("./app_data/recipes/" + recipe.getName() + "-serialized.xml", false);
+			fOut = new FileOutputStream(destDir.getCanonicalPath() + File.separator + recipe.getName() + "-serialized.dat", false);
 		}
 		catch (IOException ex) {
-			System.err.println("There was a problem creating file at " + "./app_data/recipes/" + recipe.getName() + "-serialized.xml. Message:");
-			System.err.println(ex.getMessage());
+			try {
+				System.err.println("There was a problem creating file at " + destDir.getCanonicalPath() + File.separator + recipe.getName() + "-serialized.dat" + ". Message:");
+			} catch (IOException e) {
+				System.err.println("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + "-serialized.dat" + ". Message:");
+			}
+			System.err.print(ex.getMessage());
 			System.err.println("Stack trace:");
-			System.err.println(ex.getStackTrace());
+			System.err.print(ex.getStackTrace());
 			return false;
 		}
 		
@@ -40,10 +49,10 @@ public class RecipeFileAccess implements FileAccessDriverInterface<Recipe> {
 			oStream = new ObjectOutputStream(fOut);
 		}
 		catch (IOException ex) {
-			System.err.println("There was creating a serializablre recipe object stream named after " + recipe.getName() + ". Message:");
-			System.err.println(ex.getMessage());
+			System.err.println("There was creating a serializable recipe object stream named after " + recipe.getName() + ". Message:");
+			System.err.print(ex.getMessage());
 			System.err.println("Stack trace:");
-			System.err.println(ex.getStackTrace());
+			System.err.print(ex.getStackTrace());
 			return false;
 		}
 		
@@ -52,10 +61,10 @@ public class RecipeFileAccess implements FileAccessDriverInterface<Recipe> {
 			oStream.writeObject(recipe);
 		}
 		catch (IOException ex) {
-			System.err.println("There was writing a serializablre recipe object named " + recipe.getName() + " to a file stream. Message:");
-			System.err.println(ex.getMessage());
+			System.err.println("There was writing a serializable recipe object named " + recipe.getName() + " to a file stream. Message:");
+			System.err.print(ex.getMessage());
 			System.err.println("Stack trace:");
-			System.err.println(ex.getStackTrace());
+			System.err.print(ex.getStackTrace());
 			return false;
 		}
 		
@@ -64,10 +73,14 @@ public class RecipeFileAccess implements FileAccessDriverInterface<Recipe> {
 			fOut.close();
 		}
 		catch (IOException ex) {
-			System.err.println("There was a problem closing file at " + "./app_data/recipes/" + recipe.getName() + "-serialized.xml. Message:");
-			System.err.println(ex.getMessage());
+			try {
+				System.err.println("There was a problem closing file at " + destDir.getCanonicalPath() + File.separator + recipe.getName() + "-serialized.dat" + ". Message:");
+			} catch (IOException e) {
+				System.err.println("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + "-serialized.dat" + ". Message:");
+			}
+			System.err.print(ex.getMessage());
 			System.err.println("Stack trace:");
-			System.err.println(ex.getStackTrace());
+			System.err.print(ex.getStackTrace());
 			return false;
 		}
 				
