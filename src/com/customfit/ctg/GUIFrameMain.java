@@ -31,7 +31,8 @@ public class GUIFrameMain extends JFrame{
 		panel.setLayout(new BorderLayout());
 		panel.add(titlePanel(), BorderLayout.NORTH);
 		panel.add(centerPanel(), BorderLayout.CENTER);
-		panel.add(new GUIMainButtonPanel(), BorderLayout.CENTER);
+//		panel.add(new GUIMainMenuRecipes(), BorderLayout.CENTER);
+		panel.add(new GUIMainButtonPanel(), BorderLayout.SOUTH);
 		
 		this.add(panel);
 		
@@ -50,9 +51,10 @@ public class GUIFrameMain extends JFrame{
 	private JPanel centerPanel(){
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(1, 2));
+	
 		
-//		panel.add(new GUIMainMenuRecipes());
-//		panel.add(new GUIMainMenuMenuList());
+		panel.add(new GUIMainMenuRecipes());
+		panel.add(new GUIMainMenuRecipes());
 		
 		return panel;
 	}
