@@ -16,20 +16,73 @@ public class FlatFileDriver implements DataDriverInterface {
 	/**
 	 * This is appended to file names when they are generated.
 	 */
-	private static final String RECIPE_FILE_SUFFIX = "-serialized.dat";
+	public static final String RECIPE_FILE_SUFFIX = "-serialized.dat";
+	
 	/**
-	 * 
+	 * This is where recipe data goes.
 	 */
-	private File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+	private File recipeDataDirectory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+	
+	/**
+	 * @return The recipe data directory.
+	 */
+	public File getRecipeDataDirectory() {
+		return this.recipeDataDirectory;
+	}
+
+	@Override
+	public boolean connect(String destinationDirectory) {
+		//this is a file system driver
+		//but we'll do a little testing of the waters anyways
+		this.recipeDataDirectory = new File(destinationDirectory);
+		
+		//the required testing facility is in connect()
+		return this.connect();
+	}
+	
+	public boolean connect() {
+		//this is a file system driver
+		//but we'll do a little testing of the waters anyways
+		
+		//the required testing facility is in isConnected()
+		return this.isConnected();
+	}
+
+	@Override
+	public boolean isConnected() {
+		//this is a file system driver
+		//but we'll do a little testing of the waters anyways
+
+		boolean canConnect = false;
+		
+		//if the data directory exists
+		if (recipeDataDirectory.exists())
+		{
+			//and if you can read & write to data directory
+			if (recipeDataDirectory.canWrite() && recipeDataDirectory.canRead())
+				//then you are "connected"
+				canConnect = true;
+		}
+		//otherwise
+		else
+		{
+			File cwd = new File ("."); //get current working directory
+			//if you can read & write to current working directory
+			if (cwd.exists() && cwd.canWrite() && cwd.canRead())
+				//then you are "connected"
+				canConnect = true;
+		}
+		return canConnect;
+	}
 	
 	@Override
-	public List<Recipe> getAllRecipes() {
+	public List<Recipe> selectAllRecipes() {
 		List<Recipe> recipes = new ArrayList<Recipe>();
 		
-		if (destDir.exists()) for (File recipeFile : destDir.listFiles())
+		if (recipeDataDirectory.exists()) for (File recipeFile : recipeDataDirectory.listFiles())
 		{
 		    Recipe recipe = null; //recipe storage
-		    recipe = this.getRecipe(recipeFile);
+		    recipe = this.selectRecipe(recipeFile);
 		    if (recipe != null)
 		    	recipes.add(recipe);
 		}
@@ -37,29 +90,26 @@ public class FlatFileDriver implements DataDriverInterface {
 		return recipes;
 	}
 
-	public Recipe getRecipe(String recipeName) {
+	public Recipe selectRecipeByName(String recipeName) {
 	    Recipe recipe = null; //recipe storage
 	    String recipeFileName = "";
 	    try {
-			recipeFileName = destDir.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX;
+			recipeFileName = recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX;
 		} catch (IOException ex) {
-			System.err.println("There was a problem opening target data directory for recipes. Message:");
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
+			this.dumpDataError("There was a problem opening target data directory for recipes.", ex);
 		}
 		File recipeFile = new File(recipeFileName);
 		if (recipeFile.exists())
-			recipe = this.getRecipe(recipeFile);
+			recipe = this.selectRecipe(recipeFile);
 		return recipe;
 	}
 	
 	/**
-	 * Returns 
+	 * Returns a recipe by using recipeFile.  
 	 * @param recipeFile
 	 * @return
 	 */
-	public Recipe getRecipe(File recipeFile) {
+	public Recipe selectRecipe(File recipeFile) {
 	    ObjectInputStream iStream = null;
 	    Recipe recipe = null; //recipe storage
 	    
@@ -68,23 +118,19 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (FileNotFoundException ex) {
 	    	try {
-				System.err.println("There was a problem opening non-existant file at " + recipeFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now. Message:");
+	    		this.dumpDataError("There was a problem opening non-existant file at " + recipeFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now.", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now. Message:");
+				this.dumpDataError("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
 		}
 		catch (IOException ex) {
 	    	try {
-				System.err.println("There was a problem opening deserialization stream for file at " + recipeFile.getCanonicalPath() + ". Message:");
+	    		this.dumpDataError("There was a problem opening deserialization stream for file at " + recipeFile.getCanonicalPath() + ".", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem opening deserialization stream for a file. Message:");
+				this.dumpDataError("There was a problem opening deserialization stream for a file.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
 		}
 	    
 	    //deserialize recipe from file
@@ -124,23 +170,19 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 	    catch (IOException ex) {
 	    	try {
-				System.err.println("There was a problem opening file at " + recipeFile.getCanonicalPath() + " for deserialization. Proceeding without interruption. Message:");
+	    		this.dumpDataError("There was a problem opening file at " + recipeFile.getCanonicalPath() + " for deserialization. Proceeding without interruption.", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem opening a file for deserialization. Proceeding without interruption. Message:");
+				this.dumpDataError("There was a problem opening a file for deserialization. Proceeding without interruption.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
 		}
 	    catch (ClassNotFoundException ex) {
 	    	try {
-				System.err.println("There was a problem deserializing object from file at " + recipeFile.getCanonicalPath() + ". Proceeding without interruption. Message:");
+				this.dumpDataError("There was a problem deserializing object from file at " + recipeFile.getCanonicalPath() + ". Proceeding without interruption.", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem deserializing object from a file. Proceeding without interruption. Message:");
+				this.dumpDataError("There was a problem deserializing object from a file. Proceeding without interruption.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
 		}
 	    try {
 	    	//close input stream
@@ -148,37 +190,56 @@ public class FlatFileDriver implements DataDriverInterface {
 				iStream.close();
 		} catch (IOException ex) {
 	    	try {
-				System.err.println("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption. Message:");
+				this.dumpDataError("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem closing a file after deserialization. Proceeding without interruption. Message:");
+				this.dumpDataError("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
 		}
 		
 		return recipe;
 	}
 	
 	@Override
-	public boolean addRecipe(Recipe recipe) {
-		FileOutputStream fOut;
-	    
-	    if (!destDir.exists()) destDir.mkdirs();
-	    
-		try	{
-			//open file
-			fOut = new FileOutputStream(destDir.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX, false);
-		}
+	public boolean insertRecipe(Recipe recipe) {
+		//when using this routine, we'll auto-generate data directory
+	    if (!recipeDataDirectory.exists()) recipeDataDirectory.mkdirs();
+
+	    //prepare a file
+	    File newFile;
+	    try
+	    {
+	    	String newFileName = recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX;
+	    	newFile = new File(newFileName);
+	    }
 		catch (IOException ex) {
 			try {
-				System.err.println("There was a problem creating file at " + destDir.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ". Message:");
+				this.dumpDataError("There was a problem creating file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ". Message:");
+				this.dumpDataError("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
+			return false;
+		}
+	    
+	    //now call the overload to export
+	    return this.insertRecipe(recipe, newFile);
+	}
+	
+	public boolean insertRecipe(Recipe recipe, File toFile) {
+		//this is very reusable, especially for recipe file exporting
+		FileOutputStream fOut;
+		try
+		{
+			fOut = new FileOutputStream(toFile, false);
+		}
+		catch (FileNotFoundException ex) {
+			try {
+				this.dumpDataError("There was a problem creating file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+			} catch (IOException e) {
+				this.dumpDataError("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
+			}
 			return false;
 		}
 		
@@ -188,10 +249,7 @@ public class FlatFileDriver implements DataDriverInterface {
 			oStream = new ObjectOutputStream(fOut);
 		}
 		catch (IOException ex) {
-			System.err.println("There was creating a serializable recipe object stream named after " + recipe.getName() + ". Message:");
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
+			this.dumpDataError("There was a problem creating a serializable recipe object stream named after " + recipe.getName() + ".", ex);
 			return false;
 		}
 		
@@ -200,10 +258,7 @@ public class FlatFileDriver implements DataDriverInterface {
 			oStream.writeObject(recipe);
 		}
 		catch (IOException ex) {
-			System.err.println("There was writing a serializable recipe object named " + recipe.getName() + " to a file stream. Message:");
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
+			this.dumpDataError("There was writing a serializable recipe object named " + recipe.getName() + " to a file stream.", ex);
 			return false;
 		}
 		
@@ -213,69 +268,68 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (IOException ex) {
 			try {
-				System.err.println("There was a problem closing file at " + destDir.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ". Message:");
+				this.dumpDataError("There was a problem closing file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				System.err.println("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ". Message:");
+				this.dumpDataError("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
-			System.err.print(ex.getMessage());
-			System.err.println("Stack trace:");
-			System.err.print(ex.getStackTrace());
 			return false;
 		}
 				
 		return true;
 	}
+	
+	@Override
+	public boolean updateRecipeByName(String currentRecipeName, Recipe updatedRecipe) {
+		//for the filesystem driver, this couldn't be simpler
+		//we're going to delete, then insert
+		if (this.isConnected())
+		{
+			if (this.deleteRecipe(currentRecipeName))
+			{
+				//delete succeeded
+				//now save it
+				return this.insertRecipe(updatedRecipe);
+			}
+		}
+		//otherwise:
+		return false;
+	}
 
 	@Override
-	public boolean connect(String requiredAndIgnoredConnectionString) {
-		//this is a file system driver
-		//this is generally a true statement,
-		//but we'll do a little testing of the waters anyways
-		
-		//the required testing facility is in connect()
-		return this.connect();
+	public boolean deleteRecipe(String recipeName) {
+		File file;
+		try
+		{
+			file = new File(recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX);
+			return file.delete();
+		}
+		catch (IOException ex)
+		{
+			try {
+				this.dumpDataError("There was an error deleting the file " + recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX, ex);
+			} catch (IOException e) {
+				this.dumpDataError("There was an error deleting a file for the " + recipeName + "recipe.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
+			}
+			return false;
+		}
 	}
 	
-	public boolean connect() {
-		//this is a file system driver
-		//this is generally a true statement,
-		//but we'll do a little testing of the waters anyways
-		
-		//the required testing facility is in isConnected()
-		return this.isConnected();
-	}
-
-	@Override
-	public boolean isConnected() {
-		//this is a file system driver
-		//this is generally a true statement,
-		//but we'll do a little testing of the waters anyways
-
-		boolean canConnect = false;
-		
-		//if the data dir exists
-		if (destDir.exists())
-		{
-			//if you can read & write to data directory
-			if (destDir.canWrite() && destDir.canRead())
-				//then you are "connected"
-				canConnect = true;
-		}
-		//otherwise
-		else
-		{
-			File cwd = new File ("."); //current working directory
-			//if you can read & write to current working directory
-			if (cwd.exists() && cwd.canWrite() && cwd.canRead())
-				//then you are "connected"
-				canConnect = true;
-		}
-		return canConnect;
-	}
-
-	@Override
-	public boolean updateRecipe(String currentRecipeName, Recipe updatedRecipe) {
-		// TODO Auto-generated method stub
-		return false;
+	/**
+	 * This is consumed internally by the object in order
+	 * to dump as much info about the error as possible, while
+	 * shortening implementation code by 5 lines per exception.
+	 * There are lots of exceptions, so this was needed to shorten
+	 * the code.
+	 * @param message Message to dump.
+	 * @param exception Exception.
+	 */
+	private void dumpDataError(String message, Exception exception)
+	{
+		System.err.println(message + " Exception Message:");
+		System.err.print(exception.getMessage());
+		System.err.println("Stack trace:");
+		System.err.print(exception.getStackTrace());	
 	}
 }

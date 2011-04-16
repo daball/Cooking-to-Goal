@@ -28,7 +28,7 @@ public interface DataDriverInterface {
 	public boolean isConnected();
 	
 	/**
-	 * Returns a set of all Recipes.
+	 * Returns a list of all Recipes.
 	 * 
 	 * Hint: Try using the getRecipe() function if you only need one Recipe
 	 * object. There is an overhead for repeated round-trips to the database
@@ -36,21 +36,21 @@ public interface DataDriverInterface {
 	 * 
 	 * @return A list of all Recipe objects, or an empty list if none.
 	 */
-	public List<Recipe> getAllRecipes();
+	public List<Recipe> selectAllRecipes();
 	
 	/**
 	 * Returns a Recipe by name.
 	 * @param String Recipe name.
 	 * @return Recipe object, or null if non-existant.
 	 */
-	public Recipe getRecipe(String recipeName);
+	public Recipe selectRecipeByName(String recipeName);
 	
 	/**
 	 * Saves a new Recipe object.
 	 * @param Recipe A Recipe object.
 	 * @return Boolean indicating the success of the operation.
 	 */
-	public boolean addRecipe(Recipe newRecipe);
+	public boolean insertRecipe(Recipe newRecipe);
 	
 	/**
 	 * Updates a saved Recipe object.
@@ -59,5 +59,12 @@ public interface DataDriverInterface {
 	 * @param Recipe The updated Recipe object. 
 	 * @return Boolean indicating the success of the operation.
 	 */
-	public boolean updateRecipe(String currentRecipeName, Recipe updatedRecipe);
+	public boolean updateRecipeByName(String currentRecipeName, Recipe updatedRecipe);
+	
+	/**
+	 * Removes a Recipe object from the database.
+	 * @param recipeName The recipe's name.
+	 * @return Boolean indicating the success of the operation.
+	 */
+	public boolean deleteRecipe(String recipeName);
 }

@@ -52,42 +52,17 @@ public class FlatFileDriverTestCase extends TestCase {
 		//set up file access
 		this.rfa = new FlatFileDriver();
 	}
-	
-	/**
-	 * Tests saving a serialized object.
-	 * @throws FileNotFoundException 
-	 * @throws IOException
-	 */
-	public void testSave() throws FileNotFoundException, IOException
-	{
-		//store the test object
-		this.rfa.addRecipe(this.testRecipe);
-		
-		//grab file info
-	    File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
-		File file = new File(destDir.getCanonicalPath() + File.separator + this.testRecipe.getName() + "-serialized.dat");
-		FileReader fReader = new FileReader(file);
-		BufferedReader bReader = new BufferedReader(fReader);
-		
-		//make sure file it was saved
-		assertTrue(file.exists());
-		
-		//tell the user the contents in console
-		System.out.println("testSave(): Saved test file with contents:");
-		String line = "";
-		while ( (line = bReader.readLine()) != null)
-			System.out.println(line);
 
-		//close readers
-		bReader.close();
-		fReader.close();
-		
-		//delete test file
-		if (file.delete() == false)
-			System.err.println("testSave(): Could not delete test file.");
-		else
-			System.out.println("testSave(): Deleted test recipe file.");
-		System.out.println("testSave(): Test completed.");
+	public void testConnect() throws IOException
+	{
+		System.out.println("testConnect(): Test beginning.");
+		System.out.println("\ttestConnect(): Test empty connect().");
+		assertTrue(this.rfa.connect());
+		System.out.println("\ttestConnect(): Test connect(data dir).");
+		assertTrue(this.rfa.connect(this.rfa.getRecipeDataDirectory().getCanonicalPath()));
+		System.out.println("\ttestConnect(): Test isConnected().");
+		assertTrue(this.rfa.isConnected());
+		System.out.println("testConnect(): Test completed.");
 	}
 	
 	/**
@@ -95,34 +70,69 @@ public class FlatFileDriverTestCase extends TestCase {
 	 * @throws FileNotFoundException 
 	 * @throws IOException
 	 */
-	public void testGet() throws FileNotFoundException, IOException
+	public void testInsertRecipe() throws FileNotFoundException, IOException
 	{
+		System.out.println("testInsertRecipe(): Test beginning.");
+		
 		//store the test object
-		this.rfa.addRecipe(this.testRecipe);
+		this.rfa.insertRecipe(this.testRecipe);
 		
 		//grab file info
-	    File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
-		File file = new File(destDir.getCanonicalPath() + File.separator + this.testRecipe.getName() + "-serialized.dat");
+	    File destDir = this.rfa.getRecipeDataDirectory(); //recipes data directory
+		File file = new File(destDir.getCanonicalPath() + File.separator + this.testRecipe.getName() + FlatFileDriver.RECIPE_FILE_SUFFIX);
 		FileReader fReader = new FileReader(file);
 		BufferedReader bReader = new BufferedReader(fReader);
 		
 		//make sure file it was saved
 		assertTrue(file.exists());
 		
-		//tell the tester the contents in console
-		System.out.println("testGet(): Saved test file.");
+		//tell the user the contents in console
+		System.out.println("\ttestInsertRecipe(): Saved test file with contents:");
 		String line = "";
 		while ( (line = bReader.readLine()) != null)
-			System.out.println(line);
+			System.out.println("\t" + line);
 
 		//close readers
 		bReader.close();
 		fReader.close();
 		
+		//delete test file
+		boolean deleted = false;
+		if ((deleted = file.delete()) == false)
+			System.err.println("\ttestInsertRecipe(): Could not delete test file.");
+		else
+			System.out.println("\ttestInsertRecipe(): Deleted test recipe file.");
+		System.out.println("testInsertRecipe(): Test completed.");
+		
+		assertTrue(deleted);
+		}
+	
+	/**
+	 * Tests saving a serialized object.
+	 * @throws FileNotFoundException 
+	 * @throws IOException
+	 */
+	public void testSelectRecipe() throws FileNotFoundException, IOException
+	{
+		System.out.println("testSelectRecipe(): Test beginning.");
+		
+		//store the test object
+		this.rfa.insertRecipe(this.testRecipe);
+		
+		//grab file info
+	    File destDir = this.rfa.getRecipeDataDirectory(); //recipes data directory
+		File file = new File(destDir.getCanonicalPath() + File.separator + this.testRecipe.getName() + FlatFileDriver.RECIPE_FILE_SUFFIX);
+		
+		//make sure file it was saved
+		assertTrue(file.exists());
+		
+		//tell the tester the contents in console
+		System.out.println("\ttestSelectRecipe(): Saved test recipe.");
+		
 		//now go get the newly created object
-		Recipe recipe = this.rfa.getRecipe(TEST_RECIPE_NAME);
+		Recipe recipe = this.rfa.selectRecipeByName(TEST_RECIPE_NAME);
 
-		System.out.println("testGet(): Retrieved test recipe using the get(String) function.");
+		System.out.println("\ttestSelectRecipe(): Retrieved test recipe using the get(String) function.");
 
 		//now make sure that everything matches after deserialization
 		assertEquals(recipe.getName(), TEST_RECIPE_NAME);
@@ -133,19 +143,23 @@ public class FlatFileDriverTestCase extends TestCase {
 		//disabled tests:
 		//assertEquals(recipe.getIngredients(), TEST_RECIPE_INGREDIENTS);
 		//assertEquals(recipe.getNutrition(), TEST_RECIPE_NUTRITION_INFO);
-		System.out.println("testGet(): Recipe " + "Name" + "=" + recipe.getName());
-		System.out.println("testGet(): Recipe " + "Description" + "=" + recipe.getDescription());
-		System.out.println("testGet(): Recipe " + "Instructions" + "=" + recipe.getInstructions());
-		System.out.println("testGet(): Recipe " + "Rating" + "=" + recipe.getRating());
-		System.out.println("testGet(): Recipe " + "Serving Size" + "=" + recipe.getServingSize());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Name" + "=" + recipe.getName());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Description" + "=" + recipe.getDescription());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Instructions" + "=" + recipe.getInstructions());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Rating" + "=" + recipe.getRating());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Serving Size" + "=" + recipe.getServingSize());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Ingredients" + "=" + recipe.getIngredients());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Nutrition Information" + "=" + recipe.getNutrition());
 		
 		//delete test file
-		if (file.delete() == false)
-			System.err.println("testGet(): Could not delete test file.");
+		boolean deleted = false;
+		if ((deleted = file.delete()) == false)
+			System.err.println("\ttestSelectRecipe(): Could not delete test file.");
 		else
-			System.out.println("testGet(): Deleted test recipe file.");
+			System.out.println("\ttestSelectRecipe(): Deleted test recipe file.");
 
-		System.out.println("testGet(): Test completed.");
+		System.out.println("testSelectRecipe(): Test completed.");
+		assertTrue(deleted);
 	}
 
 	/**
