@@ -60,7 +60,7 @@ public class RecipeFileAccessJUnitTest extends TestCase {
 	 */
 	public void testSave() throws FileNotFoundException, IOException
 	{
-		//save it
+		//store the test object
 		this.rfa.saveObject(this.testRecipe);
 		
 		//grab file info
@@ -73,13 +73,79 @@ public class RecipeFileAccessJUnitTest extends TestCase {
 		assertTrue(file.exists());
 		
 		//tell the user the contents in console
-		System.out.println("Saved test file with contents:");
+		System.out.println("testSave(): Saved test file with contents:");
 		String line = "";
 		while ( (line = bReader.readLine()) != null)
 			System.out.println(line);
+
+		//close readers
+		bReader.close();
+		fReader.close();
 		
 		//delete test file
-		file.delete();
+		if (file.delete() == false)
+			System.err.println("testSave(): Could not delete test file.");
+		else
+			System.out.println("testSave(): Deleted test recipe file.");
+		System.out.println("testSave(): Test completed.");
+	}
+	
+	/**
+	 * Tests saving a serialized object.
+	 * @throws FileNotFoundException 
+	 * @throws IOException
+	 */
+	public void testGet() throws FileNotFoundException, IOException
+	{
+		//store the test object
+		this.rfa.saveObject(this.testRecipe);
+		
+		//grab file info
+	    File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+		File file = new File(destDir.getCanonicalPath() + File.separator + this.testRecipe.getName() + "-serialized.dat");
+		FileReader fReader = new FileReader(file);
+		BufferedReader bReader = new BufferedReader(fReader);
+		
+		//make sure file it was saved
+		assertTrue(file.exists());
+		
+		//tell the tester the contents in console
+		System.out.println("testGet(): Saved test file.");
+		String line = "";
+		while ( (line = bReader.readLine()) != null)
+			System.out.println(line);
+
+		//close readers
+		bReader.close();
+		fReader.close();
+		
+		//now go get the newly created object
+		Recipe recipe = this.rfa.get(TEST_RECIPE_NAME);
+
+		System.out.println("testGet(): Retrieved test recipe using the get(String) function.");
+
+		//now make sure that everything matches after deserialization
+		assertEquals(recipe.getName(), TEST_RECIPE_NAME);
+		assertEquals(recipe.getDescription(), TEST_RECIPE_DESCRIPTION);
+		assertEquals(recipe.getInstructions(), TEST_RECIPE_INSTRUCTIONS);
+		assertEquals(recipe.getRating(), TEST_RECIPE_RATING);
+		assertEquals(recipe.getServingSize(), TEST_RECIPE_SERVING_SIZE);
+		//disabled tests:
+		//assertEquals(recipe.getIngredients(), TEST_RECIPE_INGREDIENTS);
+		//assertEquals(recipe.getNutrition(), TEST_RECIPE_NUTRITION_INFO);
+		System.out.println("testGet(): Recipe " + "Name" + "=" + recipe.getName());
+		System.out.println("testGet(): Recipe " + "Description" + "=" + recipe.getDescription());
+		System.out.println("testGet(): Recipe " + "Instructions" + "=" + recipe.getInstructions());
+		System.out.println("testGet(): Recipe " + "Rating" + "=" + recipe.getRating());
+		System.out.println("testGet(): Recipe " + "Serving Size" + "=" + recipe.getServingSize());
+		
+		//delete test file
+		if (file.delete() == false)
+			System.err.println("testGet(): Could not delete test file.");
+		else
+			System.out.println("testGet(): Deleted test recipe file.");
+
+		System.out.println("testGet(): Test completed.");
 	}
 
 	/**

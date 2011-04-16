@@ -16,6 +16,12 @@ public interface FileAccess <E> {
 	 */
 	public AbstractList<E> getAll();
 	/**
+	 * Returns a object of E type.
+	 * @param String Some object identifier.
+	 * @return A list of all E objects.
+	 */
+	public E get(String s);
+	/**
 	 * Saves an object of E type.
 	 * @param object Any E object.
 	 * @return Boolean indicating the success of the save operation.
