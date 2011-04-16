@@ -15,7 +15,7 @@ import java.io.*;
  * @author David
  *
  */
-public class RecipeFileAccessJUnitTest extends TestCase {
+public class FlatFileDriverTestCase extends TestCase {
 
 	//CONSTANTS
 	private static final String TEST_RECIPE_NAME = "Test Recipe";
@@ -25,7 +25,7 @@ public class RecipeFileAccessJUnitTest extends TestCase {
 	private static final double TEST_RECIPE_RATING = 1.0;
 
 	private Recipe testRecipe;
-	private RecipeFileAccess rfa;
+	private FlatFileDriver rfa;
 	
 	/**
 	 * @throws java.lang.Exception
@@ -50,7 +50,7 @@ public class RecipeFileAccessJUnitTest extends TestCase {
 		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_RATING, null, null);
 		
 		//set up file access
-		this.rfa = new RecipeFileAccess();
+		this.rfa = new FlatFileDriver();
 	}
 	
 	/**

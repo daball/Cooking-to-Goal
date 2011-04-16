@@ -11,7 +11,7 @@ import java.io.*;
  * @author David
  *
  */
-public class RecipeFileAccess implements FileAccessDriverInterface<Recipe> {
+public class FlatFileDriver implements DataDriverInterface<Recipe> {
 
 	/**
 	 * This is appended to file names when they are generated.
