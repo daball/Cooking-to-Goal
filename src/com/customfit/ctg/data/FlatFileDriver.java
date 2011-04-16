@@ -11,7 +11,7 @@ import java.io.*;
  * @author David
  *
  */
-public class FlatFileDriver implements DataDriverInterface<Recipe> {
+public class FlatFileDriver implements DataDriverInterface {
 
 	/**
 	 * This is appended to file names when they are generated.
@@ -23,13 +23,13 @@ public class FlatFileDriver implements DataDriverInterface<Recipe> {
 	private File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
 	
 	@Override
-	public List<Recipe> getAll() {
+	public List<Recipe> getAllRecipes() {
 		List<Recipe> recipes = new ArrayList<Recipe>();
 		
 		if (destDir.exists()) for (File recipeFile : destDir.listFiles())
 		{
 		    Recipe recipe = null; //recipe storage
-		    recipe = this.get(recipeFile);
+		    recipe = this.getRecipe(recipeFile);
 		    if (recipe != null)
 		    	recipes.add(recipe);
 		}
@@ -37,7 +37,7 @@ public class FlatFileDriver implements DataDriverInterface<Recipe> {
 		return recipes;
 	}
 
-	public Recipe get(String recipeName) {
+	public Recipe getRecipe(String recipeName) {
 	    Recipe recipe = null; //recipe storage
 	    String recipeFileName = "";
 	    try {
@@ -50,7 +50,7 @@ public class FlatFileDriver implements DataDriverInterface<Recipe> {
 		}
 		File recipeFile = new File(recipeFileName);
 		if (recipeFile.exists())
-			recipe = this.get(recipeFile);
+			recipe = this.getRecipe(recipeFile);
 		return recipe;
 	}
 	
@@ -59,7 +59,7 @@ public class FlatFileDriver implements DataDriverInterface<Recipe> {
 	 * @param recipeFile
 	 * @return
 	 */
-	public Recipe get(File recipeFile) {
+	public Recipe getRecipe(File recipeFile) {
 	    ObjectInputStream iStream = null;
 	    Recipe recipe = null; //recipe storage
 	    
@@ -161,7 +161,7 @@ public class FlatFileDriver implements DataDriverInterface<Recipe> {
 	}
 	
 	@Override
-	public boolean saveObject(Recipe recipe) {
+	public boolean addRecipe(Recipe recipe) {
 		FileOutputStream fOut;
 	    
 	    if (!destDir.exists()) destDir.mkdirs();
@@ -224,5 +224,58 @@ public class FlatFileDriver implements DataDriverInterface<Recipe> {
 		}
 				
 		return true;
+	}
+
+	@Override
+	public boolean connect(String requiredAndIgnoredConnectionString) {
+		//this is a file system driver
+		//this is generally a true statement,
+		//but we'll do a little testing of the waters anyways
+		
+		//the required testing facility is in connect()
+		return this.connect();
+	}
+	
+	public boolean connect() {
+		//this is a file system driver
+		//this is generally a true statement,
+		//but we'll do a little testing of the waters anyways
+		
+		//the required testing facility is in isConnected()
+		return this.isConnected();
+	}
+
+	@Override
+	public boolean isConnected() {
+		//this is a file system driver
+		//this is generally a true statement,
+		//but we'll do a little testing of the waters anyways
+
+		boolean canConnect = false;
+		
+		//if the data dir exists
+		if (destDir.exists())
+		{
+			//if you can read & write to data directory
+			if (destDir.canWrite() && destDir.canRead())
+				//then you are "connected"
+				canConnect = true;
+		}
+		//otherwise
+		else
+		{
+			File cwd = new File ("."); //current working directory
+			//if you can read & write to current working directory
+			if (cwd.exists() && cwd.canWrite() && cwd.canRead())
+				//then you are "connected"
+				canConnect = true;
+		}
+		return canConnect;
+	}
+
+	@Override
+	public boolean updateRecipe(String currentRecipeName, Recipe updatedRecipe) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

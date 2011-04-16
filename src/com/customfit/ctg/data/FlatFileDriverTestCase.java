@@ -61,7 +61,7 @@ public class FlatFileDriverTestCase extends TestCase {
 	public void testSave() throws FileNotFoundException, IOException
 	{
 		//store the test object
-		this.rfa.saveObject(this.testRecipe);
+		this.rfa.addRecipe(this.testRecipe);
 		
 		//grab file info
 	    File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
@@ -98,7 +98,7 @@ public class FlatFileDriverTestCase extends TestCase {
 	public void testGet() throws FileNotFoundException, IOException
 	{
 		//store the test object
-		this.rfa.saveObject(this.testRecipe);
+		this.rfa.addRecipe(this.testRecipe);
 		
 		//grab file info
 	    File destDir = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
@@ -120,7 +120,7 @@ public class FlatFileDriverTestCase extends TestCase {
 		fReader.close();
 		
 		//now go get the newly created object
-		Recipe recipe = this.rfa.get(TEST_RECIPE_NAME);
+		Recipe recipe = this.rfa.getRecipe(TEST_RECIPE_NAME);
 
 		System.out.println("testGet(): Retrieved test recipe using the get(String) function.");
 
