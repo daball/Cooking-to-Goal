@@ -13,7 +13,6 @@ import java.io.*;
 
 /**
  * @author David
- *
  */
 public class FlatFileDriverTestCase extends TestCase {
 
