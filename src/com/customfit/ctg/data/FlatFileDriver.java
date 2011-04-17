@@ -6,48 +6,115 @@ package com.customfit.ctg.data;
 import com.customfit.ctg.Recipe;
 import java.util.*;
 import java.io.*;
+import java.beans.*;
 
 /**
- * @author David
+ * The FlatFileDriver class represents one of the DataDriverInterfaces
+ * aimed at providing basic data operations for the application
+ * for the local filesystem, as a data store.
+ * 
+ * It uses the long-term object persistence provided in the JSR 57,
+ * Long-Term Persistence for JavaBeans. Although it is the only
+ * part of JavaBeans we'll be using here.
  *
+ * @author David
  */
 public class FlatFileDriver implements DataDriverInterface {
 
 	/**
-	 * This is appended to file names when they are generated.
+	 * This is appended to file names when they are generated
+	 * by the insert/update queries, when exact file names are
+	 * not provided specified by the driver consumer. It provides
+	 * a default naming convention for recipe files.
 	 */
-	public static final String RECIPE_FILE_SUFFIX = "-serialized.dat";
+	public static final String RECIPE_FILE_SUFFIX = ".recipe.xml";
 	
 	/**
-	 * This is where recipe data goes.
+	 * This is File path where recipe data will go, by default, per
+	 * the driver implementation.
 	 */
-	private File recipeDataDirectory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+	private File recipeDataDirectory;	
 	
 	/**
-	 * @return The recipe data directory.
+	 * Creates a new FlatFileDriver object and automatically connects
+	 * to the application's current working directory.
 	 */
-	public File getRecipeDataDirectory() {
-		return this.recipeDataDirectory;
+	public FlatFileDriver() {
+		super();
+		
+		//connect driver to application current working directory
+		this.connect();
 	}
 
+	/**
+	 * Connects the driver to the specific data directory.
+	 * 
+	 * Using this method call will ensure that all data will be written
+	 * to your specified directory. 
+	 * 
+	 * The destination directory is optional. By using the other
+	 * method overload, you guarantee the data directory will be
+	 * chosen by the driver.
+	 * 
+	 * Once a driver has connected to directory, you must call connect(String)
+	 * to use a different directory for default file storage, or connect()
+	 * without any parameters for the application's current working directory.
+	 * 
+	 * @param dataDirectory The directory you want to save to/read from
+	 * by default.
+	 * 
+	 * @return Boolean indicating that you have read and write
+	 * permissions at the target directory you specified.
+	 */
 	@Override
-	public boolean connect(String destinationDirectory) {
+	public boolean connect(String dataDirectory) {
 		//this is a file system driver
 		//but we'll do a little testing of the waters anyways
-		this.recipeDataDirectory = new File(destinationDirectory);
+		this.recipeDataDirectory = new File(dataDirectory);
 		
 		//the required testing facility is in connect()
 		return this.connect();
 	}
 	
+	
+	/**
+	 * Connects the driver to the application's current working directory.
+	 * 
+	 * The destination directory is optional by using the other function
+	 * overload. Once the object is created, the current working can be
+	 * refreshed by calling connect() again without any parameters.
+	 *  
+	 * The default directory for recipes is within the scope of the\
+	 * application's current working directory, at the path:
+	 *  ./app_data/...
+	 *  
+	 * Recipes are stored at:
+	 *  ./app_data/recipes/*
+	 *  
+	 * Once a driver is connected, the object will not adjust paths even
+	 * if the application's current working directory is changed through
+	 * another means. You must re-instantiate the driver or choose a data
+	 * directory manually by calling the connect(String) overloaded method.
+	 * 
+	 * @return Boolean indicating that you have read and write permissions
+	 * at the directory you specified.
+	 */
 	public boolean connect() {
 		//this is a file system driver
 		//but we'll do a little testing of the waters anyways
+		this.recipeDataDirectory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
 		
 		//the required testing facility is in isConnected()
 		return this.isConnected();
 	}
 
+
+	/**
+	 * Checks the driver's connection state to the current data directory.
+	 * 
+	 * @return Boolean indicating that you have read and write permissions
+	 * at the directory it is connected to.
+	 */
 	@Override
 	public boolean isConnected() {
 		//this is a file system driver
@@ -75,6 +142,34 @@ public class FlatFileDriver implements DataDriverInterface {
 		return canConnect;
 	}
 	
+	/**
+	 * Doesn't do anything. It would close a connection normally, but
+	 * there isn't really a connection in this implementation.
+	 */
+	@Override
+	public void close() {
+		// Do nothing, although it is needed for other drivers to work
+		// properly.
+	}
+	
+	/**
+	 * Returns the currently data directory of the current object.
+	 * 
+	 * It makes no assertions about the validity of this path. Use
+	 * the resulting object to check for existing paths and/or usability.
+	 * 
+	 * @return The recipe data directory.
+	 */
+	public File getRecipeDataDirectory() {
+		return this.recipeDataDirectory;
+	}
+	
+	/**
+	 * Selects all recipes from the recipe data directory.
+	 * 
+	 * @return A List of Recipe objects.
+	 */
+	
 	@Override
 	public List<Recipe> selectAllRecipes() {
 		List<Recipe> recipes = new ArrayList<Recipe>();
@@ -82,7 +177,7 @@ public class FlatFileDriver implements DataDriverInterface {
 		if (recipeDataDirectory.exists()) for (File recipeFile : recipeDataDirectory.listFiles())
 		{
 		    Recipe recipe = null; //recipe storage
-		    recipe = this.selectRecipe(recipeFile);
+		    recipe = this.selectRecipeByFile(recipeFile);
 		    if (recipe != null)
 		    	recipes.add(recipe);
 		}
@@ -90,8 +185,28 @@ public class FlatFileDriver implements DataDriverInterface {
 		return recipes;
 	}
 
-	public Recipe selectRecipeByName(String recipeName) {
-	    Recipe recipe = null; //recipe storage
+	/**
+	 * Selects all recipes from the recipe data directory when
+	 * given a recipe name.
+	 * 
+	 * @param recipeName Name of the recipe. File must be located in the
+	 * recipe data directory. The file must be suffixed with RECIPE_FILE_SUFFIX.
+	 * The recipe file associated with the name must exist, if it does not, the
+	 * method will return an empty list. 
+	 * 
+	 * @return List of Recipe objects as required by the interface, but
+	 * the list will only have one item in it, per the implementation.
+	 */
+	@Override
+	public List<Recipe> selectRecipesByName(String recipeName) {
+	    //in this driver implementation, there will only be one in item in the list
+		//but in SQL queries, there may be more entries
+		
+		//create list
+		List<Recipe> recipes = new ArrayList<Recipe>();
+		
+		//build recipe from file
+		Recipe recipe = null; //recipe storage
 	    String recipeFileName = "";
 	    try {
 			recipeFileName = recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX;
@@ -100,21 +215,28 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		File recipeFile = new File(recipeFileName);
 		if (recipeFile.exists())
-			recipe = this.selectRecipe(recipeFile);
-		return recipe;
+			recipe = this.selectRecipeByFile(recipeFile);
+		
+		//add recipe to list
+		recipes.add(recipe);
+		
+		//return
+		return recipes;
 	}
 	
 	/**
-	 * Returns a recipe by using recipeFile.  
-	 * @param recipeFile
-	 * @return
+	 * Returns a deserialized Recipe object from a XML File.
+	 * 
+	 * @param recipeFile File containing Recipe object.
+	 * 
+	 * @return Recipe object from state-file.
 	 */
-	public Recipe selectRecipe(File recipeFile) {
-	    ObjectInputStream iStream = null;
+	public Recipe selectRecipeByFile(File recipeFile) {
+	    FileInputStream iStream = null;
 	    Recipe recipe = null; //recipe storage
 	    
 		try {
-			iStream = new ObjectInputStream(new FileInputStream(recipeFile));
+			iStream = new FileInputStream(recipeFile);
 		}
 		catch (FileNotFoundException ex) {
 	    	try {
@@ -124,21 +246,6 @@ public class FlatFileDriver implements DataDriverInterface {
 				this.dumpDataError("Then an error was generated while generating the error.", e);
 			}
 		}
-		catch (IOException ex) {
-	    	try {
-	    		this.dumpDataError("There was a problem opening deserialization stream for file at " + recipeFile.getCanonicalPath() + ".", ex);
-			} catch (IOException e) {
-				this.dumpDataError("There was a problem opening deserialization stream for a file.", ex);
-				this.dumpDataError("Then an error was generated while generating the error.", e);
-			}
-		}
-	    
-	    //deserialize recipe from file
-	    //from: http://www.exampledepot.com/egs/java.io/DeserializeObj.html
-	    //be sure to go back here for specific instructions for
-	    //deserializing from byte arrays, the  BLOB data type
-	    //response from SQL query, probably by SQLite or Derby for now,
-	    //perhaps campus-wide Oracle, MySQL, etc., later
 	    
 	    //NOTE to self: Ask Team Code Breakers if there would be any objection
 	    //to forking the code later to a side-project for a campus-wide Java EE
@@ -164,31 +271,18 @@ public class FlatFileDriver implements DataDriverInterface {
 	    //for multiple languages, from the beginning-out. English (College) may have it's own
 	    //user interface grammar, so might English (
 	    
-	    try {
-	    	if (iStream != null)
-	    		recipe = (Recipe) iStream.readObject();
-		}
-	    catch (IOException ex) {
-	    	try {
-	    		this.dumpDataError("There was a problem opening file at " + recipeFile.getCanonicalPath() + " for deserialization. Proceeding without interruption.", ex);
-			} catch (IOException e) {
-				this.dumpDataError("There was a problem opening a file for deserialization. Proceeding without interruption.", ex);
-				this.dumpDataError("Then an error was generated while generating the error.", e);
-			}
-		}
-	    catch (ClassNotFoundException ex) {
-	    	try {
-				this.dumpDataError("There was a problem deserializing object from file at " + recipeFile.getCanonicalPath() + ". Proceeding without interruption.", ex);
-			} catch (IOException e) {
-				this.dumpDataError("There was a problem deserializing object from a file. Proceeding without interruption.", ex);
-				this.dumpDataError("Then an error was generated while generating the error.", e);
-			}
-		}
+		XMLDecoder decoder;
+    	if (iStream != null)
+    	{
+    		decoder = new XMLDecoder(iStream);
+		    recipe = (Recipe)decoder.readObject();
+    	}
 	    try {
 	    	//close input stream
 			if (iStream != null)
 				iStream.close();
-		} catch (IOException ex) {
+		}
+	    catch (IOException ex) {
 	    	try {
 				this.dumpDataError("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
 			} catch (IOException e) {
@@ -200,6 +294,13 @@ public class FlatFileDriver implements DataDriverInterface {
 		return recipe;
 	}
 	
+	
+	/**
+	 * Inserts a new recipe XML file into the recipe data directory by
+	 * serializing the Recipe object.
+	 * 
+	 * @param recipe Recipe to save.
+	 */
 	@Override
 	public boolean insertRecipe(Recipe recipe) {
 		//when using this routine, we'll auto-generate data directory
@@ -223,10 +324,18 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 	    
 	    //now call the overload to export
-	    return this.insertRecipe(recipe, newFile);
+	    return this.insertRecipeToFile(recipe, newFile);
 	}
 	
-	public boolean insertRecipe(Recipe recipe, File toFile) {
+	/**
+	 * Serializes Recipe to XML file you specify.
+	 * 
+	 * @param recipe Recipe object to store.
+	 * @param toFile File to put it in.
+	 * 
+	 * @return Boolean indicating success of the operation.
+	 */	
+	public boolean insertRecipeToFile(Recipe recipe, File toFile) {
 		//this is very reusable, especially for recipe file exporting
 		FileOutputStream fOut;
 		try
@@ -243,24 +352,9 @@ public class FlatFileDriver implements DataDriverInterface {
 			return false;
 		}
 		
-		ObjectOutputStream oStream;
-		try {
-			//open object stream at file
-			oStream = new ObjectOutputStream(fOut);
-		}
-		catch (IOException ex) {
-			this.dumpDataError("There was a problem creating a serializable recipe object stream named after " + recipe.getName() + ".", ex);
-			return false;
-		}
-		
-		try	{
-			//write object
-			oStream.writeObject(recipe);
-		}
-		catch (IOException ex) {
-			this.dumpDataError("There was writing a serializable recipe object named " + recipe.getName() + " to a file stream.", ex);
-			return false;
-		}
+		XMLEncoder encoder = new XMLEncoder(fOut);
+		encoder.writeObject(recipe);
+		encoder.close();
 		
 		try {
 			//close file
@@ -279,6 +373,18 @@ public class FlatFileDriver implements DataDriverInterface {
 		return true;
 	}
 	
+	/**
+	 * Updates the recipe with the currentRecipeName with the new Recipe object.
+	 * 
+	 * This may mean the file can be renamed, if the recipe name changes.
+	 * 
+	 * @param currentRecipeName The current name of the recipe. (Before changing)
+	 * 
+	 * @param updatedRecipe The Recipe object to save. (May have a new recipe name.)
+	 * 
+	 * @return Boolean indicating the success of the operation.
+	 */
+	
 	@Override
 	public boolean updateRecipeByName(String currentRecipeName, Recipe updatedRecipe) {
 		//for the filesystem driver, this couldn't be simpler
@@ -295,6 +401,16 @@ public class FlatFileDriver implements DataDriverInterface {
 		//otherwise:
 		return false;
 	}
+	
+	/**
+	 * Deletes the recipe using the object's default naming convention.
+	 * 
+	 * Read about inserting for more information about naming conventions.
+	 * 
+	 * @param recipeName Recipe name.
+	 * 
+	 * @return Boolean indicating the success of the operation.
+	 */
 
 	@Override
 	public boolean deleteRecipe(String recipeName) {
@@ -302,7 +418,7 @@ public class FlatFileDriver implements DataDriverInterface {
 		try
 		{
 			file = new File(recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX);
-			return file.delete();
+			return this.deleteRecipeFile(file);
 		}
 		catch (IOException ex)
 		{
@@ -317,11 +433,24 @@ public class FlatFileDriver implements DataDriverInterface {
 	}
 	
 	/**
+	 * Deletes whatever file you specify.
+	 * 
+	 * @param file Any valid File object.
+	 *  
+	 * @return Boolean indicating the success of the operation.
+	 */
+	public boolean deleteRecipeFile(File file)
+	{
+		return file.delete();
+	}
+	
+	/**
 	 * This is consumed internally by the object in order
 	 * to dump as much info about the error as possible, while
 	 * shortening implementation code by 5 lines per exception.
 	 * There are lots of exceptions, so this was needed to shorten
 	 * the code.
+	 * 
 	 * @param message Message to dump.
 	 * @param exception Exception.
 	 */
@@ -332,4 +461,5 @@ public class FlatFileDriver implements DataDriverInterface {
 		System.err.println("Stack trace:");
 		System.err.print(exception.getStackTrace());	
 	}
+
 }
