@@ -130,7 +130,7 @@ public class FlatFileDriverTestCase extends TestCase {
 		System.out.println("\ttestSelectRecipe(): Saved test recipe.");
 		
 		//now go get the newly created object
-		Recipe recipe = this.rfa.selectRecipeByName(TEST_RECIPE_NAME);
+		Recipe recipe = this.rfa.selectRecipesByName(TEST_RECIPE_NAME).get(0);
 
 		System.out.println("\ttestSelectRecipe(): Retrieved test recipe using the get(String) function.");
 

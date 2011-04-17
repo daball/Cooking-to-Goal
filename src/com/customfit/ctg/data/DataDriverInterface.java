@@ -20,6 +20,11 @@ public interface DataDriverInterface {
 	 * @return Boolean indicating connection success, true if connected, false if not connected.
 	 */
 	public boolean connect(String connectionString);
+	
+	/**
+	 * Close database connection.
+	 */
+	public void close();
 
 	/**
 	 * Tests connection to database. 
@@ -43,7 +48,7 @@ public interface DataDriverInterface {
 	 * @param String Recipe name.
 	 * @return Recipe object, or null if non-existant.
 	 */
-	public Recipe selectRecipeByName(String recipeName);
+	public List<Recipe> selectRecipesByName(String recipeName);
 	
 	/**
 	 * Saves a new Recipe object.
