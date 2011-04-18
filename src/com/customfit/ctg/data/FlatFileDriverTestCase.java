@@ -21,6 +21,7 @@ public class FlatFileDriverTestCase extends TestCase {
 	private static final String TEST_RECIPE_DESCRIPTION = "This is a recipe description.";
 	private static final String TEST_RECIPE_INSTRUCTIONS = "Sample instructions.";
 	private static final int 	TEST_RECIPE_SERVING_SIZE = 1;
+	private static final int 	TEST_RECIPE_SERVINGS = 1;
 	private static final double TEST_RECIPE_RATING = 1.0;
 
 	private Recipe testRecipe;
@@ -46,7 +47,7 @@ public class FlatFileDriverTestCase extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		//set up basic test object
-		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_RATING, null, null);
+		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, null, null);
 		
 		//set up file access
 		this.rfa = new FlatFileDriver();
