@@ -1,14 +1,11 @@
 package com.customfit.ctg;
 
-import java.io.Serializable;
-
 /**
  * A model of nutrition facts
  * @author Drew
  */
-public class NutritionFacts implements Serializable{
+public class NutritionFacts{
 
-	private static final long serialVersionUID = 1L;
 	private int calories = 0,
 				total_fat = 0,
 				saturated_fat = 0,

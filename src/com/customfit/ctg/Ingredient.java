@@ -1,30 +1,13 @@
 package com.customfit.ctg;
 
-import java.io.Serializable;
-
 /**
  * The model of an ingredient
  * @author Drew
  */
-public class Ingredient implements Serializable{
+public class Ingredient{
 
-	private static final long serialVersionUID = 1L;
 	private String name;
-	private MeasurementType measurement;
-	
-	/**
-	 * @return the measurement
-	 */
-	public MeasurementType getMeasurement() {
-		return measurement;
-	}
 
-	/**
-	 * @param measurement the measurement to set
-	 */
-	public void setMeasurement(MeasurementType measurement) {
-		this.measurement = measurement;
-	}
 
 	/**
 	 * Constructs an Ingredient

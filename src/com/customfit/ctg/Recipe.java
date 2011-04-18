@@ -1,7 +1,7 @@
 package com.customfit.ctg;
 
 import java.io.Serializable;
-import java.util.Map;
+import java.util.ArrayList;
 
 /**
  * The model of a recipe.
@@ -21,7 +21,7 @@ public class Recipe implements Serializable{
 	
 	private double rating = 0.0;
 	
-	private Map<Ingredient, Integer> ingredients; // K = Ingredient, V = Quantity
+	private ArrayList<RecipeIngredient> ingredients;
 	
 	private NutritionFacts nutrition;
 
@@ -51,7 +51,7 @@ public class Recipe implements Serializable{
 				  int servingSize,
 				  int servings,
 				  double rating,
-				  Map<Ingredient, Integer> ingredients,
+				  ArrayList<RecipeIngredient> ingredients,
 				  NutritionFacts nutrition
 				  ){
 		this.setName(name);
@@ -151,14 +151,14 @@ public class Recipe implements Serializable{
 	/**
 	 * @param ingredients the ingredients to set
 	 */
-	public void setIngredients(Map<Ingredient, Integer> ingredients) {
+	public void setIngredients(ArrayList<RecipeIngredient> ingredients) {
 		this.ingredients = ingredients;
 	}
 
 	/**
 	 * @return the ingredients
 	 */
-	public Map<Ingredient, Integer> getIngredients() {
+	public ArrayList<RecipeIngredient> getIngredients() {
 		return ingredients;
 	}
 
