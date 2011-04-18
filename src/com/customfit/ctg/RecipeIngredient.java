@@ -2,11 +2,11 @@ package com.customfit.ctg;
 
 public class RecipeIngredient extends Ingredient{
 
-	private MeasurementType measurement;
+	private MeasurementType measurementType;
 	private double amount;
 
 	/**
-	 * Creates a default RecipeIngredient
+	 * Creates a default RecipeIngredient with name only.
 	 * @param name
 	 */
 	public RecipeIngredient(String name) {
@@ -14,16 +14,26 @@ public class RecipeIngredient extends Ingredient{
 	}
 	
 	/**
-	 * @return the measurement
+	 * Creates a RecipeIngredient
+	 * @param name
 	 */
-	public MeasurementType getMeasurement() {
-		return measurement;
+	public RecipeIngredient(String name, MeasurementType measurementType, double amount) {
+		super(name);
+		this.setMeasurementType(measurementType);
+		this.setAmount(amount);
+	}
+	
+	/**
+	 * @return the measurement type
+	 */
+	public MeasurementType getMeasurementType() {
+		return measurementType;
 	}
 	/**
-	 * @param measurement the measurement to set
+	 * @param measurementType the measurement to set
 	 */
-	public void setMeasurement(MeasurementType measurement) {
-		this.measurement = measurement;
+	public void setMeasurementType(MeasurementType measurementType) {
+		this.measurementType = measurementType;
 	}
 	/**
 	 * @return the amount

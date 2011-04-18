@@ -7,6 +7,7 @@ package com.customfit.ctg;
 public class Ingredient{
 
 	private String name;
+	private GroceryCategory category;
 
 
 	/**
@@ -14,7 +15,16 @@ public class Ingredient{
 	 * @param name
 	 */
 	public Ingredient(String name){
-		this.name = name;
+		this.setName(name);
+	}
+	
+	/**
+	 * Constructs an Ingredient
+	 * @param name
+	 */
+	public Ingredient(String name, GroceryCategory category){
+		this.setName(name);
+		this.setCategory(category);
 	}
 
 	/**
@@ -22,6 +32,20 @@ public class Ingredient{
 	 */
 	public String getName() {
 		return name;
+	}
+
+	/**
+	 * @return the category
+	 */
+	public GroceryCategory getCategory() {
+		return category;
+	}
+
+	/**
+	 * @param category the category to set
+	 */
+	public void setCategory(GroceryCategory category) {
+		this.category = category;
 	}
 
 	/**
