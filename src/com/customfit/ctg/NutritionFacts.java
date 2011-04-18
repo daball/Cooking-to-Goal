@@ -1,13 +1,15 @@
 package com.customfit.ctg;
 
+import java.io.Serializable;
+
 /**
  * A model of nutrition facts
  * @author Drew
  */
-public class NutritionFacts {
-	private int servingSize,
-				servings,
-				calories = 0,
+public class NutritionFacts implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+	private int calories = 0,
 				total_fat = 0,
 				saturated_fat = 0,
 				trans_fat = 0,
@@ -17,40 +19,7 @@ public class NutritionFacts {
 				dietary_fiber = 0,
 				sugars = 0,
 				protein = 0;
-	
-	/**
-	 * Constructs an empty object.
-	 * Must set all values with setters.
-	 */
-	public NutritionFacts(){}
 
-	/**
-	 * @return the servingSize
-	 */
-	public int getServingSize() {
-		return servingSize;
-	}
-
-	/**
-	 * @param servingSize the servingSize to set
-	 */
-	public void setServingSize(int servingSize) {
-		this.servingSize = servingSize;
-	}
-
-	/**
-	 * @return the servings
-	 */
-	public int getServings() {
-		return servings;
-	}
-
-	/**
-	 * @param servings the servings to set
-	 */
-	public void setServings(int servings) {
-		this.servings = servings;
-	}
 
 	/**
 	 * @return the calories

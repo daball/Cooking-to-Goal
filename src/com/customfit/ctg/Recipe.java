@@ -15,12 +15,10 @@ public class Recipe implements Serializable{
 	private String name = "New Recipe";
 	private String description = "Your recipe description goes here.";
 	private String instructions = "Insert your recipe here.";
-	
+
 	private int servingSize = 0;
-	/**
-	 * Store rating as a percentage. So, if we use a 5-point scale, you may use Round(rating * 5.0) to get any scale. Change the scale to 10, Round(rating * 10.0).
-	 * The data is still the same. You may remove this comment or adjust it. --David 
-	 */
+	private int servings = 0;
+	
 	private double rating = 0.0;
 	
 	private Map<Ingredient, Integer> ingredients; // K = Ingredient, V = Quantity
@@ -28,15 +26,30 @@ public class Recipe implements Serializable{
 	private NutritionFacts nutrition;
 
 	/**
-	 * Constructs an empty object.
+	 * Constructs a basic Recipe object with just a name.
 	 * Fields must be set with setters.
 	 */
-	public Recipe() {}
+	public Recipe(String name) {
+		this.setName(name);
+	}
 	
+	/**
+	 * Constructs a recipe object with all parameters.
+	 * 
+	 * @param name
+	 * @param description
+	 * @param instructions
+	 * @param servingSize
+	 * @param servings
+	 * @param rating
+	 * @param ingredients
+	 * @param nutrition
+	 */
 	public Recipe(String name,
 				  String description,
 				  String instructions,
 				  int servingSize,
+				  int servings,
 				  double rating,
 				  Map<Ingredient, Integer> ingredients,
 				  NutritionFacts nutrition
@@ -45,9 +58,38 @@ public class Recipe implements Serializable{
 		this.setDescription(description);
 		this.setInstructions(instructions);
 		this.setServingSize(servingSize);
+		this.setServings(servings);
 		this.setRating(rating);
 		this.setIngredients(ingredients);
 		this.setNutrition(nutrition);
+	}
+
+	/**
+	 * @return the servingSize
+	 */
+	public int getServingSize() {
+		return servingSize;
+	}
+
+	/**
+	 * @param servingSize the servingSize to set
+	 */
+	public void setServingSize(int servingSize) {
+		this.servingSize = servingSize;
+	}
+
+	/**
+	 * @return the servings
+	 */
+	public int getServings() {
+		return servings;
+	}
+
+	/**
+	 * @param servings the servings to set
+	 */
+	public void setServings(int servings) {
+		this.servings = servings;
 	}
 
 	/**
@@ -90,20 +132,6 @@ public class Recipe implements Serializable{
 	 */
 	public String getInstructions() {
 		return instructions;
-	}
-
-	/**
-	 * @param servingSize the servingSize to set
-	 */
-	public void setServingSize(int servingSize) {
-		this.servingSize = servingSize;
-	}
-
-	/**
-	 * @return the servingSize
-	 */
-	public int getServingSize() {
-		return servingSize;
 	}
 
 	/**
