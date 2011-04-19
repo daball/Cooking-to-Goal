@@ -1,9 +1,11 @@
 /**
  * 
  */
-package com.customfit.ctg.data;
+package com.customfit.ctg.data.tests;
 
 import junit.framework.TestCase;
+
+import com.customfit.ctg.data.FlatFileDriver;
 import com.customfit.ctg.model.*;
 import org.junit.Before;
 import java.io.*;
@@ -12,7 +14,7 @@ import java.util.*;
 /**
  * @author David
  */
-public class FlatFileDriverTestCase extends TestCase {
+public class FlatFileDriverTests extends TestCase {
 
 	//CONSTANTS
 	private static final String TEST_RECIPE_NAME			= "Test Recipe";

@@ -1,16 +1,20 @@
 /**
  * 
  */
-package com.customfit.ctg.data;
+package com.customfit.ctg.data.tests;
 
 import java.util.List;
+
+import com.customfit.ctg.data.DataManager;
+import com.customfit.ctg.data.FlatFileDriver;
+
 import junit.framework.TestCase;
 
 /**
  * @author david
  *
  */
-public class DataManagerTestCase extends TestCase {
+public class DataManagerTests extends TestCase {
 
 	public void testAcquireFlatFileDriver()
 	{
