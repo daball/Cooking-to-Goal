@@ -22,11 +22,16 @@ public interface DataDriverInterface {
 	public boolean connect(String connectionString);
 
 	/**
+	 * Close database connection.
+	 */
+	public void close();
+
+	/**
 	 * Tests connection to database. 
 	 * @return Boolean indicating connection status, true if connected, false if not connected.
 	 */
 	public boolean isConnected();
-	
+
 	/**
 	 * Returns a list of all Recipes.
 	 * 
@@ -37,21 +42,21 @@ public interface DataDriverInterface {
 	 * @return A list of all Recipe objects, or an empty list if none.
 	 */
 	public List<Recipe> selectAllRecipes();
-	
+
 	/**
-	 * Returns a Recipe by name.
+	 * Returns a list of Recipes, by matching the name.
 	 * @param String Recipe name.
 	 * @return Recipe object, or null if non-existant.
 	 */
-	public Recipe selectRecipeByName(String recipeName);
-	
+	public List<Recipe> selectRecipesByName(String recipeName);
+
 	/**
 	 * Saves a new Recipe object.
 	 * @param Recipe A Recipe object.
 	 * @return Boolean indicating the success of the operation.
 	 */
 	public boolean insertRecipe(Recipe newRecipe);
-	
+
 	/**
 	 * Updates a saved Recipe object.
 	 * @param String The prior name for the recipe, which may or may not
@@ -60,7 +65,7 @@ public interface DataDriverInterface {
 	 * @return Boolean indicating the success of the operation.
 	 */
 	public boolean updateRecipeByName(String currentRecipeName, Recipe updatedRecipe);
-	
+
 	/**
 	 * Removes a Recipe object from the database.
 	 * @param recipeName The recipe's name.
