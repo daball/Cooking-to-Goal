@@ -286,7 +286,21 @@ public class FlatFileDriver implements DataDriverInterface {
 		//use XStream now instead of JAXB
 		recipe = (Recipe) this.xstream.fromXML(iStream); 
 		
-		return recipe;
+	    try {
+	    	//close input stream
+			if (iStream != null)
+				iStream.close();
+		}
+	    catch (IOException ex) {
+	    	try {
+				this.dumpDataError("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
+			} catch (IOException e) {
+				this.dumpDataError("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
+			}
+		}
+	    
+	    return recipe;
 	}
 	
 	
@@ -349,6 +363,20 @@ public class FlatFileDriver implements DataDriverInterface {
 		
 		//use XStream now instead of JAXB
 		this.xstream.toXML(recipe, fOut);
+		
+		try {
+			//close file
+			fOut.close();
+		}
+		catch (IOException ex) {
+			try {
+				this.dumpDataError("There was a problem closing file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+			} catch (IOException e) {
+				this.dumpDataError("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				this.dumpDataError("Then an error was generated while generating the error.", e);
+			}
+			return false;
+		}
 		
 		return true;
 	}

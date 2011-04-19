@@ -6,156 +6,292 @@ package com.customfit.ctg;
  */
 public class NutritionFacts{
 
-	private int calories = 0,
-				total_fat = 0,
-				saturated_fat = 0,
-				trans_fat = 0,
-				cholesterol = 0,
-				sodium = 0,
-				total_carbs = 0,
-				dietary_fiber = 0,
-				sugars = 0,
-				protein = 0;
+	private MeasurableUnit Calories = null;
+	private MeasurableUnit TotalFat = null;
+	private MeasurableUnit SaturatedFat = null;
+	private MeasurableUnit TransFat = null;
+	private MeasurableUnit Cholesterol = null;
+	private MeasurableUnit Sodium = null;
+	private MeasurableUnit TotalCarbohydrate = null;
+	private MeasurableUnit DietaryFiber = null;
+	private MeasurableUnit Sugars = null;
+	private MeasurableUnit Protein = null;
 
+	public static NutritionFacts EmptyNutritionFactsTable = new NutritionFacts();
+	
+	public static NutritionFacts CompleteNutritionFactsTable = new NutritionFacts(
+			new MeasurableUnit(0.0, MeasurementUnit.FoodUnits.CALORIES),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.MILLIGRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.MILLIGRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
+			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS)
+			);
+	/**
+	 * @param calories
+	 * @param totalFat
+	 * @param saturatedFat
+	 * @param transFat
+	 * @param cholesterol
+	 * @param sodium
+	 * @param totalCarbohydrate
+	 * @param dietaryFiber
+	 * @param sugars
+	 * @param protein
+	 */
+	public NutritionFacts(MeasurableUnit calories, MeasurableUnit totalFat,
+			MeasurableUnit saturatedFat, MeasurableUnit transFat,
+			MeasurableUnit cholesterol, MeasurableUnit sodium,
+			MeasurableUnit totalCarbohydrate, MeasurableUnit dietaryFiber,
+			MeasurableUnit sugars, MeasurableUnit protein) {
+		super();
+		this.Calories = calories;
+		this.TotalFat = totalFat;
+		this.SaturatedFat = saturatedFat;
+		this.TransFat = transFat;
+		this.Cholesterol = cholesterol;
+		this.Sodium = sodium;
+		this.TotalCarbohydrate = totalCarbohydrate;
+		this.DietaryFiber = dietaryFiber;
+		this.Sugars = sugars;
+		this.Protein = protein;
+	}
+
+	/**
+	 * 
+	 */
+	public NutritionFacts() {
+		super();
+	}
+
+	
 
 	/**
 	 * @return the calories
 	 */
-	public int getCalories() {
-		return calories;
+	public MeasurableUnit getCalories() {
+		return Calories;
 	}
 
 	/**
 	 * @param calories the calories to set
 	 */
-	public void setCalories(int calories) {
-		this.calories = calories;
+	public void setCalories(MeasurableUnit calories) {
+		Calories = calories;
+	}
+	
+	/**
+	 * @param calories the calories to set
+	 */
+	public void setCalories(double calories) {
+		Calories = new MeasurableUnit(calories, MeasurementUnit.FoodUnits.CALORIES);
 	}
 
 	/**
-	 * @return the total_fat
+	 * @return the totalFat
 	 */
-	public int getTotal_fat() {
-		return total_fat;
+	public MeasurableUnit getTotalFat() {
+		return TotalFat;
 	}
 
 	/**
-	 * @param total_fat the total_fat to set
+	 * @param totalFat the totalFat to set
 	 */
-	public void setTotal_fat(int total_fat) {
-		this.total_fat = total_fat;
+	public void setTotalFat(MeasurableUnit totalFat) {
+		TotalFat = totalFat;
 	}
 
 	/**
-	 * @return the saturated_fat
+	 * @return the saturatedFat
 	 */
-	public int getSaturated_fat() {
-		return saturated_fat;
+	public MeasurableUnit getSaturatedFat() {
+		return SaturatedFat;
 	}
 
 	/**
-	 * @param saturated_fat the saturated_fat to set
+	 * @param saturatedFat the saturatedFat to set
 	 */
-	public void setSaturated_fat(int saturated_fat) {
-		this.saturated_fat = saturated_fat;
+	public void setSaturatedFat(MeasurableUnit saturatedFat) {
+		SaturatedFat = saturatedFat;
 	}
 
 	/**
-	 * @return the trans_fat
+	 * @return the transFat
 	 */
-	public int getTrans_fat() {
-		return trans_fat;
+	public MeasurableUnit getTransFat() {
+		return TransFat;
 	}
 
 	/**
-	 * @param trans_fat the trans_fat to set
+	 * @param transFat the transFat to set
 	 */
-	public void setTrans_fat(int trans_fat) {
-		this.trans_fat = trans_fat;
+	public void setTransFat(MeasurableUnit transFat) {
+		TransFat = transFat;
 	}
 
 	/**
 	 * @return the cholesterol
 	 */
-	public int getCholesterol() {
-		return cholesterol;
+	public MeasurableUnit getCholesterol() {
+		return Cholesterol;
 	}
 
 	/**
 	 * @param cholesterol the cholesterol to set
 	 */
-	public void setCholesterol(int cholesterol) {
-		this.cholesterol = cholesterol;
+	public void setCholesterol(MeasurableUnit cholesterol) {
+		Cholesterol = cholesterol;
 	}
 
 	/**
 	 * @return the sodium
 	 */
-	public int getSodium() {
-		return sodium;
+	public MeasurableUnit getSodium() {
+		return Sodium;
 	}
 
 	/**
 	 * @param sodium the sodium to set
 	 */
-	public void setSodium(int sodium) {
-		this.sodium = sodium;
+	public void setSodium(MeasurableUnit sodium) {
+		Sodium = sodium;
 	}
 
 	/**
-	 * @return the total_carbs
+	 * @return the totalCarbohydrate
 	 */
-	public int getTotal_carbs() {
-		return total_carbs;
+	public MeasurableUnit getTotalCarbohydrate() {
+		return TotalCarbohydrate;
 	}
 
 	/**
-	 * @param total_carbs the total_carbs to set
+	 * @param totalCarbohydrate the totalCarbohydrate to set
 	 */
-	public void setTotal_carbs(int total_carbs) {
-		this.total_carbs = total_carbs;
+	public void setTotalCarbohydrate(MeasurableUnit totalCarbohydrate) {
+		TotalCarbohydrate = totalCarbohydrate;
 	}
 
 	/**
-	 * @return the dietary_fiber
+	 * @return the dietaryFiber
 	 */
-	public int getDietary_fiber() {
-		return dietary_fiber;
+	public MeasurableUnit getDietaryFiber() {
+		return DietaryFiber;
 	}
 
 	/**
-	 * @param dietary_fiber the dietary_fiber to set
+	 * @param dietaryFiber the dietaryFiber to set
 	 */
-	public void setDietary_fiber(int dietary_fiber) {
-		this.dietary_fiber = dietary_fiber;
+	public void setDietaryFiber(MeasurableUnit dietaryFiber) {
+		DietaryFiber = dietaryFiber;
 	}
 
 	/**
 	 * @return the sugars
 	 */
-	public int getSugars() {
-		return sugars;
+	public MeasurableUnit getSugars() {
+		return Sugars;
 	}
 
 	/**
 	 * @param sugars the sugars to set
 	 */
-	public void setSugars(int sugars) {
-		this.sugars = sugars;
+	public void setSugars(MeasurableUnit sugars) {
+		Sugars = sugars;
 	}
 
 	/**
 	 * @return the protein
 	 */
-	public int getProtein() {
-		return protein;
+	public MeasurableUnit getProtein() {
+		return Protein;
 	}
 
 	/**
 	 * @param protein the protein to set
 	 */
-	public void setProtein(int protein) {
-		this.protein = protein;
+	public void setProtein(MeasurableUnit protein) {
+		Protein = protein;
 	}
-	
+
+	/**
+	 * @return the emptyNutritionFactsTable
+	 */
+	public static NutritionFacts getEmptyNutritionFactsTable() {
+		return EmptyNutritionFactsTable;
+	}
+
+	/**
+	 * @param emptyNutritionFactsTable the emptyNutritionFactsTable to set
+	 */
+	public static void setEmptyNutritionFactsTable(
+			NutritionFacts emptyNutritionFactsTable) {
+		EmptyNutritionFactsTable = emptyNutritionFactsTable;
+	}
+
+	/**
+	 * @return the completeNutritionFactsTable
+	 */
+	public static NutritionFacts getCompleteNutritionFactsTable() {
+		return CompleteNutritionFactsTable;
+	}
+
+	/**
+	 * @param completeNutritionFactsTable the completeNutritionFactsTable to set
+	 */
+	public static void setCompleteNutritionFactsTable(
+			NutritionFacts completeNutritionFactsTable) {
+		CompleteNutritionFactsTable = completeNutritionFactsTable;
+	}
+
+	@Override
+	public String toString()
+	{
+		StringBuilder sb = new StringBuilder();
+		
+		sb.append("Calories:");
+		sb.append(this.getCalories());
+		sb.append("\n");
+		
+		sb.append("Total Fat:");
+		sb.append(this.getTotalFat());
+		sb.append("\n");
+		
+		sb.append("\tSaturated Fat:");
+		sb.append(this.getSaturatedFat());
+		sb.append("\n");
+
+		sb.append("\tTrans Fat:");
+		sb.append(this.getTransFat());
+		sb.append("\n");
+		
+		sb.append("Cholesterol:");
+		sb.append(this.getCholesterol());
+		sb.append("\n");
+		
+		sb.append("Sodium:");
+		sb.append(this.getSodium());
+		sb.append("\n");
+		
+		sb.append("Total Carbohydrate:");
+		sb.append(this.getTotalCarbohydrate());
+		sb.append("\n");
+
+		sb.append("\tDietary Fiber:");
+		sb.append(this.getDietaryFiber());
+		sb.append("\n");
+
+		sb.append("\tSugars:");
+		sb.append(this.getSugars());
+		sb.append("\n");
+		
+		sb.append("Protein:");
+		sb.append(this.getProtein());
+		sb.append("\n");
+		
+		return sb.toString();
+	}
 }

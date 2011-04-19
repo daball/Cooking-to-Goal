@@ -17,8 +17,9 @@ public class Recipe implements Serializable{
 	private String description = "Your recipe description goes here.";
 	private String instructions = "Insert your recipe here.";
 
-	private int servingSize = 0;
-	private int servings = 0;
+	private MeasurableUnit servingSize = new MeasurableUnit(1.0, "specify unit");
+	
+	private double servings = 0.0;
 	
 	private double rating = 0.0;
 
@@ -49,8 +50,8 @@ public class Recipe implements Serializable{
 	public Recipe(String name,
 				  String description,
 				  String instructions,
-				  int servingSize,
-				  int servings,
+				  MeasurableUnit servingSize,
+				  double servings,
 				  double rating,
 				  List<RecipeIngredient> ingredients,
 				  NutritionFacts nutritionInformation
@@ -68,28 +69,28 @@ public class Recipe implements Serializable{
 	/**
 	 * @return the servingSize
 	 */
-	public int getServingSize() {
+	public MeasurableUnit getServingSize() {
 		return servingSize;
 	}
 
 	/**
 	 * @param servingSize the servingSize to set
 	 */
-	public void setServingSize(int servingSize) {
+	public void setServingSize(MeasurableUnit servingSize) {
 		this.servingSize = servingSize;
 	}
 
 	/**
 	 * @return the servings
 	 */
-	public int getServings() {
+	public double getServings() {
 		return servings;
 	}
 
 	/**
 	 * @param servings the servings to set
 	 */
-	public void setServings(int servings) {
+	public void setServings(double servings) {
 		this.servings = servings;
 	}
 
