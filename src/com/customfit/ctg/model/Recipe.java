@@ -1,6 +1,5 @@
 package com.customfit.ctg.model;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,9 +8,7 @@ import java.util.List;
  * 
  * @author Drew
  */
-public class Recipe implements Serializable{
-
-	private static final long serialVersionUID = 1L;
+public class Recipe {
 
 	private String name = "New Recipe";
 	private String description = "Your recipe description goes here.";

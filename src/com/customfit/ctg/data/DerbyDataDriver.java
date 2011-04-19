@@ -3,35 +3,72 @@
  */
 package com.customfit.ctg.data;
 
+import com.customfit.ctg.model.*;
 import java.util.List;
-
-import com.customfit.ctg.model.Recipe;
+import java.io.*;
+import java.sql.*;
 
 /**
+ * WORKINPROGRESS:
  * The DerbyDataDriver class represents one of the DataDriverInterfaces
- * aimed at providing basic data operations for the application
- * for the local filesystem, as a data store.
+ * aimed at providing embedded data operations for the application.
  * 
  * @author David
  */
 public class DerbyDataDriver implements DataDriverInterface {
 
+	private final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
+	private String dbName = "." + File.separator + "app_data" + File.separator + "derby.db";
+	private String connectionString = "jdbc:derby:" + dbName + ";create=true";
+	private Connection connection = null;
+	
 	@Override
 	public boolean connect(String connectionString) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		this.connectionString = connectionString;
+		
+		//load driver
+		try {
+			Class.forName(connectionString);
+		} catch (ClassNotFoundException e) {
+			this.dumpDataError("The JDBC Embedded Derby driver not found. (" + this.JDBC_DRIVER + ")", e);
+			return false;
+		}
 
+		//boot database
+		try {
+			connection = DriverManager.getConnection(connectionString);
+		} catch (SQLException e) {
+			this.dumpDataError("SQLException has occurred while connecting to Derby database.", e);
+			return false;
+		}
+
+		//return connection state
+		return this.isConnected();
+	}
+	
 	@Override
 	public void close() {
-		// TODO Auto-generated method stub
-		
+		if (this.connection != null){
+			try {
+				this.connection.close();
+			} catch (SQLException e) {
+				this.dumpDataError("SQLException has occurred while closing connection to Derby database.", e);
+			}
+		}
 	}
 
 	@Override
 	public boolean isConnected() {
-		// TODO Auto-generated method stub
-		return false;
+		if (this.connection != null){
+			try {
+				return !(this.connection.isClosed());
+			} catch (SQLException e) {
+				this.dumpDataError("SQLException has occurred while checking connection state to Derby database in isConnected().", e);
+				return false;
+			}
+		}
+		else
+			return false;
 	}
 
 	@Override
@@ -65,4 +102,22 @@ public class DerbyDataDriver implements DataDriverInterface {
 		return false;
 	}
 
+	/**
+	 * This is consumed internally by the object in order
+	 * to dump as much info about the error as possible, while
+	 * shortening implementation code by 5 lines per exception.
+	 * There are lots of exceptions, so this was needed to shorten
+	 * the code.
+	 * 
+	 * @param message Message to dump.
+	 * @param exception Exception.
+	 */
+	private void dumpDataError(String message, Exception exception)
+	{
+		System.err.println(message + " Exception Message:");
+		System.err.print(exception.getMessage());
+		System.err.println("Stack trace:");
+		System.err.print(exception.getStackTrace());	
+	}
+	
 }
