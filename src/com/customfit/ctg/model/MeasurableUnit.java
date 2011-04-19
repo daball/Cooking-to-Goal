@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.customfit.ctg;
+package com.customfit.ctg.model;
 
 /**
  * A MeasurableUnit represents what, in science, is typically

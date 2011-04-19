@@ -4,7 +4,8 @@
 package com.customfit.ctg.data;
 
 import java.util.List;
-import com.customfit.ctg.Recipe;
+
+import com.customfit.ctg.model.Recipe;
 
 /**
  * The DataDriverInterface describes the required functionality

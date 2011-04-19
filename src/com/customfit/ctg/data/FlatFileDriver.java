@@ -3,8 +3,8 @@
  */
 package com.customfit.ctg.data;
 
-import com.customfit.ctg.Recipe;
-import com.customfit.ctg.RecipeIngredient;
+import com.customfit.ctg.model.Recipe;
+import com.customfit.ctg.model.RecipeIngredient;
 import com.thoughtworks.xstream.XStream;
 import java.util.*;
 import java.io.*;

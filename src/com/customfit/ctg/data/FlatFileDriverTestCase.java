@@ -4,7 +4,7 @@
 package com.customfit.ctg.data;
 
 import junit.framework.TestCase;
-import com.customfit.ctg.*;
+import com.customfit.ctg.model.*;
 import org.junit.Before;
 import java.io.*;
 import java.util.*;

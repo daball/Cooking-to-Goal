@@ -1,4 +1,4 @@
-package com.customfit.ctg;
+package com.customfit.ctg.model;
 
 /**
  * The model of an ingredient

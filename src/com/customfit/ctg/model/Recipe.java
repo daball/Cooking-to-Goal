@@ -1,4 +1,4 @@
-package com.customfit.ctg;
+package com.customfit.ctg.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
