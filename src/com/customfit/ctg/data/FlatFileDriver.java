@@ -4,9 +4,10 @@
 package com.customfit.ctg.data;
 
 import com.customfit.ctg.Recipe;
+import com.customfit.ctg.RecipeIngredient;
+import com.thoughtworks.xstream.XStream;
 import java.util.*;
 import java.io.*;
-import java.beans.*;
 
 /**
  * The FlatFileDriver class represents one of the DataDriverInterfaces
@@ -34,6 +35,13 @@ public class FlatFileDriver implements DataDriverInterface {
 	 * the driver implementation.
 	 */
 	private File recipeDataDirectory;	
+
+	/**
+	 * This uses the external XStream library to do what neither
+	 * Object serialization nor JAXB serialization can, that is
+	 * serialize everything including generic collections, etc.
+	 */
+	private XStream xstream = new XStream();
 	
 	/**
 	 * Creates a new FlatFileDriver object and automatically connects
@@ -44,6 +52,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		
 		//connect driver to application current working directory
 		this.connect();
+		
+		//map short names to objects for serialization
+		xstream.alias("recipe", Recipe.class);
+		xstream.alias("ingredient", RecipeIngredient.class);
 	}
 
 	/**
@@ -270,26 +282,9 @@ public class FlatFileDriver implements DataDriverInterface {
 	    //corporate communities, etc. Perhaps the easiest way to do that would be to program
 	    //for multiple languages, from the beginning-out. English (College) may have it's own
 	    //user interface grammar, so might English (
-	    
-		XMLDecoder decoder;
-    	if (iStream != null)
-    	{
-    		decoder = new XMLDecoder(iStream);
-		    recipe = (Recipe)decoder.readObject();
-    	}
-	    try {
-	    	//close input stream
-			if (iStream != null)
-				iStream.close();
-		}
-	    catch (IOException ex) {
-	    	try {
-				this.dumpDataError("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
-			} catch (IOException e) {
-				this.dumpDataError("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
-				this.dumpDataError("Then an error was generated while generating the error.", e);
-			}
-		}
+	    		
+		//use XStream now instead of JAXB
+		recipe = (Recipe) this.xstream.fromXML(iStream); 
 		
 		return recipe;
 	}
@@ -352,24 +347,9 @@ public class FlatFileDriver implements DataDriverInterface {
 			return false;
 		}
 		
-		XMLEncoder encoder = new XMLEncoder(fOut);
-		encoder.writeObject(recipe);
-		encoder.close();
+		//use XStream now instead of JAXB
+		this.xstream.toXML(recipe, fOut);
 		
-		try {
-			//close file
-			fOut.close();
-		}
-		catch (IOException ex) {
-			try {
-				this.dumpDataError("There was a problem closing file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
-			} catch (IOException e) {
-				this.dumpDataError("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
-				this.dumpDataError("Then an error was generated while generating the error.", e);
-			}
-			return false;
-		}
-				
 		return true;
 	}
 	

@@ -4,7 +4,7 @@ public class RecipeIngredient extends Ingredient{
 
 	private MeasurementType measurementType;
 	private double amount;
-
+	
 	/**
 	 * Creates a default RecipeIngredient with name only.
 	 * @param name

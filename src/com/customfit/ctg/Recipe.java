@@ -2,6 +2,7 @@ package com.customfit.ctg;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The model of a recipe.
@@ -20,22 +21,11 @@ public class Recipe implements Serializable{
 	private int servings = 0;
 	
 	private double rating = 0.0;
-	
-	private ArrayList<RecipeIngredient> ingredients;
+
+	private List<RecipeIngredient> ingredients = new ArrayList<RecipeIngredient>();
 	
 	private NutritionFacts nutritionInformation;
 
-	/**
-	 * Constructs an empty Recipe object.
-	 * 
-	 * Notice: You must leave this method in order to use XML Serialization.
-	 * In fact, be sure to have a default constructor on ALL
-	 * classes you want to XML-serialize. The Encoder must be able to create
-	 * an anonymous object in order to comprehend what it will be serializing.
-	 */
-	public Recipe() {
-	}
-	
 	/**
 	 * Constructs a basic Recipe object with just a name.
 	 * Fields must be set with setters.
@@ -62,7 +52,7 @@ public class Recipe implements Serializable{
 				  int servingSize,
 				  int servings,
 				  double rating,
-				  ArrayList<RecipeIngredient> ingredients,
+				  List<RecipeIngredient> ingredients,
 				  NutritionFacts nutritionInformation
 				  ){
 		this.setName(name);
@@ -158,21 +148,21 @@ public class Recipe implements Serializable{
 	public double getRating() {
 		return rating;
 	}
-
+	
 	/**
 	 * @param ingredients the ingredients to set
 	 */
-	public void setIngredients(ArrayList<RecipeIngredient> ingredients) {
+	protected void setIngredients(List<RecipeIngredient> ingredients) {
 		this.ingredients = ingredients;
 	}
-
+	
 	/**
 	 * @return the ingredients
 	 */
-	public ArrayList<RecipeIngredient> getIngredients() {
+	public List<RecipeIngredient> getIngredients() {
 		return ingredients;
 	}
-
+	
 	/**
 	 * @param nutrition the nutrition information to set
 	 */

@@ -4,11 +4,10 @@
 package com.customfit.ctg.data;
 
 import junit.framework.TestCase;
-//import org.junit.After;
-//import org.junit.AfterClass;
-import org.junit.Before;
 import com.customfit.ctg.*;
+import org.junit.Before;
 import java.io.*;
+import java.util.*;
 
 /**
  * @author David
@@ -22,6 +21,8 @@ public class FlatFileDriverTestCase extends TestCase {
 	private static final int 	TEST_RECIPE_SERVING_SIZE = 1;
 	private static final int 	TEST_RECIPE_SERVINGS = 1;
 	private static final double TEST_RECIPE_RATING = 1.0;
+	private static List<RecipeIngredient>
+								TEST_RECIPE_INGREDIENTS = new ArrayList<RecipeIngredient>();
 
 	private Recipe testRecipe;
 	private FlatFileDriver rfa;
@@ -45,8 +46,12 @@ public class FlatFileDriverTestCase extends TestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		//stir up some ingredients
+		this.TEST_RECIPE_INGREDIENTS.add(new RecipeIngredient("Sugar", MeasurementType.CUPS, 1.0));
+		this.TEST_RECIPE_INGREDIENTS.add(new RecipeIngredient("Spice", MeasurementType.TABLESPOONS, 2.5));
+		
 		//set up basic test object
-		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, null, null);
+		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, null);
 		
 		//set up file access
 		this.rfa = new FlatFileDriver();
