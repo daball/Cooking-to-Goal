@@ -23,8 +23,19 @@ public class Recipe implements Serializable{
 	
 	private ArrayList<RecipeIngredient> ingredients;
 	
-	private NutritionFacts nutrition;
+	private NutritionFacts nutritionInformation;
 
+	/**
+	 * Constructs an empty Recipe object.
+	 * 
+	 * Notice: You must leave this method in order to use XML Serialization.
+	 * In fact, be sure to have a default constructor on ALL
+	 * classes you want to XML-serialize. The Encoder must be able to create
+	 * an anonymous object in order to comprehend what it will be serializing.
+	 */
+	public Recipe() {
+	}
+	
 	/**
 	 * Constructs a basic Recipe object with just a name.
 	 * Fields must be set with setters.
@@ -52,7 +63,7 @@ public class Recipe implements Serializable{
 				  int servings,
 				  double rating,
 				  ArrayList<RecipeIngredient> ingredients,
-				  NutritionFacts nutrition
+				  NutritionFacts nutritionInformation
 				  ){
 		this.setName(name);
 		this.setDescription(description);
@@ -61,7 +72,7 @@ public class Recipe implements Serializable{
 		this.setServings(servings);
 		this.setRating(rating);
 		this.setIngredients(ingredients);
-		this.setNutrition(nutrition);
+		this.setNutritionInformation(nutritionInformation);
 	}
 
 	/**
@@ -163,16 +174,16 @@ public class Recipe implements Serializable{
 	}
 
 	/**
-	 * @param nutrition the nutrition to set
+	 * @param nutrition the nutrition information to set
 	 */
-	public void setNutrition(NutritionFacts nutrition) {
-		this.nutrition = nutrition;
+	public void setNutritionInformation(NutritionFacts nutritionInformation) {
+		this.nutritionInformation = nutritionInformation;
 	}
 
 	/**
-	 * @return the nutrition
+	 * @return the nutrition information
 	 */
-	public NutritionFacts getNutrition() {
-		return nutrition;
+	public NutritionFacts getNutritionInformation() {
+		return nutritionInformation;
 	}
 }

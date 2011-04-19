@@ -3,7 +3,7 @@
  */
 package com.customfit.ctg.data;
 
-import com.customfit.ctg.data.*;
+import java.util.List;
 import junit.framework.TestCase;
 
 /**
@@ -16,6 +16,28 @@ public class DataManagerTestCase extends TestCase {
 	{
 		FlatFileDriver dvr = DataManager.acquireFlatFileDriver();
 		assertTrue(dvr.isConnected());
-		if (dvr.isConnected()) System.out.println("Acquired driver. Will use " + dvr.getRecipeDataDirectory().getAbsolutePath() + " for recipe data storage.");
+		if (dvr.isConnected()) System.out.println("Acquired driver directly from code:\n\t" + ((Object)dvr).toString() + "\n\tWill use " + dvr.getRecipeDataDirectory().getAbsolutePath() + " for recipe data storage.");
+	}
+	
+	public void testListLoadedDrivers() throws IllegalArgumentException, SecurityException, IllegalAccessException, NoSuchFieldException
+	{
+		List<String> driverList = DataManager.listLoadedDataDrivers();
+		System.out.println("List of loaded drivers (from DataManager):");
+		for (String driver : driverList)
+		{
+			System.out.println("\t" + driver);
+		}
+		assertTrue(!driverList.isEmpty());
+	}
+	
+	public void testAcquireDriverByUsingFlatFile() throws Exception
+	{
+		FlatFileDriver dvr = (FlatFileDriver)DataManager.acquireDriver("com.customfit.ctg.data.FlatFileDriver");
+		assertTrue(dvr != null);
+		if (dvr != null)
+		{
+			assertTrue(dvr.isConnected());
+			if (dvr.isConnected()) System.out.println("Acquired driver using manager-loader:\n\t" + ((Object)dvr).toString() + "\n\tWill use " + dvr.getRecipeDataDirectory().getAbsolutePath() + " for recipe data storage.");
+		}
 	}
 }

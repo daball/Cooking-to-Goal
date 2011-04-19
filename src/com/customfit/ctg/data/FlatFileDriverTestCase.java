@@ -4,11 +4,10 @@
 package com.customfit.ctg.data;
 
 import junit.framework.TestCase;
-import org.junit.After;
-import org.junit.AfterClass;
+//import org.junit.After;
+//import org.junit.AfterClass;
 import org.junit.Before;
 import com.customfit.ctg.*;
-import com.customfit.ctg.data.*;
 import java.io.*;
 
 /**
@@ -149,7 +148,7 @@ public class FlatFileDriverTestCase extends TestCase {
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Rating" + "=" + recipe.getRating());
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Serving Size" + "=" + recipe.getServingSize());
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Ingredients" + "=" + recipe.getIngredients());
-		System.out.println("\ttestSelectRecipe(): Recipe " + "Nutrition Information" + "=" + recipe.getNutrition());
+		System.out.println("\ttestSelectRecipe(): Recipe " + "Nutrition Information" + "=" + recipe.getNutritionInformation());
 		
 		//delete test file
 		boolean deleted = false;
