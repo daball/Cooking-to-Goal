@@ -7,7 +7,7 @@ import com.customfit.ctg.gui.GUIFrameMain;
  * Cooking to Goal application.
  * @author Drew
  */
-public class CTGMain {
+public class Controller {
 	
 	public static void main(String args[]){
 		GUIFrameMain gui = new GUIFrameMain();
