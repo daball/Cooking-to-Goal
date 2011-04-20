@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
+import com.customfit.ctg.Controller;
 import com.customfit.ctg.gui.GUIFrameMain;
 import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
 
@@ -15,12 +16,9 @@ import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
  * 
  */
 public class GUISouthPanel extends JPanel {
-	private GUIFrameMain parentFrame;
 	private JButton btnDone;
 	
-	public GUISouthPanel(GUIFrameMain pf) {
-		parentFrame = pf;
-		
+	public GUISouthPanel() {
 		this.setPreferredSize(new Dimension(350, 100)); //sets the size for the JPanel
 		this.btnDone = new JButton("OK");
 		btnDone.setPreferredSize(new Dimension(160, 30));
@@ -39,7 +37,8 @@ public class GUISouthPanel extends JPanel {
 		
 		public void actionPerformed(ActionEvent e) {
 			if(whichButton.equalsIgnoreCase("done")) {
-				parentFrame.openPanel(new GUIManageMenuPanel(parentFrame));
+//TODO: Outsource this to a Controller and call the Controller up from here				
+				Controller.getMainFrame().openPanel(new GUIManageMenuPanel());
 			}
 		}//end actionPerformed
 	}//end class ButtonListener

@@ -25,7 +25,7 @@ public class GUIFrameMain extends JFrame{
 	 */
 	public GUIFrameMain(){
 		
-		panel = new GUIManageMenuPanel(this);
+		panel = new GUIManageMenuPanel();
 		this.add(panel);
 		
 		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

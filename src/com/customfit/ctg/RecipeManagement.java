@@ -6,7 +6,8 @@ import java.util.*;
 
 /**
  * The RecipeManagement facility, used as a section of the total
- * application Controller logic.
+ * application Controller logic, represents the actions that
+ * directly involve recipe management.
  * 
  * @author David
  */

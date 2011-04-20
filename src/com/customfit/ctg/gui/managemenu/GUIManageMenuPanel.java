@@ -14,18 +14,15 @@ import com.customfit.ctg.gui.GUIFormats;
 import com.customfit.ctg.gui.GUIFrameMain;
 
 public class GUIManageMenuPanel extends JPanel {
-	private GUIFrameMain parentFrame;
 	private String title;
 	
-	public GUIManageMenuPanel(GUIFrameMain pf){
+	public GUIManageMenuPanel(){
 		title = "Weekly Menu";
-		
-		parentFrame = pf;
 		
 		this.setLayout(new BorderLayout());
 		this.add(titlePanel(), BorderLayout.NORTH);
 		this.add(centerPanel(), BorderLayout.CENTER);
-		this.add(new GUIMainButtonPanel(parentFrame), BorderLayout.SOUTH);
+		this.add(new GUIMainButtonPanel(), BorderLayout.SOUTH);
 	}
 	
 	private JPanel titlePanel(){

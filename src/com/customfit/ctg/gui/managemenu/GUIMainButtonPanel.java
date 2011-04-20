@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.customfit.ctg.Controller;
 import com.customfit.ctg.gui.GUIFrameMain;
 import com.customfit.ctg.gui.manageusers.GUIManageUsersPanel;
 
@@ -16,8 +17,6 @@ import com.customfit.ctg.gui.manageusers.GUIManageUsersPanel;
  * 
  */
 public class GUIMainButtonPanel extends JPanel {
-	private GUIFrameMain parentFrame;
-	
 	JButton viewGoals;
 	JButton manageUsers;
 	JButton manageRecipes;
@@ -26,9 +25,7 @@ public class GUIMainButtonPanel extends JPanel {
 
 	// JButton buttonExit;
 
-	public GUIMainButtonPanel(GUIFrameMain pf) {
-		parentFrame = pf;
-		
+	public GUIMainButtonPanel() {
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(350, 100)); //sets the size for the JPanel
 		this.viewGoals = new JButton("View Goals"); //creates an instance of the buttons
@@ -69,7 +66,8 @@ public class GUIMainButtonPanel extends JPanel {
 	
 	private class ManageUsersListener implements ActionListener {
 		public void actionPerformed(ActionEvent evt) {
-			parentFrame.openPanel(new GUIManageUsersPanel(parentFrame));
+//TODO: Outsource this to a Controller and call the Controller up from here
+			Controller.getMainFrame().openPanel(new GUIManageUsersPanel());
 		}
 		
 	}

@@ -29,6 +29,7 @@ public class Recipe {
 	 * Fields must be set with setters.
 	 */
 	public Recipe(String name) {
+		super();
 		this.setName(name);
 	}
 	
@@ -53,6 +54,7 @@ public class Recipe {
 				  List<RecipeIngredient> ingredients,
 				  NutritionFacts nutritionInformation
 				  ){
+		super();
 		this.setName(name);
 		this.setDescription(description);
 		this.setInstructions(instructions);

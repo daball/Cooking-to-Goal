@@ -4,6 +4,8 @@ import com.customfit.ctg.data.DataDriverInterface;
 import com.customfit.ctg.data.DataManager;
 import com.customfit.ctg.data.FlatFileDriver;
 import com.customfit.ctg.gui.GUIFrameMain;
+
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import com.customfit.ctg.gui.manageusers.*;
@@ -21,10 +23,10 @@ public class Controller {
 	 * 
 	 * It is created by main() as the JVM executes the app. 
 	 */
-	private static GUIFrameMain guiMain;
+	static GUIFrameMain guiMain;
 	
 	/**
-	 * Holds the reference to the data driver used througout
+	 * Holds the reference to the data driver used throughout
 	 * the Controller(s).
 	 * 
 	 * This may be null if no driver is loaded.
@@ -32,7 +34,7 @@ public class Controller {
 	 * connected when using it. Otherwise use
 	 * connect().
 	 */
-	private static DataDriverInterface dataDriver;
+	static DataDriverInterface dataDriver;
 	
     /**
      * The main entry point for the 
@@ -59,13 +61,11 @@ public class Controller {
         }
                 
 		guiMain = new GUIFrameMain();
+		guiMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		guiMain.setVisible(true);
 
 		//connect with filesystem data driver
 		dataDriver = DataManager.acquireFlatFileDriver();
-		
-        //I recommend all GUI designers switch to NetBeans
-        //for extremely easy coding. -David
     }
     
 	/**

@@ -5,7 +5,7 @@ package com.customfit.ctg.data;
 
 import com.customfit.ctg.*;
 import com.customfit.ctg.model.*;
-import java.util.List;
+import java.util.*;
 import java.io.*;
 import java.sql.*;
 
@@ -74,7 +74,31 @@ public class DerbyDataDriver implements DataDriverInterface {
 
 	@Override
 	public List<Recipe> selectAllRecipes() {
+		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
+		Statement statement; 
 		// TODO Auto-generated method stub
+		try {
+			statement = this.connection.createStatement();
+			if (statement.execute("SELECT Name, Description, Instructions, ServingSizeQuantity, ServingSizeUnit, Servings, Rating FROM Recipe"))
+			{
+				ResultSet response = statement.getResultSet();
+//				do
+//				{
+//					Recipe recipe = new Recipe(
+//							response.getString(0),
+//							response.getString(1),
+//							response.getString(2),
+//							response.getDouble(3),
+//							new MeasurableUnit(response.getDouble(4), response.getString(5)),
+//							response.getDouble(6),
+//							response.getDouble(7));
+//					recipes.add(recipe);
+//				}
+//				while (response.next());
+			}
+		} catch (SQLException e) {
+			Controller.dumpException("SQLException occurred while performing select all recipes operation.", e);
+		}
 		return null;
 	}
 

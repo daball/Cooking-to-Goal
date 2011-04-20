@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
  * Contains the controller logic for the CTG application.
- * @author Drew *
+ * @author Drew
  */
 public class MealPlanner {
 

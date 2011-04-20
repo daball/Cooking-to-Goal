@@ -22,9 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 
-import com.customfit.ctg.User;
-import com.customfit.ctg.gui.GUIFrameMain;
-
+import com.customfit.ctg.model.*;
 
 /**
  * Central panel for the manage users interface.
@@ -33,22 +31,20 @@ import com.customfit.ctg.gui.GUIFrameMain;
  *
  */
 public class GUICenterPanel extends JPanel  {
-	private GUIFrameMain parentFrame;
-	
 	private JList listUsers;
 	private JTextField txtName;
 	private JTextField txtGoal1;
 	private JTextField txtGoal2;
 	
-	ArrayList<User> userList;
+	ArrayList<User> userList = new ArrayList<User>();
 	
 	String[] defaultList = { "test1", "test2", "test3", "test4",
 	"test5" };
 	
-	GUICenterPanel(GUIFrameMain pf) {
-		parentFrame = pf;
-		
-		userList = parentFrame.getMealPlanner().getUserList();
+	GUICenterPanel() {
+//TODO: David needs to implement Users onto the data package.
+//TODO: Outsource this to the Controller and have the Controller send the data over 
+		//userList = parentFrame.getMealPlanner().getUserList();
 		
 		this.setLayout(new BorderLayout());
 		

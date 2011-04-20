@@ -2,9 +2,11 @@ package com.customfit.ctg.gui.managemenu;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListModel;
@@ -15,24 +17,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import com.customfit.ctg.Recipe;
-import com.customfit.ctg.User;
-import com.customfit.ctg.gui.GUIFrameMain;
+import com.customfit.ctg.model.*;
 
 public class GUIMainMenuRecipes extends JPanel  {
+	private static final long serialVersionUID = 1L;
+	
 	private JLabel lblRecipe;
 	private JButton btnAdd;
 	private JList listRecipes;
 	
-	private GUIFrameMain parentFrame;
-	
-	ArrayList<Recipe> recipeList;
-	String[] defaultList = { "test1", "test2", "test3", "test4",
-	"test5" };
-	
-	GUIMainMenuRecipes(GUIFrameMain pf) {
-		parentFrame = pf;
-		
+	GUIMainMenuRecipes() {
 		lblRecipe = new JLabel("Recipes");
 		
 		btnAdd = new JButton("Add");
@@ -42,8 +36,6 @@ public class GUIMainMenuRecipes extends JPanel  {
 		listRecipes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		listRecipes.setLayoutOrientation(JList.VERTICAL);
 		listRecipes.setVisibleRowCount(-1);
-		
-		updateRecipeList();
 		
 		JScrollPane scrollPane = new JScrollPane(listRecipes,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -60,14 +52,18 @@ public class GUIMainMenuRecipes extends JPanel  {
 		this.add(btnAdd);
 	}
 	
-	public void updateRecipeList() {
+	/**
+	 * This updates the GUI list with the Recipe list.
+	 * 
+	 * It usually gets called by the controller.
+	 * 
+	 * @param recipes List of recipes.
+	 */
+	public void updateRecipeList(List<Recipe> recipes)
+	{
 		DefaultListModel model = new DefaultListModel();
-		listRecipes = new JList(model);
-		recipeList = parentFrame.getMealPlanner().getRecipeList();
-		//int i = 0;
-		for (Recipe r : recipeList) {
-			model.add(model.getSize(),r.getName());
-			//i++;
+		for (Recipe recipe : recipes) {
+			model.add(model.getSize(),recipe.getName());
 		}
 	}
 	
@@ -88,6 +84,5 @@ public class GUIMainMenuRecipes extends JPanel  {
 				}
 			}
 		} 
-	}
-	
+	}	
 }

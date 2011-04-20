@@ -315,46 +315,81 @@ public class NutritionFacts{
 	{
 		StringBuilder sb = new StringBuilder();
 		
-		sb.append("Calories:");
-		sb.append(this.getCalories());
-		sb.append("\n");
+		if (this.getCalories() != null)
+		{
+			sb.append("Calories:");
+			sb.append(this.getCalories());
+			sb.append("\n");
+		}
 		
-		sb.append("Total Fat:");
-		sb.append(this.getTotalFat());
-		sb.append("\n");
+		if (this.getTotalFat() != null)
+		{
+			sb.append("Total Fat:");
+			sb.append(this.getTotalFat());
+			sb.append("\n");
+		}
 		
-		sb.append("\tSaturated Fat:");
-		sb.append(this.getSaturatedFat());
-		sb.append("\n");
+		if (this.getSaturatedFat() != null)
+		{
+			sb.append("\tSaturated Fat:");
+			sb.append(this.getSaturatedFat());
+			sb.append("\n");
+		}
+		
+		if (this.getTransFat() != null)
+		{
+			sb.append("\tTrans Fat:");
+			sb.append(this.getTransFat());
+			sb.append("\n");
+		}
+		
+		if (this.getCholesterol() != null)
+		{
+			sb.append("Cholesterol:");
+			sb.append(this.getCholesterol());
+			sb.append("\n");
+		}
+		
+		if (this.getSodium() != null)
+		{
+			sb.append("Sodium:");
+			sb.append(this.getSodium());
+			sb.append("\n");
+		}
 
-		sb.append("\tTrans Fat:");
-		sb.append(this.getTransFat());
-		sb.append("\n");
+		if (this.getTotalCarbohydrate() != null)
+		{
+			sb.append("Total Carbohydrate:");
+			sb.append(this.getTotalCarbohydrate());
+			sb.append("\n");
+		}
 		
-		sb.append("Cholesterol:");
-		sb.append(this.getCholesterol());
-		sb.append("\n");
+		if (this.getDietaryFiber() != null)
+		{
+			sb.append("\tDietary Fiber:");
+			sb.append(this.getDietaryFiber());
+			sb.append("\n");
+		}
 		
-		sb.append("Sodium:");
-		sb.append(this.getSodium());
-		sb.append("\n");
-		
-		sb.append("Total Carbohydrate:");
-		sb.append(this.getTotalCarbohydrate());
-		sb.append("\n");
+		if (this.getSugars() != null)
+		{
+			sb.append("\tSugars:");
+			sb.append(this.getSugars());
+			sb.append("\n");
+		}
 
-		sb.append("\tDietary Fiber:");
-		sb.append(this.getDietaryFiber());
-		sb.append("\n");
-
-		sb.append("\tSugars:");
-		sb.append(this.getSugars());
-		sb.append("\n");
+		if (this.getProtein() != null)
+		{
+			sb.append("Protein:");
+			sb.append(this.getProtein());
+			sb.append("\n");
+		}
 		
-		sb.append("Protein:");
-		sb.append(this.getProtein());
-		sb.append("\n");
+		if (sb.length() == 0)
+		{
+			sb.append("There are no Nutrition Facts available for this item.");
+		}
 		
-		return sb.toString();
+		return sb.toString().trim();
 	}
 }
