@@ -14,7 +14,24 @@ import com.customfit.ctg.gui.manageusers.*;
  * @author Drew, David
  */
 public class Controller {
+	/**
+	 * Holds the reference to the GUIFrameMain that
+	 * draws the main window throughout the application
+	 * execution.
+	 * 
+	 * It is created by main() as the JVM executes the app. 
+	 */
 	private static GUIFrameMain guiMain;
+	
+	/**
+	 * Holds the reference to the data driver used througout
+	 * the Controller(s).
+	 * 
+	 * This may be null if no driver is loaded.
+	 * Be sure to make sure your driver is
+	 * connected when using it. Otherwise use
+	 * connect().
+	 */
 	private static DataDriverInterface dataDriver;
 	
     /**
@@ -52,17 +69,46 @@ public class Controller {
     }
     
 	/**
-	 * @return the dataDriver
+	 * Gets the reference to the data driver used througout
+	 * the Controller(s).
+	 * 
+	 * @return The data driver instance (or null otherwise).
 	 */
 	public static DataDriverInterface getDataDriver() {
 		return dataDriver;
 	}
 
 	/**
-	 * @return the gui
+	 * Gets the global GUIFrameMain instance.
+	 * 
+	 * @return The reference to the GUIFrameMain that
+	 * draws the main window throughout the application
+	 * execution.
 	 */
 	public static GUIFrameMain getMainFrame() {
 		return guiMain;
 	}
   
- }
+	/**
+	 * This is used anywhere in the program in order to dump 
+	 * as much info about the error as possible to stderr, while
+	 * shortening implementation code by 5 lines per exception.
+	 * There are lots of exceptions, so this was needed to shorten
+	 * the code.
+	 * 
+	 * You can use this inside your try {} catch {} blocks to
+	 * provide stderr listeners with lots of debug information.
+	 * 
+	 * @param message Message to dump.
+	 * @param exception Exception.
+	 */
+	public static void dumpException(String message, Exception exception)
+	{
+		System.err.println("ERROR: An exception has been handled. Message:");
+		System.err.println(message);
+		System.err.println("Exception message:");
+		System.err.print(exception.getMessage());
+		System.err.println("Stack trace:");
+		System.err.print(exception.getStackTrace());	
+	}
+}

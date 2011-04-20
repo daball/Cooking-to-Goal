@@ -3,6 +3,7 @@
  */
 package com.customfit.ctg.data;
 
+import com.customfit.ctg.*;
 import com.customfit.ctg.model.*;
 import java.util.List;
 import java.io.*;
@@ -30,7 +31,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 		try {
 			Class.forName(connectionString);
 		} catch (ClassNotFoundException e) {
-			this.dumpDataError("The JDBC Embedded Derby driver not found. (" + this.JDBC_DRIVER + ")", e);
+			Controller.dumpException("The JDBC Embedded Derby driver not found. (" + this.JDBC_DRIVER + ")", e);
 			return false;
 		}
 
@@ -38,7 +39,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 		try {
 			connection = DriverManager.getConnection(connectionString);
 		} catch (SQLException e) {
-			this.dumpDataError("SQLException has occurred while connecting to Derby database.", e);
+			Controller.dumpException("SQLException has occurred while connecting to Derby database.", e);
 			return false;
 		}
 
@@ -52,7 +53,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 			try {
 				this.connection.close();
 			} catch (SQLException e) {
-				this.dumpDataError("SQLException has occurred while closing connection to Derby database.", e);
+				Controller.dumpException("SQLException has occurred while closing connection to Derby database.", e);
 			}
 		}
 	}
@@ -63,7 +64,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 			try {
 				return !(this.connection.isClosed());
 			} catch (SQLException e) {
-				this.dumpDataError("SQLException has occurred while checking connection state to Derby database in isConnected().", e);
+				Controller.dumpException("SQLException has occurred while checking connection state to Derby database in isConnected().", e);
 				return false;
 			}
 		}
@@ -102,22 +103,4 @@ public class DerbyDataDriver implements DataDriverInterface {
 		return false;
 	}
 
-	/**
-	 * This is consumed internally by the object in order
-	 * to dump as much info about the error as possible, while
-	 * shortening implementation code by 5 lines per exception.
-	 * There are lots of exceptions, so this was needed to shorten
-	 * the code.
-	 * 
-	 * @param message Message to dump.
-	 * @param exception Exception.
-	 */
-	private void dumpDataError(String message, Exception exception)
-	{
-		System.err.println(message + " Exception Message:");
-		System.err.print(exception.getMessage());
-		System.err.println("Stack trace:");
-		System.err.print(exception.getStackTrace());	
-	}
-	
 }
