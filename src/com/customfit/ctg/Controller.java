@@ -1,8 +1,12 @@
 package com.customfit.ctg;
 
+import com.customfit.ctg.data.DataDriverInterface;
+import com.customfit.ctg.data.DataManager;
+import com.customfit.ctg.data.FlatFileDriver;
 import com.customfit.ctg.gui.GUIFrameMain;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import com.customfit.ctg.gui.manageusers.*;
 
 /**
  * The Controller class for the 
@@ -10,7 +14,9 @@ import javax.swing.UnsupportedLookAndFeelException;
  * @author Drew, David
  */
 public class Controller {
-
+	private static GUIFrameMain guiMain;
+	private static DataDriverInterface dataDriver;
+	
     /**
      * The main entry point for the 
      * Cooking to Goal application.
@@ -34,14 +40,29 @@ public class Controller {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        
-        //create main window
-        GUIFrameMain gui = new GUIFrameMain();
+                
+		guiMain = new GUIFrameMain();
+		guiMain.setVisible(true);
 
-        //display main window
-        gui.setVisible(true);
-
+		//connect with filesystem data driver
+		dataDriver = DataManager.acquireFlatFileDriver();
+		
         //I recommend all GUI designers switch to NetBeans
         //for extremely easy coding. -David
     }
-}
+    
+	/**
+	 * @return the dataDriver
+	 */
+	public static DataDriverInterface getDataDriver() {
+		return dataDriver;
+	}
+
+	/**
+	 * @return the gui
+	 */
+	public static GUIFrameMain getMainFrame() {
+		return guiMain;
+	}
+  
+ }

@@ -174,4 +174,10 @@ public class Recipe {
 	public NutritionFacts getNutritionInformation() {
 		return nutritionInformation;
 	}
+	
+	@Override
+	public String toString()
+	{
+		return this.getName();
+	}
 }

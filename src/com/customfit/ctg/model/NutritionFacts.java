@@ -104,6 +104,13 @@ public class NutritionFacts{
 	public void setTotalFat(MeasurableUnit totalFat) {
 		TotalFat = totalFat;
 	}
+	
+	/**
+	 * @param totalFatGrams the totalFat (in grams) to set
+	 */
+	public void setTotalFat(double totalFatGrams) {
+		TotalFat = new MeasurableUnit(totalFatGrams, MeasurementUnit.MetricUnits.GRAMS);
+	}
 
 	/**
 	 * @return the saturatedFat
@@ -117,6 +124,13 @@ public class NutritionFacts{
 	 */
 	public void setSaturatedFat(MeasurableUnit saturatedFat) {
 		SaturatedFat = saturatedFat;
+	}
+	
+	/**
+	 * @param saturatedFat the saturatedFat (in grams) to set
+	 */
+	public void setSaturatedFat(double saturatedFatInGrams) {
+		SaturatedFat = new MeasurableUnit(saturatedFatInGrams, MeasurementUnit.MetricUnits.GRAMS);
 	}
 
 	/**
@@ -132,6 +146,13 @@ public class NutritionFacts{
 	public void setTransFat(MeasurableUnit transFat) {
 		TransFat = transFat;
 	}
+	
+	/**
+	 * @param transFat the transFat (in grams) to set
+	 */
+	public void setTransFat(double transFatInGrams) {
+		TransFat = new MeasurableUnit(transFatInGrams, MeasurementUnit.MetricUnits.GRAMS);
+	}
 
 	/**
 	 * @return the cholesterol
@@ -145,6 +166,13 @@ public class NutritionFacts{
 	 */
 	public void setCholesterol(MeasurableUnit cholesterol) {
 		Cholesterol = cholesterol;
+	}
+	
+	/**
+	 * @param cholesterol the cholesterol (in milligrams) to set
+	 */
+	public void setCholesterol(double cholesterolInMilligrams) {
+		Cholesterol = new MeasurableUnit(cholesterolInMilligrams, MeasurementUnit.MetricUnits.MILLIGRAMS);
 	}
 
 	/**
@@ -160,6 +188,13 @@ public class NutritionFacts{
 	public void setSodium(MeasurableUnit sodium) {
 		Sodium = sodium;
 	}
+	
+	/**
+	 * @param sodium the sodium (in milligrams) to set
+	 */
+	public void setSodium(double sodiumInMilligrams) {
+		Sodium = new MeasurableUnit(sodiumInMilligrams, MeasurementUnit.MetricUnits.MILLIGRAMS);
+	}
 
 	/**
 	 * @return the totalCarbohydrate
@@ -173,6 +208,13 @@ public class NutritionFacts{
 	 */
 	public void setTotalCarbohydrate(MeasurableUnit totalCarbohydrate) {
 		TotalCarbohydrate = totalCarbohydrate;
+	}
+	
+	/**
+	 * @param totalCarbohydrate the totalCarbohydrate (in grams) to set
+	 */
+	public void setTotalCarbohydrate(double totalCarbohydrateInGrams) {
+		TotalCarbohydrate = new MeasurableUnit(totalCarbohydrateInGrams, MeasurementUnit.MetricUnits.GRAMS);
 	}
 
 	/**
@@ -188,6 +230,13 @@ public class NutritionFacts{
 	public void setDietaryFiber(MeasurableUnit dietaryFiber) {
 		DietaryFiber = dietaryFiber;
 	}
+	
+	/**
+	 * @param dietaryFiber the dietaryFiber (in grams) to set
+	 */
+	public void setDietaryFiber(double dietaryFiberInGrams) {
+		DietaryFiber = new MeasurableUnit(dietaryFiberInGrams,  MeasurementUnit.MetricUnits.GRAMS);
+	}
 
 	/**
 	 * @return the sugars
@@ -202,6 +251,13 @@ public class NutritionFacts{
 	public void setSugars(MeasurableUnit sugars) {
 		Sugars = sugars;
 	}
+	
+	/**
+	 * @param sugars the sugars (in grams) to set
+	 */
+	public void setSugars(double sugarsInGrams) {
+		Sugars = new MeasurableUnit(sugarsInGrams, MeasurementUnit.MetricUnits.GRAMS);
+	}
 
 	/**
 	 * @return the protein
@@ -215,6 +271,13 @@ public class NutritionFacts{
 	 */
 	public void setProtein(MeasurableUnit protein) {
 		Protein = protein;
+	}
+	
+	/**
+	 * @param protein the protein (in grams) to set
+	 */
+	public void setProtein(double proteinInGrams) {
+		Protein = new MeasurableUnit(proteinInGrams, MeasurementUnit.MetricUnits.GRAMS);
 	}
 
 	/**
