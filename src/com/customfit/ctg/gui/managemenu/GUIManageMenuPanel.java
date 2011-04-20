@@ -11,10 +11,11 @@ import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
 import com.customfit.ctg.Controller;
+import com.customfit.ctg.Observer;
 import com.customfit.ctg.gui.GUIFormats;
 import com.customfit.ctg.gui.GUIFrameMain;
 
-public class GUIManageMenuPanel extends JPanel {
+public class GUIManageMenuPanel extends JPanel implements Observer {
 	private String title;
 	
 	private Controller controller;
@@ -47,8 +48,12 @@ public class GUIManageMenuPanel extends JPanel {
 		
 		return panel;
 	}
-	
-	//public JFrame getParentFrame() {
-	//	return parentFrame;
-	//}
+
+	/**
+	 * The update method refreshes this panel's data.
+	 */
+	@Override
+	public void update() {
+		this.revalidate();		
+	}
 }

@@ -47,21 +47,21 @@ public class GUIFrameMain extends JFrame{
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-//	/**
-//	 * openPanel is used by any panel that needs to open a different panel
-//	 * inside of this frame.  To use this method, pass this frame to
-//	 * the panel (via the constructor is the easiest).
-//	 * 
-//	 * Caution: This will destroy the current panel, so make sure you save
-//	 * all critical data before hand. (we could us a stack or list to make it
-//	 * a bit smarter, but for now this should do the trick.)
-//	 * 
-//	 * @param p Is the JPanel you would like to open.
-//	 */
-//	public void openPanel(JPanel p) {
-//		this.remove(panel);
-//		panel = p;
-//		this.add(panel);
-//		panel.revalidate();
-//	}
+	/**
+	 * openPanel is used by any panel that needs to open a different panel
+	 * inside of this frame.  To use this method, pass this frame to
+	 * the panel (via the constructor is the easiest).
+	 * 
+	 * Caution: This will destroy the current panel, so make sure you save
+	 * all critical data before hand. (we could us a stack or list to make it
+	 * a bit smarter, but for now this should do the trick.)
+	 * 
+	 * @param p Is the JPanel you would like to open.
+	 */
+	public void openPanel(JPanel p) {
+		this.remove(panel);
+		panel = p;
+		this.add(panel);
+		panel.revalidate();
+	}
 }

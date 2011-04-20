@@ -42,10 +42,6 @@ public class GUIMainButtonPanel extends JPanel {
 		manageRecipes.setPreferredSize(new Dimension(160, 30));
 		printList.setPreferredSize(new Dimension(160, 30));
 		exit.setPreferredSize(new Dimension(160, 30));
-//		ViewGoalsListener viewGoalsListener = new ViewGoalsListener(); //creates listeners
-//		ManageUsersListener manageUsersListener = new ManageUsersListener();
-//		ManageRecipesListener manageRecipesListener = new ManageRecipesListener();
-//		PrintListListener printListListener = new PrintListListener();
 
 		GUIListener gl = new GUIListener();
 		viewGoals.addActionListener(gl); //adds listeners to the buttons
@@ -62,55 +58,34 @@ public class GUIMainButtonPanel extends JPanel {
 
 	}
 	
+	/**
+	 * Listener for this button panel.
+	 * Commands should be sent to the Controller
+	 * @author S. D. Salyer
+	 *
+	 */
 	private class GUIListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
 			if(ae.getSource().equals(viewGoals)){
-				// 
+				// do something
 			}
 			else if(ae.getSource().equals(manageUsers)){
-				controller.openPanel(new GUIManageUsersPanel());
+				controller.openPanel(new GUIManageUsersPanel(controller));
 			}
-			
+			else if(ae.getSource().equals(manageRecipes)){
+				// do something
+			}
+			else if(ae.getSource().equals(printList)){
+				// do something
+			}
+			else if(ae.getSource().equals(manageUsers)){
+				System.exit(0);
+			}
+			else{
+				// Shouldn't be here
+			}
 		}
-	}
-	
-//	private class ViewGoalsListener implements ActionListener {
-//		public void actionPerformed(ActionEvent evt) {
-//			
-//			
-//		}
-//		
-//	}
-//	
-//	
-//	private class ManageUsersListener implements ActionListener {
-//		public void actionPerformed(ActionEvent evt) {
-////TODO: Outsource this to a Controller and call the Controller up from here
-////			Controller.getMainFrame().openPanel(new GUIManageUsersPanel());
-//		}
-//		
-//	}
-//	
-//	private class ManageRecipesListener implements ActionListener {
-//		public void actionPerformed(ActionEvent evt) {
-//			
-//			
-//		}
-//		
-//	}
-//	
-//	private class PrintListListener implements ActionListener {
-//		public void actionPerformed(ActionEvent evt) {
-//			
-//			
-//		}
-//	}
-//	
-//	public class ExitListener implements ActionListener {
-//		public void actionPerformed(ActionEvent evt) {
-//			System.exit(0);
-//		}// end actionPerformed
-//	}
-	
+	} // end private inner class
+
 }
