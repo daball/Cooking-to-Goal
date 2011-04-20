@@ -2,7 +2,7 @@ package com.customfit.ctg.model;
 
 public class RecipeIngredient extends Ingredient{
 
-	private MeasurableUnit measurement = new MeasurableUnit(0.0, "units");
+	private MeasurableUnit amount = new MeasurableUnit(0.0, "units");
 	
 	/**
 	 * Creates a default RecipeIngredient with name only.
@@ -16,9 +16,9 @@ public class RecipeIngredient extends Ingredient{
 	 * Creates a RecipeIngredient
 	 * @param name
 	 */
-	public RecipeIngredient(String name, MeasurableUnit measuableUnit) {
+	public RecipeIngredient(String name, MeasurableUnit amount) {
 		super(name);
-		this.measurement = measuableUnit;
+		this.amount = amount;
 	}
 	
 	/**
@@ -27,23 +27,23 @@ public class RecipeIngredient extends Ingredient{
 	 */
 	public RecipeIngredient(String name, double quantity, String unit) {
 		super(name);
-		this.measurement = new MeasurableUnit(quantity, unit);
+		this.amount = new MeasurableUnit(quantity, unit);
 	}
 	
-	public MeasurableUnit getMeasurement() {
-		return measurement;
+	public MeasurableUnit getAmount() {
+		return this.amount;
 	}
 	
 	public String getMeasurementUnit() {
-		return measurement.getUnit();
+		return this.amount.getUnit();
 	}
 	
-	public double getMeasurementQuantity() {
-		return measurement.getQuantity();
+	public double getMeasurementAmount() {
+		return this.amount.getQuantity();
 	}
 	
 	public String toString()
 	{
-		return this.getMeasurement() + " " + this.getName();
+		return this.getAmount() + " " + this.getName();
 	}
 }
