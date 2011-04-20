@@ -6,10 +6,12 @@ import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -20,6 +22,9 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.Border;
 
+import com.customfit.ctg.User;
+import com.customfit.ctg.gui.GUIFrameMain;
+
 
 /**
  * Central panel for the manage users interface.
@@ -28,12 +33,22 @@ import javax.swing.border.Border;
  *
  */
 public class GUICenterPanel extends JPanel  {
+	private GUIFrameMain parentFrame;
+	
 	private JList listUsers;
+	private JTextField txtName;
+	private JTextField txtGoal1;
+	private JTextField txtGoal2;
+	
+	ArrayList<User> userList;
 	
 	String[] defaultList = { "test1", "test2", "test3", "test4",
 	"test5" };
 	
-	GUICenterPanel() {
+	GUICenterPanel(GUIFrameMain pf) {
+		parentFrame = pf;
+		
+		userList = parentFrame.getMealPlanner().getUserList();
 		
 		this.setLayout(new BorderLayout());
 		
@@ -53,10 +68,12 @@ public class GUICenterPanel extends JPanel  {
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder("Users"));
 		
-		listUsers = new JList(defaultList);
+		listUsers = new JList();
 		listUsers.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		listUsers.setLayoutOrientation(JList.VERTICAL);
 		listUsers.setVisibleRowCount(-1);
+		
+		updateUserList();
 		
 		JScrollPane scrollPane = new JScrollPane(listUsers,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -110,9 +127,9 @@ public class GUICenterPanel extends JPanel  {
 		JPanel panel = new JPanel();
 		panel.setBorder(BorderFactory.createTitledBorder("Update User"));
 		
-		JTextField txtName = new JTextField("");
-		JTextField txtGoal1 = new JTextField("");
-		JTextField txtGoal2 = new JTextField("");
+		txtName = new JTextField("");
+		txtGoal1 = new JTextField("");
+		txtGoal2 = new JTextField("");
 		JLabel lblName = new JLabel("Name:");
 		JLabel lblGoal1 = new JLabel("Goal 1:");
 		JLabel lblGoal2 = new JLabel("Goal 2:");
@@ -144,6 +161,19 @@ public class GUICenterPanel extends JPanel  {
 		return panel;
 	}
 	
+	public void updateUserList() {
+		DefaultListModel model = new DefaultListModel();
+		
+		
+		for (User u : userList) {
+			model.addElement(u.getName());
+			System.out.println(model.getSize() + u.getName());
+		}
+		listUsers = new JList(model);
+		//this.revalidate();
+		
+	}
+	//===============================================
 	/**
 	 * Controls the actions of the buttons
 	 * 
@@ -160,7 +190,6 @@ public class GUICenterPanel extends JPanel  {
 		 */
 		ButtonListener(String b){
 			whichButton = b; 
-			
 		}
 		
 		/**
@@ -171,11 +200,9 @@ public class GUICenterPanel extends JPanel  {
 		 */
 		public void actionPerformed(ActionEvent e) {
 			if(whichButton.equalsIgnoreCase("add")) {
-				if (listUsers.isSelectionEmpty()) {
-					System.out.println("You didn't select anything!");
-				}
-				else {
-					System.out.println("You have selected the recipe: " + listUsers.getSelectedValue());
+				if (!txtName.getText().isEmpty()) {
+					userList.add(new User(txtName.getText()));
+					updateUserList();
 				}
 			}
 			if(whichButton.equalsIgnoreCase("remove")) {
