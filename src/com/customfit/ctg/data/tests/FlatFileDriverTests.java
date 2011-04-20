@@ -159,11 +159,11 @@ public class FlatFileDriverTests extends TestCase {
 		System.out.println("\ttestSelectRecipe(): Retrieved test recipe using the get(String) function.");
 
 		//now make sure that everything matches after deserialization
-//		assertEquals(recipe.getName(), TEST_RECIPE_NAME);
-//		assertEquals(recipe.getDescription(), TEST_RECIPE_DESCRIPTION);
-//		assertEquals(recipe.getInstructions(), TEST_RECIPE_INSTRUCTIONS);
-//		assertEquals(recipe.getRating(), TEST_RECIPE_RATING);
-//		assertTrue(recipe.getServingSize() == TEST_RECIPE_SERVING_SIZE);
+		assertEquals(recipe.getName(), TEST_RECIPE_NAME);
+		assertEquals(recipe.getDescription(), TEST_RECIPE_DESCRIPTION);
+		assertEquals(recipe.getInstructions(), TEST_RECIPE_INSTRUCTIONS);
+		assertEquals(recipe.getRating(), TEST_RECIPE_RATING);
+		assertTrue(recipe.getServingSize() == TEST_RECIPE_SERVING_SIZE);
 		//disabled tests:
 		//assertEquals(recipe.getIngredients(), TEST_RECIPE_INGREDIENTS);
 		//assertEquals(recipe.getNutrition(), TEST_RECIPE_NUTRITION_INFO);
