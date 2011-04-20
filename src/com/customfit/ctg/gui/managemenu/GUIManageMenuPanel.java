@@ -10,19 +10,23 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
+import com.customfit.ctg.Controller;
 import com.customfit.ctg.gui.GUIFormats;
 import com.customfit.ctg.gui.GUIFrameMain;
 
 public class GUIManageMenuPanel extends JPanel {
 	private String title;
 	
-	public GUIManageMenuPanel(){
-		title = "Weekly Menu";
+	private Controller controller;
+	
+	public GUIManageMenuPanel(Controller controller){
+		this.controller = controller;		
+		this.title = "Weekly Menu";
 		
 		this.setLayout(new BorderLayout());
 		this.add(titlePanel(), BorderLayout.NORTH);
 		this.add(centerPanel(), BorderLayout.CENTER);
-		this.add(new GUIMainButtonPanel(), BorderLayout.SOUTH);
+		this.add(new GUIMainButtonPanel(controller), BorderLayout.SOUTH);
 	}
 	
 	private JPanel titlePanel(){

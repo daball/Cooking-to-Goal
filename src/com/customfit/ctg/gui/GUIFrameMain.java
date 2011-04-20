@@ -1,13 +1,20 @@
 package com.customfit.ctg.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.customfit.ctg.Controller;
 import com.customfit.ctg.MealPlanner;
-import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
+import com.customfit.ctg.Observer;
+import com.customfit.ctg.gui.manageusers.*;
+import com.customfit.ctg.gui.managemenu.*;
 
 /**
- * The main GUI file
+ * The main GUI frame.
+ * Acts as a frame to house sub-panels.
  * @author Drew and Ryan
  */
 public class GUIFrameMain extends JFrame{
@@ -21,15 +28,17 @@ public class GUIFrameMain extends JFrame{
 	
 	private JPanel panel;
 	
-	private MealPlanner model;		// The model the view displays
+	private MealPlanner model;			// The model the view displays
+	private Controller controller;		// The controller
 	
 	/**
 	 * Constructs the CTG GUI
 	 */
-	public GUIFrameMain(MealPlanner model){
+	public GUIFrameMain(MealPlanner model, Controller controller){
 		this.model = model;
-		
-		this.panel = new GUIManageMenuPanel();
+		this.controller = controller;
+
+		this.panel = new GUIManageMenuPanel(controller);
 		this.add(panel);
 		
 		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -37,22 +46,22 @@ public class GUIFrameMain extends JFrame{
 		this.setTitle(APPLICATION_TITLE);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
-	
-	/**
-	 * openPanel is used by any panel that needs to open a different panel
-	 * inside of this frame.  To use this method, pass this frame to
-	 * the panel (via the constructor is the easiest).
-	 * 
-	 * Caution: This will destroy the current panel, so make sure you save
-	 * all critical data before hand. (we could us a stack or list to make it
-	 * a bit smarter, but for now this should do the trick.)
-	 * 
-	 * @param p Is the JPanel you would like to open.
-	 */
-	public void openPanel(JPanel p) {
-		this.remove(panel);
-		panel = p;
-		this.add(panel);
-		panel.revalidate();
-	}
+
+//	/**
+//	 * openPanel is used by any panel that needs to open a different panel
+//	 * inside of this frame.  To use this method, pass this frame to
+//	 * the panel (via the constructor is the easiest).
+//	 * 
+//	 * Caution: This will destroy the current panel, so make sure you save
+//	 * all critical data before hand. (we could us a stack or list to make it
+//	 * a bit smarter, but for now this should do the trick.)
+//	 * 
+//	 * @param p Is the JPanel you would like to open.
+//	 */
+//	public void openPanel(JPanel p) {
+//		this.remove(panel);
+//		panel = p;
+//		this.add(panel);
+//		panel.revalidate();
+//	}
 }

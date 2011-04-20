@@ -1,20 +1,20 @@
 package com.customfit.ctg.gui.managemenu;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.customfit.ctg.Controller;
-import com.customfit.ctg.gui.GUIFrameMain;
 import com.customfit.ctg.gui.manageusers.GUIManageUsersPanel;
+
 
 /**
  * 
  * @author Steven T
- * 
  */
 public class GUIMainButtonPanel extends JPanel {
 	JButton viewGoals;
@@ -22,10 +22,14 @@ public class GUIMainButtonPanel extends JPanel {
 	JButton manageRecipes;
 	JButton printList;
 	JButton exit;
+	
+	private Controller controller;
 
 	// JButton buttonExit;
 
-	public GUIMainButtonPanel() {
+	public GUIMainButtonPanel(Controller controller) {
+		this.controller = controller;
+		
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(350, 100)); //sets the size for the JPanel
 		this.viewGoals = new JButton("View Goals"); //creates an instance of the buttons
@@ -38,14 +42,17 @@ public class GUIMainButtonPanel extends JPanel {
 		manageRecipes.setPreferredSize(new Dimension(160, 30));
 		printList.setPreferredSize(new Dimension(160, 30));
 		exit.setPreferredSize(new Dimension(160, 30));
-		ViewGoalsListener viewGoalsListener = new ViewGoalsListener(); //creates listeners
-		ManageUsersListener manageUsersListener = new ManageUsersListener();
-		ManageRecipesListener manageRecipesListener = new ManageRecipesListener();
-		PrintListListener printListListener = new PrintListListener();
-		viewGoals.addActionListener(viewGoalsListener); //adds listeners to the buttons
-		manageUsers.addActionListener(manageUsersListener);
-		manageRecipes.addActionListener(manageRecipesListener);
-		printList.addActionListener(printListListener);
+//		ViewGoalsListener viewGoalsListener = new ViewGoalsListener(); //creates listeners
+//		ManageUsersListener manageUsersListener = new ManageUsersListener();
+//		ManageRecipesListener manageRecipesListener = new ManageRecipesListener();
+//		PrintListListener printListListener = new PrintListListener();
+
+		GUIListener gl = new GUIListener();
+		viewGoals.addActionListener(gl); //adds listeners to the buttons
+		manageUsers.addActionListener(gl);
+		manageRecipes.addActionListener(gl);
+		printList.addActionListener(gl);
+		
 		this.setLayout(new FlowLayout()); //sets the layout for the buttons
 		this.add(viewGoals); //adds buttons to the subpanel
 		this.add(manageUsers);
@@ -55,42 +62,55 @@ public class GUIMainButtonPanel extends JPanel {
 
 	}
 	
-	private class ViewGoalsListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			
-			
-		}
-		
-	}
-	
-	
-	private class ManageUsersListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-//TODO: Outsource this to a Controller and call the Controller up from here
-			Controller.getMainFrame().openPanel(new GUIManageUsersPanel());
-		}
-		
-	}
-	
-	private class ManageRecipesListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			
-			
-		}
-		
-	}
-	
-	private class PrintListListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			
+	private class GUIListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent ae) {
+			if(ae.getSource().equals(viewGoals)){
+				// 
+			}
+			else if(ae.getSource().equals(manageUsers)){
+				controller.openPanel(new GUIManageUsersPanel());
+			}
 			
 		}
 	}
 	
-	public class ExitListener implements ActionListener {
-		public void actionPerformed(ActionEvent evt) {
-			System.exit(0);
-		}// end actionPerformed
-	}
+//	private class ViewGoalsListener implements ActionListener {
+//		public void actionPerformed(ActionEvent evt) {
+//			
+//			
+//		}
+//		
+//	}
+//	
+//	
+//	private class ManageUsersListener implements ActionListener {
+//		public void actionPerformed(ActionEvent evt) {
+////TODO: Outsource this to a Controller and call the Controller up from here
+////			Controller.getMainFrame().openPanel(new GUIManageUsersPanel());
+//		}
+//		
+//	}
+//	
+//	private class ManageRecipesListener implements ActionListener {
+//		public void actionPerformed(ActionEvent evt) {
+//			
+//			
+//		}
+//		
+//	}
+//	
+//	private class PrintListListener implements ActionListener {
+//		public void actionPerformed(ActionEvent evt) {
+//			
+//			
+//		}
+//	}
+//	
+//	public class ExitListener implements ActionListener {
+//		public void actionPerformed(ActionEvent evt) {
+//			System.exit(0);
+//		}// end actionPerformed
+//	}
 	
 }

@@ -1,7 +1,5 @@
 package com.customfit.ctg;
 
-import com.customfit.ctg.gui.GUIFrameMain;
-
 /**
  * The main entry point for the CTG application.
  * Creates the Model, the View, and the Controller.
@@ -17,7 +15,7 @@ public class CTGMain {
 	 */
 	public static void main(String[] args){
 		MealPlanner mp = new MealPlanner();			// Model
-		GUIFrameMain gui = new GUIFrameMain(mp);	// View
-		new Controller(mp, gui);					// Controller
+													// View created in controller
+		new Controller(mp);							// Controller
 	}
 }

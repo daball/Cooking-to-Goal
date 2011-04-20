@@ -2,6 +2,7 @@ package com.customfit.ctg;
 
 import com.customfit.ctg.model.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 
 
@@ -11,16 +12,37 @@ import java.util.ArrayList;
  */
 public class MealPlanner {
 	
-	private static ArrayList<User> userList = new ArrayList<User>();			// Stores all the User objects
-	private static ArrayList<Recipe> recipeList = new ArrayList<Recipe>();		// Stores all the Recipe objects
-//	private static ArrayList<Recipe> menuList = new ArrayList<Recipe>();		// Stores Recipe objects for weekly menu
+	private ArrayList<User> userList = new ArrayList<User>();			// Stores all the User objects
+	private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();		// Stores all the Recipe objects
+//	private ArrayList<Recipe> menuList = new ArrayList<Recipe>();		// Stores Recipe objects for weekly menu
+
+	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	
 	/**
 	 * Initializes the model with data
 	 */
 	public MealPlanner(){
 		generateTestData();		// Delete me when data IO is ready
+		notifyObservers();
 	}
+	
+	public void registerObserver(Observer o){
+		observers.add(o);
+	}
+	
+	public void removeObserver(Observer o){
+		observers.remove(o);
+	}
+	
+	public void notifyObservers(){
+		Iterator<Observer> it = observers.iterator();
+		
+		while(it.hasNext()){
+			Observer o = (Observer) it.next();
+			o.update();
+		}
+	}
+	
 	/**
 	 * Generates some test data to work with.
 	 */
