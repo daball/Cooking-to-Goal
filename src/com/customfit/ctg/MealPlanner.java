@@ -8,13 +8,14 @@ import java.util.Iterator;
 
 /**
  * The composite model of our data.
+ * 
  * @author Drew
  */
-public class MealPlanner {
+public class MealPlanner { // implements Observable
 	
 	private ArrayList<User> userList = new ArrayList<User>();			// Stores all the User objects
 	private ArrayList<Recipe> recipeList = new ArrayList<Recipe>();		// Stores all the Recipe objects
-//	private ArrayList<Recipe> menuList = new ArrayList<Recipe>();		// Stores Recipe objects for weekly menu
+	private ArrayList<Recipe> menuList = new ArrayList<Recipe>();		// Stores Recipe objects for weekly menu
 
 	private ArrayList<Observer> observers = new ArrayList<Observer>();
 	
@@ -22,18 +23,62 @@ public class MealPlanner {
 	 * Initializes the model with data
 	 */
 	public MealPlanner(){
-		generateTestData();		// Delete me when data IO is ready
+		generateTestData();	// Delete me when data IO is ready
 		notifyObservers();
 	}
 	
+	/**
+	 * Creates a new user and adds them to the list
+	 */
+	// FIXME
+	public void createUser(){
+		User newUser = new User("");
+		userList.add(newUser);
+	}
+	
+	/**
+	 * Adds a user to the list
+	 * @param u A User object
+	 */
+	public void addUser(User u){
+		userList.add(u);
+	}
+	
+	/**
+	 * Removes a User from the list
+	 * @param u A user object
+	 */
+	public void removeUser(User u){
+		userList.remove(u);
+	}
+	
+	/**
+	 * Retrieves the entire list of users.
+	 * @return Array List of User objects
+	 */
+	public ArrayList<User> getAllUsers(){
+		return this.userList;
+	}
+	
+	/**
+	 * Add an observer to this model
+	 * @param o
+	 */
 	public void registerObserver(Observer o){
 		observers.add(o);
 	}
 	
+	/**
+	 * Remove an observer of this model
+	 * @param o
+	 */
 	public void removeObserver(Observer o){
 		observers.remove(o);
 	}
 	
+	/**
+	 * Notify observers when this model changes.
+	 */
 	public void notifyObservers(){
 		Iterator<Observer> it = observers.iterator();
 		
@@ -42,7 +87,9 @@ public class MealPlanner {
 			o.update();
 		}
 	}
-	
+
+
+	//---------------- Delete me at some point --------------------------//
 	/**
 	 * Generates some test data to work with.
 	 */
