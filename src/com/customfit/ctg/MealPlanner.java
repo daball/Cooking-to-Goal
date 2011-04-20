@@ -24,16 +24,38 @@ public class MealPlanner { // implements Observable
 	 */
 	public MealPlanner(){
 		generateTestData();	// Delete me when data IO is ready
-		notifyObservers();
 	}
 	
 	/**
-	 * Creates a new user and adds them to the list
+	 * Creates a new Recipe with name only.
+	 * @param name
+	 * @return The created Recipe
 	 */
-	// FIXME
-	public void createUser(){
-		User newUser = new User("");
-		userList.add(newUser);
+	public Recipe createRecipe(String name){
+		Recipe newRecipe = new Recipe(name);
+		this.addRecipe(newRecipe);
+		return newRecipe;
+	}
+	
+	/**
+	 * Creates a new user with name only and adds them to the list
+	 * @param name
+	 * @return The created user
+	 */
+	public User createUser(String name){
+		User newUser = new User(name);
+		this.addUser(newUser);
+		return newUser;
+	}
+	
+	/**
+	 * Creates a new user with name and nutrition plan and adds them to the list
+	 * @return The created user
+	 */
+	public User createUser(String name, NutritionPlan np){
+		User newUser = createUser(name);
+		newUser.setActiveNutritionPlan(np);
+		return newUser;
 	}
 	
 	/**
@@ -42,6 +64,7 @@ public class MealPlanner { // implements Observable
 	 */
 	public void addUser(User u){
 		userList.add(u);
+		notifyObservers();
 	}
 	
 	/**
@@ -50,14 +73,49 @@ public class MealPlanner { // implements Observable
 	 */
 	public void removeUser(User u){
 		userList.remove(u);
+		notifyObservers();
+	}
+	
+	/**
+	 * Adds a Recipe to the list
+	 * @param u A Recipe object
+	 */
+	public void addRecipe(Recipe r){
+		recipeList.add(r);
+		notifyObservers();
+	}
+	
+	/**
+	 * Removes a Recipe from the list
+	 * @param u A Recipe object
+	 */
+	public void removeRecipe(Recipe r){
+		recipeList.remove(r);
+		notifyObservers();
 	}
 	
 	/**
 	 * Retrieves the entire list of users.
 	 * @return Array List of User objects
 	 */
-	public ArrayList<User> getAllUsers(){
+	public ArrayList<User> getUserList(){
 		return this.userList;
+	}
+	
+	/**
+	 * Retrieves the entire list of recipes.
+	 * @return Array List of Recipe objects
+	 */
+	public ArrayList<Recipe> getRecipeList(){
+		return this.recipeList;
+	}
+	
+	/**
+	 * Retrieves the entire list of recipes from the Menu.
+	 * @return Array List of Recipe objects
+	 */
+	public ArrayList<Recipe> getMenuList(){
+		return this.menuList;
 	}
 	
 	/**
