@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.customfit.ctg.data.tests;
 
 import junit.framework.TestCase;
@@ -13,9 +10,10 @@ import java.io.*;
 import java.util.*;
 
 /**
+ * Tests the Recipe functions in FlatFileDriver.
  * @author David
  */
-public class FlatFileDriverTests extends TestCase {
+public class FlatFileDriverRecipeTests extends TestCase {
 
 	//CONSTANTS
 	private static final String TEST_RECIPE_NAME			= "Test Recipe";
