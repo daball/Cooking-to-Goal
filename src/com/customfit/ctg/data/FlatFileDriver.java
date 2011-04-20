@@ -399,7 +399,7 @@ public class FlatFileDriver implements DataDriverInterface {
 		//we're going to delete, then insert
 		if (this.isConnected())
 		{
-			if (this.deleteRecipe(currentRecipeName))
+			if (this.deleteRecipeByName(currentRecipeName))
 			{
 				//delete succeeded
 				//now save it
@@ -421,7 +421,7 @@ public class FlatFileDriver implements DataDriverInterface {
 	 */
 
 	@Override
-	public boolean deleteRecipe(String recipeName) {
+	public boolean deleteRecipeByName(String recipeName) {
 		File file;
 		try
 		{

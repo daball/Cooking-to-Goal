@@ -8,6 +8,7 @@ import junit.framework.TestCase;
 import com.customfit.ctg.data.FlatFileDriver;
 import com.customfit.ctg.model.*;
 import org.junit.Before;
+import org.junit.After;
 import java.io.*;
 import java.util.*;
 
@@ -50,9 +51,6 @@ public class FlatFileDriverTests extends TestCase {
 	 */
 	@Before
 	public void setUp() throws Exception {
-		//be sure to clear before each test
-		TEST_RECIPE_INGREDIENTS.clear();
-		
 		//stir up some ingredients
 		TEST_RECIPE_INGREDIENTS.add(new RecipeIngredient("Sugar", 1.0, MeasurementUnit.USAUnits.CUPS));
 		TEST_RECIPE_INGREDIENTS.add(new RecipeIngredient("Spice", 2.5, MeasurementUnit.USAUnits.TABLESPOONS));
@@ -67,6 +65,16 @@ public class FlatFileDriverTests extends TestCase {
 		
 		//set up file access
 		this.rfa = new FlatFileDriver();
+	}
+	
+	/**
+	 * @throws java.lang.Exception
+	 */
+	@After
+	public void tearDown() throws Exception {
+		//be sure to clear after each test
+		TEST_RECIPE_INGREDIENTS.clear();
+		
 	}
 
 	public void testConnect() throws IOException

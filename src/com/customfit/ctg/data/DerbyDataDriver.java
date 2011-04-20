@@ -98,7 +98,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 	}
 
 	@Override
-	public boolean deleteRecipe(String recipeName) {
+	public boolean deleteRecipeByName(String recipeName) {
 		// TODO Auto-generated method stub
 		return false;
 	}

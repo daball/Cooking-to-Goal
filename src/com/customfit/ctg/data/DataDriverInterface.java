@@ -72,5 +72,5 @@ public interface DataDriverInterface {
 	 * @param recipeName The recipe's name.
 	 * @return Boolean indicating the success of the operation.
 	 */
-	public boolean deleteRecipe(String recipeName);
+	public boolean deleteRecipeByName(String recipeName);
 }
