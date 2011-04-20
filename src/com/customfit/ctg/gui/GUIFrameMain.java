@@ -3,6 +3,7 @@ package com.customfit.ctg.gui;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.customfit.ctg.MealPlanner;
 import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
 
 /**
@@ -20,12 +21,15 @@ public class GUIFrameMain extends JFrame{
 	
 	private JPanel panel;
 	
+	private MealPlanner model;		// The model the view displays
+	
 	/**
 	 * Constructs the CTG GUI
 	 */
-	public GUIFrameMain(){
+	public GUIFrameMain(MealPlanner model){
+		this.model = model;
 		
-		panel = new GUIManageMenuPanel();
+		this.panel = new GUIManageMenuPanel();
 		this.add(panel);
 		
 		this.setSize(WINDOW_WIDTH, WINDOW_HEIGHT);

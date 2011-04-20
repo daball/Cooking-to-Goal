@@ -1,39 +1,30 @@
 package com.customfit.ctg;
 
-import com.customfit.ctg.gui.*;
-import com.customfit.ctg.gui.manageusers.GUIManageUsersPanel;
 import com.customfit.ctg.model.*;
-import java.util.*;
+import java.util.ArrayList;
+
+
 
 /**
- * Contains the controller logic for the CTG application.
+ * The composite model of our data.
  * @author Drew
  */
 public class MealPlanner {
-
-	//private GUIFrameMain parentFrame;
 	
 	private static ArrayList<User> userList = new ArrayList<User>();			// Stores all the User objects
 	private static ArrayList<Recipe> recipeList = new ArrayList<Recipe>();		// Stores all the Recipe objects
-	private static ArrayList<Recipe> menuList = new ArrayList<Recipe>();		// Stores Recipe objects for weekly menu
+//	private static ArrayList<Recipe> menuList = new ArrayList<Recipe>();		// Stores Recipe objects for weekly menu
 	
 	/**
-	 * Initialize the program with a reference to the GUI (view).
-	 * @param pf
+	 * Initializes the model with data
 	 */
-	//public MealPlanner(GUIFrameMain pf){
 	public MealPlanner(){
-		//this.parentFrame = pf;
-		
 		generateTestData();		// Delete me when data IO is ready
-		
-		//pf.setVisible(true);
 	}
-	
 	/**
 	 * Generates some test data to work with.
 	 */
-	private static void generateTestData(){
+	private void generateTestData(){
 		/*
 		 * Ryan has 1 goal of 2000 calories MAX a day
 		 */
@@ -92,16 +83,5 @@ public class MealPlanner {
 		recipeList.add(r);
 		r = new Recipe("Pudding");
 		recipeList.add(r);
-	}
-	
-	public static ArrayList<User> getUserList() {
-		GUIManageUsersPanel manageUsersPanel = new GUIManageUsersPanel();
-		Controller.getMainFrame().openPanel(manageUsersPanel);
-		return userList;
-	}
-	
-	public static List<Recipe> getRecipeList() {
-		List<Recipe> recipeList = Controller.getDataDriver().selectAllRecipes();
-		return recipeList;
 	}
 }
