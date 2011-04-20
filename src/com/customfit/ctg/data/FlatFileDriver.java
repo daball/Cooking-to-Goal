@@ -1,6 +1,3 @@
- /**
- * 
- */
 package com.customfit.ctg.data;
 
 import com.customfit.ctg.*;
@@ -29,6 +26,14 @@ public class FlatFileDriver implements DataDriverInterface {
 	 * a default naming convention for recipe files.
 	 */
 	public static final String RECIPE_FILE_SUFFIX = ".recipe.xml";
+
+	/**
+	 * This is appended to file names when they are generated
+	 * by the insert/update queries, when exact file names are
+	 * not provided specified by the driver consumer. It provides
+	 * a default naming convention for user files.
+	 */
+	public static final String USER_FILE_SUFFIX = ".user.xml";
 	
 	/**
 	 * This is File path where recipe data will go, by default, per
@@ -37,11 +42,17 @@ public class FlatFileDriver implements DataDriverInterface {
 	private File recipeDataDirectory;	
 
 	/**
+	 * This is File path where user data will go, by default, per
+	 * the driver implementation.
+	 */
+	private File userDataDirectory;	
+
+	/**
 	 * This uses the external XStream library to do what neither
 	 * Object serialization nor JAXB serialization can, that is
 	 * serialize everything including generic collections, etc.
 	 */
-	private XStream xstream = new XStream();
+	private XStream xStream = new XStream();
 	
 	/**
 	 * Creates a new FlatFileDriver object and automatically connects
@@ -54,8 +65,8 @@ public class FlatFileDriver implements DataDriverInterface {
 		this.connect();
 		
 		//map short names to objects for serialization
-		xstream.alias("recipe", Recipe.class);
-		xstream.alias("ingredient", RecipeIngredient.class);
+		xStream.alias("recipe", Recipe.class);
+		xStream.alias("ingredient", RecipeIngredient.class);
 	}
 
 	/**
@@ -83,11 +94,11 @@ public class FlatFileDriver implements DataDriverInterface {
 		//this is a file system driver
 		//but we'll do a little testing of the waters anyways
 		this.recipeDataDirectory = new File(dataDirectory);
+		this.userDataDirectory = new File(dataDirectory);
 		
 		//the required testing facility is in connect()
 		return this.connect();
 	}
-	
 	
 	/**
 	 * Connects the driver to the application's current working directory.
@@ -114,12 +125,12 @@ public class FlatFileDriver implements DataDriverInterface {
 	public boolean connect() {
 		//this is a file system driver
 		//but we'll do a little testing of the waters anyways
-		this.recipeDataDirectory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+		this.recipeDataDirectory = new File ("." + File.separator + "app_data" + File.separator + "recipes"); //recipes data directory
+		this.userDataDirectory = new File ("." + File.separator + "app_data" + File.separator + "users"); //users data directory
 		
 		//the required testing facility is in isConnected()
 		return this.isConnected();
 	}
-
 
 	/**
 	 * Checks the driver's connection state to the current data directory.
@@ -165,7 +176,7 @@ public class FlatFileDriver implements DataDriverInterface {
 	}
 	
 	/**
-	 * Returns the currently data directory of the current object.
+	 * Returns the current recipe data directory.
 	 * 
 	 * It makes no assertions about the validity of this path. Use
 	 * the resulting object to check for existing paths and/or usability.
@@ -175,13 +186,24 @@ public class FlatFileDriver implements DataDriverInterface {
 	public File getRecipeDataDirectory() {
 		return this.recipeDataDirectory;
 	}
-	
+
+	/**
+	 * Returns the current user data directory.
+	 * 
+	 * It makes no assertions about the validity of this path. Use
+	 * the resulting object to check for existing paths and/or usability.
+	 * 
+	 * @return The user data directory.
+	 */
+	public File getUserDataDirectory() {
+		return this.userDataDirectory;
+	}
+
 	/**
 	 * Selects all recipes from the recipe data directory.
 	 * 
 	 * @return A List of Recipe objects.
 	 */
-	
 	@Override
 	public List<Recipe> selectAllRecipes() {
 		List<Recipe> recipes = new ArrayList<Recipe>();
@@ -284,7 +306,7 @@ public class FlatFileDriver implements DataDriverInterface {
 	    //user interface grammar, so might English (
 	    		
 		//use XStream now instead of JAXB
-		recipe = (Recipe) this.xstream.fromXML(iStream); 
+		recipe = (Recipe) this.xStream.fromXML(iStream); 
 		
 	    try {
 	    	//close input stream
@@ -302,7 +324,6 @@ public class FlatFileDriver implements DataDriverInterface {
 	    
 	    return recipe;
 	}
-	
 	
 	/**
 	 * Inserts a new recipe XML file into the recipe data directory by
@@ -362,7 +383,7 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		
 		//use XStream now instead of JAXB
-		this.xstream.toXML(recipe, fOut);
+		this.xStream.toXML(recipe, fOut);
 		
 		try {
 			//close file
@@ -392,7 +413,6 @@ public class FlatFileDriver implements DataDriverInterface {
 	 * 
 	 * @return Boolean indicating the success of the operation.
 	 */
-	
 	@Override
 	public boolean updateRecipeByName(String currentRecipeName, Recipe updatedRecipe) {
 		//for the filesystem driver, this couldn't be simpler
@@ -419,7 +439,6 @@ public class FlatFileDriver implements DataDriverInterface {
 	 * 
 	 * @return Boolean indicating the success of the operation.
 	 */
-
 	@Override
 	public boolean deleteRecipeByName(String recipeName) {
 		File file;
@@ -452,4 +471,251 @@ public class FlatFileDriver implements DataDriverInterface {
 		return file.delete();
 	}
 	
+	/**
+	 * Selects all recipes from the user data directory.
+	 * 
+	 * @return A List of User objects.
+	 */
+	@Override
+	public List<User> selectAllUsers() {
+		List<User> users = new ArrayList<User>();
+		
+		if (userDataDirectory.exists()) for (File userFile : userDataDirectory.listFiles())
+		{
+		    User user = null; //user storage
+		    user = this.selectUserByFile(userFile);
+		    if (user != null)
+		    	users.add(user);
+		}
+		
+		return users;
+	}
+
+	/**
+	 * Selects all users from the user data directory when
+	 * given a user name.
+	 * 
+	 * @param userName Name of the user. File must be located in the
+	 * user data directory. The file must be suffixed with USER_FILE_SUFFIX.
+	 * The user file associated with the name must exist, if it does not, the
+	 * method will return an empty list. 
+	 * 
+	 * @return List of User objects as required by the interface, but
+	 * the list will only have one item in it, per the implementation.
+	 */
+	@Override
+	public List<User> selectUsersByName(String userName) {
+	    //in this driver implementation, there will only be one in item in the list
+		//but in SQL queries, there may be more entries
+		
+		//create list
+		List<User> users = new ArrayList<User>();
+		
+		//build user from file
+		User user = null; //user storage
+	    String userFileName = "";
+	    try {
+			userFileName = userDataDirectory.getCanonicalPath() + File.separator + userName + USER_FILE_SUFFIX;
+		} catch (IOException ex) {
+			Controller.dumpException("There was a problem opening target data directory for users.", ex);
+		}
+		File userFile = new File(userFileName);
+		if (userFile.exists())
+			user = this.selectUserByFile(userFile);
+		
+		//add user to list
+		users.add(user);
+		
+		//return
+		return users;
+	}
+	
+	/**
+	 * Returns a deserialized User object from a XML File.
+	 * 
+	 * @param userFile File containing User object.
+	 * 
+	 * @return User object from state-file.
+	 */
+	public User selectUserByFile(File userFile) {
+	    FileInputStream iStream = null;
+	    User user = null; //recipe storage
+	    
+		try {
+			iStream = new FileInputStream(userFile);
+		}
+		catch (FileNotFoundException ex) {
+	    	try {
+	    		Controller.dumpException("There was a problem opening non-existant file at " + userFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now.", ex);
+			} catch (IOException e) {
+				Controller.dumpException("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now.", ex);
+				Controller.dumpException("Then an error was generated while generating the error.", e);
+			}
+		}
+	    
+		//use XStream now instead of JAXB
+		user = (User) this.xStream.fromXML(iStream); 
+		
+	    try {
+	    	//close input stream
+			if (iStream != null)
+				iStream.close();
+		}
+	    catch (IOException ex) {
+	    	try {
+	    		Controller.dumpException("There was a problem closing file at " + userFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
+			} catch (IOException e) {
+				Controller.dumpException("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
+				Controller.dumpException("Then an error was generated while generating the error.", e);
+			}
+		}
+	    
+	    return user;
+	}
+	
+	/**
+	 * Inserts a new user XML file into the user data directory by
+	 * serializing the User object.
+	 * 
+	 * @param user User to save.
+	 */
+	@Override
+	public boolean insertUser(User user) {
+		//when using this routine, we'll auto-generate data directory
+	    if (!userDataDirectory.exists()) userDataDirectory.mkdirs();
+
+	    //prepare a file
+	    File newFile;
+	    try
+	    {
+	    	String newFileName = userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX;
+	    	newFile = new File(newFileName);
+	    }
+		catch (IOException ex) {
+			try {
+				Controller.dumpException("There was a problem creating file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+			} catch (IOException e) {
+				Controller.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Controller.dumpException("Then an error was generated while generating the error.", e);
+			}
+			return false;
+		}
+	    
+	    //now call the overload to export
+	    return this.insertUserToFile(user, newFile);
+	}
+	
+	/**
+	 * Serializes User to XML file you specify.
+	 * 
+	 * @param user User object to store.
+	 * @param toFile File to put it in.
+	 * 
+	 * @return Boolean indicating success of the operation.
+	 */	
+	public boolean insertUserToFile(User user, File toFile) {
+		//this is very reusable, especially for recipe file exporting
+		FileOutputStream fOut;
+		try
+		{
+			fOut = new FileOutputStream(toFile, false);
+		}
+		catch (FileNotFoundException ex) {
+			try {
+				Controller.dumpException("There was a problem creating file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+			} catch (IOException e) {
+				Controller.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Controller.dumpException("Then an error was generated while generating the error.", e);
+			}
+			return false;
+		}
+		
+		//use XStream now instead of JAXB
+		this.xStream.toXML(user, fOut);
+		
+		try {
+			//close file
+			fOut.close();
+		}
+		catch (IOException ex) {
+			try {
+				Controller.dumpException("There was a problem closing file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+			} catch (IOException e) {
+				Controller.dumpException("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Controller.dumpException("Then an error was generated while generating the error.", e);
+			}
+			return false;
+		}
+		
+		return true;
+	}
+	
+	/**
+	 * Updates the user with the currentUserName with the new User object.
+	 * 
+	 * This may mean the file can be renamed, if the user name changes.
+	 * 
+	 * @param currentUserName The current name of the user. (Before changing)
+	 * @param updatedUser The User object to save. (May have a new user name.)
+	 * 
+	 * @return Boolean indicating the success of the operation.
+	 */
+	@Override
+	public boolean updateUserByName(String currentUserName, User updatedUser) {
+		//for the filesystem driver, this couldn't be simpler
+		//we're going to delete, then insert
+		if (this.isConnected())
+		{
+			if (this.deleteUserByName(currentUserName))
+			{
+				//delete succeeded
+				//now save it
+				return this.insertUser(updatedUser);
+			}
+		}
+		//otherwise:
+		return false;
+	}
+	
+	/**
+	 * Deletes the user using the object's default naming convention.
+	 * 
+	 * Read about inserting for more information about naming conventions.
+	 * 
+	 * @param userName User name.
+	 * 
+	 * @return Boolean indicating the success of the operation.
+	 */
+	@Override
+	public boolean deleteUserByName(String userName) {
+		File file;
+		try
+		{
+			file = new File(userDataDirectory.getCanonicalPath() + File.separator + userName + USER_FILE_SUFFIX);
+			return this.deleteUserFile(file);
+		}
+		catch (IOException ex)
+		{
+			try {
+				Controller.dumpException("There was an error deleting the file " + userDataDirectory.getCanonicalPath() + File.separator + userName + USER_FILE_SUFFIX, ex);
+			} catch (IOException e) {
+				Controller.dumpException("There was an error deleting a file for the " + userName + "recipe.", ex);
+				Controller.dumpException("Then an error was generated while generating the error.", e);
+			}
+			return false;
+		}
+	}
+	
+	/**
+	 * Deletes whatever file you specify.
+	 * 
+	 * @param file Any valid File object.
+	 *  
+	 * @return Boolean indicating the success of the operation.
+	 */
+	public boolean deleteUserFile(File file)
+	{
+		return file.delete();
+	}
+
 }

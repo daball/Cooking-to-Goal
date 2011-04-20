@@ -1,16 +1,14 @@
-/**
- * 
- */
 package com.customfit.ctg.data;
 
 import com.customfit.ctg.*;
 import com.customfit.ctg.model.*;
+
 import java.util.*;
 import java.io.*;
 import java.sql.*;
 
 /**
- * WORKINPROGRESS:
+ * TODO: DERBYDATADRIVER WORK IN PROGRESS
  * The DerbyDataDriver class represents one of the DataDriverInterfaces
  * aimed at providing embedded data operations for the application.
  * 
@@ -76,7 +74,6 @@ public class DerbyDataDriver implements DataDriverInterface {
 	public List<Recipe> selectAllRecipes() {
 		ArrayList<Recipe> recipes = new ArrayList<Recipe>();
 		Statement statement; 
-		// TODO Auto-generated method stub
 		try {
 			statement = this.connection.createStatement();
 			if (statement.execute("SELECT Name, Description, Instructions, ServingSizeQuantity, ServingSizeUnit, Servings, Rating FROM Recipe"))
@@ -123,6 +120,36 @@ public class DerbyDataDriver implements DataDriverInterface {
 
 	@Override
 	public boolean deleteRecipeByName(String recipeName) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public List<User> selectAllUsers() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<User> selectUsersByName(String userName) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean insertUser(User newUser) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean updateUserByName(String currentUserName, User updatedUser) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean deleteUserByName(String userName) {
 		// TODO Auto-generated method stub
 		return false;
 	}

@@ -40,7 +40,7 @@ public class MealPlanner {
 		User ryan = new User("Ryan");				// Create a User
 		NutritionFacts nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
 		nf.setCalories(2000.0);						// Use "setters" to set goals .. here, 2000 calories
-		ryan.setMaxGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
+		ryan.getActiveNutritionPlan().setMaximumGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
 		userList.add(ryan);							// add this user to the List
 		
 		/*
@@ -48,10 +48,10 @@ public class MealPlanner {
 		 *           and 100 mg? cholesterol MAX a day
 		 */
 		User drew = new User("Drew Salyer");				// Create a User
-//		NutritionFacts nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
+		nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
 		nf.setCalories(1800.0);						// Use "setters" to set goals .. here, 2000 calories
 		nf.setCholesterol(100.0);
-		drew.setMaxGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
+		drew.getActiveNutritionPlan().setMaximumGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
 		userList.add(drew);							// add this user to the List
 		
 		/*
@@ -59,12 +59,14 @@ public class MealPlanner {
 		 *                  and 100 g? carbs a day
 		 */
 		User david = new User("David A. Ball, Dr. Spaz!!");				// Create a User
-//		NutritionFacts nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
+		nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
 		nf.setCalories(3000.0);						// Use "setters" to set goals .. here, 2000 calories
-		david.setMinGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
+		david.getActiveNutritionPlan().setMinimumGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
+		nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
+		nf.setCalories(3000.0);						// Use "setters" to set goals .. here, 2000 calories
 		nf.setTotalCarbohydrate(100.0);
 		nf.setCalories(0);
-		david.setMaxGoals(nf);
+		david.getActiveNutritionPlan().setMaximumGoals(nf);
 		userList.add(david);							// add this user to the List
 		
 		
@@ -72,13 +74,14 @@ public class MealPlanner {
 		 * Steven has 4 goals, 2 MIN, 2 MAX
 		 */
 		User steven = new User("S");				// Create a User
-//		NutritionFacts nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
+		nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
 		nf.setCalories(2200);						// Use "setters" to set goals .. here, 2000 calories
 		nf.setTotalCarbohydrate(1250);
-		steven.setMinGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
+		steven.getActiveNutritionPlan().setMinimumGoals(nf);						// if user wants 2000 calorie max, use setMaxGoals and pass it the NF object we just created
+		nf = new NutritionFacts();	// Create a NutritionFacts to store nutritional info
 		nf.setTotalCarbohydrate(100);
 		nf.setCalories(1800);
-		steven.setMaxGoals(nf);
+		steven.getActiveNutritionPlan().setMaximumGoals(nf);
 		userList.add(steven);							// add this user to the List
 		
 		

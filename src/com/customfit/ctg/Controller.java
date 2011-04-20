@@ -47,17 +47,13 @@ public class Controller {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            dumpException("Error setting look and feel.", e);
         } catch (InstantiationException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            dumpException("Error setting look and feel.", e);
         } catch (IllegalAccessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            dumpException("Error setting look and feel.", e);
         } catch (UnsupportedLookAndFeelException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            dumpException("Error setting look and feel.", e);
         }
                 
 		guiMain = new GUIFrameMain();
