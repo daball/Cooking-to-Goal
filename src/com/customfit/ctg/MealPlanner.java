@@ -69,14 +69,6 @@ public class MealPlanner { // implements Observable
 	}
 	
 	/**
-	 * Remove an observer of this model
-	 * @param o
-	 */
-	public void removeObserver(Observer o){
-		observers.remove(o);
-	}
-	
-	/**
 	 * Notify observers when this model changes.
 	 */
 	public void notifyObservers(){
