@@ -64,6 +64,24 @@ public class MealPlanner { // implements Observable
 	}
 	
 	/**
+	 * Adds a Recipe to the Menu list
+	 * @param u A Recipe object
+	 */
+	public void addRecipeToMenu(Recipe r){
+		menuList.add(r);
+		notifyObservers();
+	}
+	
+	/**
+	 * Removes a Recipe from the Menu list
+	 * @param u A Recipe object
+	 */
+	public void removeRecipeFromMenu(Recipe r){
+		menuList.remove(r);
+		notifyObservers();
+	}
+	
+	/**
 	 * Retrieves the entire list of users.
 	 * @return Array List of User objects
 	 */
