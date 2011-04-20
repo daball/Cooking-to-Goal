@@ -25,38 +25,7 @@ public class MealPlanner { // implements Observable
 	public MealPlanner(){
 		generateTestData();	// Delete me when data IO is ready
 	}
-	
-	/**
-	 * Creates a new Recipe with name only.
-	 * @param name
-	 * @return The created Recipe
-	 */
-	public Recipe createRecipe(String name){
-		Recipe newRecipe = new Recipe(name);
-		this.addRecipe(newRecipe);
-		return newRecipe;
-	}
-	
-	/**
-	 * Creates a new user with name only and adds them to the list
-	 * @param name
-	 * @return The created user
-	 */
-	public User createUser(String name){
-		User newUser = new User(name);
-		this.addUser(newUser);
-		return newUser;
-	}
-	
-	/**
-	 * Creates a new user with name and nutrition plan and adds them to the list
-	 * @return The created user
-	 */
-	public User createUser(String name, NutritionPlan np){
-		User newUser = createUser(name);
-		newUser.setActiveNutritionPlan(np);
-		return newUser;
-	}
+
 	
 	/**
 	 * Adds a user to the list

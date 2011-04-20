@@ -3,6 +3,9 @@ package com.customfit.ctg;
 import javax.swing.JPanel;
 
 import com.customfit.ctg.gui.GUIFrameMain;
+import com.customfit.ctg.model.NutritionPlan;
+import com.customfit.ctg.model.Recipe;
+import com.customfit.ctg.model.User;
 
 /**
  * Links the view with the model.
@@ -34,5 +37,38 @@ public class Controller {
 	public void openPanel(JPanel panel) {
 		model.registerObserver((Observer) panel);
 		gui.openPanel(panel);
+	}
+	
+	
+	/**
+	 * Creates a new Recipe with name only.
+	 * @param name
+	 * @return The created Recipe
+	 */
+	public Recipe createRecipe(String name){
+		Recipe newRecipe = new Recipe(name);
+		model.addRecipe(newRecipe);
+		return newRecipe;
+	}
+	
+	/**
+	 * Creates a new user with name only and adds them to the list
+	 * @param name
+	 * @return The created user
+	 */
+	public User createUser(String name){
+		User newUser = new User(name);
+		model.addUser(newUser);
+		return newUser;
+	}
+	
+	/**
+	 * Creates a new user with name and nutrition plan and adds them to the list
+	 * @return The created user
+	 */
+	public User createUser(String name, NutritionPlan np){
+		User newUser = createUser(name);
+		newUser.setActiveNutritionPlan(np);
+		return newUser;
 	}
 }
