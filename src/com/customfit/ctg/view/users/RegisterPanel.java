@@ -114,13 +114,13 @@ public class RegisterPanel extends SubPanel {
     }//GEN-LAST:event_jButtonSignupActionPerformed
 
     private void jTextFieldUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUserKeyReleased
-        // if user name is longer than two characters
+        //if user name is longer than two characters
         if (this.jTextFieldUser.getText().length() > 2)
-            // then permit registration
+            //then permit registration
             this.jButtonSignup.setEnabled(true);
         //otherwise
         else
-            // disable sign up
+            //disable sign up
             this.jButtonSignup.setEnabled(false);
     }//GEN-LAST:event_jTextFieldUserKeyReleased
 
@@ -146,4 +146,5 @@ public class RegisterPanel extends SubPanel {
         //grab title from on the panel
         return this.jLabelTitle.getText();
     }
+    
 }

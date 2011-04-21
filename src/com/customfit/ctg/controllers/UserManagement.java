@@ -1,8 +1,10 @@
 package com.customfit.ctg.controllers;
 
 import com.customfit.ctg.model.*;
+import com.customfit.ctg.view.SubPanel;
 import com.customfit.ctg.view.users.*;
 import java.util.*;
+import javax.sound.midi.ControllerEventListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,10 +47,10 @@ public class UserManagement {
     {
         //send it over to the database
         boolean status = Application.getDataDriver().insertUser(user);
-        //checek for errors
+        //check for errors
         if (!status)
             //if failed, tell user about the failure
-            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem registering your user.");
+            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem registering your user.", "Error", JOptionPane.ERROR_MESSAGE);
         else
             //otherwise, assume success and present login
             UserManagement.presentLogin();
@@ -82,16 +84,14 @@ public class UserManagement {
      */
     public static void editRegistration(User user)
     {
-        //method stub:
-        //	replace this CLI-code with GUI-initiation code
-        System.err.println("editRegstration() hit: User " + "Name" + ": " + user.getName() + ". Feature not currently implemented.");
-        /* 
-         * example pseudocode:
-         * 		instantiate JPanel for viewing User
-         * 		pass recipe to a special function in JPanel for processing List<User>
-         * 		Controller.getMainFrame().setPanel( list panel )
-         * TODO: replace this with GUI initialization code for Create User
-         */
+        //get currently loaded frame
+        SubPanel currentPanel = Application.getMainFrame().getPanel();
+        //create edit user panel
+        EditAccountPanel editAccountPanel = new EditAccountPanel(currentPanel);
+        //load the user into the profile panel
+        editAccountPanel.setUser(user);
+        //display panel in main frame
+        Application.getMainFrame().setPanel(editAccountPanel);
     }
 
     /**
@@ -100,12 +100,21 @@ public class UserManagement {
      * 
      * @param originalUserName The user's original name, used to locate the recipe in the database.
      * @param newUser The new user data.
+     * @param previousPanel The panel we were viewing before we activated this feature.
      * 
      * @return Boolean indicating the success of the operation. 
      */
-    public static boolean updateUser(String originalUserName, User newUser)
+    public static boolean updateRegistrationAndGoBack(String originalUserName, User newUser, SubPanel previousPanel)
     {
-        return Application.getDataDriver().updateUserByName(originalUserName, newUser);
+        boolean status = Application.getDataDriver().updateUserByName(originalUserName, newUser);
+         //check for errors
+        if (!status)
+            //if failed, tell user about the failure
+            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem updating your user registration.", "Error", JOptionPane.ERROR_MESSAGE);
+        else
+            //otherwise, assume success and present previously loaded panel
+            Application.getMainFrame().setPanel(previousPanel);
+       return status;
     }
 
     /**
@@ -118,7 +127,22 @@ public class UserManagement {
      */
     public static boolean deleteUser(String userName)
     {
-        return Application.getDataDriver().deleteUserByName(userName);
+        boolean status = false;
+        //be sure to ask for a confirmation first, if they click OK
+        if (JOptionPane.showConfirmDialog(Application.getMainFrame(), "Are you sure you want to delete the user, " + userName + "? All profile data will be deleted. This cannot be reversed.", "Delete User Confirmation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+        {
+            //then do the delete
+            status = Application.getDataDriver().deleteUserByName(userName);
+             //check for errors
+            if (!status)
+                //if failed, tell user about the failure
+                JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem deleting your user registration.", "Error", JOptionPane.ERROR_MESSAGE);
+            else
+                //if all went well go back to login screen, since the user is now dead
+                UserManagement.presentLogin();
+        }
+        //turn the status back over
+        return status;
     }
 
     /**
@@ -131,6 +155,7 @@ public class UserManagement {
      */
     public static boolean deleteUser(User user)
     {
+        //call overloaded
         return deleteUser(user.getName());
     }
 

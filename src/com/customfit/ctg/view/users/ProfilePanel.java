@@ -1,5 +1,6 @@
 package com.customfit.ctg.view.users;
 
+import com.customfit.ctg.controllers.UserManagement;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;
 import javax.swing.BorderFactory;
@@ -11,6 +12,9 @@ import javax.swing.BorderFactory;
  */
 public class ProfilePanel extends SubPanel {
     
+    /**
+     * The user currently displayed on the panel.
+     */
     private User user;
 
     /** Creates new form ProfilePanel */
@@ -48,6 +52,11 @@ public class ProfilePanel extends SubPanel {
         jScrollPane2.setViewportView(jTextPane1);
 
         jComboBoxAccount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Me Menu", "Edit User", "Logout" }));
+        jComboBoxAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxAccountActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -75,6 +84,21 @@ public class ProfilePanel extends SubPanel {
                 .addContainerGap(236, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jComboBoxAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAccountActionPerformed
+        // process me menu
+        
+        //if user hit Edit User
+        if (((String)this.jComboBoxAccount.getSelectedItem()).equals("Edit User"))
+            //then tell the controller about it
+            UserManagement.editRegistration(user);
+        //if user hit Edit User
+        else if (((String)this.jComboBoxAccount.getSelectedItem()).equals("Logout"))
+            //ask controller for login screen
+            UserManagement.presentLogin();
+        //and no matter what, be sure to reset this combo box back to index 0
+        this.jComboBoxAccount.setSelectedIndex(0);
+    }//GEN-LAST:event_jComboBoxAccountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
