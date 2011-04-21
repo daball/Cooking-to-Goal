@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.customfit.ctg.Controller;
+import com.customfit.ctg.gui.managerecipes.GUIManageRecipesPanel;
 import com.customfit.ctg.gui.manageusers.GUIManageUsersPanel;
 
 
@@ -74,7 +75,7 @@ public class GUIMainButtonPanel extends JPanel {
 				controller.openPanel(new GUIManageUsersPanel(controller));
 			}
 			else if(ae.getSource().equals(manageRecipes)){
-				// do something
+				controller.openPanel(new GUIManageRecipesPanel(controller));
 			}
 			else if(ae.getSource().equals(printList)){
 				// do something
