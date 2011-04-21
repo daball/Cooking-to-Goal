@@ -1,4 +1,4 @@
-package com.customfit.ctg.gui.manageusers;
+package com.customfit.ctg.view.users;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -6,9 +6,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.customfit.ctg.Controller;
-import com.customfit.ctg.gui.GUIFrameMain;
-import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
+import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.view.MainFrame;
+import com.customfit.ctg.view.meal.GUIManageMenuPanel;
 
 /**
  * 
@@ -17,9 +17,9 @@ import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
  */
 public class GUISouthPanel extends JPanel {
 	private JButton btnDone;
-	private Controller controller;
+	private Application controller;
 	
-	public GUISouthPanel(Controller controller) {
+	public GUISouthPanel(Application controller) {
 		this.controller = controller;
 		this.setPreferredSize(new Dimension(350, 100)); //sets the size for the JPanel
 		this.btnDone = new JButton("OK");

@@ -1,4 +1,4 @@
-package com.customfit.ctg.gui.manageusers;
+package com.customfit.ctg.view.users;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;

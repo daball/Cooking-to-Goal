@@ -1,4 +1,4 @@
-package com.customfit.ctg.gui.manageusers;
+package com.customfit.ctg.view.users;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -9,16 +9,16 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import com.customfit.ctg.Controller;
-import com.customfit.ctg.Observer;
-import com.customfit.ctg.gui.GUIFormats;
-import com.customfit.ctg.gui.GUIFrameMain;
+import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.view.GUIFormats;
+import com.customfit.ctg.view.MainFrame;
+import com.customfit.ctg.view.Observer;
 
 public class GUIManageUsersPanel extends JPanel implements Observer {
 	private String title;
-	private Controller controller;
+	private Application controller;
 	
-	public GUIManageUsersPanel(Controller controller){
+	public GUIManageUsersPanel(Application controller){
 		this.controller = controller;
 		title = "Manage User(s)";
 				

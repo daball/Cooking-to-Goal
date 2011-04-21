@@ -11,13 +11,14 @@
  * @author Ryan Spoon
  */
 
-package com.customfit.ctg.gui.managerecipes;
+package com.customfit.ctg.view.recipes;
 
-import com.customfit.ctg.Controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.customfit.ctg.Observer;
-import com.customfit.ctg.gui.GUIFormats;
+import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.view.GUIFormats;
+import com.customfit.ctg.view.Observer;
+
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -28,12 +29,8 @@ import javax.swing.table.DefaultTableModel;
  * @author Ryan Spoon
  */
 public class GUIEditRecipePanel extends JPanel implements Observer {
-    private Controller controller;
-
     /** Creates new form GUIManageRecipesPanel */
-    public GUIEditRecipePanel(Controller controller) {
-        this.controller = controller;
-
+    public GUIEditRecipePanel() {
         initComponents();
         custInitialize();
     }
@@ -209,11 +206,11 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
             if(ae.getSource().equals(btnSave)){
                 //Recipe r = createRecipe();
                 //controller.addRecipe(r);
-                controller.openPanel(new GUIManageRecipesPanel(controller));
+                Application.openPanel(new GUIManageRecipesPanel());
             }
             else if(ae.getSource().equals(btnCancel))
             {
-                controller.openPanel(new GUIManageRecipesPanel(controller));
+                Application.openPanel(new GUIManageRecipesPanel());
             }
             else if(ae.getSource().equals(btnAddIngredient))
             {

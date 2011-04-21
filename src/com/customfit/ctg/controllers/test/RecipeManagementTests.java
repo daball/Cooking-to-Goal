@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.customfit.ctg.test;
+package com.customfit.ctg.controllers.test;
 
 
 import java.util.ArrayList;
@@ -11,6 +11,8 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import com.customfit.ctg.*;
+import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.controllers.RecipeManagement;
 import com.customfit.ctg.model.MeasurableUnit;
 import com.customfit.ctg.model.MeasurementUnit;
 import com.customfit.ctg.model.NutritionFacts;
@@ -43,7 +45,7 @@ public class RecipeManagementTests extends TestCase {
 	@Before
 	public void setUp() throws Exception {
 		//launch app normally
-		Controller.main(new String[]{ });
+		Application.launch(new String[]{ });
 		
 		//stir up some ingredients
 		TEST_RECIPE_INGREDIENTS.add(new RecipeIngredient("Sugar", 1.0, MeasurementUnit.USAUnits.CUPS));
@@ -58,7 +60,7 @@ public class RecipeManagementTests extends TestCase {
 		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//tell the database to store it
-		Controller.getDataDriver().insertRecipe(this.testRecipe);
+		Application.getDataDriver().insertRecipe(this.testRecipe);
 	}
 	
 	/**
@@ -74,13 +76,13 @@ public class RecipeManagementTests extends TestCase {
 		Thread.currentThread().sleep(500);
 		
 		//tell the database to delete test recipe
-		Controller.getDataDriver().deleteRecipeByName(this.testRecipe.getName());
+		Application.getDataDriver().deleteRecipeByName(this.testRecipe.getName());
 		
 		//hide main frame
-		Controller.getMainFrame().setVisible(false);
+		Application.getMainFrame().setVisible(false);
 		
 		//and close it
-		Controller.getMainFrame().dispose();
+		Application.getMainFrame().dispose();
 	}
 	
 	public void testBrowseRecipes()
@@ -107,14 +109,14 @@ public class RecipeManagementTests extends TestCase {
 
 		boolean found = false;
 		//find it		
-		for (Recipe recipe : Controller.getDataDriver().selectAllRecipes())
+		for (Recipe recipe : Application.getDataDriver().selectAllRecipes())
 		{
 			System.out.println("!!!!!!!!!!!Found " + recipe.getName());
 			if (recipe.getName().equals(testRecipe.getName()))
 			{
 				found = true;
 				//now delete it
-				Controller.getDataDriver().deleteRecipeByName(testName);
+				Application.getDataDriver().deleteRecipeByName(testName);
 				break;
 			}
 		}
@@ -140,7 +142,7 @@ public class RecipeManagementTests extends TestCase {
 		Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//tell data driver to create recipe
-		Controller.getDataDriver().insertRecipe(testRecipe);
+		Application.getDataDriver().insertRecipe(testRecipe);
 
 		//make it different
 		testRecipe.setName(testRecipe.getName() +  " - UPDATED!");
@@ -152,13 +154,13 @@ public class RecipeManagementTests extends TestCase {
 		//now test it
 		boolean found = false;
 		//find it		
-		for (Recipe recipe : Controller.getDataDriver().selectAllRecipes())
+		for (Recipe recipe : Application.getDataDriver().selectAllRecipes())
 		{
 			if (recipe.getName().equals(testRecipe.getName()))
 			{
 				found = true;
 				//now delete it
-				Controller.getDataDriver().deleteRecipeByName(testRecipe.getName());
+				Application.getDataDriver().deleteRecipeByName(testRecipe.getName());
 				break;
 			}
 		}
@@ -172,9 +174,9 @@ public class RecipeManagementTests extends TestCase {
 		Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//tell data driver to create recipe
-		Controller.getDataDriver().insertRecipe(testRecipe);
+		Application.getDataDriver().insertRecipe(testRecipe);
 
-		for (Recipe recipe : Controller.getDataDriver().selectAllRecipes())
+		for (Recipe recipe : Application.getDataDriver().selectAllRecipes())
 		{
 			if (recipe.getName().equals(testRecipe.getName()))
 			{

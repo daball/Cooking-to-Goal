@@ -1,4 +1,4 @@
-package com.customfit.ctg.gui.managemenu;
+package com.customfit.ctg.view.meal;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -8,9 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.customfit.ctg.Controller;
-import com.customfit.ctg.gui.managerecipes.GUIManageRecipesPanel;
-import com.customfit.ctg.gui.manageusers.GUIManageUsersPanel;
+import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.view.recipes.GUIManageRecipesPanel;
+import com.customfit.ctg.view.users.GUIManageUsersPanel;
 
 
 /**
@@ -24,13 +24,10 @@ public class GUIMainButtonPanel extends JPanel {
 	JButton printList;
 	JButton exit;
 	
-	private Controller controller;
-
+	
 	// JButton buttonExit;
 
-	public GUIMainButtonPanel(Controller controller) {
-		this.controller = controller;
-		
+	public GUIMainButtonPanel() {
 		this.setLayout(new BorderLayout());
 		this.setPreferredSize(new Dimension(350, 100)); //sets the size for the JPanel
 		this.viewGoals = new JButton("View Goals"); //creates an instance of the buttons
@@ -72,10 +69,10 @@ public class GUIMainButtonPanel extends JPanel {
 				// do something
 			}
 			else if(ae.getSource().equals(manageUsers)){
-				controller.openPanel(new GUIManageUsersPanel(controller));
+				Application.openPanel(new GUIManageUsersPanel());
 			}
 			else if(ae.getSource().equals(manageRecipes)){
-				controller.openPanel(new GUIManageRecipesPanel(controller));
+				Application.openPanel(new GUIManageRecipesPanel());
 			}
 			else if(ae.getSource().equals(printList)){
 				// do something

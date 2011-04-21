@@ -1,6 +1,7 @@
 package com.customfit.ctg.data;
 
 import com.customfit.ctg.*;
+import com.customfit.ctg.controllers.Application;
 import com.customfit.ctg.model.*;
 
 import java.util.*;
@@ -14,7 +15,7 @@ import java.sql.*;
  * 
  * @author David
  */
-public class DerbyDataDriver implements DataDriverInterface {
+public class DerbyDataDriver implements DataDriver {
 
 	private final String JDBC_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
 	private String dbName = "." + File.separator + "app_data" + File.separator + "derby.db";
@@ -29,7 +30,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 		try {
 			Class.forName(connectionString);
 		} catch (ClassNotFoundException e) {
-			Controller.dumpException("The JDBC Embedded Derby driver not found. (" + this.JDBC_DRIVER + ")", e);
+			Application.dumpException("The JDBC Embedded Derby driver not found. (" + this.JDBC_DRIVER + ")", e);
 			return false;
 		}
 
@@ -37,7 +38,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 		try {
 			connection = DriverManager.getConnection(connectionString);
 		} catch (SQLException e) {
-			Controller.dumpException("SQLException has occurred while connecting to Derby database.", e);
+			Application.dumpException("SQLException has occurred while connecting to Derby database.", e);
 			return false;
 		}
 
@@ -51,7 +52,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 			try {
 				this.connection.close();
 			} catch (SQLException e) {
-				Controller.dumpException("SQLException has occurred while closing connection to Derby database.", e);
+				Application.dumpException("SQLException has occurred while closing connection to Derby database.", e);
 			}
 		}
 	}
@@ -62,7 +63,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 			try {
 				return !(this.connection.isClosed());
 			} catch (SQLException e) {
-				Controller.dumpException("SQLException has occurred while checking connection state to Derby database in isConnected().", e);
+				Application.dumpException("SQLException has occurred while checking connection state to Derby database in isConnected().", e);
 				return false;
 			}
 		}
@@ -94,7 +95,7 @@ public class DerbyDataDriver implements DataDriverInterface {
 //				while (response.next());
 			}
 		} catch (SQLException e) {
-			Controller.dumpException("SQLException occurred while performing select all recipes operation.", e);
+			Application.dumpException("SQLException occurred while performing select all recipes operation.", e);
 		}
 		return null;
 	}

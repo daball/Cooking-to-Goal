@@ -1,11 +1,11 @@
-package com.customfit.ctg.gui;
+package com.customfit.ctg.view;
 
 import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.border.Border;
 
 public class GUIFormats {
-	static public Font getTitleFont() {
+	public static Font getTitleFont() {
 		Font font = new Font("Serif", Font.BOLD, 32);
 		
 		return font;

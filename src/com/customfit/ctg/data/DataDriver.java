@@ -9,7 +9,7 @@ import com.customfit.ctg.model.*;
  *   
  * @author David
  */
-public interface DataDriverInterface {
+public interface DataDriver {
 	/**
 	 * Set up connection to database.
 	 *  

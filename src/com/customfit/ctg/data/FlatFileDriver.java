@@ -1,6 +1,6 @@
 package com.customfit.ctg.data;
 
-import com.customfit.ctg.*;
+import com.customfit.ctg.controllers.Application;
 import com.customfit.ctg.model.*;
 import com.thoughtworks.xstream.XStream;
 import java.util.*;
@@ -17,7 +17,7 @@ import java.io.*;
  *
  * @author David
  */
-public class FlatFileDriver implements DataDriverInterface {
+public class FlatFileDriver implements DataDriver {
 
 	/**
 	 * This is appended to file names when they are generated
@@ -245,7 +245,7 @@ public class FlatFileDriver implements DataDriverInterface {
 	    try {
 			recipeFileName = recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX;
 		} catch (IOException ex) {
-			Controller.dumpException("There was a problem opening target data directory for recipes.", ex);
+			Application.dumpException("There was a problem opening target data directory for recipes.", ex);
 		}
 		File recipeFile = new File(recipeFileName);
 		if (recipeFile.exists())
@@ -274,10 +274,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (FileNotFoundException ex) {
 	    	try {
-	    		Controller.dumpException("There was a problem opening non-existant file at " + recipeFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now.", ex);
+	    		Application.dumpException("There was a problem opening non-existant file at " + recipeFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now.", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now.", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now.", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 		}
 	    
@@ -315,10 +315,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 	    catch (IOException ex) {
 	    	try {
-	    		Controller.dumpException("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
+	    		Application.dumpException("There was a problem closing file at " + recipeFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 		}
 	    
@@ -345,10 +345,10 @@ public class FlatFileDriver implements DataDriverInterface {
 	    }
 		catch (IOException ex) {
 			try {
-				Controller.dumpException("There was a problem creating file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				Application.dumpException("There was a problem creating file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -374,10 +374,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (FileNotFoundException ex) {
 			try {
-				Controller.dumpException("There was a problem creating file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				Application.dumpException("There was a problem creating file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -391,10 +391,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (IOException ex) {
 			try {
-				Controller.dumpException("There was a problem closing file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				Application.dumpException("There was a problem closing file at " + recipeDataDirectory.getCanonicalPath() + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "recipes" + File.separator + recipe.getName() + RECIPE_FILE_SUFFIX + ".", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -450,10 +450,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		catch (IOException ex)
 		{
 			try {
-				Controller.dumpException("There was an error deleting the file " + recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX, ex);
+				Application.dumpException("There was an error deleting the file " + recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX, ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was an error deleting a file for the " + recipeName + "recipe.", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was an error deleting a file for the " + recipeName + "recipe.", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -517,7 +517,7 @@ public class FlatFileDriver implements DataDriverInterface {
 	    try {
 			userFileName = userDataDirectory.getCanonicalPath() + File.separator + userName + USER_FILE_SUFFIX;
 		} catch (IOException ex) {
-			Controller.dumpException("There was a problem opening target data directory for users.", ex);
+			Application.dumpException("There was a problem opening target data directory for users.", ex);
 		}
 		File userFile = new File(userFileName);
 		if (userFile.exists())
@@ -546,10 +546,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (FileNotFoundException ex) {
 	    	try {
-	    		Controller.dumpException("There was a problem opening non-existant file at " + userFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now.", ex);
+	    		Application.dumpException("There was a problem opening non-existant file at " + userFile.getCanonicalPath() + " for deserialization. Not sure where it could have went, but it's gone now.", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now.", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem opening a non-existant file for deserialization. Not sure where it could have went, but it's gone now.", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 		}
 	    
@@ -563,10 +563,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 	    catch (IOException ex) {
 	    	try {
-	    		Controller.dumpException("There was a problem closing file at " + userFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
+	    		Application.dumpException("There was a problem closing file at " + userFile.getCanonicalPath() + " after deserialization. Proceeding without interruption.", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem closing a file after deserialization. Proceeding without interruption.", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 		}
 	    
@@ -593,10 +593,10 @@ public class FlatFileDriver implements DataDriverInterface {
 	    }
 		catch (IOException ex) {
 			try {
-				Controller.dumpException("There was a problem creating file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Application.dumpException("There was a problem creating file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -622,10 +622,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (FileNotFoundException ex) {
 			try {
-				Controller.dumpException("There was a problem creating file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Application.dumpException("There was a problem creating file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem creating file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -639,10 +639,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		}
 		catch (IOException ex) {
 			try {
-				Controller.dumpException("There was a problem closing file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Application.dumpException("There was a problem closing file at " + userDataDirectory.getCanonicalPath() + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was a problem closing file at " + "." + File.separator + "app_data" + File.separator + "users" + File.separator + user.getName() + USER_FILE_SUFFIX + ".", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}
@@ -697,10 +697,10 @@ public class FlatFileDriver implements DataDriverInterface {
 		catch (IOException ex)
 		{
 			try {
-				Controller.dumpException("There was an error deleting the file " + userDataDirectory.getCanonicalPath() + File.separator + userName + USER_FILE_SUFFIX, ex);
+				Application.dumpException("There was an error deleting the file " + userDataDirectory.getCanonicalPath() + File.separator + userName + USER_FILE_SUFFIX, ex);
 			} catch (IOException e) {
-				Controller.dumpException("There was an error deleting a file for the " + userName + "recipe.", ex);
-				Controller.dumpException("Then an error was generated while generating the error.", e);
+				Application.dumpException("There was an error deleting a file for the " + userName + "recipe.", ex);
+				Application.dumpException("Then an error was generated while generating the error.", e);
 			}
 			return false;
 		}

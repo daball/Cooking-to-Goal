@@ -9,14 +9,16 @@
  * Created on Apr 20, 2011, 8:45:16 PM
  */
 
-package com.customfit.ctg.gui.managerecipes;
+package com.customfit.ctg.view.recipes;
 
-import com.customfit.ctg.Controller;
-import com.customfit.ctg.gui.managemenu.GUIManageMenuPanel;
+import com.customfit.ctg.controllers.Application;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.customfit.ctg.Observer;
-import com.customfit.ctg.gui.GUIFormats;
+
+import com.customfit.ctg.view.GUIFormats;
+import com.customfit.ctg.view.Observer;
+import com.customfit.ctg.view.meal.GUIManageMenuPanel;
+
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,10 +29,10 @@ import javax.swing.table.DefaultTableModel;
  * @author Ryan Spoon
  */
 public class GUIManageRecipesPanel extends JPanel implements Observer {
-    private Controller controller;
+    private Application controller;
 
     /** Creates new form GUIManageRecipesPanel */
-    public GUIManageRecipesPanel(Controller controller) {
+    public GUIManageRecipesPanel(Application controller) {
         this.controller = controller;
 
         initComponents();

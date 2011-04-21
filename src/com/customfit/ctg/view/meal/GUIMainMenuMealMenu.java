@@ -1,15 +1,11 @@
-package com.customfit.ctg.gui.managemenu;
+package com.customfit.ctg.view.meal;
 
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import java.util.List;
-
 import javax.swing.BoxLayout;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -17,22 +13,21 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
 
-import com.customfit.ctg.model.*;
-
-public class GUIMainMenuRecipes extends JPanel  {
-	private static final long serialVersionUID = 1L;
-	
+public class GUIMainMenuMealMenu extends JPanel  {
 	private JLabel lblRecipe;
-	private JButton btnAdd;
+	private JButton btnRemove;
 	private JList listRecipes;
 	
-	GUIMainMenuRecipes() {
-		lblRecipe = new JLabel("Recipes");
+	String[] defaultList = { "test1", "test2", "test3", "test4",
+	"test5" };
+	
+	GUIMainMenuMealMenu() {
+		lblRecipe = new JLabel("Weekly Menu");
 		
-		btnAdd = new JButton("Add");
-		btnAdd.addActionListener(new ButtonListener("add"));
+		btnRemove = new JButton("Remove");
+		btnRemove.addActionListener(new ButtonListener("remove"));
 		
-		listRecipes = new JList();
+		listRecipes = new JList(defaultList);
 		listRecipes.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 		listRecipes.setLayoutOrientation(JList.VERTICAL);
 		listRecipes.setVisibleRowCount(-1);
@@ -49,22 +44,8 @@ public class GUIMainMenuRecipes extends JPanel  {
 		
 		this.add(lblRecipe);
 		this.add(simplePanel);
-		this.add(btnAdd);
-	}
-	
-	/**
-	 * This updates the GUI list with the Recipe list.
-	 * 
-	 * It usually gets called by the controller.
-	 * 
-	 * @param recipes List of recipes.
-	 */
-	public void updateRecipeList(List<Recipe> recipes)
-	{
-		DefaultListModel model = new DefaultListModel();
-		for (Recipe recipe : recipes) {
-			model.add(model.getSize(),recipe.getName());
-		}
+		this.add(btnRemove);
+		
 	}
 	
 	private class ButtonListener implements ActionListener {
@@ -75,7 +56,7 @@ public class GUIMainMenuRecipes extends JPanel  {
 			
 		}
 		public void actionPerformed(ActionEvent e) {
-			if(whichButton.equalsIgnoreCase("add")) {
+			if(whichButton.equalsIgnoreCase("remove")) {
 				if (listRecipes.isSelectionEmpty()) {
 					System.out.println("You didn't select anything!");
 				}
@@ -84,5 +65,6 @@ public class GUIMainMenuRecipes extends JPanel  {
 				}
 			}
 		} 
-	}	
+	}
+	
 }
