@@ -39,6 +39,29 @@ public class ProfilePanel extends SubPanel {
         jTextPane1 = new javax.swing.JTextPane();
         jComboBoxMeMenu = new javax.swing.JComboBox();
         linkLabelBrowseRecipes = new com.customfit.ctg.view.LinkLabel();
+        jLabel1 = new javax.swing.JLabel();
+        linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPaneNutritionPlanNote = new javax.swing.JTextPane();
+        linkLabel1 = new com.customfit.ctg.view.LinkLabel();
+        linkLabel2 = new com.customfit.ctg.view.LinkLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextPaneRecipeNote = new javax.swing.JTextPane();
+        linkLabel3 = new com.customfit.ctg.view.LinkLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextPaneMealPlanNote = new javax.swing.JTextPane();
+        linkLabel4 = new com.customfit.ctg.view.LinkLabel();
+        linkLabel5 = new com.customfit.ctg.view.LinkLabel();
+        linkLabel6 = new com.customfit.ctg.view.LinkLabel();
+        linkLabel7 = new com.customfit.ctg.view.LinkLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        linkLabel8 = new com.customfit.ctg.view.LinkLabel();
+        linkLabel9 = new com.customfit.ctg.view.LinkLabel();
+        linkLabel10 = new com.customfit.ctg.view.LinkLabel();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Profile Home");
@@ -69,6 +92,84 @@ public class ProfilePanel extends SubPanel {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jLabel1.setText("Recipe Management");
+
+        linkLabelAddNew.setText("Add a new recipe");
+        linkLabelAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabelAddNewActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jLabel2.setText("Nutrition Planning");
+
+        jScrollPane3.setBorder(null);
+
+        jTextPaneNutritionPlanNote.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
+        jTextPaneNutritionPlanNote.setBorder(null);
+        jTextPaneNutritionPlanNote.setEditable(false);
+        jTextPaneNutritionPlanNote.setText("You are currently using the %PLAN% nutrition plan.");
+        jTextPaneNutritionPlanNote.setFocusable(false);
+        jTextPaneNutritionPlanNote.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jTextPaneNutritionPlanNote.setOpaque(false);
+        jTextPaneNutritionPlanNote.setVerifyInputWhenFocusTarget(false);
+        jScrollPane3.setViewportView(jTextPaneNutritionPlanNote);
+
+        linkLabel1.setText("Select a different nutrition plan");
+
+        linkLabel2.setText("Design a new nutrition plan");
+
+        jScrollPane4.setBorder(null);
+
+        jTextPaneRecipeNote.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
+        jTextPaneRecipeNote.setBorder(null);
+        jTextPaneRecipeNote.setEditable(false);
+        jTextPaneRecipeNote.setText("There are currently %COUNT% recipes in the local database.");
+        jTextPaneRecipeNote.setFocusable(false);
+        jTextPaneRecipeNote.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jTextPaneRecipeNote.setOpaque(false);
+        jTextPaneRecipeNote.setVerifyInputWhenFocusTarget(false);
+        jScrollPane4.setViewportView(jTextPaneRecipeNote);
+
+        linkLabel3.setText("Calculate plan effectiveness");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12));
+        jLabel3.setText("Meal Planning");
+
+        jScrollPane5.setBorder(null);
+
+        jTextPaneMealPlanNote.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
+        jTextPaneMealPlanNote.setBorder(null);
+        jTextPaneMealPlanNote.setEditable(false);
+        jTextPaneMealPlanNote.setText("You have %COUNT% meals planned for the next seven days.");
+        jTextPaneMealPlanNote.setFocusable(false);
+        jTextPaneMealPlanNote.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jTextPaneMealPlanNote.setOpaque(false);
+        jTextPaneMealPlanNote.setVerifyInputWhenFocusTarget(false);
+        jScrollPane5.setViewportView(jTextPaneMealPlanNote);
+
+        linkLabel4.setText("Show menu");
+
+        linkLabel5.setText("Show menu");
+
+        linkLabel6.setText("Show menu");
+
+        linkLabel7.setText("Menu archive");
+
+        jLabel4.setText("Today:");
+
+        jLabel5.setText("This week:");
+
+        jLabel6.setText("This month:");
+
+        linkLabel8.setText("Shopping list");
+
+        linkLabel9.setText("Shopping list");
+
+        linkLabel10.setText("Shopping list");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,12 +177,53 @@ public class ProfilePanel extends SubPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(linkLabelBrowseRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(linkLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(linkLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(linkLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 177, Short.MAX_VALUE)
                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(linkLabelBrowseRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(linkLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(linkLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(linkLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(linkLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(74, 74, 74)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(linkLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(linkLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(linkLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)))
+                        .addGap(122, 122, 122))
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 362, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,8 +236,45 @@ public class ProfilePanel extends SubPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(linkLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(linkLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(linkLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(linkLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(linkLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(linkLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(linkLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(linkLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(linkLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(linkLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(linkLabelBrowseRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(55, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -119,12 +298,40 @@ public class ProfilePanel extends SubPanel {
         RecipeManagement.browseRecipes();
     }//GEN-LAST:event_linkLabelBrowseRecipesActionPerformed
 
+    private void linkLabelAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNewActionPerformed
+        //tell controller to create a new recipe
+        RecipeManagement.createRecipe();
+}//GEN-LAST:event_linkLabelAddNewActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBoxMeMenu;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPaneMealPlanNote;
+    private javax.swing.JTextPane jTextPaneNutritionPlanNote;
+    private javax.swing.JTextPane jTextPaneRecipeNote;
+    private com.customfit.ctg.view.LinkLabel linkLabel1;
+    private com.customfit.ctg.view.LinkLabel linkLabel10;
+    private com.customfit.ctg.view.LinkLabel linkLabel2;
+    private com.customfit.ctg.view.LinkLabel linkLabel3;
+    private com.customfit.ctg.view.LinkLabel linkLabel4;
+    private com.customfit.ctg.view.LinkLabel linkLabel5;
+    private com.customfit.ctg.view.LinkLabel linkLabel6;
+    private com.customfit.ctg.view.LinkLabel linkLabel7;
+    private com.customfit.ctg.view.LinkLabel linkLabel8;
+    private com.customfit.ctg.view.LinkLabel linkLabel9;
+    private com.customfit.ctg.view.LinkLabel linkLabelAddNew;
     private com.customfit.ctg.view.LinkLabel linkLabelBrowseRecipes;
     // End of variables declaration//GEN-END:variables
 

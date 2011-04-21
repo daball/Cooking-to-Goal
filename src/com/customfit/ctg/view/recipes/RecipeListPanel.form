@@ -123,13 +123,27 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="tblRecipes">
+        <Component class="javax.swing.JTable" name="jTableRecipes">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="2" rowCount="2">
                 <Column editable="false" title="Name" type="java.lang.String"/>
                 <Column editable="false" title="Rating" type="java.lang.Integer"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
             </Property>
             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
               <JTableSelectionModel selectionMode="0"/>
@@ -138,22 +152,31 @@
               <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jTableRecipesMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddNew">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add a new recipe."/>
+        <Property name="text" type="java.lang.String" value="Add a new recipe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddNewActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonViewRecipe">
       <Properties>
         <Property name="text" type="java.lang.String" value="View Recipe"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonViewRecipeActionPerformed"/>
+      </Events>
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelHome">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Return to Home"/>
+        <Property name="text" type="java.lang.String" value="Return to home"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelHomeActionPerformed"/>

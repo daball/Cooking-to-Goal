@@ -4,22 +4,60 @@ import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import java.util.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.table.*;
+import javax.swing.event.*;
 
 /**
  * This is the panel that lists recipes and provides options to interact
- * with the list. This can be used for either browsing, searching, etc.
+ * with the list. This can be used for either browsing or searching.
  *
  * @author Ryan Spoon, David
  */
 public class RecipeListPanel extends SubPanel {
 
+    /**
+     * This gets stored whenever the controller passes it this way.
+     */
+    private List<Recipe> recipes;
+    
+    /**
+     * The Recipe List has two behaviors.
+     */
+    public static enum ListMode
+    {
+        LIST_BROWSE,
+        LIST_SEARCH
+    };
+    
+    /**
+     * This determines the behavior of this list.
+     */
+    private ListMode listMode;
+    
     /** Creates new form RecipeListPanel */
-    public RecipeListPanel() {
+    public RecipeListPanel(ListMode listMode) {
         initComponents();
+        
+        //setup list mode
+        this.listMode = listMode;
+        
+        //customize form for list mode
+        if (this.listMode == ListMode.LIST_BROWSE)
+            this.jLabelTitle.setText("Browse Recipes");
+        else if (this.listMode == ListMode.LIST_SEARCH)
+            this.jLabelTitle.setText("Search Recipes");
         
         //setup the me-menu in the right-top corner
         jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Edit User", "Logout" }));
+
+        //manually coded (netbeans issue?) on-select event
+        jTableRecipes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent evt) {
+                jTableRecipesValueChanged(evt);
+            }
+        }
+        );
     }
 
     /** This method is called from within the constructor to
@@ -36,12 +74,12 @@ public class RecipeListPanel extends SubPanel {
         jTextPane1 = new javax.swing.JTextPane();
         jComboBoxMeMenu = new javax.swing.JComboBox();
         scrollPaneTable = new javax.swing.JScrollPane();
-        tblRecipes = new javax.swing.JTable();
+        jTableRecipes = new javax.swing.JTable();
         linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
         jButtonViewRecipe = new javax.swing.JButton();
         linkLabelHome = new com.customfit.ctg.view.LinkLabel();
 
-        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Recipe Listing");
 
         jScrollPane2.setBorder(null);
@@ -63,7 +101,7 @@ public class RecipeListPanel extends SubPanel {
             }
         });
 
-        tblRecipes.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRecipes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null}
@@ -87,15 +125,30 @@ public class RecipeListPanel extends SubPanel {
                 return canEdit [columnIndex];
             }
         });
-        tblRecipes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tblRecipes.getTableHeader().setReorderingAllowed(false);
-        scrollPaneTable.setViewportView(tblRecipes);
+        jTableRecipes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableRecipes.getTableHeader().setReorderingAllowed(false);
+        jTableRecipes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableRecipesMouseClicked(evt);
+            }
+        });
+        scrollPaneTable.setViewportView(jTableRecipes);
 
-        linkLabelAddNew.setText("Add a new recipe.");
+        linkLabelAddNew.setText("Add a new recipe");
+        linkLabelAddNew.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabelAddNewActionPerformed(evt);
+            }
+        });
 
         jButtonViewRecipe.setText("View Recipe");
+        jButtonViewRecipe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonViewRecipeActionPerformed(evt);
+            }
+        });
 
-        linkLabelHome.setText("Return to Home");
+        linkLabelHome.setText("Return to home");
         linkLabelHome.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelHomeActionPerformed(evt);
@@ -163,19 +216,53 @@ public class RecipeListPanel extends SubPanel {
         UserManagement.viewProfile();
     }//GEN-LAST:event_linkLabelHomeActionPerformed
 
+    private void linkLabelAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNewActionPerformed
+        //tell controller to create a new recipe
+        RecipeManagement.createRecipe();
+    }//GEN-LAST:event_linkLabelAddNewActionPerformed
+
+    private void jTableRecipesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRecipesMouseClicked
+        //if double-clicked
+        if (evt.getClickCount() == 2)
+            //same as view recipe
+            jButtonViewRecipeActionPerformed(null);
+    }//GEN-LAST:event_jTableRecipesMouseClicked
+
+    private void jButtonViewRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewRecipeActionPerformed
+        //if a row is selected
+        if (this.jTableRecipes.getSelectedRowCount() > 0)
+        {
+            //grab Recipe
+            Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
+            //tell RecipeManagement to view recipe
+            RecipeManagement.viewRecipe(recipe);
+        }
+    }//GEN-LAST:event_jButtonViewRecipeActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonViewRecipe;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTableRecipes;
     private javax.swing.JTextPane jTextPane1;
     private com.customfit.ctg.view.LinkLabel linkLabelAddNew;
     private com.customfit.ctg.view.LinkLabel linkLabelHome;
     private javax.swing.JScrollPane scrollPaneTable;
-    private javax.swing.JTable tblRecipes;
     // End of variables declaration//GEN-END:variables
 
+    private void jTableRecipesValueChanged(javax.swing.event.ListSelectionEvent evt) {                                       
+        //check for selected value
+        if (this.jTableRecipes.getSelectedRowCount() == 0)
+            //if none then disable login button
+            this.jButtonViewRecipe.setEnabled(false);
+        //otherwise
+        else
+            //if valid then enable login button
+            this.jButtonViewRecipe.setEnabled(true);
+    } 
+    
     /**
      * Extends SubPanel functionality by returning the title as being the
      * same as on the panel itself.
@@ -187,24 +274,16 @@ public class RecipeListPanel extends SubPanel {
         //grab title from on the panel
         return this.jLabelTitle.getText();
     }
-    
+        
     /**
-     * Sets the title for this particular panel.
-     * @return The title in the panel.
-     */
-    public void setTitle(String title)
-    {
-        //sut title on the panel
-        this.jLabelTitle.setText(title);
-    }
-    
-    /**
-     * Sets the inital list of recipes passed into the view.
+     * Sets the initial list of recipes passed into the view.
      * 
      * @param recipes List of recipes.
      */
     public void setRecipeList(List<Recipe> recipes) {
-        DefaultTableModel tableModel = (DefaultTableModel)tblRecipes.getModel();
+        this.recipes = recipes;
+        
+        DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
 
         for (Recipe recipe : recipes)
         {
@@ -212,7 +291,7 @@ public class RecipeListPanel extends SubPanel {
             tableModel.addRow(row);
         }
         
-        tblRecipes.setModel(tableModel);
+        jTableRecipes.setModel(tableModel);
     }
 
 }

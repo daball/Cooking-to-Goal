@@ -38,9 +38,7 @@ public class RecipeManagement {
     public static void browseRecipes(List<Recipe> recipes)
     {
         //create panel
-        RecipeListPanel recipeListPanel = new RecipeListPanel();
-        //set title (reusable panel)
-        recipeListPanel.setTitle("Browse Recipes");
+        RecipeListPanel recipeListPanel = new RecipeListPanel(RecipeListPanel.ListMode.LIST_BROWSE);
         //tell panel about our recipes
         recipeListPanel.setRecipeList(recipes);
         //display panel in main frame
