@@ -79,6 +79,7 @@ public class UserManagement {
         //display panel in main frame
         Application.getMainFrame().setPanel(profilePanel);
     }
+    
     /**
      * Activates View Profile application feature, which displays
      * a View Profile JPanel to display the profile of the provided
