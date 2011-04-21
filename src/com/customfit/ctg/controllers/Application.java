@@ -1,10 +1,7 @@
 package com.customfit.ctg.controllers;
 
 import com.customfit.ctg.data.*;
-import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
-
-import javax.swing.*;
 
 /**
  * The Application class exists as the part of the Controller logic
@@ -61,6 +58,7 @@ public class Application {
 
         //make the main frame visible (after it has been prepared)
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 mainFrame.setVisible(true);
             }

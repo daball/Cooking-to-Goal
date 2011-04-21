@@ -16,42 +16,6 @@ import javax.swing.JOptionPane;
 public class UserManagement {
 
     /**
-     * Activates List Users application feature, which displays
-     * a List Users JPanel in the main JFrame from the list
-     * of all known recipes in the Controller's default database.
-     */
-    public static void listUsers()
-    {
-        //recipes not provided, so go get them
-        List<User> users = Application.getDataDriver().selectAllUsers();
-
-        //now pass them to the overloaded method
-        listUsers(users);
-    }
-
-    /**
-     * Activates List Users application feature, which displays
-     * a List Users JPanel in the main JFrame with the recipes
-     * you have provided.
-     * 
-     * @param users The list of users. 
-     */
-    public static void listUsers(List<User> users)
-    {
-        //method stub:
-        //	TODO: replace this CLI-code with GUI-initiation code
-        System.out.println("listUsers() user listing (by name):");
-        for (User user : users)
-                System.out.println("\t" + user.getName());
-        /* 
-         * example pseudocode:
-         * 		instantiate JPanel for listing recipes (browse/search/etc.)
-         * 		pass recipes to a special function in JPanel for processing List<Recipe>
-         * 		Controller.getMainFrame().openPanel( list panel )
-         */
-    }
-
-    /**
      * Activates Register User application feature, which in this case
      * displays a Register User JPanel to prepare a new User object
      * for storage. If you already have a User object, use the
@@ -101,31 +65,26 @@ public class UserManagement {
      */
     public static void viewProfile(User user)
     {
-        //method stub:
-        //	replace this CLI-code with GUI-initiation code
-        System.out.println("viewProfile(): User " + "Name" + ": " + user.getName());
-
-        /* 
-         * example pseudocode:
-         * 		instantiate JPanel for viewing User
-         * 		pass recipe to a special function in JPanel for processing List<User>
-         * 		Controller.getMainFrame().openPanel( list panel )
-         * TODO: replace this with GUI initialization code for Create Recipes
-         */
+        //create profile panel
+        ProfilePanel profilePanel = new ProfilePanel();
+        //load the user into the profile panel
+        profilePanel.setUser(user);
+        //display panel in main frame
+        Application.getMainFrame().setPanel(profilePanel);
     }
 
     /**
-     * Activates Edit Profile application feature, which displays
-     * an Edit Profile JPanel to permit end user to edit the contents of the
+     * Activates Edit Registration application feature, which displays
+     * an Edit Registration JPanel to permit end user to edit the contents of the
      * provided User object.
      * 
      * @param user The user for which there is a profile to edit in view.
      */
-    public static void editProfile(User user)
+    public static void editRegistration(User user)
     {
         //method stub:
         //	replace this CLI-code with GUI-initiation code
-        System.err.println("editProfile() hit: User " + "Name" + ": " + user.getName() + ". Feature not currently implemented.");
+        System.err.println("editRegstration() hit: User " + "Name" + ": " + user.getName() + ". Feature not currently implemented.");
         /* 
          * example pseudocode:
          * 		instantiate JPanel for viewing User

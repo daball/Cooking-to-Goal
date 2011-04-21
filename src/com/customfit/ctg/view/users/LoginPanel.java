@@ -5,6 +5,7 @@ import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;
 import java.awt.event.ActionEvent;
 import java.util.*;
+import javax.sound.midi.ControllerEventListener;
 import javax.swing.*;
 
 /**
@@ -44,7 +45,7 @@ public class LoginPanel extends SubPanel {
         linkLabelRegister = new com.customfit.ctg.view.LinkLabel();
         jButtonLogin = new javax.swing.JButton();
 
-        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Welcome");
 
         jLabel2.setText("Please select your user name.");
@@ -56,6 +57,11 @@ public class LoginPanel extends SubPanel {
         });
         jListUser.setFocusCycleRoot(true);
         jListUser.setName("jListUser"); // NOI18N
+        jListUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jListUserMouseClicked(evt);
+            }
+        });
         jListUser.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jListUserValueChanged(evt);
@@ -133,8 +139,21 @@ public class LoginPanel extends SubPanel {
     }//GEN-LAST:event_jListUserValueChanged
 
     private void jButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonLoginActionPerformed
+        //grab user name
+        String userName = (String)this.jListUser.getSelectedValue();
+        //get User back out of data driver
+        List<User> users = Application.getDataDriver().selectUsersByName(userName);
+        User user = users.get(0);
         //tell UserManagement to display profile home
+        UserManagement.viewProfile(user);
     }//GEN-LAST:event_jButtonLoginActionPerformed
+
+    private void jListUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListUserMouseClicked
+        //if double click and there is a selected user
+        if (evt.getClickCount() == 2 && this.jListUser.getSelectedValue() != null)
+            //then do same as login 
+            this.jButtonLoginActionPerformed(null);
+    }//GEN-LAST:event_jListUserMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
