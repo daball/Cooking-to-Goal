@@ -1,6 +1,6 @@
 package com.customfit.ctg.view.users;
 
-import com.customfit.ctg.controllers.*;
+import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.User;
 import com.customfit.ctg.view.SubPanel;
 

@@ -1,6 +1,6 @@
 package com.customfit.ctg;
 
-import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.controller.Application;
 
 /**
  * The main entry point for the CTG application.

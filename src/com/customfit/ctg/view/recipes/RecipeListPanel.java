@@ -1,6 +1,6 @@
 package com.customfit.ctg.view.recipes;
 
-import com.customfit.ctg.controllers.*;
+import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import java.util.*;
@@ -203,7 +203,7 @@ public class RecipeListPanel extends SubPanel {
      * 
      * @param recipes List of recipes.
      */
-    private void setRecipeList(List<Recipe> recipes) {
+    public void setRecipeList(List<Recipe> recipes) {
         DefaultTableModel tableModel = (DefaultTableModel)tblRecipes.getModel();
 
         for (Recipe recipe : recipes)

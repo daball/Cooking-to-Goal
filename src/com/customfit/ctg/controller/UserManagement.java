@@ -1,4 +1,4 @@
-package com.customfit.ctg.controllers;
+package com.customfit.ctg.controller;
 
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;

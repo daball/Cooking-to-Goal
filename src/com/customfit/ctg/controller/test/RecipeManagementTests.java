@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.customfit.ctg.controllers.test;
+package com.customfit.ctg.controller.test;
 
 
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
 import com.customfit.ctg.*;
-import com.customfit.ctg.controllers.Application;
-import com.customfit.ctg.controllers.RecipeManagement;
+import com.customfit.ctg.controller.Application;
+import com.customfit.ctg.controller.RecipeManagement;
 import com.customfit.ctg.model.MeasurableUnit;
 import com.customfit.ctg.model.MeasurementUnit;
 import com.customfit.ctg.model.NutritionFacts;

@@ -1,7 +1,7 @@
 package com.customfit.ctg.data;
 
 import com.customfit.ctg.*;
-import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.controller.Application;
 import com.customfit.ctg.model.*;
 
 import java.util.*;

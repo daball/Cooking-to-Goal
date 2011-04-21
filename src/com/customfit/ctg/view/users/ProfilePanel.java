@@ -1,6 +1,6 @@
 package com.customfit.ctg.view.users;
 
-import com.customfit.ctg.controllers.*;
+import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import javax.swing.BorderFactory;
@@ -38,6 +38,7 @@ public class ProfilePanel extends SubPanel {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
         jComboBoxMeMenu = new javax.swing.JComboBox();
+        linkLabelBrowseRecipes = new com.customfit.ctg.view.LinkLabel();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Profile Home");
@@ -61,6 +62,13 @@ public class ProfilePanel extends SubPanel {
             }
         });
 
+        linkLabelBrowseRecipes.setText("Browse recipes");
+        linkLabelBrowseRecipes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabelBrowseRecipesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -72,7 +80,8 @@ public class ProfilePanel extends SubPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                        .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(linkLabelBrowseRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,7 +93,9 @@ public class ProfilePanel extends SubPanel {
                     .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(152, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(linkLabelBrowseRecipes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(120, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -103,12 +114,18 @@ public class ProfilePanel extends SubPanel {
         this.jComboBoxMeMenu.setSelectedIndex(0);
 }//GEN-LAST:event_jComboBoxMeMenuActionPerformed
 
+    private void linkLabelBrowseRecipesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelBrowseRecipesActionPerformed
+        //tell controller to browse recipes
+        RecipeManagement.browseRecipes();
+    }//GEN-LAST:event_linkLabelBrowseRecipesActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane1;
+    private com.customfit.ctg.view.LinkLabel linkLabelBrowseRecipes;
     // End of variables declaration//GEN-END:variables
 
     /**

@@ -15,7 +15,7 @@ package com.customfit.ctg.view.recipes;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.controller.Application;
 import com.customfit.ctg.view.GUIFormats;
 import com.customfit.ctg.view.Observer;
 

@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.controller.Application;
 import com.customfit.ctg.view.recipes.OldRecipeListPanel;
 import com.customfit.ctg.view.users.GUIManageUsersPanel;
 

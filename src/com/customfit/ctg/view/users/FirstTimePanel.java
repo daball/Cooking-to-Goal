@@ -11,7 +11,7 @@
 
 package com.customfit.ctg.view.users;
 
-import com.customfit.ctg.controllers.UserManagement;
+import com.customfit.ctg.controller.UserManagement;
 import com.customfit.ctg.view.SubPanel;
 
 /**

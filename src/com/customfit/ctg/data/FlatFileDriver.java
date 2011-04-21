@@ -1,6 +1,6 @@
 package com.customfit.ctg.data;
 
-import com.customfit.ctg.controllers.Application;
+import com.customfit.ctg.controller.Application;
 import com.customfit.ctg.model.*;
 import com.thoughtworks.xstream.XStream;
 import java.util.*;

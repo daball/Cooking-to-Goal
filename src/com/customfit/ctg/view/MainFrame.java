@@ -1,6 +1,6 @@
 package com.customfit.ctg.view;
 
-import com.customfit.ctg.controllers.*;
+import com.customfit.ctg.controller.*;
 import java.awt.Color;
 import javax.swing.*;
 
