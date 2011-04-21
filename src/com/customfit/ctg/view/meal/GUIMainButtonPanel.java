@@ -9,7 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import com.customfit.ctg.controllers.Application;
-import com.customfit.ctg.view.recipes.GUIManageRecipesPanel;
+import com.customfit.ctg.view.recipes.OldRecipeListPanel;
 import com.customfit.ctg.view.users.GUIManageUsersPanel;
 
 
@@ -72,7 +72,7 @@ public class GUIMainButtonPanel extends JPanel {
 				Application.openPanel(new GUIManageUsersPanel());
 			}
 			else if(ae.getSource().equals(manageRecipes)){
-				Application.openPanel(new GUIManageRecipesPanel());
+				Application.openPanel(new OldRecipeListPanel());
 			}
 			else if(ae.getSource().equals(printList)){
 				// do something

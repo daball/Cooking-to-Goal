@@ -17,6 +17,12 @@ import javax.swing.JOptionPane;
 public class UserManagement {
 
     /**
+     * Once user login has succeeded, then keep track of it for
+     * later.
+     */
+    private static User currentUser;
+    
+    /**
      * Activates Register User application feature, which in this case
      * displays a Register User JPanel to prepare a new User object
      * for storage. If you already have a User object, use the
@@ -72,6 +78,16 @@ public class UserManagement {
         profilePanel.setUser(user);
         //display panel in main frame
         Application.getMainFrame().setPanel(profilePanel);
+    }
+    /**
+     * Activates View Profile application feature, which displays
+     * a View Profile JPanel to display the profile of the provided
+     * User object, for the currently logged in user.
+     */
+    public static void viewProfile()
+    {
+        //call overload
+        viewProfile(currentUser);
     }
 
     /**
@@ -183,5 +199,36 @@ public class UserManagement {
             //display panel in main frame
             Application.getMainFrame().setPanel(firstTimePanel);
        }
+    }
+    
+    /**
+     * Finishes login and presents user with profile home.
+     * 
+     * @param user User that was just logged in.
+     */
+    public static void finishLogin(User user)
+    {
+        //save login
+        currentUser = user;
+        //show user profile home
+        UserManagement.viewProfile();
+    }
+    /**
+     * Logs current user out and presents user with login screen.
+     */
+    public static void logout()
+    {
+        //erase current login
+        currentUser = null;
+        //present login screen
+        UserManagement.presentLogin();
+    }
+    
+    /**
+     * Gets currently logged in user.
+     * @return Currently logged in user.
+     */
+    public static User getCurrentUser() {
+        return currentUser;
     }
 }

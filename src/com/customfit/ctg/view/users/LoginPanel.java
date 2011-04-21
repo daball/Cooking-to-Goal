@@ -3,9 +3,7 @@ package com.customfit.ctg.view.users;
 import com.customfit.ctg.controllers.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;
-import java.awt.event.ActionEvent;
 import java.util.*;
-import javax.sound.midi.ControllerEventListener;
 import javax.swing.*;
 
 /**
@@ -144,8 +142,8 @@ public class LoginPanel extends SubPanel {
         //get User back out of data driver
         List<User> users = Application.getDataDriver().selectUsersByName(userName);
         User user = users.get(0);
-        //tell UserManagement to display profile home
-        UserManagement.viewProfile(user);
+        //tell UserManagement to complete login process and goto profile home
+        UserManagement.finishLogin(user);
     }//GEN-LAST:event_jButtonLoginActionPerformed
 
     private void jListUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jListUserMouseClicked

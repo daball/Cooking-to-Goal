@@ -29,7 +29,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Ryan Spoon
  */
 public class GUIEditRecipePanel extends JPanel implements Observer {
-    /** Creates new form GUIManageRecipesPanel */
+    /** Creates new form OldRecipeListPanel */
     public GUIEditRecipePanel() {
         initComponents();
         custInitialize();
@@ -206,11 +206,11 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
             if(ae.getSource().equals(btnSave)){
                 //Recipe r = createRecipe();
                 //controller.addRecipe(r);
-                Application.openPanel(new GUIManageRecipesPanel());
+                Application.openPanel(new OldRecipeListPanel());
             }
             else if(ae.getSource().equals(btnCancel))
             {
-                Application.openPanel(new GUIManageRecipesPanel());
+                Application.openPanel(new OldRecipeListPanel());
             }
             else if(ae.getSource().equals(btnAddIngredient))
             {

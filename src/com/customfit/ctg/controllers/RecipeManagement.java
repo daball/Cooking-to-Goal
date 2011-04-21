@@ -36,11 +36,6 @@ public class RecipeManagement {
 	 */
 	public static void browseRecipes(List<Recipe> recipes)
 	{
-		//method stub:
-		//	TODO: replace this CLI-code with GUI-initiation code
-		System.out.println("browseRecipes() recipe listing (by name):");
-		for (Recipe recipe : recipes)
-			System.out.println("\t" + recipe.getName());
 		/* 
 		 * example pseudocode:
 		 * 		instantiate JPanel for listing recipes (browse/search/etc.)

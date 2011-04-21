@@ -3,6 +3,7 @@ package com.customfit.ctg.view;
 /**
  * This represents any of the sub-panels which can be loaded up
  * into the MainFrame.
+ * 
  * @author David
  */
 public abstract class SubPanel extends javax.swing.JPanel {

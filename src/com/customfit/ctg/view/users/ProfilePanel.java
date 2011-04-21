@@ -1,8 +1,8 @@
 package com.customfit.ctg.view.users;
 
-import com.customfit.ctg.controllers.UserManagement;
+import com.customfit.ctg.controllers.*;
 import com.customfit.ctg.model.*;
-import com.customfit.ctg.view.SubPanel;
+import com.customfit.ctg.view.*;
 import javax.swing.BorderFactory;
 
 /**
@@ -19,7 +19,10 @@ public class ProfilePanel extends SubPanel {
 
     /** Creates new form ProfilePanel */
     public ProfilePanel() {
-        initComponents();        
+        initComponents();
+        
+        //setup the me-menu in the right-top corner
+        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Edit User", "Logout" }));
     }
 
     /** This method is called from within the constructor to
@@ -34,7 +37,7 @@ public class ProfilePanel extends SubPanel {
         jLabelTitle = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTextPane1 = new javax.swing.JTextPane();
-        jComboBoxAccount = new javax.swing.JComboBox();
+        jComboBoxMeMenu = new javax.swing.JComboBox();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Profile Home");
@@ -51,10 +54,10 @@ public class ProfilePanel extends SubPanel {
         jTextPane1.setVerifyInputWhenFocusTarget(false);
         jScrollPane2.setViewportView(jTextPane1);
 
-        jComboBoxAccount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Me Menu", "Edit User", "Logout" }));
-        jComboBoxAccount.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Me Menu", "Edit User", "Logout" }));
+        jComboBoxMeMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxAccountActionPerformed(evt);
+                jComboBoxMeMenuActionPerformed(evt);
             }
         });
 
@@ -69,7 +72,7 @@ public class ProfilePanel extends SubPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
-                        .addComponent(jComboBoxAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -78,31 +81,31 @@ public class ProfilePanel extends SubPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitle)
-                    .addComponent(jComboBoxAccount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(236, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComboBoxAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAccountActionPerformed
+    private void jComboBoxMeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMeMenuActionPerformed
         // process me menu
         
         //if user hit Edit User
-        if (((String)this.jComboBoxAccount.getSelectedItem()).equals("Edit User"))
+        if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit User"))
             //then tell the controller about it
-            UserManagement.editRegistration(user);
+            UserManagement.editRegistration(UserManagement.getCurrentUser());
         //if user hit Edit User
-        else if (((String)this.jComboBoxAccount.getSelectedItem()).equals("Logout"))
-            //ask controller for login screen
-            UserManagement.presentLogin();
+        else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Logout"))
+            //ask controller for logout
+            UserManagement.logout();
         //and no matter what, be sure to reset this combo box back to index 0
-        this.jComboBoxAccount.setSelectedIndex(0);
-    }//GEN-LAST:event_jComboBoxAccountActionPerformed
+        this.jComboBoxMeMenu.setSelectedIndex(0);
+}//GEN-LAST:event_jComboBoxMeMenuActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBoxAccount;
+    private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane1;
@@ -130,8 +133,6 @@ public class ProfilePanel extends SubPanel {
         this.user = user;
         //set title label
         this.jLabelTitle.setText("Personalized Home for " + user.getName());
-        //setup the me-menu in the right-top corner
-        jComboBoxAccount.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + user.getName(), "Edit User", "Logout" }));
     }
     
 }
