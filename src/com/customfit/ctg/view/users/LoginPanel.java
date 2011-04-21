@@ -48,7 +48,7 @@ public class LoginPanel extends SubPanel {
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Welcome");
 
-        jLabel2.setText("Please select your user name.");
+        jLabel2.setText("Please select your user name to login.");
 
         jListUser.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };

@@ -4,7 +4,6 @@ import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;
 import com.customfit.ctg.view.users.*;
 import java.util.*;
-import javax.sound.midi.ControllerEventListener;
 import javax.swing.JOptionPane;
 
 /**
@@ -167,11 +166,22 @@ public class UserManagement {
     {
         //get list of users
         List<User> users = Application.getDataDriver().selectAllUsers();
-        //create login panel
-        LoginPanel loginPanel = new LoginPanel();
-        //tell login panel about our user list
-        loginPanel.setUserList(users);
-        //display panel in main frame
-        Application.getMainFrame().setPanel(loginPanel);
+        //check to see if this is the first go around
+        if (users.size() > 0)
+        {
+            //and if not, then create login panel
+            LoginPanel loginPanel = new LoginPanel();
+            //tell login panel about our user list
+            loginPanel.setUserList(users);
+            //display panel in main frame
+            Application.getMainFrame().setPanel(loginPanel);
+        }
+        else
+        {
+            //if it is, then welcome guest to new application
+            FirstTimePanel firstTimePanel = new FirstTimePanel();
+            //display panel in main frame
+            Application.getMainFrame().setPanel(firstTimePanel);
+       }
     }
 }
