@@ -10,7 +10,6 @@ import java.util.List;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Before;
-import com.customfit.ctg.*;
 import com.customfit.ctg.controller.Application;
 import com.customfit.ctg.controller.RecipeManagement;
 import com.customfit.ctg.model.MeasurableUnit;
@@ -25,7 +24,7 @@ import com.customfit.ctg.model.RecipeIngredient;
  */
 public class RecipeManagementTests extends TestCase {
 
-	private static final String TEST_RECIPE_NAME			= "Test Recipe";
+	private static final String TEST_RECIPE_NAME		= "Test Recipe";
 	private static final String TEST_RECIPE_DESCRIPTION 	= "This is a recipe description.";
 	private static final String TEST_RECIPE_INSTRUCTIONS 	= "Sample instructions.";
 	private static final MeasurableUnit
@@ -105,7 +104,7 @@ public class RecipeManagementTests extends TestCase {
 		Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//call create recipe
-		assertTrue(RecipeManagement.createRecipe(testRecipe));
+		assertTrue(RecipeManagement.createRecipeAndGoBack(testRecipe));
 
 		boolean found = false;
 		//find it		

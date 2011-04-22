@@ -1,5 +1,6 @@
 package com.customfit.ctg.view.meal;
 
+import com.customfit.ctg.view.SubPanel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -8,16 +9,11 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import com.customfit.ctg.controller.Application;
-import com.customfit.ctg.view.recipes.OldRecipeListPanel;
-import com.customfit.ctg.view.users.GUIManageUsersPanel;
-
-
 /**
- * 
+ * Does this code still apply to anything?
  * @author Steven T
  */
-public class GUIMainButtonPanel extends JPanel {
+public class GUIMainButtonPanel extends SubPanel {
 	JButton viewGoals;
 	JButton manageUsers;
 	JButton manageRecipes;
@@ -59,29 +55,31 @@ public class GUIMainButtonPanel extends JPanel {
 	/**
 	 * Listener for this button panel.
 	 * Commands should be sent to the Controller
+         * 
 	 * @author S. D. Salyer
-	 *
 	 */
 	private class GUIListener implements ActionListener{
 		@Override
 		public void actionPerformed(ActionEvent ae) {
+                        //view goals action
 			if(ae.getSource().equals(viewGoals)){
-				// do something
+				//TODO: view goals action
 			}
+                        //manage users action
 			else if(ae.getSource().equals(manageUsers)){
-				Application.openPanel(new GUIManageUsersPanel());
+				//TODO: manage users action
 			}
+                        //manage recipes action
 			else if(ae.getSource().equals(manageRecipes)){
-				Application.openPanel(new OldRecipeListPanel());
+				//TODO: manage recipes action
 			}
+                        //print list action
 			else if(ae.getSource().equals(printList)){
-				// do something
+				//TODO: print list action
 			}
+                        //manage users action
 			else if(ae.getSource().equals(manageUsers)){
-				System.exit(0);
-			}
-			else{
-				// Shouldn't be here
+				//TODO: manage users action
 			}
 		}
 	} // end private inner class

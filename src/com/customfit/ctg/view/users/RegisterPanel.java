@@ -35,7 +35,7 @@ public class RegisterPanel extends SubPanel {
 
         jButton1.setText("jButton1");
 
-        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Register a New User");
 
         jLabel2.setText("Please complete the following information in order to register a new user.");
@@ -69,9 +69,8 @@ public class RegisterPanel extends SubPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTitle)
-                    .addComponent(jLabel2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSignup)
                         .addGap(18, 18, 18)
@@ -79,7 +78,8 @@ public class RegisterPanel extends SubPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

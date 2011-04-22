@@ -25,12 +25,11 @@ public class Recipe {
 	private NutritionFacts nutritionInformation;
 
 	/**
-	 * Constructs a basic Recipe object with just a name.
+	 * Constructs an empty Recipe object.
 	 * Fields must be set with setters.
 	 */
-	public Recipe(String name) {
-		super();
-		this.setName(name);
+	public Recipe() {
+            super();
 	}
 	
 	/**
@@ -54,15 +53,15 @@ public class Recipe {
 				  List<RecipeIngredient> ingredients,
 				  NutritionFacts nutritionInformation
 				  ){
-		super();
-		this.setName(name);
-		this.setDescription(description);
-		this.setInstructions(instructions);
-		this.setServingSize(servingSize);
-		this.setServings(servings);
-		this.setRating(rating);
-		this.setIngredients(ingredients);
-		this.setNutritionInformation(nutritionInformation);
+            super();
+            this.setName(name);
+            this.setDescription(description);
+            this.setInstructions(instructions);
+            this.setServingSize(servingSize);
+            this.setServings(servings);
+            this.setRating(rating);
+            this.setIngredients(ingredients);
+            this.setNutritionInformation(nutritionInformation);
 	}
 
 	/**
@@ -181,5 +180,5 @@ public class Recipe {
 	public String toString()
 	{
 		return this.getName();
-	}
+	}        
 }

@@ -85,7 +85,7 @@ public class EditAccountPanel extends SubPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTitle)
+                    .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -96,7 +96,7 @@ public class EditAccountPanel extends SubPanel {
                         .addComponent(jButtonSave)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancel)))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,7 +143,7 @@ public class EditAccountPanel extends SubPanel {
         //update the user
         this.user.setName(this.jTextFieldUser.getText());
         //update user and present previous panel
-        UserManagement.updateRegistrationAndGoBack(previousUserName, this.user, this.previousPanel);
+        UserManagement.updateRegistrationAndGoHome(previousUserName, this.user);
 }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed

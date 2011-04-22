@@ -1,8 +1,10 @@
 package com.customfit.ctg.controller;
 
 import com.customfit.ctg.model.*;
+import com.customfit.ctg.view.SubPanel;
 import com.customfit.ctg.view.recipes.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 /**
  * The RecipeManagement Controller logic represents the actions that
@@ -53,15 +55,7 @@ public class RecipeManagement {
      */
     public static void createRecipe()
     {
-            //method stub:
-            //	TODO: insert GUI-initiation code and remove this CLI error message
-            System.err.println("createRecipe() hit. Not currently implemented.");
-            /* 
-             * example pseudocode:
-             * 		instantiate JPanel for creating new Recipe
-             * 		Controller.getMainFrame().setPanel( list panel )
-             */
-            Application.getMainFrame().setPanel( new GUIEditRecipePanel() );
+        Application.getMainFrame().setPanel( new EditRecipePanel(EditRecipePanel.EditMode.EDIT_NEW));
     }
 
     /**
@@ -75,10 +69,19 @@ public class RecipeManagement {
      * 
      * @return Boolean indicating the success of the operation. 
      */
-    public static boolean createRecipe(Recipe recipe)
+    public static boolean createRecipeAndGoBack(Recipe recipe, SubPanel previousPanel)
     {
-            //send it over to the database
-            return Application.getDataDriver().insertRecipe(recipe);
+        //send it over to the database
+        boolean status = Application.getDataDriver().insertRecipe(recipe);
+        //check for errors
+        if (!status)
+            //if failed, tell user about the failure
+            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem creating your recipe.", "Error", JOptionPane.ERROR_MESSAGE);
+        else
+            //otherwise, assume success and go back
+            Application.getMainFrame().setPanel(previousPanel);
+        //return status
+        return status;
     }
 
     /**
@@ -117,16 +120,9 @@ public class RecipeManagement {
      */
     public static void editRecipe(Recipe recipe)
     {
-        //method stub:
-        //	replace this CLI-code with GUI-initiation code
-        System.err.println("editRecipe() hit: Recipe " + "Name" + ": " + recipe.getName() + ". Feature not currently implemented.");
-        /* 
-         * example pseudocode:
-         * 		instantiate JPanel for viewing Recipe
-         * 		pass recipe to a special function in JPanel for processing List<Recipe>
-         * 		Controller.getMainFrame().openPanel( list panel )
-         * TODO: replace this with GUI initialization code for Create Recipes
-         */
+        EditRecipePanel editPanel = new EditRecipePanel(EditRecipePanel.EditMode.EDIT_EXISTING);
+        editPanel.setRecipe(recipe);
+        Application.getMainFrame().setPanel(editPanel);
     }
 
     /**

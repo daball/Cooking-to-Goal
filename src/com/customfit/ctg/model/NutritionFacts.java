@@ -1,8 +1,12 @@
 package com.customfit.ctg.model;
 
 /**
- * A model of nutrition facts
- * @author Drew
+ * Data model for nutrition facts table.
+ * 
+ * Go to this web site for more information about nutrition facts tables.
+ * http://www.fda.gov/food/labelingnutrition/consumerinformation/ucm078889.htm
+ * 
+ * @author Drew, David
  */
 public class NutritionFacts{
 
@@ -49,16 +53,16 @@ public class NutritionFacts{
 			MeasurableUnit totalCarbohydrate, MeasurableUnit dietaryFiber,
 			MeasurableUnit sugars, MeasurableUnit protein) {
 		super();
-		this.Calories = calories;
-		this.TotalFat = totalFat;
-		this.SaturatedFat = saturatedFat;
-		this.TransFat = transFat;
-		this.Cholesterol = cholesterol;
-		this.Sodium = sodium;
-		this.TotalCarbohydrate = totalCarbohydrate;
-		this.DietaryFiber = dietaryFiber;
-		this.Sugars = sugars;
-		this.Protein = protein;
+		this.setCalories(calories);
+                this.setTotalFat(totalFat);
+		this.setSaturatedFat(saturatedFat);
+		this.setTransFat(transFat);
+		this.setCholesterol(cholesterol);
+		this.setSodium(sodium);
+		this.setTotalCarbohydrate(totalCarbohydrate);
+		this.setDietaryFiber(dietaryFiber);
+		this.setSugars(sugars);
+		this.setProtein(protein);
 	}
 
 	/**

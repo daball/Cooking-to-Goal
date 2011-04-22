@@ -116,11 +116,10 @@ public class UserManagement {
      * 
      * @param originalUserName The user's original name, used to locate the recipe in the database.
      * @param newUser The new user data.
-     * @param previousPanel The panel we were viewing before we activated this feature.
      * 
      * @return Boolean indicating the success of the operation. 
      */
-    public static boolean updateRegistrationAndGoBack(String originalUserName, User newUser, SubPanel previousPanel)
+    public static boolean updateRegistrationAndGoHome(String originalUserName, User newUser)
     {
         boolean status = Application.getDataDriver().updateUserByName(originalUserName, newUser);
          //check for errors
@@ -128,8 +127,8 @@ public class UserManagement {
             //if failed, tell user about the failure
             JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem updating your user registration.", "Error", JOptionPane.ERROR_MESSAGE);
         else
-            //otherwise, assume success and present previously loaded panel
-            Application.getMainFrame().setPanel(previousPanel);
+            //now login user
+            UserManagement.finishLogin(newUser);
        return status;
     }
 
