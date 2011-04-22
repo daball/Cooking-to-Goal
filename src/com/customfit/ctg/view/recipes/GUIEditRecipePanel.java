@@ -13,13 +13,10 @@
 
 package com.customfit.ctg.view.recipes;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import com.customfit.ctg.controller.Application;
-import com.customfit.ctg.view.GUIFormats;
-import com.customfit.ctg.view.Observer;
+import com.customfit.ctg.controller.RecipeManagement;
+import com.customfit.ctg.controller.UserManagement;
 
-import javax.swing.JPanel;
+import com.customfit.ctg.view.SubPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,11 +25,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Ryan Spoon
  */
-public class GUIEditRecipePanel extends JPanel implements Observer {
+public class GUIEditRecipePanel extends SubPanel {
     /** Creates new form OldRecipeListPanel */
     public GUIEditRecipePanel() {
         initComponents();
-        custInitialize();
+        //setup the me-menu in the right-top corner
+        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Edit User", "Logout" }));
     }
 
     /** This method is called from within the constructor to
@@ -44,72 +42,44 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblTitle = new javax.swing.JLabel();
-        panelSouth = new javax.swing.JPanel();
         btnSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
-        panelCenter = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
         lblName = new javax.swing.JLabel();
-        txtName = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
         lblName1 = new javax.swing.JLabel();
-        txtName1 = new javax.swing.JTextField();
-        panelEast = new javax.swing.JPanel();
+        txtName = new javax.swing.JTextField();
         scrollPaneNutrition = new javax.swing.JScrollPane();
         tblNutrition = new javax.swing.JTable();
-        panelIngTitle = new javax.swing.JPanel();
+        txtName1 = new javax.swing.JTextField();
+        jLabelTitle = new javax.swing.JLabel();
+        jComboBoxMeMenu = new javax.swing.JComboBox();
         scrollPaneIngedients = new javax.swing.JScrollPane();
         tblIngredients = new javax.swing.JTable();
-        panelIngButtons = new javax.swing.JPanel();
-        btnAddIngredient = new javax.swing.JButton();
-        btnRemoveIngredient = new javax.swing.JButton();
-
-        setLayout(new java.awt.BorderLayout());
-
-        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("Manage Recipe Box");
-        add(lblTitle, java.awt.BorderLayout.PAGE_START);
+        btnRemoveIng = new javax.swing.JButton();
+        btnAddIng = new javax.swing.JButton();
 
         btnSave.setText("Save");
-        panelSouth.add(btnSave);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
 
         btnCancel.setText("Cancel");
-        panelSouth.add(btnCancel);
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
 
-        add(panelSouth, java.awt.BorderLayout.SOUTH);
-
-        panelCenter.setLayout(new javax.swing.BoxLayout(panelCenter, javax.swing.BoxLayout.Y_AXIS));
-
-        jPanel1.setMaximumSize(new java.awt.Dimension(32767, 30));
-        jPanel1.setMinimumSize(new java.awt.Dimension(73, 30));
-        jPanel1.setLayout(new java.awt.GridLayout(1, 2, 5, 5));
-
+        lblName.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName.setText("Name: ");
-        jPanel1.add(lblName);
 
-        txtName.setText("jTextField1");
-        jPanel1.add(txtName);
-
-        panelCenter.add(jPanel1);
-
-        jPanel2.setMaximumSize(new java.awt.Dimension(32767, 30));
-        jPanel2.setMinimumSize(new java.awt.Dimension(73, 30));
-        jPanel2.setLayout(new java.awt.GridLayout(1, 2, 5, 5));
-
+        lblName1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName1.setText("Rating: ");
-        jPanel2.add(lblName1);
 
-        txtName1.setText("jTextField1");
-        jPanel2.add(txtName1);
+        txtName.setText("txtName");
 
-        panelCenter.add(jPanel2);
-
-        add(panelCenter, java.awt.BorderLayout.CENTER);
-
-        panelEast.setLayout(new javax.swing.BoxLayout(panelEast, javax.swing.BoxLayout.Y_AXIS));
-
-        scrollPaneNutrition.setBorder(javax.swing.BorderFactory.createTitledBorder("Nutrition Facts"));
+        scrollPaneNutrition.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nutrition Facts", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         tblNutrition.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,10 +109,19 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
         tblNutrition.getTableHeader().setReorderingAllowed(false);
         scrollPaneNutrition.setViewportView(tblNutrition);
 
-        panelEast.add(scrollPaneNutrition);
+        txtName1.setText("txtRating");
 
-        panelIngTitle.setBorder(javax.swing.BorderFactory.createTitledBorder("Ingredients"));
-        panelIngTitle.setLayout(new javax.swing.BoxLayout(panelIngTitle, javax.swing.BoxLayout.Y_AXIS));
+        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18)); // NOI18N
+        jLabelTitle.setText("Edit Recipe");
+
+        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Me Menu", "Edit User", "Logout" }));
+        jComboBoxMeMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxMeMenuActionPerformed(evt);
+            }
+        });
+
+        scrollPaneIngedients.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingredients", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
 
         tblIngredients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -164,70 +143,122 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
         tblIngredients.getTableHeader().setReorderingAllowed(false);
         scrollPaneIngedients.setViewportView(tblIngredients);
 
-        panelIngTitle.add(scrollPaneIngedients);
+        btnRemoveIng.setText("Remove");
+        btnRemoveIng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveIngActionPerformed(evt);
+            }
+        });
 
-        panelIngButtons.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
+        btnAddIng.setText("Add");
+        btnAddIng.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddIngActionPerformed(evt);
+            }
+        });
 
-        btnAddIngredient.setText("Add");
-        panelIngButtons.add(btnAddIngredient);
-
-        btnRemoveIngredient.setText("Remove");
-        panelIngButtons.add(btnRemoveIngredient);
-
-        panelIngTitle.add(panelIngButtons);
-
-        panelEast.add(panelIngTitle);
-
-        add(panelEast, java.awt.BorderLayout.EAST);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 396, Short.MAX_VALUE)
+                        .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCancel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnAddIng)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemoveIng))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtName1))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(scrollPaneNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(64, 64, 64)))
+                .addContainerGap())
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelTitle))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblName1)
+                            .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAddIng)
+                            .addComponent(btnRemoveIng))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnSave)
+                            .addComponent(btnCancel)))
+                    .addComponent(scrollPaneNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void custInitialize() {
-        GUIListener gl = new GUIListener();
-        btnSave.addActionListener(gl);
-        btnCancel.addActionListener(gl);
-        btnAddIngredient.addActionListener(gl);
-        btnRemoveIngredient.addActionListener(gl);
+    private void jComboBoxMeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMeMenuActionPerformed
+        // process me menu
 
-        jPanel1.setBorder(GUIFormats.getPaddingBorder());
-        jPanel2.setBorder(GUIFormats.getPaddingBorder());
+        //if user hit Edit User
+        if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit User"))
+            //then tell the controller about it
+            UserManagement.editRegistration(UserManagement.getCurrentUser());
+        //if user hit Edit User
+        else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Logout"))
+            //ask controller for logout
+            UserManagement.logout();
+        //and no matter what, be sure to reset this combo box back to index 0
+        this.jComboBoxMeMenu.setSelectedIndex(0);
+}//GEN-LAST:event_jComboBoxMeMenuActionPerformed
 
-        lblTitle.setFont(GUIFormats.getTitleFont());
-    }
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        //Recipe r = createRecipe();
+        //controller.addRecipe(r);
+        RecipeManagement.browseRecipes();
+    }//GEN-LAST:event_btnSaveActionPerformed
 
-    /**
-     * Listener for this button panel.
-     * Commands should be sent to the Controller
-     * @author Ryan Spoon
-     *
-     */
-    private class GUIListener implements ActionListener{
-        @Override
-        public void actionPerformed(ActionEvent ae) {
-            if(ae.getSource().equals(btnSave)){
-                //Recipe r = createRecipe();
-                //controller.addRecipe(r);
-                Application.openPanel(new OldRecipeListPanel());
-            }
-            else if(ae.getSource().equals(btnCancel))
-            {
-                Application.openPanel(new OldRecipeListPanel());
-            }
-            else if(ae.getSource().equals(btnAddIngredient))
-            {
-                DefaultTableModel dtm = (DefaultTableModel)tblIngredients.getModel();
-                dtm.addRow(new Object [] {null, null, null});
-                tblIngredients.setModel(dtm);
-                update();
-            }
-            else if(ae.getSource().equals(btnRemoveIngredient))
-            {
-                removeIngredient();
-            }
-            else{
-                // Shouldn't be here
-            }
-        }
-    } // end private inner class
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        RecipeManagement.browseRecipes();
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnRemoveIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveIngActionPerformed
+        removeIngredient();
+    }//GEN-LAST:event_btnRemoveIngActionPerformed
+
+    private void btnAddIngActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddIngActionPerformed
+        DefaultTableModel dtm = (DefaultTableModel)tblIngredients.getModel();
+        dtm.addRow(new Object [] {null, null, null});
+        tblIngredients.setModel(dtm);
+    }//GEN-LAST:event_btnAddIngActionPerformed
 
     private void updateRecipeList() {
         DefaultTableModel dtm = (DefaultTableModel)tblNutrition.getModel();
@@ -235,7 +266,6 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
         Object[] o = {"hey", 4};
         dtm.addRow(o);
         tblNutrition.setModel(dtm);
-        this.update();
     }
 
     private void removeIngredient() {
@@ -247,33 +277,30 @@ public class GUIEditRecipePanel extends JPanel implements Observer {
             tblIngredients.setModel(dtm);
             if (currentRow < tblIngredients.getRowCount())
                 tblIngredients.setRowSelectionInterval(currentRow, currentRow);
-            update();
         }
     }
 
     /**
-     * The update method refreshes this panel's data.
+     * Extends SubPanel functionality by returning the title as being the
+     * same as on the panel itself.
+     * @return The title in the panel.
      */
     @Override
-    public void update() {
-            this.revalidate();
+    public String getTitle()
+    {
+        //grab title from on the panel
+        return this.jLabelTitle.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddIngredient;
+    private javax.swing.JButton btnAddIng;
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnRemoveIngredient;
+    private javax.swing.JButton btnRemoveIng;
     private javax.swing.JButton btnSave;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JComboBox jComboBoxMeMenu;
+    private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblName1;
-    private javax.swing.JLabel lblTitle;
-    private javax.swing.JPanel panelCenter;
-    private javax.swing.JPanel panelEast;
-    private javax.swing.JPanel panelIngButtons;
-    private javax.swing.JPanel panelIngTitle;
-    private javax.swing.JPanel panelSouth;
     private javax.swing.JScrollPane scrollPaneIngedients;
     private javax.swing.JScrollPane scrollPaneNutrition;
     private javax.swing.JTable tblIngredients;

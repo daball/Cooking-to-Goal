@@ -61,6 +61,7 @@ public class RecipeManagement {
              * 		instantiate JPanel for creating new Recipe
              * 		Controller.getMainFrame().setPanel( list panel )
              */
+            Application.getMainFrame().setPanel( new GUIEditRecipePanel() );
     }
 
     /**
