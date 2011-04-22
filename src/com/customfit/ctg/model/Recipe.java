@@ -11,12 +11,12 @@ import java.util.List;
 public class Recipe {
 
 	private String name = "New Recipe";
-	private String description = "Your recipe description goes here.";
+	//private String description = "Your recipe description goes here.";
 	private String instructions = "Insert your recipe here.";
 
 	private MeasurableUnit servingSize = new MeasurableUnit(1.0, "serving");
 	
-	private double servings = 0.0;
+	private double servings = 1.0;
 	
 	private double rating = 0.0;
 
@@ -45,7 +45,7 @@ public class Recipe {
 	 * @param nutrition
 	 */
 	public Recipe(String name,
-				  String description,
+				  //String description,
 				  String instructions,
 				  MeasurableUnit servingSize,
 				  double servings,
@@ -55,7 +55,7 @@ public class Recipe {
 				  ){
             super();
             this.setName(name);
-            this.setDescription(description);
+            //this.setDescription(description);
             this.setInstructions(instructions);
             this.setServingSize(servingSize);
             this.setServings(servings);
@@ -109,16 +109,16 @@ public class Recipe {
 	/**
 	 * @param description the description to set
 	 */
-	public void setDescription(String description) {
-		this.description = description;
-	}
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
 
 	/**
 	 * @return the description
 	 */
-	public String getDescription() {
-		return description;
-	}
+//	public String getDescription() {
+//		return description;
+//	}
 
 	/**
 	 * @param instructions the instructions to set

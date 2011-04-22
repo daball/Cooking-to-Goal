@@ -27,6 +27,14 @@ public abstract class SubPanel extends javax.swing.JPanel {
     public SubPanel() {
         initComponents();
     }
+    
+    /**
+     * This is used for forms that require data refreshing.
+     */
+    public void refresh()
+    {
+        System.err.println("SubPanel.refreshData() was hit, but wasn't implemented (overridden). Override this method and set it to update data.");
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.

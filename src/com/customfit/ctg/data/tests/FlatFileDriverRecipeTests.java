@@ -17,7 +17,7 @@ public class FlatFileDriverRecipeTests extends TestCase {
 
 	//CONSTANTS
 	private static final String TEST_RECIPE_NAME			= "Test Recipe";
-	private static final String TEST_RECIPE_DESCRIPTION 	= "This is a recipe description.";
+	//private static final String TEST_RECIPE_DESCRIPTION 	= "This is a recipe description.";
 	private static final String TEST_RECIPE_INSTRUCTIONS 	= "Sample instructions.";
 	private static final MeasurableUnit
 								TEST_RECIPE_SERVING_SIZE 	= new MeasurableUnit(1.0, "Serving");
@@ -59,7 +59,8 @@ public class FlatFileDriverRecipeTests extends TestCase {
 		TEST_RECIPE_NUTRITION_FACTS.setCalories(100.0);
 				
 		//set up basic test object
-		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+		//Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+                this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//set up file access
 		this.rfa = new FlatFileDriver();
@@ -158,7 +159,7 @@ public class FlatFileDriverRecipeTests extends TestCase {
 
 		//now make sure that everything matches after deserialization
 		assertEquals(recipe.getName(), TEST_RECIPE_NAME);
-		assertEquals(recipe.getDescription(), TEST_RECIPE_DESCRIPTION);
+		//assertEquals(recipe.getDescription(), TEST_RECIPE_DESCRIPTION);
 		assertEquals(recipe.getInstructions(), TEST_RECIPE_INSTRUCTIONS);
 		assertEquals(recipe.getRating(), TEST_RECIPE_RATING);
 		assertTrue(recipe.getServingSize() == TEST_RECIPE_SERVING_SIZE);
@@ -166,7 +167,7 @@ public class FlatFileDriverRecipeTests extends TestCase {
 		//assertEquals(recipe.getIngredients(), TEST_RECIPE_INGREDIENTS);
 		//assertEquals(recipe.getNutrition(), TEST_RECIPE_NUTRITION_INFO);
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Name" + ": " + recipe.getName());
-		System.out.println("\ttestSelectRecipe(): Recipe " + "Description" + ":\n" + recipe.getDescription());
+		//System.out.println("\ttestSelectRecipe(): Recipe " + "Description" + ":\n" + recipe.getDescription());
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Instructions" + ":\n" + recipe.getInstructions());
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Rating" + ": " + recipe.getRating());
 		System.out.println("\ttestSelectRecipe(): Recipe " + "Serving Size" + ": " + recipe.getServingSize());

@@ -78,8 +78,12 @@ public class RecipeManagement {
             //if failed, tell user about the failure
             JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem creating your recipe.", "Error", JOptionPane.ERROR_MESSAGE);
         else
+        {
             //otherwise, assume success and go back
             Application.getMainFrame().setPanel(previousPanel);
+            //refresh data on previous panel
+            previousPanel.refresh();
+        }
         //return status
         return status;
     }
@@ -96,7 +100,7 @@ public class RecipeManagement {
             //method stub:
             //	replace this CLI-code with GUI-initiation code
             System.out.println("viewRecipe(): Recipe " + "Name" + ": " + recipe.getName());
-            System.out.println("\tviewRecipe(): Recipe " + "Description" + ":\n" + recipe.getDescription());
+            //System.out.println("\tviewRecipe(): Recipe " + "Description" + ":\n" + recipe.getDescription());
             System.out.println("\tviewRecipe(): Recipe " + "Instructions" + ":\n" + recipe.getInstructions());
             System.out.println("\tviewRecipe(): Recipe " + "Rating" + ": " + recipe.getRating());
             System.out.println("\tviewRecipe(): Recipe " + "Serving Size" + ": " + recipe.getServingSize());

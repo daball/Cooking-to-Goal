@@ -103,8 +103,7 @@ public class RecipeListPanel extends SubPanel {
 
         jTableRecipes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Name", "Rating"
@@ -291,6 +290,7 @@ public class RecipeListPanel extends SubPanel {
             tableModel.removeRow(0);
         }
 
+        //add recipes to list
         for (Recipe recipe : recipes)
         {
             Object[] row = {recipe.getName(), new Long(Math.round(recipe.getRating() * 5.0)).toString()};
@@ -298,6 +298,14 @@ public class RecipeListPanel extends SubPanel {
         }
         
         jTableRecipes.setModel(tableModel);
+    }
+    
+    @Override
+    public void refresh()
+    {
+        //refresh data
+        if (this.listMode == ListMode.LIST_BROWSE)
+            this.setRecipeList(Application.getDataDriver().selectAllRecipes());
     }
 
 }

@@ -25,7 +25,7 @@ import com.customfit.ctg.model.RecipeIngredient;
 public class RecipeManagementTests extends TestCase {
 
 	private static final String TEST_RECIPE_NAME		= "Test Recipe";
-	private static final String TEST_RECIPE_DESCRIPTION 	= "This is a recipe description.";
+	//private static final String TEST_RECIPE_DESCRIPTION 	= "This is a recipe description.";
 	private static final String TEST_RECIPE_INSTRUCTIONS 	= "Sample instructions.";
 	private static final MeasurableUnit
 								TEST_RECIPE_SERVING_SIZE 	= new MeasurableUnit(1.0, "Serving");
@@ -56,7 +56,8 @@ public class RecipeManagementTests extends TestCase {
 		TEST_RECIPE_NUTRITION_FACTS.setCalories(100.0);
 				
 		//set up basic test recipe from all the components
-		this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+		//this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+                this.testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//tell the database to store it
 		Application.getDataDriver().insertRecipe(this.testRecipe);
@@ -98,31 +99,6 @@ public class RecipeManagementTests extends TestCase {
 		assertTrue(true);
 	}
 	
-	public void testCreateRecipe2()
-	{
-		String testName = TEST_RECIPE_NAME + " - testCreateRecipe2()";
-		Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
-		
-		//call create recipe
-		assertTrue(RecipeManagement.createRecipeAndGoBack(testRecipe));
-
-		boolean found = false;
-		//find it		
-		for (Recipe recipe : Application.getDataDriver().selectAllRecipes())
-		{
-			System.out.println("!!!!!!!!!!!Found " + recipe.getName());
-			if (recipe.getName().equals(testRecipe.getName()))
-			{
-				found = true;
-				//now delete it
-				Application.getDataDriver().deleteRecipeByName(testName);
-				break;
-			}
-		}
-		
-		assertTrue(found);
-	}
-
 	public void testViewRecipe()
 	{
 		RecipeManagement.viewRecipe(this.testRecipe);
@@ -138,14 +114,15 @@ public class RecipeManagementTests extends TestCase {
 	public void testUpdateRecipe()
 	{
 		String testName = TEST_RECIPE_NAME + " - testUpdateRecipe()";
-		Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
-		
+		//Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+                Recipe testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+
 		//tell data driver to create recipe
 		Application.getDataDriver().insertRecipe(testRecipe);
 
 		//make it different
 		testRecipe.setName(testRecipe.getName() +  " - UPDATED!");
-		testRecipe.setDescription("THIS HAS BEEN UPDATED OK!");
+		//testRecipe.setDescription("THIS HAS BEEN UPDATED OK!");
 		
 		//now update it
 		assertTrue(RecipeManagement.updateRecipe(testName, testRecipe));
@@ -170,7 +147,8 @@ public class RecipeManagementTests extends TestCase {
 	public void testDeleteRecipe()
 	{
 		String testName = TEST_RECIPE_NAME + " - testDeleteRecipe()";
-		Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+		//Recipe testRecipe = new Recipe(testName, TEST_RECIPE_DESCRIPTION, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
+                Recipe testRecipe = new Recipe(TEST_RECIPE_NAME, TEST_RECIPE_INSTRUCTIONS, TEST_RECIPE_SERVING_SIZE, TEST_RECIPE_SERVINGS, TEST_RECIPE_RATING, TEST_RECIPE_INGREDIENTS, TEST_RECIPE_NUTRITION_FACTS);
 		
 		//tell data driver to create recipe
 		Application.getDataDriver().insertRecipe(testRecipe);
