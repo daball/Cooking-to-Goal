@@ -14,7 +14,7 @@ public class Recipe {
 	private String description = "Your recipe description goes here.";
 	private String instructions = "Insert your recipe here.";
 
-	private MeasurableUnit servingSize = new MeasurableUnit(1.0, "specify unit");
+	private MeasurableUnit servingSize = new MeasurableUnit(1.0, "serving");
 	
 	private double servings = 0.0;
 	

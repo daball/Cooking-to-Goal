@@ -372,7 +372,7 @@ public class EditRecipePanel extends SubPanel {
     public Recipe getRecipe()
     {
         Recipe recipe = new Recipe();
-        recipe.setName(this.jTextName.getName().trim());
+        recipe.setName(this.jTextName.getText().trim());
         recipe.setRating(this.starVotingPanel.getRating());
         return recipe;
     }

@@ -284,6 +284,12 @@ public class RecipeListPanel extends SubPanel {
         this.recipes = recipes;
         
         DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
+        
+        //clear old results
+        while (tableModel.getRowCount() > 0)
+        {
+            tableModel.removeRow(0);
+        }
 
         for (Recipe recipe : recipes)
         {
