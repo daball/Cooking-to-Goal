@@ -33,12 +33,12 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldServingSize" min="-2" pref="39" max="-2" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBoxServingSizeUnit" pref="169" max="32767" attributes="0"/>
+                              <Component id="jComboBoxServingSizeUnit" min="-2" pref="169" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblName" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextName" pref="248" max="32767" attributes="1"/>
+                              <Component id="jTextName" min="-2" pref="157" max="-2" attributes="1"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="lblName1" min="-2" pref="51" max="-2" attributes="0"/>
@@ -55,7 +55,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnSave" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                       <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -68,7 +68,7 @@
           <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabelTitle" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jComboBoxMeMenu" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -94,7 +94,7 @@
                               <Component id="jPanel1" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace pref="22" max="32767" attributes="1"/>
                               <Component id="scrollPaneNutrition" min="-2" pref="259" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -108,14 +108,14 @@
                       <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnSave" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnSave" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="39" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -179,10 +179,35 @@
         <Component class="javax.swing.JTable" name="jTableNutritionFacts">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="2" rowCount="2">
-                <Column editable="false" title="Name" type="java.lang.String"/>
-                <Column editable="false" title="Amount" type="java.lang.Integer"/>
+              <Table columnCount="2" rowCount="10">
+                <Column editable="true" title="Name" type="java.lang.String">
+                  <Data value="Calories"/>
+                  <Data value="Total Fat (g)"/>
+                  <Data value="     Saturated Fat (g)"/>
+                  <Data value="     Trans Fat (g)"/>
+                  <Data value="Cholesterol (mg)"/>
+                  <Data value="Sodium (mg)"/>
+                  <Data value="Total Carbohydrate (g)"/>
+                  <Data value="     Dietary Fiber (g)"/>
+                  <Data value="     Sugars (g)"/>
+                  <Data value="Protein (g)"/>
+                </Column>
+                <Column editable="true" title="Amount" type="java.lang.Float"/>
               </Table>
+            </Property>
+            <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
+              <TableColumnModel selectionModel="0">
+                <Column maxWidth="120" minWidth="120" prefWidth="120" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                  <Title/>
+                  <Editor/>
+                  <Renderer/>
+                </Column>
+              </TableColumnModel>
             </Property>
             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
               <JTableSelectionModel selectionMode="0"/>
@@ -237,7 +262,7 @@
                   <Component id="jButtonRemoveIngredient" min="-2" pref="30" max="-2" attributes="1"/>
                   <EmptySpace pref="222" max="32767" attributes="0"/>
               </Group>
-              <Component id="scrollPaneIngedients" alignment="0" pref="291" max="32767" attributes="1"/>
+              <Component id="scrollPaneIngedients" alignment="0" pref="291" max="32767" attributes="2"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -248,7 +273,7 @@
                       <Component id="jButtonAddIngredient" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneIngedients" pref="117" max="32767" attributes="0"/>
+                  <Component id="scrollPaneIngedients" min="-2" pref="117" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -265,7 +290,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
-                    <Column editable="true" title="Amount" type="java.lang.Float"/>
+                    <Column editable="true" title="Amount" type="java.lang.String"/>
                     <Column editable="true" title="Ingredient" type="java.lang.String"/>
                   </Table>
                 </Property>
@@ -355,6 +380,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldServingSize">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1.0"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxServingSizeUnit">
       <Properties>

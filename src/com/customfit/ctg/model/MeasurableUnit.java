@@ -21,10 +21,23 @@ public class MeasurableUnit implements Comparable<MeasurableUnit> {
 	 * @param unit Measurement. (e.g., grams, gallons, miles, millenia)
 	 */
 	public MeasurableUnit(double quantity, String unit) {
-		super();
-		this.quantity = quantity;
-		this.unit = unit;
-	}
+            super();
+            this.quantity = quantity;
+            this.unit = unit;
+        }
+        
+	/**
+	 * Create a new MeasurableUnit with the quantity and unit specified
+         * in the measurableUnitString.
+	 * 
+	 * @param measurableUnitString Amount and unit as specified by a previous MeasurableUnit.toString().
+	 */
+        public MeasurableUnit(String measurableUnitString) {
+            //grab amount quantity
+            this.quantity = Double.parseDouble(measurableUnitString.replaceAll("[A-Z,a-z, ]", ""));
+            //grab amount unit
+            this.unit = measurableUnitString.replaceAll("\\.|[0-9]", "");
+        }
 	
 	/**
 	 * @return the quantity

@@ -10,8 +10,8 @@ public class MeasurementUnit
 		public static String QUARTS			= "quarts";
 		public static String PINTS			= "pints";
 		public static String CUPS			= "cups";
-		public static String LIQUID_OUNCES	= "ounces"; 	// Volume
-		public static String DRY_OUNCES		= "ounces"; 	// Weight
+		public static String LIQUID_OUNCES	= "fluid ounces"; 	// Volume
+		public static String DRY_OUNCES		= "ounces (dry)"; 	// Weight
 		public static String TABLESPOONS	= "tablespoons";
 		public static String TEASPOONS		= "teaspoons";
 	}

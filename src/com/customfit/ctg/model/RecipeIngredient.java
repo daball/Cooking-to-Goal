@@ -13,8 +13,9 @@ public class RecipeIngredient extends Ingredient{
 	}
 	
 	/**
-	 * Creates a RecipeIngredient
-	 * @param name
+	 * Creates a RecipeIngredient with name and amount.
+	 * @param name Ingredient name. 
+         * @param amount A MeasurableUnit instance.
 	 */
 	public RecipeIngredient(String name, MeasurableUnit amount) {
 		super(name);
@@ -22,13 +23,27 @@ public class RecipeIngredient extends Ingredient{
 	}
 	
 	/**
-	 * Creates a RecipeIngredient
-	 * @param name
+	 * Creates a RecipeIngredient with name and amount. The amount
+         * will be converted to a MeasurableUnit out of the quantity and unit.
+	 * @param name Ingredient name.
+         * @param quantity Quantity.
+         * @param unit Measurement unit.
 	 */
 	public RecipeIngredient(String name, double quantity, String unit) {
 		super(name);
 		this.amount = new MeasurableUnit(quantity, unit);
 	}
+        
+	/**
+	 * Creates a RecipeIngredient with name and amount. The amount
+         * will be converted to a MeasurableUnit out of the String.
+	 * @param name Ingredient name.
+         * @param measureableUnitString MeasurableUnit string.
+	 */
+        public RecipeIngredient(String name, String measureableUnitString) {
+                super(name);
+                this.amount = new MeasurableUnit(measureableUnitString);
+        }
 	
 	public MeasurableUnit getAmount() {
 		return this.amount;

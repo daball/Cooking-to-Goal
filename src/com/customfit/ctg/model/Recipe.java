@@ -22,7 +22,7 @@ public class Recipe {
 
 	private List<RecipeIngredient> ingredients = new ArrayList<RecipeIngredient>();
 	
-	private NutritionFacts nutritionInformation;
+	private NutritionFacts nutritionInformation = new NutritionFacts();
 
 	/**
 	 * Constructs an empty Recipe object.
