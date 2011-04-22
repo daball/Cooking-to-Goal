@@ -8,6 +8,7 @@
                 <root id="src.dir" name="src"/>
             </source-roots>
             <test-roots>
+                <root id="test.test.dir"/>
                 <root id="test.tests.dir"/>
             </test-roots>
         </data>
