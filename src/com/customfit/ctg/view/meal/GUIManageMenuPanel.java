@@ -1,6 +1,5 @@
 package com.customfit.ctg.view.meal;
 
-import com.customfit.ctg.controllers.*;
 import com.customfit.ctg.view.*;
 
 import javax.swing.*;
