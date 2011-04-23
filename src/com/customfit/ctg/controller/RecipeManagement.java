@@ -41,7 +41,7 @@ public class RecipeManagement {
     public static void browseRecipes(List<Recipe> recipes)
     {
         //create panel
-        RecipeListPanel recipeListPanel = new RecipeListPanel(RecipeListPanel.ListMode.LIST_BROWSE);
+        DesignNutritionPlan recipeListPanel = new DesignNutritionPlan(DesignNutritionPlan.ListMode.LIST_BROWSE);
         //tell panel about our recipes
         recipeListPanel.setRecipeList(recipes);
         //display panel in main frame

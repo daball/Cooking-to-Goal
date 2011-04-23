@@ -10,60 +10,108 @@ import java.util.List;
  */
 public class Recipe {
 
-	private String name = "New Recipe";
-	//private String description = "Your recipe description goes here.";
-	private String instructions = "Insert your recipe here.";
+    /**
+     * The name of the recipe.
+     */
+    private String name = "New Recipe";
 
-	private MeasurableUnit servingSize = new MeasurableUnit(1.0, "serving");
-	
-	private double servings = 1.0;
-	
-	private double rating = 0.0;
+    /**
+     * The instructions for the recipe.
+     */
+    private String instructions = "Insert your recipe here.";
 
-	private List<RecipeIngredient> ingredients = new ArrayList<RecipeIngredient>();
-	
-	private NutritionFacts nutritionInformation = new NutritionFacts();
+    /**
+     * Sets the serving size for the recipe (for each of the number of servings).
+     */
+    private MeasurableUnit servingSize = new MeasurableUnit(1.0, "unit");
 
-	/**
-	 * Constructs an empty Recipe object.
-	 * Fields must be set with setters.
-	 */
-	public Recipe() {
-            super();
-	}
-	
-	/**
-	 * Constructs a recipe object with all parameters.
-	 * 
-	 * @param name
-	 * @param description
-	 * @param instructions
-	 * @param servingSize
-	 * @param servings
-	 * @param rating
-	 * @param ingredients
-	 * @param nutrition
-	 */
-	public Recipe(String name,
-				  //String description,
-				  String instructions,
-				  MeasurableUnit servingSize,
-				  double servings,
-				  double rating,
-				  List<RecipeIngredient> ingredients,
-				  NutritionFacts nutritionInformation
-				  ){
-            super();
-            this.setName(name);
-            //this.setDescription(description);
-            this.setInstructions(instructions);
-            this.setServingSize(servingSize);
-            this.setServings(servings);
-            this.setRating(rating);
-            this.setIngredients(ingredients);
-            this.setNutritionInformation(nutritionInformation);
-	}
+    /**
+     * Sets the number of servings the recipe makes.
+     */
+    private double servings = 1.0;
 
+    /**
+     * The recipe rating (voting system).
+     */
+    private double rating = 0.0;
+
+    /**
+     * The list of ingredients in the recipe.
+     */
+    private List<RecipeIngredient> ingredients = new ArrayList<RecipeIngredient>();
+
+    /**
+     * The nutrition information for the recipe.
+     */
+    private NutritionFacts nutritionInformation = new NutritionFacts();
+
+    /**
+     * Constructs an empty Recipe object.
+     * Fields must be set with setters.
+     */
+    public Recipe() {
+        super();
+    }
+
+    /**
+     * Constructs a recipe object with all parameters.
+     * 
+     * @param name The name of the recipe.
+     * @param description The instructions for the recipe.
+     * @param instructions Sets the serving size for the recipe (for each of the number of servings).
+     * @param servingSize
+     * @param servings
+     * @param rating
+     * @param ingredients
+     * @param nutrition
+     */
+    public Recipe(String name,
+                              //String description,
+                              String instructions,
+                              MeasurableUnit servingSize,
+                              double servings,
+                              double rating,
+                              List<RecipeIngredient> ingredients,
+                              NutritionFacts nutritionInformation
+                              ){
+        super();
+        this.setName(name);
+        this.setInstructions(instructions);
+        this.setServingSize(servingSize);
+        this.setServings(servings);
+        this.setRating(rating);
+        this.setIngredients(ingredients);
+        this.setNutritionInformation(nutritionInformation);
+    }
+
+    /**
+     * @param name the name to set
+     */
+    public void setName(String name) {
+            this.name = name;
+    }
+
+    /**
+     * Gets the name of the recipe.
+     */
+    public String getName() {
+            return name;
+    }
+    
+    /**
+     * The instructions for the recipe.
+     */
+    public void setInstructions(String instructions) {
+            this.instructions = instructions;
+    }
+
+    /**
+     * @return the instructions
+     */
+    public String getInstructions() {
+            return instructions;
+    }
+    
 	/**
 	 * @return the servingSize
 	 */
@@ -85,54 +133,12 @@ public class Recipe {
 		return servings;
 	}
 
-	/**
-	 * @param servings the servings to set
-	 */
-	public void setServings(double servings) {
-		this.servings = servings;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @param description the description to set
-	 */
-//	public void setDescription(String description) {
-//		this.description = description;
-//	}
-
-	/**
-	 * @return the description
-	 */
-//	public String getDescription() {
-//		return description;
-//	}
-
-	/**
-	 * @param instructions the instructions to set
-	 */
-	public void setInstructions(String instructions) {
-		this.instructions = instructions;
-	}
-
-	/**
-	 * @return the instructions
-	 */
-	public String getInstructions() {
-		return instructions;
-	}
+    /**
+     * Sets the name of the recipe.
+     */
+    public void setServings(double servings) {
+            this.servings = servings;
+    }
 
 	/**
 	 * @param rating the rating to set

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.customfit.ctg.model;
 
 /**
@@ -18,17 +15,24 @@ public class NutritionPlan {
 	private String name;
 	
 	/**
-	 * The minimum goals set out
-	 * in the NutritionPlan.
+	 * The goals set out in the NutritionPlan.
 	 */
-	private NutritionFacts minimumGoals = new NutritionFacts();
+	private NutritionFacts goals = new NutritionFacts();
+        
+        /**
+         * The direction of the nutritional goals.
+         */
+        public static enum NutritionGoalDirection
+        {
+            MINIMUM_GOAL,
+            MAXIMUM_GOAL
+        };
+        
+        /**
+         * The direction of the nutritional goals. (Minimum or Maximum)
+         */
+        private NutritionGoalDirection goalDirection = NutritionGoalDirection.MAXIMUM_GOAL;
 	
-	/**
-	 * The maximum goals set out
-	 * in the NutritionPlan.
-	 */
-	private NutritionFacts maximumGoals = new NutritionFacts();
-
 	/**
 	 * Creates a new NutritionPlan for a User with empty goals.
 	 * 
@@ -43,15 +47,12 @@ public class NutritionPlan {
 	 * Creates a new NutritionPlan for a User with the specified goals.
 	 * 
 	 * @param name The name of the NutritionPlan.
-	 * @param minimumGoals The minimum goals set out in the NutritionPlan.
-	 * @param maximumGoals The maximum goals set out in the NutritionPlan.
+	 * @param goals The goals set out in the NutritionPlan.
 	 */
-	public NutritionPlan(String name, NutritionFacts minimumGoals,
-			NutritionFacts maximumGoals) {
+	public NutritionPlan(String name, NutritionFacts goals) {
 		super();
 		this.name = name;
-		this.minimumGoals = minimumGoals;
-		this.maximumGoals = maximumGoals;
+		this.goals = goals;
 	}
 
 	/**
@@ -73,42 +74,34 @@ public class NutritionPlan {
 	}
 	
 	/**
-	 * Gets the maximum goals set out
-	 * in the NutritionPlan.
+	 * Gets the goals set out in the NutritionPlan.
 	 * 
 	 * @return The NutritionPlan maximum goals.
 	 */
-	public NutritionFacts getMaximumGoals() {
-		return maximumGoals;
+	public NutritionFacts getGoals() {
+		return this.goals;
 	}
 	
 	/**
-	 * Sets the maximum goals set out
-	 * in the NutritionPlan.
+	 * Sets the goals set out in the NutritionPlan.
 	 * 
 	 * @param maxGoals The NutritionPlan maximum goals.
 	 */
-	public void setMaximumGoals(NutritionFacts maximumGoals) {
-		this.maximumGoals = maximumGoals;
+	public void setGoals(NutritionFacts goals) {
+		this.goals = goals;
 	}
 
-	/**
-	 * Gets the minimum goals set out
-	 * in the NutritionPlan.
-	 * 
-	 * @return The NutritionPlan minimum goals.
-	 */
-	public NutritionFacts getMinimumGoals() {
-		return minimumGoals;
-	}
+        /**
+         * Gets the direction of the nutritional goals.
+         */
+        public NutritionGoalDirection getGoalDirection() {
+            return this.goalDirection;
+        }
 
-	/**
-	 * Sets the minimum goals set out
-	 * in the NutritionPlan.
-	 * 
-	 * @param minGoals the minGoals to set
-	 */
-	public void setMinimumGoals(NutritionFacts minimumGoals) {
-		this.minimumGoals = minimumGoals;
-	}
+        /**
+         * Sets the direction of the nutritional goals.
+         */
+        public void setGoalDirection(NutritionGoalDirection goalDirection) {
+            this.goalDirection = goalDirection;
+        }
 }

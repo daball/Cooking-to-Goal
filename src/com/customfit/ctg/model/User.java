@@ -15,16 +15,6 @@ public class User {
 	private String name;
 	
 	/**
-	 * The list of nutrition plans for the user.
-	 */
-	private List<NutritionPlan> nutritionPlans = new ArrayList<NutritionPlan>();
-	
-	/**
-	 * The active nutrition plan for the user.
-	 */
-	private NutritionPlan activeNutritionPlan = new NutritionPlan("Default Plan");
-	
-	/**
 	 * Constructs a user with a single, active empty nutrition plan with
 	 * the user name provided.
 	 * 
@@ -32,7 +22,6 @@ public class User {
 	 */
 	public User(String name){
 		this.setName(name);
-		this.nutritionPlans.add(this.activeNutritionPlan);
 	}
 	
 	/**
@@ -42,12 +31,9 @@ public class User {
 	 * @param nutritionPlans The list of nutrition plans.
 	 * @param activeNutritionPlan The active nutrition plan.
 	 */
-	public User(String name, List<NutritionPlan> nutritionPlans,
-			NutritionPlan activeNutritionPlan) {
+	public User(String name) {
 		super();
 		this.name = name;
-		this.nutritionPlans = nutritionPlans;
-		this.activeNutritionPlan = activeNutritionPlan;
 	}
 
 	/**
