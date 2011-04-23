@@ -346,11 +346,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Show menu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabel4ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabel5">
       <Properties>
         <Property name="text" type="java.lang.String" value="Show menu"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabel5ActionPerformed"/>
+      </Events>
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabel6">
       <Properties>

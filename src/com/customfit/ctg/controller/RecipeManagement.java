@@ -1,5 +1,6 @@
 package com.customfit.ctg.controller;
 
+import com.customfit.ctg.view.meal.MealMenuPanel;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;
 import com.customfit.ctg.view.recipes.*;

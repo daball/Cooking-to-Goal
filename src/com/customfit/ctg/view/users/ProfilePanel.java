@@ -151,8 +151,18 @@ public class ProfilePanel extends SubPanel {
         jScrollPane5.setViewportView(jTextPaneMealPlanNote);
 
         linkLabel4.setText("Show menu");
+        linkLabel4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabel4ActionPerformed(evt);
+            }
+        });
 
         linkLabel5.setText("Show menu");
+        linkLabel5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabel5ActionPerformed(evt);
+            }
+        });
 
         linkLabel6.setText("Show menu");
 
@@ -301,6 +311,14 @@ public class ProfilePanel extends SubPanel {
         //tell controller to create a new recipe
         RecipeManagement.createRecipe();
 }//GEN-LAST:event_linkLabelAddNewActionPerformed
+
+    private void linkLabel5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabel5ActionPerformed
+        MealPlanner.browseMenu();
+    }//GEN-LAST:event_linkLabel5ActionPerformed
+
+    private void linkLabel4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabel4ActionPerformed
+        MealPlanner.browseMenu();
+    }//GEN-LAST:event_linkLabel4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
