@@ -1,0 +1,36 @@
+Menu.scale
+	if the user's chosen nutritional goal is a max
+		if menu's total value for user_goal > User's target goal
+			difference = target_goal - menu_total
+			AmountToRemove = difference/RecipeCount
+			for each recipe in the menu
+				Call Recipe.scaleDown(AmountToRemove)
+		end if
+	else //the user's chosen nutritional goal is a min
+		if menu's total value for user_goal < User's target goal
+			difference = target_goal - menu_total
+			AmountToRemove = difference/RecipeCount
+			for each recipe in the menu
+				Call Recipe.scaleUp(AmountToRemove)
+		end if
+	end if
+
+Recipe.scaleDown(amountToRemove)
+	ratio = 1 + amountToRemove/originalNutrionValue
+	Recipe.setNutritionRatio(ratio);
+	Recipe.scale()
+	
+Recipe.scale()
+	for each ingredient
+		newQuantity = originalQuantity * Recipe.NutritionRatio * ServingSizeRatio
+		Ingredient.setQuantity(newQuantity)
+	for each nutrition
+		newQuantity = originalQuantity * Recipe.NutritionRatio * currentServingSize
+		Nutrition.setQuantity(newQuantity)
+		
+FORMULAS:
+	amountToRemove = (target_goal - menu_total)/RecipeCount    ////This will create a negative for max and positive for min
+	Recipe.NutritionRatio = 1 + amountToRemove/originalNutrionValue
+	newIngredientQuantity = originalQuantity * Recipe.NutritionRatio * ServingSizeRatio
+	newNutritionQuantity = originalQuantity * Recipe.NutritionRatio * currentServingSize  ////we don't use the ServingSizeRatio b/c it's usually entered as 1 serving
+	
