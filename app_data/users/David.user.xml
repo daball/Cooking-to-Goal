@@ -1,0 +1,11 @@
+<com.customfit.ctg.model.User>
+  <name>David</name>
+  <nutritionPlans>
+    <nutritionPlan>
+      <name>Default Plan</name>
+      <minimumGoals/>
+      <maximumGoals/>
+    </nutritionPlan>
+  </nutritionPlans>
+  <activeNutritionPlan reference="../nutritionPlans/nutritionPlan"/>
+</com.customfit.ctg.model.User>
