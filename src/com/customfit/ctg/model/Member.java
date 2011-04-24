@@ -42,6 +42,24 @@ public class Member {
     }
     
     /**
+     * Gets the member's name.
+     * 
+     * @return The member's name.
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Sets the member's name.
+     * 
+     * @param name The member's name.
+     */
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    /**
      * Gets the active nutrition plan for the user.
      * 
      * @return The active nutrition plan for the user.
