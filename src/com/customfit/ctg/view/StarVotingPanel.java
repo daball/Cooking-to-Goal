@@ -14,7 +14,8 @@ import javax.swing.JPanel;
  * 
  * @author David
  */
-public class StarVotingPanel extends JPanel implements Serializable {
+public class StarVotingPanel extends JPanel implements Serializable
+{
     
     /**
      * Number of stars to use.
@@ -29,15 +30,39 @@ public class StarVotingPanel extends JPanel implements Serializable {
     private int score = 0;
     public static final String PROP_SCORE = "score";
     private PropertyChangeSupport scoreSupport;
+    
+    /**
+     * Boolean that indicates whether or not the star panel is editable.
+     * 
+     * When true, the panel will let the user click to change the rating
+     * or right click to remove the rating.
+     * 
+     * When false, no changes are permitted by the user.
+     */
+    private boolean editable = true;
+    public static final String PROP_EDITABLE = "editable";
+    private PropertyChangeSupport editableSupport;
 
-    ImageIcon imageIconStarOff;
-    ImageIcon imageIconStarOn;
+    /**
+     * Holds the star-off.png icon.
+     */
+    private ImageIcon imageIconStarOff;
+    
+    /**
+     * Holds the star-on.png icon.
+     */
+    private ImageIcon imageIconStarOn;
 
-    /** Creates new form StarVotingPanel */
-    public StarVotingPanel() {
+    /**
+     * Creates a new StarVotingPanel, which displays a number of
+     * stars for scoring something.
+     */
+    public StarVotingPanel()
+    {
         initComponents();
         scaleSupport = new PropertyChangeSupport(this);
         scoreSupport = new PropertyChangeSupport(this);
+        editableSupport = new PropertyChangeSupport(this);
         this.imageIconStarOff = new ImageIcon(getClass().getResource("/art/export/star-off.png"));
         this.imageIconStarOn = new ImageIcon(getClass().getResource("/art/export/star-on.png"));
         this.setPreferredSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
@@ -83,33 +108,45 @@ public class StarVotingPanel extends JPanel implements Serializable {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Returns the score value for a given mouse polling position.
+     * 
+     * @param evt MouseEvent
+     * 
+     * @return The score value for a given mouse polling position.
+     */
     private int mousePositionToScoreValue(java.awt.event.MouseEvent evt)
     {
         return new Double(Math.ceil(new Integer(evt.getX()).doubleValue() / new Integer(this.imageIconStarOff.getIconWidth()).doubleValue())).intValue();
     }
     
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
-        this.paintScore(this.getGraphics(), mousePositionToScoreValue(evt));
+        if (this.editable)
+            this.paintScore(this.getGraphics(), mousePositionToScoreValue(evt));
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
-        this.paintScore(this.getGraphics(), mousePositionToScoreValue(evt));
+        if (this.editable)
+            this.paintScore(this.getGraphics(), mousePositionToScoreValue(evt));
     }//GEN-LAST:event_formMouseMoved
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
-        //if right click, erase the score
-        if (evt.getButton() != MouseEvent.BUTTON1)
+        if (this.editable)
         {
-            this.score = 0;
-            this.repaint();
+            //if right click, erase the score
+            if (evt.getButton() != MouseEvent.BUTTON1)
+            {
+                this.score = 0;
+                this.repaint();
+            }
+            //otherwise set the score
+            else this.score = mousePositionToScoreValue(evt);
         }
-        //otherwise set the score
-        else this.score = mousePositionToScoreValue(evt);
     }//GEN-LAST:event_formMousePressed
 
     private void formMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseExited
         //make sure we are on the right star
-        this.repaint();
+        if (this.editable) this.repaint();
     }//GEN-LAST:event_formMouseExited
 
 
@@ -126,6 +163,7 @@ public class StarVotingPanel extends JPanel implements Serializable {
 
     /**
      * Sets the scale to use. (The number of stars to display.)
+     * 
      * @param scale The scale.
      */
     public void setScale(int scale) {
@@ -140,6 +178,7 @@ public class StarVotingPanel extends JPanel implements Serializable {
     
     /**
      * Gets the current score. (Number of stars checked.)
+     * 
      * @return The score.
      */
     public int getScore() {
@@ -148,6 +187,7 @@ public class StarVotingPanel extends JPanel implements Serializable {
 
     /**
      * Sets the current score. (Number of stars checked.)
+     * 
      * @param score The score.
      */
     public void setScore(int score) {
@@ -159,6 +199,7 @@ public class StarVotingPanel extends JPanel implements Serializable {
     
     /**
      * Sets the current score by rating.
+     * 
      * @param percentage Percentage of checked stars.
      */
     public void setRating(double percentage) {
@@ -167,18 +208,57 @@ public class StarVotingPanel extends JPanel implements Serializable {
     
     /**
      * Gets the rating by dividing score / scale.
+     * 
      * @param percentage Percentage of checked stars.
      */
-    public double getRating() {
+    public double getRating()
+    {
         return new Integer(this.score).doubleValue() / new Integer(this.scale).doubleValue();
     }
 
+    /**
+     * Gets Boolean that indicates whether or not the star panel is editable.
+     * 
+     * When true, the panel will let the user click to change the rating
+     * or right click to remove the rating.
+     * 
+     * @return Boolean that indicates whether or not the star panel is editable.
+     */
+    public boolean isEditable()
+    {
+        return editable;
+    }
+
+    /**
+     * Sets Boolean that indicates whether or not the star panel is editable.
+     * 
+     * When true, the panel will let the user click to change the rating
+     * or right click to remove the rating.
+     * 
+     * @param editable Boolean that indicates whether or not the star panel is editable.
+     */
+    public void setEditable(boolean editable)
+    {
+        this.editable = editable;
+    }
+    
+    /**
+     * Paints the current rating on the panel.
+     * 
+     * @param g A valid Graphics instance.
+     */
     @Override
     public void paint(Graphics g)
     {
         paintScore(g, this.score);
     }
     
+    /**
+     * Paints any rating on the panel.
+     * 
+     * @param g A valid Graphics instance.
+     * @param score The rating to redraw.
+     */
     public void paintScore(Graphics g, int score)
     {
         //do superclass first
@@ -218,4 +298,13 @@ public class StarVotingPanel extends JPanel implements Serializable {
     public void removeScoreChangeListener(PropertyChangeListener listener) {
         scoreSupport.removePropertyChangeListener(listener);
     }
+    
+    public void addEditableChangeListener(PropertyChangeListener listener) {
+        editableSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removeEditableChangeListener(PropertyChangeListener listener) {
+        editableSupport.removePropertyChangeListener(listener);
+    }
+    
 }
