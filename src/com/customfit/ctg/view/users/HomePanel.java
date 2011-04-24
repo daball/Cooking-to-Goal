@@ -22,6 +22,11 @@ public class HomePanel extends SubPanel {
      * The list of recipes currently displayed in the panel.
      */
     private List<Recipe> recipes;
+    
+    /**
+     * The list of members currently displayed in the panel.
+     */
+    private List<Member> members;
 
     /** Creates new form HomePanel */
     public HomePanel() {
@@ -438,7 +443,7 @@ public class HomePanel extends SubPanel {
     }
     
     /**
-     * Sets the initial list of recipes passed into the view.
+     * Sets the list of recipes passed into the view.
      * 
      * @param recipes List of recipes.
      */
@@ -461,6 +466,39 @@ public class HomePanel extends SubPanel {
         }
         
         jTableRecipes.setModel(tableModel);
+    }
+    
+    /**
+     * Sets the list of members passed into the view.
+     * 
+     * @param members List of members.
+     */
+    public void setMemberList(List<Member> members) {
+        this.members = members;
+        
+        DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
+        
+        //clear old results
+        while (tableModel.getRowCount() > 0)
+        {
+            tableModel.removeRow(0);
+        }
+
+        //add recipes to list
+        for (Member member : members)
+        {
+            Object[] row = {member.getName(), member.getActiveNutritionPlan().getName()};
+            tableModel.addRow(row);
+        }
+        
+        jTableMembers.setModel(tableModel);
+    }
+    
+    @Override
+    public void refresh()
+    {
+        //refresh data
+            this.setRecipeList(Application.getDataDriver().selectAllRecipes());
     }
     
 }
