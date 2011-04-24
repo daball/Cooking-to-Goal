@@ -104,4 +104,5 @@ public class NutritionPlan {
         public void setGoalDirection(NutritionGoalDirection goalDirection) {
             this.goalDirection = goalDirection;
         }
+        
 }

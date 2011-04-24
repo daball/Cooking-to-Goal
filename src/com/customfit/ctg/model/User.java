@@ -3,12 +3,13 @@ package com.customfit.ctg.model;
 import java.util.*;
 
 /**
- * This describes a User of the system, including the user's name
- * and managed Members.
+ * This describes a User of the system, including the user's name,
+ * managed Members, and nutrition plans.
  * 
  * @author David
  */
 public class User {
+
     /**
      * The user's name.
      */
@@ -20,23 +21,30 @@ public class User {
     private List<Member> members;
 
     /**
-     * Constructs a user with a single, active empty nutrition plan with
-     * the user name provided.
+     * The list of nutrition plans for the user.
+     */
+    private List<NutritionPlan> nutritionPlans = new ArrayList<NutritionPlan>();
+    
+    /**
+     * Constructs a user with the name provided.
      * 
      * @param name The user's name.
      */
     public User(String name){
-        this.setName(name);
+        this.name = name;
     }
 
     /**
-     * Constructs a user with a single, active empty nutrition plan with
-     * the user name provided.
+     * Constructs a user with the information provided.
      * 
      * @param name The user's name.
+     * @param members The user's members.
+     * @param nutritionPlans The list of nutrition plans for the user's member.
      */
-    public User(String name, List<Member> members){
-        this.setName(name);
+    public User(String name, List<Member> members, List<NutritionPlan> nutritionPlans){
+        this.name = name;
+        this.members = members;
+        this.nutritionPlans = nutritionPlans;
     }
 
     /**
@@ -55,5 +63,15 @@ public class User {
      */
     public void setName(String name) {
         this.name = name;
-    }	
+    }
+    
+    /**
+     * Gets the List of NutritionPlans for the user.
+     * 
+     * @return The list of nutrition plans for the user.
+     */
+    public List<NutritionPlan> getNutritionPlans() {
+            return nutritionPlans;
+    }
+    
 }

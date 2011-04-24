@@ -12,427 +12,553 @@ import com.customfit.ctg.controller.*;
  */
 public class NutritionFacts{
 
-	private Measurement Calories = null;
-	private Measurement TotalFat = null;
-	private Measurement SaturatedFat = null;
-	private Measurement TransFat = null;
-	private Measurement Cholesterol = null;
-	private Measurement Sodium = null;
-	private Measurement TotalCarbohydrate = null;
-	private Measurement DietaryFiber = null;
-	private Measurement Sugars = null;
-	private Measurement Protein = null;
+    /**
+     * Calories in NutritionFacts.
+     */
+    private Measurement Calories = null;
+    
+    /**
+     * Total Fat in NutritionFacts.
+     */
+    private Measurement totalFat = null;
+    
+    /**
+     * Saturated Fat in NutritionFacts.
+     */
+    private Measurement saturatedFat = null;
+    
+    /**
+     * Trans Fat in NutritionFacts.
+     */
+    private Measurement transFat = null;
 
-	public static NutritionFacts EmptyNutritionFactsTable = new NutritionFacts();
-	
-	public static NutritionFacts CompleteNutritionFactsTable = new NutritionFacts(
-			new Measurement(0.0, Measurement.FoodUnits.CALORIES),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.MILLIGRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.MILLIGRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
-			new Measurement(0.0, Measurement.MetricUnits.GRAMS)
-			);
-	/**
-	 * @param calories
-	 * @param totalFat
-	 * @param saturatedFat
-	 * @param transFat
-	 * @param cholesterol
-	 * @param sodium
-	 * @param totalCarbohydrate
-	 * @param dietaryFiber
-	 * @param sugars
-	 * @param protein
-	 */
-	public NutritionFacts(Measurement calories, Measurement totalFat,
-			Measurement saturatedFat, Measurement transFat,
-			Measurement cholesterol, Measurement sodium,
-			Measurement totalCarbohydrate, Measurement dietaryFiber,
-			Measurement sugars, Measurement protein) {
-		super();
-		this.setCalories(calories);
-                this.setTotalFat(totalFat);
-		this.setSaturatedFat(saturatedFat);
-		this.setTransFat(transFat);
-		this.setCholesterol(cholesterol);
-		this.setSodium(sodium);
-		this.setTotalCarbohydrate(totalCarbohydrate);
-		this.setDietaryFiber(dietaryFiber);
-		this.setSugars(sugars);
-		this.setProtein(protein);
-	}
+    /**
+     * Cholesterol in NutritionFacts.
+     */
+    private Measurement cholesterol = null;
+    
+    /**
+     * Sodium in NutritionFacts.
+     */
+    private Measurement sodium = null;
 
-	/**
-	 * 
-	 */
-	public NutritionFacts() {
-		super();
-	}
+    /**
+     * Total Carbohydrate in NutritionFacts.
+     */
+    private Measurement totalCarbohydrate = null;
 
-	
+    /**
+     * Dietary Fiber in NutritionFacts.
+     */
+    private Measurement dietaryFiber = null;
 
-	/**
-	 * @return the calories
-	 */
-	public Measurement getCalories() {
-		return Calories;
-	}
+    /**
+     * Sugars in NutritionFacts.
+     */
+    private Measurement sugars = null;
 
-	/**
-	 * @param calories the calories to set
-	 */
-	public void setCalories(Measurement calories) {
-		Calories = calories;
-	}
-	
-	/**
-	 * @param calories the calories to set
-	 */
-	public void setCalories(double calories) {
-		Calories = new Measurement(calories, Measurement.FoodUnits.CALORIES);
-	}
+    /**
+     * Protein in NutritionFacts.
+     */
+    private Measurement protein = null;
 
-	/**
-	 * @return the totalFat
-	 */
-	public Measurement getTotalFat() {
-		return TotalFat;
-	}
+    /**
+     * Returns a new empty NutritionFacts.
+     */
+    public static NutritionFacts EmptyNutritionFacts = new NutritionFacts();
 
-	/**
-	 * @param totalFat the totalFat to set
-	 */
-	public void setTotalFat(Measurement totalFat) {
-		TotalFat = totalFat;
-	}
-	
-	/**
-	 * @param totalFatGrams the totalFat (in grams) to set
-	 */
-	public void setTotalFat(double totalFatGrams) {
-		TotalFat = new Measurement(totalFatGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the saturatedFat
-	 */
-	public Measurement getSaturatedFat() {
-		return SaturatedFat;
-	}
-
-	/**
-	 * @param saturatedFat the saturatedFat to set
-	 */
-	public void setSaturatedFat(Measurement saturatedFat) {
-		SaturatedFat = saturatedFat;
-	}
-	
-	/**
-	 * @param saturatedFat the saturatedFat (in grams) to set
-	 */
-	public void setSaturatedFat(double saturatedFatInGrams) {
-		SaturatedFat = new Measurement(saturatedFatInGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the transFat
-	 */
-	public Measurement getTransFat() {
-		return TransFat;
-	}
-
-	/**
-	 * @param transFat the transFat to set
-	 */
-	public void setTransFat(Measurement transFat) {
-		TransFat = transFat;
-	}
-	
-	/**
-	 * @param transFat the transFat (in grams) to set
-	 */
-	public void setTransFat(double transFatInGrams) {
-		TransFat = new Measurement(transFatInGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the cholesterol
-	 */
-	public Measurement getCholesterol() {
-		return Cholesterol;
-	}
-
-	/**
-	 * @param cholesterol the cholesterol to set
-	 */
-	public void setCholesterol(Measurement cholesterol) {
-		Cholesterol = cholesterol;
-	}
-	
-	/**
-	 * @param cholesterol the cholesterol (in milligrams) to set
-	 */
-	public void setCholesterol(double cholesterolInMilligrams) {
-		Cholesterol = new Measurement(cholesterolInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
-	}
-
-	/**
-	 * @return the sodium
-	 */
-	public Measurement getSodium() {
-		return Sodium;
-	}
-
-	/**
-	 * @param sodium the sodium to set
-	 */
-	public void setSodium(Measurement sodium) {
-		Sodium = sodium;
-	}
-	
-	/**
-	 * @param sodium the sodium (in milligrams) to set
-	 */
-	public void setSodium(double sodiumInMilligrams) {
-		Sodium = new Measurement(sodiumInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
-	}
-
-	/**
-	 * @return the totalCarbohydrate
-	 */
-	public Measurement getTotalCarbohydrate() {
-		return TotalCarbohydrate;
-	}
-
-	/**
-	 * @param totalCarbohydrate the totalCarbohydrate to set
-	 */
-	public void setTotalCarbohydrate(Measurement totalCarbohydrate) {
-		TotalCarbohydrate = totalCarbohydrate;
-	}
-	
-	/**
-	 * @param totalCarbohydrate the totalCarbohydrate (in grams) to set
-	 */
-	public void setTotalCarbohydrate(double totalCarbohydrateInGrams) {
-		TotalCarbohydrate = new Measurement(totalCarbohydrateInGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the dietaryFiber
-	 */
-	public Measurement getDietaryFiber() {
-		return DietaryFiber;
-	}
-
-	/**
-	 * @param dietaryFiber the dietaryFiber to set
-	 */
-	public void setDietaryFiber(Measurement dietaryFiber) {
-		DietaryFiber = dietaryFiber;
-	}
-	
-	/**
-	 * @param dietaryFiber the dietaryFiber (in grams) to set
-	 */
-	public void setDietaryFiber(double dietaryFiberInGrams) {
-		DietaryFiber = new Measurement(dietaryFiberInGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the sugars
-	 */
-	public Measurement getSugars() {
-		return Sugars;
-	}
-
-	/**
-	 * @param sugars the sugars to set
-	 */
-	public void setSugars(Measurement sugars) {
-		Sugars = sugars;
-	}
-	
-	/**
-	 * @param sugars the sugars (in grams) to set
-	 */
-	public void setSugars(double sugarsInGrams) {
-		Sugars = new Measurement(sugarsInGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the protein
-	 */
-	public Measurement getProtein() {
-		return Protein;
-	}
-
-	/**
-	 * @param protein the protein to set
-	 */
-	public void setProtein(Measurement protein) {
-		Protein = protein;
-	}
-	
-	/**
-	 * @param protein the protein (in grams) to set
-	 */
-	public void setProtein(double proteinInGrams) {
-		Protein = new Measurement(proteinInGrams, Measurement.MetricUnits.GRAMS);
-	}
-
-	/**
-	 * @return the emptyNutritionFactsTable
-	 */
-	public static NutritionFacts getEmptyNutritionFactsTable() {
-		return EmptyNutritionFactsTable;
-	}
-
-	/**
-	 * @param emptyNutritionFactsTable the emptyNutritionFactsTable to set
-	 */
-	public static void setEmptyNutritionFactsTable(
-			NutritionFacts emptyNutritionFactsTable) {
-		EmptyNutritionFactsTable = emptyNutritionFactsTable;
-	}
-
-	/**
-	 * @return the completeNutritionFactsTable
-	 */
-	public static NutritionFacts getCompleteNutritionFactsTable() {
-		return CompleteNutritionFactsTable;
-	}
-
-	/**
-	 * @param completeNutritionFactsTable the completeNutritionFactsTable to set
-	 */
-	public static void setCompleteNutritionFactsTable(
-			NutritionFacts completeNutritionFactsTable) {
-		CompleteNutritionFactsTable = completeNutritionFactsTable;
-	}
-
-	@Override
-	public String toString()
-	{
-		StringBuilder sb = new StringBuilder();
-		
-		if (this.getCalories() != null)
-		{
-			sb.append("Calories:");
-			sb.append(this.getCalories());
-			sb.append("\n");
-		}
-		
-		if (this.getTotalFat() != null)
-		{
-			sb.append("Total Fat:");
-			sb.append(this.getTotalFat());
-			sb.append("\n");
-		}
-		
-		if (this.getSaturatedFat() != null)
-		{
-			sb.append("\tSaturated Fat:");
-			sb.append(this.getSaturatedFat());
-			sb.append("\n");
-		}
-		
-		if (this.getTransFat() != null)
-		{
-			sb.append("\tTrans Fat:");
-			sb.append(this.getTransFat());
-			sb.append("\n");
-		}
-		
-		if (this.getCholesterol() != null)
-		{
-			sb.append("Cholesterol:");
-			sb.append(this.getCholesterol());
-			sb.append("\n");
-		}
-		
-		if (this.getSodium() != null)
-		{
-			sb.append("Sodium:");
-			sb.append(this.getSodium());
-			sb.append("\n");
-		}
-
-		if (this.getTotalCarbohydrate() != null)
-		{
-			sb.append("Total Carbohydrate:");
-			sb.append(this.getTotalCarbohydrate());
-			sb.append("\n");
-		}
-		
-		if (this.getDietaryFiber() != null)
-		{
-			sb.append("\tDietary Fiber:");
-			sb.append(this.getDietaryFiber());
-			sb.append("\n");
-		}
-		
-		if (this.getSugars() != null)
-		{
-			sb.append("\tSugars:");
-			sb.append(this.getSugars());
-			sb.append("\n");
-		}
-
-		if (this.getProtein() != null)
-		{
-			sb.append("Protein:");
-			sb.append(this.getProtein());
-			sb.append("\n");
-		}
-		
-		if (sb.length() == 0)
-		{
-			sb.append("There are no Nutrition Facts available for this item.");
-		}
-		
-		return sb.toString().trim();
-	}
+    /**
+     * Returns a complete, zeroed NutritionFacts.
+     */
+    public static NutritionFacts CompleteNutritionFacts = new NutritionFacts(
+        new Measurement(0.0, Measurement.FoodUnits.CALORIES),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.MILLIGRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.MILLIGRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+        new Measurement(0.0, Measurement.MetricUnits.GRAMS)
+        );
         
-        /**
-         * Scales quantity fields of each nutrient field of a NutritionFacts into a new NutritionFacts.
-         * @param nutritionFacts A NutritionFact instance
-         * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
-         * @return The new NutritionFact with the scaled field.
-         */
-        public static NutritionFacts scaleNutritionFacts(NutritionFacts nutritionFacts, double scaleFactor)
+    /**
+     * Creates a new NutritionFacts with the information provided.
+     * 
+     * @param calories Calories in NutritionFacts.
+     * @param totalFat Total Fat in NutritionFacts.
+     * @param saturatedFat Saturated Fat in NutritionFacts.
+     * @param transFat Trans Fat in NutritionFacts.
+     * @param cholesterol Cholesterol in NutritionFacts.
+     * @param sodium Sodium in NutritionFacts.
+     * @param totalCarbohydrate Total Carbohydrate in NutritionFacts.
+     * @param dietaryFiber Dietary Fiber in NutritionFacts.
+     * @param sugars Sugars in NutritionFacts.
+     * @param protein Protein in NutritionFacts.
+     */
+    public NutritionFacts(
+                Measurement calories,
+                Measurement totalFat,
+                Measurement saturatedFat,
+                Measurement transFat,
+                Measurement cholesterol,
+                Measurement sodium,
+                Measurement totalCarbohydrate,
+                Measurement dietaryFiber,
+                Measurement sugars,
+                Measurement protein)
+    {
+        this.Calories = calories;
+        this.totalFat = totalFat;
+        this.saturatedFat = saturatedFat;
+        this.transFat = transFat;
+        this.cholesterol = cholesterol;
+        this.sodium = sodium;
+        this.totalCarbohydrate = totalCarbohydrate;
+        this.dietaryFiber = dietaryFiber;
+        this.sugars = sugars;
+        this.protein = protein;
+    }
+    
+    /**
+     * Creates a new NutritionFacts with the information provided.
+     * 
+     * @param calories Calories in NutritionFacts.
+     * @param totalFatInGrams Total Fat in grams in NutritionFacts.
+     * @param saturatedFatInGrams Saturated Fat in grams in NutritionFacts.
+     * @param transFatInGrams Trans Fat in grams in NutritionFacts.
+     * @param cholesterolInMilligrams Cholesterol in milligrams in NutritionFacts.
+     * @param sodiumInMilligrams Sodium in milligrams in NutritionFacts.
+     * @param totalCarbohydrateInGrams Total Carbohydrate in grams in NutritionFacts.
+     * @param dietaryFiberInGrams Dietary Fiber in grams in NutritionFacts.
+     * @param sugarsInGrams Sugars in grams in NutritionFacts.
+     * @param proteinInGrams Protein in grams in NutritionFacts.
+     */
+    public NutritionFacts(
+                double calories,
+                double totalFatInGrams,
+                double saturatedFatInGrams,
+                double transFatInGrams,
+                double cholesterolInMilligrams,
+                double sodiumInMilligrams,
+                double totalCarbohydrateInGrams,
+                double dietaryFiberInGrams,
+                double sugarsInGrams,
+                double proteinInGrams)
+    {
+        this.Calories = new Measurement(calories, Measurement.FoodUnits.CALORIES);
+        this.totalFat = new Measurement(totalFatInGrams, Measurement.MetricUnits.GRAMS);
+        this.saturatedFat = new Measurement(saturatedFatInGrams, Measurement.MetricUnits.GRAMS);
+        this.transFat = new Measurement(transFatInGrams, Measurement.MetricUnits.GRAMS);
+        this.cholesterol = new Measurement(cholesterolInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
+        this.sodium = new Measurement(sodiumInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
+        this.totalCarbohydrate = new Measurement(totalCarbohydrateInGrams, Measurement.MetricUnits.GRAMS);
+        this.dietaryFiber = new Measurement(dietaryFiberInGrams, Measurement.MetricUnits.GRAMS);
+        this.sugars = new Measurement(sugarsInGrams, Measurement.MetricUnits.GRAMS);
+        this.protein = new Measurement(proteinInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Creates an empty, NutritionFacts with nullified fields.
+     */
+    public NutritionFacts()
+    {
+    }
+
+    /**
+     * Gets Calories in NutritionFacts.
+     * 
+     * @return Calories in NutritionFacts.
+     */
+    public Measurement getCalories()
+    {
+        return this.Calories;
+    }
+
+    /**
+     * Sets Calories in NutritionFacts.
+     * 
+     * @param Calories Calories in NutritionFacts.
+     */
+    public void setCalories(Measurement Calories)
+    {
+        this.Calories = Calories;
+    }
+
+    /**
+     * Sets Calories in NutritionFacts.
+     * 
+     * @param Calories Calories in NutritionFacts.
+     */
+    public void setCalories(double Calories) {
+        this.Calories = new Measurement(Calories, Measurement.FoodUnits.CALORIES);
+    }
+
+    /**
+     * Gets Total Fat in NutritionFacts.
+     * 
+     * @return Total Fat in NutritionFacts.
+     */
+    public Measurement getTotalFat() {
+        return this.totalFat;
+    }
+
+    /**
+     * Sets Total Fat in NutritionFacts.
+     * 
+     * @param totalFat Total Fat in NutritionFacts.
+     */
+    public void setTotalFat(Measurement totalFat) {
+        this.totalFat = totalFat;
+    }
+
+    /**
+     * Sets Total Fat in NutritionFacts.
+     * 
+     * @param totalFatInGrams Total Fat in grams in NutritionFacts.
+     */
+    public void setTotalFat(double totalFatInGrams) {
+        this.totalFat = new Measurement(totalFatInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Gets Saturated Fat in NutritionFacts.
+     * 
+     * @return Saturated Fat in NutritionFacts.
+     */
+    public Measurement getSaturatedFat() {
+        return this.saturatedFat;
+    }
+
+    /**
+     * Sets Saturated Fat in NutritionFacts.
+     * 
+     * @param saturatedFat Total Fat in NutritionFacts.
+     */
+    public void setSaturatedFat(Measurement saturatedFat) {
+        this.saturatedFat = saturatedFat;
+    }
+
+    /**
+     * Sets Saturated Fat in NutritionFacts.
+     * 
+     * @param saturatedFatInGrams Total Fat in grams in NutritionFacts.
+     */
+    public void setSaturatedFat(double saturatedFatInGrams) {
+        this.saturatedFat = new Measurement(saturatedFatInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Gets Trans Fat in NutritionFacts.
+     * 
+     * @return Trans Fat in NutritionFacts.
+     */
+    public Measurement getTransFat() {
+        return this.transFat;
+    }
+
+    /**
+     * Sets Trans Fat in NutritionFacts.
+     * 
+     * @param transFat Trans Fat in NutritionFacts.
+     */
+    public void setTransFat(Measurement transFat) {
+        this.transFat = transFat;
+    }
+
+    /**
+     * Sets Trans Fat in NutritionFacts.
+     * 
+     * @param transFatInGrams Trans Fat in grams in NutritionFacts.
+     */
+    public void setTransFat(double transFatInGrams) {
+        this.transFat = new Measurement(transFatInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Gets Cholesterol in NutritionFacts.
+     * 
+     * @return Cholesterol in NutritionFacts.
+     */
+    public Measurement getCholesterol() {
+        return this.cholesterol;
+    }
+
+    /**
+     * Sets Cholesterol in NutritionFacts.
+     * 
+     * @param cholesterol Cholesterol in NutritionFacts.
+     */
+    public void setCholesterol(Measurement cholesterol) {
+        this.cholesterol = cholesterol;
+    }
+
+    /**
+     * Sets Cholesterol in NutritionFacts.
+     * 
+     * @param cholesterolInMilligrams Cholesterol in milligrams in NutritionFacts.
+     */
+    public void setCholesterol(double cholesterolInMilligrams) {
+        this.cholesterol = new Measurement(cholesterolInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
+    }
+
+    /**
+     * Gets Sodium in NutritionFacts.
+     * 
+     * @return Sodium in NutritionFacts.
+     */
+    public Measurement getSodium() {
+        return this.sodium;
+    }
+
+    /**
+     * Sets Sodium in NutritionFacts.
+     * 
+     * @param sodium Sodium in NutritionFacts.
+     */
+    public void setSodium(Measurement sodium) {
+        this.sodium = sodium;
+    }
+
+    /**
+     * Sets Sodium in NutritionFacts
+     * 
+     * @param sodium Sodium in milligrams in NutritionFacts.
+     */
+    public void setSodium(double sodiumInMilligrams) {
+    sodium = new Measurement(sodiumInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
+    }
+
+    /**
+     * Gets Total Carbohydrate in NutritionFacts.
+     * 
+     * @return Total Carbohydrate in NutritionFacts.
+     */
+    public Measurement getTotalCarbohydrate() {
+        return this.totalCarbohydrate;
+    }
+
+    /**
+     * Sets Total Carbohydrate in NutritionFacts.
+     * 
+     * @param totalCarbohydrate Total Carbohydrate in NutritionFacts.
+     */
+    public void setTotalCarbohydrate(Measurement totalCarbohydrate) {
+        this.totalCarbohydrate = totalCarbohydrate;
+    }
+
+    /**
+     * Sets Total Carbohydrate in NutritionFacts.
+     * 
+     * @param totalCarbohydrateInGrams Total Carbohydrate in grams in NutritionFacts.
+     */
+    public void setTotalCarbohydrate(double totalCarbohydrateInGrams) {
+        this.totalCarbohydrate = new Measurement(totalCarbohydrateInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Gets Dietary Fiber in NutritionFacts.
+     * 
+     * @return Dietary Fiber in NutritionFacts.
+     */
+    public Measurement getDietaryFiber() {
+        return this.dietaryFiber;
+    }
+
+    /**
+     * Sets Dietary Fiber in NutritionFacts.
+     * @param dietaryFiber Dietary Fiber in NutritionFacts.
+     */
+    public void setDietaryFiber(Measurement dietaryFiber) {
+        this.dietaryFiber = dietaryFiber;
+    }
+
+    /**
+     * Sets Dietary Fiber in NutritionFacts.
+     * 
+     * @param dietaryFiberInGrams Dietary Fiber in grams in NutritionFacts.
+     */
+    public void setDietaryFiber(double dietaryFiberInGrams) {
+        this.dietaryFiber = new Measurement(dietaryFiberInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Gets Sugars in NutritionFacts.
+     * 
+     * @return Sugars in NutritionFacts.
+     */
+    public Measurement getSugars() {
+        return this.sugars;
+    }
+
+    /**
+     * Sets Sugars in NutritionFacts.
+     * 
+     * @param sugars Sugars in NutritionFacts.
+     */
+    public void setSugars(Measurement sugars) {
+        this.sugars = sugars;
+    }
+
+    /**
+     * Sugars in NutritionFacts.
+     * 
+     * @param sugarsInGrams Sugars in grams in NutritionFacts.
+     */
+    public void setSugars(double sugarsInGrams) {
+        this.sugars = new Measurement(sugarsInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Gets Protein in NutritionFacts.
+     * 
+     * @return Protein in NutritionFacts.
+     */
+    public Measurement getProtein() {
+        return this.protein;
+    }
+
+    /**
+     * Sets Protein in NutritionFacts.
+     * 
+     * @param protein Protein in NutritionFacts.
+     */
+    public void setProtein(Measurement protein) {
+        this.protein = protein;
+    }
+
+    /**
+     * Protein in NutritionFacts.
+     * 
+     * @param proteinInGrams Protein in grams in NutritionFacts.
+     */
+    public void setProtein(double proteinInGrams) {
+        this.protein = new Measurement(proteinInGrams, Measurement.MetricUnits.GRAMS);
+    }
+
+    /**
+     * Returns a string with the entire NutritionFacts print out.
+     * 
+     * @return NutritionFacts table print out.
+     */
+    @Override
+    public String toString()
+    {
+        StringBuilder sb = new StringBuilder();
+
+        if (this.getCalories() != null)
         {
-            NutritionFacts newNutritionFacts = null;
-            try {
-                newNutritionFacts = (NutritionFacts)nutritionFacts.clone();
-                newNutritionFacts.setCalories(nutritionFacts.getCalories().scale(scaleFactor));
-                newNutritionFacts.setTotalFat(nutritionFacts.getTotalFat().scale(scaleFactor));
-                newNutritionFacts.setSaturatedFat(nutritionFacts.getSaturatedFat().scale(scaleFactor));
-                newNutritionFacts.setTransFat(nutritionFacts.getTransFat().scale(scaleFactor));
-                newNutritionFacts.setCholesterol(nutritionFacts.getCholesterol().scale(scaleFactor));
-                newNutritionFacts.setSodium(nutritionFacts.getSodium().scale(scaleFactor));
-                newNutritionFacts.setTotalCarbohydrate(nutritionFacts.getTotalCarbohydrate().scale(scaleFactor));
-                newNutritionFacts.setDietaryFiber(nutritionFacts.getDietaryFiber().scale(scaleFactor));
-                newNutritionFacts.setSugars(nutritionFacts.getSugars().scale(scaleFactor));
-                newNutritionFacts.setProtein(nutritionFacts.getProtein().scale(scaleFactor));
-            } catch (CloneNotSupportedException ex) {
-                Application.dumpException("The was a problem cloning the Nutrition Facts object. Clone is not supported.", ex);
-            }
-            return newNutritionFacts;
+            sb.append("Calories:");
+            sb.append(this.getCalories());
+            sb.append("\n");
         }
-        
-        /**
-         * Scales quantity fields of each nutrient field into a new NutritionFacts.
-         * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
-         * @return The new NutritionFact with the scaled field.
-         */
-        public NutritionFacts scale(double scaleFactor)
+
+        if (this.getTotalFat() != null)
         {
-            return NutritionFacts.scaleNutritionFacts(this, scaleFactor);
+            sb.append("Total Fat:");
+            sb.append(this.getTotalFat());
+            sb.append("\n");
         }
+
+        if (this.getSaturatedFat() != null)
+        {
+            sb.append("\tSaturated Fat:");
+            sb.append(this.getSaturatedFat());
+            sb.append("\n");
+        }
+
+        if (this.getTransFat() != null)
+        {
+            sb.append("\tTrans Fat:");
+            sb.append(this.getTransFat());
+            sb.append("\n");
+        }
+
+        if (this.getCholesterol() != null)
+        {
+            sb.append("Cholesterol:");
+            sb.append(this.getCholesterol());
+            sb.append("\n");
+        }
+
+        if (this.getSodium() != null)
+        {
+            sb.append("Sodium:");
+            sb.append(this.getSodium());
+            sb.append("\n");
+        }
+
+        if (this.getTotalCarbohydrate() != null)
+        {
+            sb.append("Total Carbohydrate:");
+            sb.append(this.getTotalCarbohydrate());
+            sb.append("\n");
+        }
+
+        if (this.getDietaryFiber() != null)
+        {
+            sb.append("\tDietary Fiber:");
+            sb.append(this.getDietaryFiber());
+            sb.append("\n");
+        }
+
+        if (this.getSugars() != null)
+        {
+            sb.append("\tSugars:");
+            sb.append(this.getSugars());
+            sb.append("\n");
+        }
+
+        if (this.getProtein() != null)
+        {
+            sb.append("Protein:");
+            sb.append(this.getProtein());
+            sb.append("\n");
+        }
+
+        if (sb.length() == 0)
+        {
+            sb.append("There are no Nutrition Facts available for this item.");
+        }
+
+        return sb.toString().trim();
+    }
+
+    /**
+     * Scales quantity fields of each nutrient field of a NutritionFacts into a new NutritionFacts.
+     * 
+     * @param nutritionFacts A NutritionFact instance
+     * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
+     * 
+     * @return The new NutritionFact with the scaled field.
+     */
+    public static NutritionFacts scaleNutritionFacts(NutritionFacts nutritionFacts, double scaleFactor)
+    {
+        return new NutritionFacts(
+            nutritionFacts.getCalories().scale(scaleFactor),
+            nutritionFacts.getTotalFat().scale(scaleFactor),
+            nutritionFacts.getSaturatedFat().scale(scaleFactor),
+            nutritionFacts.getTransFat().scale(scaleFactor),
+            nutritionFacts.getCholesterol().scale(scaleFactor),
+            nutritionFacts.getSodium().scale(scaleFactor),
+            nutritionFacts.getTotalCarbohydrate().scale(scaleFactor),
+            nutritionFacts.getDietaryFiber().scale(scaleFactor),
+            nutritionFacts.getSugars().scale(scaleFactor),
+            nutritionFacts.getProtein().scale(scaleFactor)
+            );
+    }
+
+    /**
+     * Scales quantity fields of each nutrient field into a new NutritionFacts.
+     * 
+     * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
+     * 
+     * @return The new NutritionFact with the scaled field.
+     */
+    public NutritionFacts scale(double scaleFactor)
+    {
+        return NutritionFacts.scaleNutritionFacts(this, scaleFactor);
+    }
+
 }
