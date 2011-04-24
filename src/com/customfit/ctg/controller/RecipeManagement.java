@@ -1,9 +1,7 @@
 package com.customfit.ctg.controller;
 
-import com.customfit.ctg.view.members.NutritionPlanListPanel;
-import com.customfit.ctg.view.meal.MealMenuPanel;
 import com.customfit.ctg.model.*;
-import com.customfit.ctg.view.SubPanel;
+import com.customfit.ctg.view.*;
 import com.customfit.ctg.view.recipes.*;
 import java.util.*;
 import javax.swing.JOptionPane;
@@ -50,11 +48,10 @@ public class RecipeManagement {
     public static void browseRecipes(List<Recipe> recipes)
     {
         //create panel
-        NutritionPlanListPanel recipeListPanel = new NutritionPlanListPanel(NutritionPlanListPanel.ListMode.LIST_BROWSE);
         //tell panel about our recipes
         //recipeListPanel.setRecipeList(recipes);
         //display panel in main frame
-        Application.getMainFrame().setPanel(recipeListPanel);
+        //Application.getMainFrame().setPanel(recipeListPanel);
     }
 
     /**
@@ -65,7 +62,7 @@ public class RecipeManagement {
      */
     public static void createRecipe()
     {
-        Application.getMainFrame().setPanel( new EditRecipePanel(EditRecipePanel.EditMode.EDIT_NEW));
+            Application.getMainFrame().setPanel(new EditRecipePanel(CreateEditMode.CREATE));
     }
 
     /**
@@ -134,7 +131,7 @@ public class RecipeManagement {
      */
     public static void editRecipe(Recipe recipe)
     {
-        EditRecipePanel editPanel = new EditRecipePanel(EditRecipePanel.EditMode.EDIT_EXISTING);
+        EditRecipePanel editPanel = new EditRecipePanel(CreateEditMode.EDIT);
         editPanel.setRecipe(recipe);
         Application.getMainFrame().setPanel(editPanel);
     }

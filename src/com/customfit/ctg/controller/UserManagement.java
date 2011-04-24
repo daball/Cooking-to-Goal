@@ -3,7 +3,6 @@ package com.customfit.ctg.controller;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import com.customfit.ctg.view.users.*;
-import com.customfit.ctg.view.members.*;
 import java.util.*;
 import javax.swing.JOptionPane;
 
@@ -27,7 +26,8 @@ public class UserManagement {
      * Gets currently logged in user.
      * @return Currently logged in user.
      */
-    public static User getCurrentUser() {
+    public static User getCurrentUser()
+    {
         return currentUser;
     }
     
@@ -81,26 +81,14 @@ public class UserManagement {
      */
     public static void viewProfile(User user)
     {
-        //first check and see if we have any members,
-        //if not, then we'll have to set one up
-        if (user.getMeals().isEmpty())
-        {
-            //
-            FirstTimeMemberPanel firstTimeMemberPanel = new FirstTimeMemberPanel();
-            //display panel in main frame
-            Application.getMainFrame().setPanel(firstTimeMemberPanel);
-        }
-        else
-        {
-            //create profile panel
-            HomePanel profilePanel = new HomePanel();
-            //load the user data into the profile panel
-            profilePanel.setUser(user);
-            //load the data into the profile panel
-            profilePanel.refresh();
-            //display panel in main frame
-            Application.getMainFrame().setPanel(profilePanel);
-        }
+        //create profile panel
+        HomePanel profilePanel = new HomePanel();
+        //load the user data into the profile panel
+        profilePanel.setUser(user);
+        //load the data into the profile panel
+        profilePanel.refresh();
+        //display panel in main frame
+        Application.getMainFrame().setPanel(profilePanel);
     }
     
     /**

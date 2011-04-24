@@ -23,11 +23,6 @@ public class HomePanel extends SubPanel {
      */
     private List<Recipe> recipes;
     
-    /**
-     * The list of members currently displayed in the panel.
-     */
-    private List<Member> members;
-
     /** Creates new form HomePanel */
     public HomePanel() {
         initComponents();
@@ -54,23 +49,14 @@ public class HomePanel extends SubPanel {
         jComboBoxMeMenu = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
-        linkLabel2 = new com.customfit.ctg.view.LinkLabel();
-        linkLabel3 = new com.customfit.ctg.view.LinkLabel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTextPaneMealPlanNote = new javax.swing.JTextPane();
         jScrollPane6 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
-        scrollPaneTable = new javax.swing.JScrollPane();
-        jTableMembers = new javax.swing.JTable();
         jButtonViewRecipe = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        jTextPane3 = new javax.swing.JTextPane();
         scrollPaneTable1 = new javax.swing.JScrollPane();
         jTableRecipes = new javax.swing.JTable();
-        jButtonEditMember = new javax.swing.JButton();
-        linkLabelAddNew1 = new com.customfit.ctg.view.LinkLabel();
         jButtonEditRecipe = new javax.swing.JButton();
         jXMonthView1 = new org.jdesktop.swingx.JXMonthView();
 
@@ -106,10 +92,6 @@ public class HomePanel extends SubPanel {
             }
         });
 
-        linkLabel2.setText("Design a new nutrition plan");
-
-        linkLabel3.setText("Calculate plan effectiveness");
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12));
         jLabel3.setText("Meal Planning");
 
@@ -137,59 +119,12 @@ public class HomePanel extends SubPanel {
         jTextPane2.setVerifyInputWhenFocusTarget(false);
         jScrollPane6.setViewportView(jTextPane2);
 
-        jTableMembers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Member", "Active Nutrition Plan"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jTableMembers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jTableMembers.getTableHeader().setReorderingAllowed(false);
-        jTableMembers.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTableMembersMouseClicked(evt);
-            }
-        });
-        scrollPaneTable.setViewportView(jTableMembers);
-
         jButtonViewRecipe.setText("View");
         jButtonViewRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonViewRecipeActionPerformed(evt);
             }
         });
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jLabel7.setText("Members");
-
-        jScrollPane7.setBorder(null);
-
-        jTextPane3.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
-        jTextPane3.setBorder(null);
-        jTextPane3.setEditable(false);
-        jTextPane3.setText("You can manage meals for yourself and any other member you would like to track. Design a nutrition plan for each member.");
-        jTextPane3.setFocusable(false);
-        jTextPane3.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jTextPane3.setOpaque(false);
-        jTextPane3.setVerifyInputWhenFocusTarget(false);
-        jScrollPane7.setViewportView(jTextPane3);
 
         jTableRecipes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -222,20 +157,6 @@ public class HomePanel extends SubPanel {
         });
         scrollPaneTable1.setViewportView(jTableRecipes);
 
-        jButtonEditMember.setText("Edit");
-        jButtonEditMember.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditMemberActionPerformed(evt);
-            }
-        });
-
-        linkLabelAddNew1.setText("Add a new member");
-        linkLabelAddNew1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                linkLabelAddNew1ActionPerformed(evt);
-            }
-        });
-
         jButtonEditRecipe.setText("Edit");
         jButtonEditRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +164,7 @@ public class HomePanel extends SubPanel {
             }
         });
 
-        jXMonthView1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jXMonthView1.setFont(new java.awt.Font("Tahoma", 0, 18));
         jXMonthView1.setEnabled(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -257,27 +178,17 @@ public class HomePanel extends SubPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                            .addComponent(scrollPaneTable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addGap(304, 304, 304))
                             .addComponent(jLabelTitle, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
                             .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 399, Short.MAX_VALUE)
-                            .addComponent(jButtonEditMember)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 204, Short.MAX_VALUE)
                                 .addComponent(jButtonViewRecipe)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonEditRecipe))
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(linkLabelAddNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(linkLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(linkLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jButtonEditRecipe)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jXMonthView1, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
@@ -308,26 +219,14 @@ public class HomePanel extends SubPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE)
+                        .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonViewRecipe)
                             .addComponent(jButtonEditRecipe))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(scrollPaneTable, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonEditMember)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(linkLabelAddNew1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(linkLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(linkLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jXMonthView1, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE))
+                        .addGap(230, 230, 230))
+                    .addComponent(jXMonthView1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -356,13 +255,6 @@ public class HomePanel extends SubPanel {
         RecipeManagement.createRecipe();
 }//GEN-LAST:event_linkLabelAddNewActionPerformed
 
-    private void jTableMembersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMembersMouseClicked
-        //if double-clicked
-        if (evt.getClickCount() == 2)
-            //same as view recipe
-            jButtonViewRecipeActionPerformed(null);
-}//GEN-LAST:event_jTableMembersMouseClicked
-
     private void jButtonViewRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewRecipeActionPerformed
         //if a row is selected
         if (this.jTableRecipes.getSelectedRowCount() > 0) {
@@ -377,44 +269,27 @@ public class HomePanel extends SubPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableRecipesMouseClicked
 
-    private void jButtonEditMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditMemberActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditMemberActionPerformed
-
-    private void linkLabelAddNew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNew1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_linkLabelAddNew1ActionPerformed
-
     private void jButtonEditRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditRecipeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEditRecipeActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonEditMember;
     private javax.swing.JButton jButtonEditRecipe;
     private javax.swing.JButton jButtonViewRecipe;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTableMembers;
     private javax.swing.JTable jTableRecipes;
     private javax.swing.JTextPane jTextPane1;
     private javax.swing.JTextPane jTextPane2;
-    private javax.swing.JTextPane jTextPane3;
     private javax.swing.JTextPane jTextPaneMealPlanNote;
     private org.jdesktop.swingx.JXMonthView jXMonthView1;
-    private com.customfit.ctg.view.LinkLabel linkLabel2;
-    private com.customfit.ctg.view.LinkLabel linkLabel3;
     private com.customfit.ctg.view.LinkLabel linkLabelAddNew;
-    private com.customfit.ctg.view.LinkLabel linkLabelAddNew1;
-    private javax.swing.JScrollPane scrollPaneTable;
     private javax.swing.JScrollPane scrollPaneTable1;
     // End of variables declaration//GEN-END:variables
 
@@ -466,32 +341,6 @@ public class HomePanel extends SubPanel {
         }
         
         jTableRecipes.setModel(tableModel);
-    }
-    
-    /**
-     * Sets the list of members passed into the view.
-     * 
-     * @param members List of members.
-     */
-    public void setMemberList(List<Member> members) {
-        this.members = members;
-        
-        DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
-        
-        //clear old results
-        while (tableModel.getRowCount() > 0)
-        {
-            tableModel.removeRow(0);
-        }
-
-        //add recipes to list
-        for (Member member : members)
-        {
-            Object[] row = {member.getName(), member.getActiveNutritionPlan().getName()};
-            tableModel.addRow(row);
-        }
-        
-        jTableMembers.setModel(tableModel);
     }
     
     @Override

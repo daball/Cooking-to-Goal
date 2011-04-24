@@ -28,17 +28,18 @@ public class Meal {
     private List<Recipe> recipes = new ArrayList<Recipe>();
 
     /**
-     * The list of members that will be dining at the meal.
+     * The number of members that will be dining at the meal.
      */
-    private List<Member> members = new ArrayList<Member>();
+    private int memberCount;
 
     /**
      * Gets the date/time the meal.
      * 
      * @return The date/time the meal.
      */
-    public Date getDate() {
-        return date;
+    public Date getDate()
+    {
+        return this.date;
     }
 
     /**
@@ -55,16 +56,16 @@ public class Meal {
      * 
      * @return The list of members that will be dining at the meal.
      */
-    public List<Member> getMembers() {
-        return members;
+    public int getMemberCount() {
+        return this.memberCount;
     }
 
     /**
      * Sets the list of members that will be dining at the meal.
-     * @param members The list of members that will be dining at the meal.
+     * @param memberCount The list of members that will be dining at the meal.
      */
-    public void setMembers(List<Member> members) {
-        this.members = members;
+    public void setMemberCount(int memberCount) {
+        this.memberCount = memberCount;
     }
 
     /**

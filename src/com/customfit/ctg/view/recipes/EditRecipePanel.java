@@ -11,20 +11,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Ryan Spoon
  */
-public class EditRecipePanel extends SubPanel {
-    /**
-     * The Recipe List has two behaviors.
-     */
-    public static enum EditMode
-    {
-        EDIT_NEW,
-        EDIT_EXISTING
-    };
-    
-    /**
-     * This determines the behavior of this list.
-     */
-    private EditMode editMode;
+public class EditRecipePanel extends CreateEditPanel {
 
     /**
      * Holds the panel that was open right before this panel was instantiated.
@@ -32,14 +19,14 @@ public class EditRecipePanel extends SubPanel {
     private SubPanel previousPanel;
 
     /** Creates new form OldRecipeListPanel */
-    public EditRecipePanel(EditMode editMode) {
+    public EditRecipePanel(CreateEditMode createEditMode) {
         initComponents();
         //setup edit mode
-        this.editMode = editMode;
+        super.setCreateEditMode(createEditMode);
         //customize form for edit mode
-        if (this.editMode == EditMode.EDIT_NEW)
+        if (this.getCreateEditMode() == CreateEditMode.CREATE)
             this.jLabelTitle.setText("Create a New Recipe");
-        else if (this.editMode == EditMode.EDIT_EXISTING)
+        else if (this.getCreateEditMode() == CreateEditMode.EDIT)
             this.jLabelTitle.setText("Edit Recipe");
         //save last panel in view
         this.previousPanel = Application.getMainFrame().getPanel();
@@ -369,7 +356,7 @@ public class EditRecipePanel extends SubPanel {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         //if its a new recipe
-        if (this.editMode == EditMode.EDIT_NEW)
+        if (this.getCreateEditMode() == CreateEditMode.CREATE)
             //then save it and go back to the last panel
             RecipeManagement.createRecipeAndGoBack(this.getRecipe(), this.getPreviousPanel());
     }//GEN-LAST:event_btnSaveActionPerformed
