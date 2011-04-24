@@ -1,64 +1,121 @@
 package com.customfit.ctg.model;
 
+import com.customfit.ctg.controller.*;
+
+/**
+ * The RecipeIngredient extends the functionality
+ * of an Ingredient by adding an amount.
+ * 
+ * @author David
+ */
 public class RecipeIngredient extends Ingredient{
 
-	private MeasurableUnit amount = new MeasurableUnit(0.0, "units");
-	
-	/**
-	 * Creates a default RecipeIngredient with name only.
-	 * @param name
-	 */
-	public RecipeIngredient(String name) {
-		super(name);
-	}
-	
-	/**
-	 * Creates a RecipeIngredient with name and amount.
-	 * @param name Ingredient name. 
-         * @param amount A MeasurableUnit instance.
-	 */
-	public RecipeIngredient(String name, MeasurableUnit amount) {
-		super(name);
-		this.amount = amount;
-	}
-	
-	/**
-	 * Creates a RecipeIngredient with name and amount. The amount
-         * will be converted to a MeasurableUnit out of the quantity and unit.
-	 * @param name Ingredient name.
-         * @param quantity Quantity.
-         * @param unit Measurement unit.
-	 */
-	public RecipeIngredient(String name, double quantity, String unit) {
-		super(name);
-		this.amount = new MeasurableUnit(quantity, unit);
-	}
-        
-	/**
-	 * Creates a RecipeIngredient with name and amount. The amount
-         * will be converted to a MeasurableUnit out of the String.
-	 * @param name Ingredient name.
-         * @param measureableUnitString MeasurableUnit string.
-	 */
-        public RecipeIngredient(String name, String measureableUnitString) {
-                super(name);
-                this.amount = new MeasurableUnit(measureableUnitString);
-        }
-	
-	public MeasurableUnit getAmount() {
-		return this.amount;
-	}
-	
-	public String getMeasurementUnit() {
-		return this.amount.getUnit();
-	}
-	
-	public double getMeasurementAmount() {
-		return this.amount.getQuantity();
-	}
-	
-	public String toString()
-	{
-		return this.getAmount() + " " + this.getName();
-	}
+    /**
+     * The amount of the RecipeIngredient.
+     */
+    private Measurement amount;
+
+    /**
+     * Creates a default RecipeIngredient with only a name.
+     * 
+     * @param name The name of the Ingredient.
+     */
+    public RecipeIngredient(String name) {
+        super(name);
+    }
+
+    /**
+     * Creates a RecipeIngredient with name and amount.
+     * 
+     * @param name The name of the Ingredient.
+     * @param amount The amount of the RecipeIngredient.
+     */
+    public RecipeIngredient(String name, Measurement amount) {
+        super(name);
+        this.amount = amount;
+    }
+
+    /**
+     * Creates a RecipeIngredient with name and amount. The amount
+     * will be converted to a Measurement out of the quantity and unit.
+     * 
+     * @param name Ingredient name.
+     * @param quantity Quantity.
+     * @param unit Measurement unit.
+     */
+    public RecipeIngredient(String name, double quantity, String unit) {
+        super(name);
+        this.amount = new Measurement(quantity, unit);
+    }
+
+    /**
+     * Creates a RecipeIngredient with name and amount. The amount
+     * will be converted to a Measurement out of the String.
+     * 
+     * @param name Ingredient name.
+     * @param measureableUnitString Measurement string.
+     */
+    public RecipeIngredient(String name, String measureableUnitString) {
+        super(name);
+        this.amount = new Measurement(measureableUnitString);
+    }
+
+    /**
+     * Gets the amount of the RecipeIngredient.
+     * 
+     * @return The amount of the RecipeIngredient.
+     */
+    public Measurement getAmount() {
+        return this.amount;
+    }
+
+    /**
+     * Sets the amount of the RecipeIngredient.
+     * 
+     * @param amount The amount of the RecipeIngredient.
+     */
+    public void setAmount(Measurement amount) {
+        this.amount = amount;
+    }
+
+    /**
+     * Gets the amount and the name of the RecipeIngredient.
+     * 
+     * Example: 1.0 teaspoons sugar
+     * 
+     * @return The amount and the name of the RecipeIngredient.
+     */
+    public String toString()
+    {
+        return this.getAmount() + " " + this.getName();
+    }
+    
+    /**
+     * Scales a RecipeIngredient's amount field.
+     * 
+     * @param recipeIngredient A RecipeIngredient instance
+     * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
+     * 
+     * @return The new RecipeIngredient with the scaled field.
+     */
+    public static RecipeIngredient scaleRecipeIngredient(RecipeIngredient recipeIngredient, double scaleFactor)
+    {
+        if (recipeIngredient.getAmount() == null)
+            return recipeIngredient;
+        else
+            return new RecipeIngredient(recipeIngredient.getName(), recipeIngredient.getAmount().scale(scaleFactor));
+    }
+
+    /**
+     * Scales amount field into a new RecipeIngredient.
+     * 
+     * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
+     * 
+     * @return The new RecipeIngredient with the scaled field.
+     */
+    public RecipeIngredient scale(double scaleFactor)
+    {
+        return RecipeIngredient.scaleRecipeIngredient(this, scaleFactor);
+    }
+
 }

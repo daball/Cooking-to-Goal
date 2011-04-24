@@ -1,12 +1,12 @@
 package com.customfit.ctg.model;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import com.customfit.ctg.controller.*;
 
 /**
- * The model of a recipe.
+ * A Recipe holds all of the individual components of a recipe.
  * 
- * @author Drew
+ * @author Drew, David
  */
 public class Recipe {
 
@@ -21,12 +21,12 @@ public class Recipe {
     private String instructions = "Insert your recipe here.";
 
     /**
-     * Sets the serving size for the recipe (for each of the number of servings).
+     * The serving size for the recipe (for each of the number of servings).
      */
-    private MeasurableUnit servingSize = new MeasurableUnit(1.0, "unit");
+    private Measurement servingSize = new Measurement(1.0, "unit");
 
     /**
-     * Sets the number of servings the recipe makes.
+     * The number of servings the recipe makes.
      */
     private double servings = 1.0;
 
@@ -46,46 +46,42 @@ public class Recipe {
     private NutritionFacts nutritionInformation = new NutritionFacts();
 
     /**
-     * Constructs an empty Recipe object.
-     * Fields must be set with setters.
+     * Constructs an empty Recipe with some default parameters.
      */
     public Recipe() {
-        super();
     }
 
     /**
      * Constructs a recipe object with all parameters.
      * 
      * @param name The name of the recipe.
-     * @param description The instructions for the recipe.
-     * @param instructions Sets the serving size for the recipe (for each of the number of servings).
-     * @param servingSize
-     * @param servings
-     * @param rating
-     * @param ingredients
-     * @param nutrition
+     * @param instructions The instructions for the recipe.
+     * @param servingSize The serving size for the recipe (for each of the number of servings).
+     * @param servings The number of servings the recipe makes.
+     * @param rating The recipe rating (voting system).
+     * @param ingredients The list of ingredients in the recipe.
+     * @param nutrition The nutrition information for the recipe.
      */
     public Recipe(String name,
-                              //String description,
                               String instructions,
-                              MeasurableUnit servingSize,
+                              Measurement servingSize,
                               double servings,
                               double rating,
                               List<RecipeIngredient> ingredients,
                               NutritionFacts nutritionInformation
                               ){
-        super();
-        this.setName(name);
-        this.setInstructions(instructions);
-        this.setServingSize(servingSize);
-        this.setServings(servings);
-        this.setRating(rating);
-        this.setIngredients(ingredients);
-        this.setNutritionInformation(nutritionInformation);
+        this.name = name;
+        this.instructions = instructions;
+        this.servingSize = servingSize;
+        this.servings = servings;
+        this.rating = rating;
+        this.ingredients = ingredients;
+        this.nutritionInformation = nutritionInformation;
     }
 
     /**
-     * @param name the name to set
+     * Sets the name of the recipe.
+     * @param name The name of the recipe.
      */
     public void setName(String name) {
             this.name = name;
@@ -93,98 +89,176 @@ public class Recipe {
 
     /**
      * Gets the name of the recipe.
+     * 
+     * @param name The name of the recipe.
      */
     public String getName() {
             return name;
     }
     
     /**
-     * The instructions for the recipe.
+     * Sets the instructions for the recipe.
+     * 
+     * @param instructions The instructions for the recipe.
      */
     public void setInstructions(String instructions) {
             this.instructions = instructions;
     }
 
     /**
-     * @return the instructions
+     * Gets the instructions for the recipe.
+     * 
+     * @return The instructions for the recipe.
      */
     public String getInstructions() {
             return instructions;
     }
     
-	/**
-	 * @return the servingSize
-	 */
-	public MeasurableUnit getServingSize() {
-		return servingSize;
-	}
-
-	/**
-	 * @param servingSize the servingSize to set
-	 */
-	public void setServingSize(MeasurableUnit servingSize) {
-		this.servingSize = servingSize;
-	}
-
-	/**
-	 * @return the servings
-	 */
-	public double getServings() {
-		return servings;
-	}
+    /**
+     * Gets the serving size for the recipe (for each of the number of servings).
+     * 
+     * @return The serving size for the recipe (for each of the number of servings).
+     */
+    public Measurement getServingSize() {
+            return servingSize;
+    }
 
     /**
-     * Sets the name of the recipe.
+     * Sets the serving size for the recipe (for each of the number of servings).
+     * 
+     * @param servingSize The serving size for the recipe (for each of the number of servings).
+     */
+    public void setServingSize(Measurement servingSize) {
+            this.servingSize = servingSize;
+    }
+
+    /**
+     * Gets the number of servings the recipe makes.
+     * 
+     * @return The number of servings the recipe makes.
+     */
+    public double getServings() {
+            return servings;
+    }
+
+    /**
+     * Sets the number of servings the recipe makes.
+     * 
+     * @param servings The number of servings the recipe makes.
      */
     public void setServings(double servings) {
             this.servings = servings;
     }
 
-	/**
-	 * @param rating the rating to set
-	 */
-	public void setRating(double rating) {
-		this.rating = rating;
-	}
+    /**
+     * Sets the recipe rating (voting system).
+     * 
+     * @param The recipe rating (voting system).
+     */
+    public void setRating(double rating) {
+            this.rating = rating;
+    }
 
-	/**
-	 * @return the rating
-	 */
-	public double getRating() {
-		return rating;
-	}
+    /**
+     * Gets the recipe rating (voting system).
+     * 
+     * @return The recipe rating (voting system).
+     */
+    public double getRating() {
+            return rating;
+    }
 	
-	/**
-	 * @param ingredients the ingredients to set
-	 */
-	protected void setIngredients(List<RecipeIngredient> ingredients) {
-		this.ingredients = ingredients;
-	}
-	
-	/**
-	 * @return the ingredients
-	 */
-	public List<RecipeIngredient> getIngredients() {
-		return ingredients;
-	}
-	
-	/**
-	 * @param nutrition the nutrition information to set
-	 */
-	public void setNutritionInformation(NutritionFacts nutritionInformation) {
-		this.nutritionInformation = nutritionInformation;
-	}
+    /**
+     * Sets the list of ingredients in the recipe.
+     * 
+     * @param ingredients The list of ingredients in the recipe.
+     */
+    protected void setIngredients(List<RecipeIngredient> ingredients) {
+            this.ingredients = ingredients;
+    }
 
-	/**
-	 * @return the nutrition information
-	 */
-	public NutritionFacts getNutritionInformation() {
-		return nutritionInformation;
-	}
-	
-	@Override
-	public String toString()
-	{
-		return this.getName();
-	}        
+    /**
+     * Gets the list of ingredients in the recipe.
+     * 
+     * @return The list of ingredients in the recipe.
+     */
+    public List<RecipeIngredient> getIngredients() {
+            return ingredients;
+    }
+
+    /**
+     * Sets the nutrition information for the recipe.
+     * @param nutrition The nutrition information for the recipe.
+     */
+    public void setNutritionInformation(NutritionFacts nutritionInformation) {
+            this.nutritionInformation = nutritionInformation;
+    }
+
+    /**
+     * Gets the nutrition information for the recipe.
+     * @return The nutrition information for the recipe.
+     */
+    public NutritionFacts getNutritionInformation() {
+            return nutritionInformation;
+    }
+
+    /**
+     * Prints the name of the Recipe.
+     */
+    @Override
+    public String toString()
+    {
+            return this.getName();
+    }
+
+    /**
+     * Scales a Recipe to a certain number of servings.
+     * 
+     * This method scales the Ingredient List amount and
+     * the NutritionFacts nutrient fields' quantity to match
+     * the new servings.
+     * 
+     * Serving size will be unaffected. The new servings amount
+     * will be stored in the mutated object.
+     * 
+     * @param recipe The Recipe to scale.
+     * @param toServings The number of servings to scale to.
+     * 
+     * @return A new Recipe that has been scaled.
+     */
+    public static Recipe scaleRecipeToServings(Recipe recipe, double toServings)
+    {
+        //get the scale factor, which is (fromServings / toServings)
+        double scaleFactor = recipe.getServings() / toServings;
+        //rebuild and scale ingredients
+        ArrayList<RecipeIngredient> newIngredientsList = new ArrayList<RecipeIngredient>();
+        for (RecipeIngredient ingredient: recipe.getIngredients())
+        {
+            if (ingredient.getAmount() == null)
+                newIngredientsList.add(ingredient);
+            else
+                newIngredientsList.add(ingredient.scale(scaleFactor));
+        }
+        //build the new Recipe and return
+        Recipe newRecipe = new Recipe(
+                recipe.getName(),
+                recipe.getInstructions(),
+                recipe.getServingSize(),
+                toServings,
+                recipe.getRating(),
+                newIngredientsList,
+                recipe.getNutritionInformation().scale(scaleFactor));
+        return newRecipe;
+    }
+
+    /**
+     * Scales a Recipe to a certain number of servings.
+     * @param recipe The Recipe to scale.
+     * @param toServings The number of servings to scale to.
+     * @return A new Recipe that has been scaled.
+     */
+    public Recipe scaleToServings(int toServings)
+    {
+        return Recipe.scaleRecipeToServings(this, toServings);
+    }
 }

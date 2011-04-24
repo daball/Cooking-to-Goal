@@ -1,7 +1,9 @@
 package com.customfit.ctg.model;
 
+import com.customfit.ctg.controller.*;
+
 /**
- * Data model for nutrition facts table.
+ * A NutritionFacts model for nutrition facts table.
  * 
  * Go to this web site for more information about nutrition facts tables.
  * http://www.fda.gov/food/labelingnutrition/consumerinformation/ucm078889.htm
@@ -10,30 +12,30 @@ package com.customfit.ctg.model;
  */
 public class NutritionFacts{
 
-	private MeasurableUnit Calories = null;
-	private MeasurableUnit TotalFat = null;
-	private MeasurableUnit SaturatedFat = null;
-	private MeasurableUnit TransFat = null;
-	private MeasurableUnit Cholesterol = null;
-	private MeasurableUnit Sodium = null;
-	private MeasurableUnit TotalCarbohydrate = null;
-	private MeasurableUnit DietaryFiber = null;
-	private MeasurableUnit Sugars = null;
-	private MeasurableUnit Protein = null;
+	private Measurement Calories = null;
+	private Measurement TotalFat = null;
+	private Measurement SaturatedFat = null;
+	private Measurement TransFat = null;
+	private Measurement Cholesterol = null;
+	private Measurement Sodium = null;
+	private Measurement TotalCarbohydrate = null;
+	private Measurement DietaryFiber = null;
+	private Measurement Sugars = null;
+	private Measurement Protein = null;
 
 	public static NutritionFacts EmptyNutritionFactsTable = new NutritionFacts();
 	
 	public static NutritionFacts CompleteNutritionFactsTable = new NutritionFacts(
-			new MeasurableUnit(0.0, MeasurementUnit.FoodUnits.CALORIES),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.MILLIGRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.MILLIGRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS),
-			new MeasurableUnit(0.0, MeasurementUnit.MetricUnits.GRAMS)
+			new Measurement(0.0, Measurement.FoodUnits.CALORIES),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.MILLIGRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.MILLIGRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS),
+			new Measurement(0.0, Measurement.MetricUnits.GRAMS)
 			);
 	/**
 	 * @param calories
@@ -47,11 +49,11 @@ public class NutritionFacts{
 	 * @param sugars
 	 * @param protein
 	 */
-	public NutritionFacts(MeasurableUnit calories, MeasurableUnit totalFat,
-			MeasurableUnit saturatedFat, MeasurableUnit transFat,
-			MeasurableUnit cholesterol, MeasurableUnit sodium,
-			MeasurableUnit totalCarbohydrate, MeasurableUnit dietaryFiber,
-			MeasurableUnit sugars, MeasurableUnit protein) {
+	public NutritionFacts(Measurement calories, Measurement totalFat,
+			Measurement saturatedFat, Measurement transFat,
+			Measurement cholesterol, Measurement sodium,
+			Measurement totalCarbohydrate, Measurement dietaryFiber,
+			Measurement sugars, Measurement protein) {
 		super();
 		this.setCalories(calories);
                 this.setTotalFat(totalFat);
@@ -77,14 +79,14 @@ public class NutritionFacts{
 	/**
 	 * @return the calories
 	 */
-	public MeasurableUnit getCalories() {
+	public Measurement getCalories() {
 		return Calories;
 	}
 
 	/**
 	 * @param calories the calories to set
 	 */
-	public void setCalories(MeasurableUnit calories) {
+	public void setCalories(Measurement calories) {
 		Calories = calories;
 	}
 	
@@ -92,20 +94,20 @@ public class NutritionFacts{
 	 * @param calories the calories to set
 	 */
 	public void setCalories(double calories) {
-		Calories = new MeasurableUnit(calories, MeasurementUnit.FoodUnits.CALORIES);
+		Calories = new Measurement(calories, Measurement.FoodUnits.CALORIES);
 	}
 
 	/**
 	 * @return the totalFat
 	 */
-	public MeasurableUnit getTotalFat() {
+	public Measurement getTotalFat() {
 		return TotalFat;
 	}
 
 	/**
 	 * @param totalFat the totalFat to set
 	 */
-	public void setTotalFat(MeasurableUnit totalFat) {
+	public void setTotalFat(Measurement totalFat) {
 		TotalFat = totalFat;
 	}
 	
@@ -113,20 +115,20 @@ public class NutritionFacts{
 	 * @param totalFatGrams the totalFat (in grams) to set
 	 */
 	public void setTotalFat(double totalFatGrams) {
-		TotalFat = new MeasurableUnit(totalFatGrams, MeasurementUnit.MetricUnits.GRAMS);
+		TotalFat = new Measurement(totalFatGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
 	 * @return the saturatedFat
 	 */
-	public MeasurableUnit getSaturatedFat() {
+	public Measurement getSaturatedFat() {
 		return SaturatedFat;
 	}
 
 	/**
 	 * @param saturatedFat the saturatedFat to set
 	 */
-	public void setSaturatedFat(MeasurableUnit saturatedFat) {
+	public void setSaturatedFat(Measurement saturatedFat) {
 		SaturatedFat = saturatedFat;
 	}
 	
@@ -134,20 +136,20 @@ public class NutritionFacts{
 	 * @param saturatedFat the saturatedFat (in grams) to set
 	 */
 	public void setSaturatedFat(double saturatedFatInGrams) {
-		SaturatedFat = new MeasurableUnit(saturatedFatInGrams, MeasurementUnit.MetricUnits.GRAMS);
+		SaturatedFat = new Measurement(saturatedFatInGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
 	 * @return the transFat
 	 */
-	public MeasurableUnit getTransFat() {
+	public Measurement getTransFat() {
 		return TransFat;
 	}
 
 	/**
 	 * @param transFat the transFat to set
 	 */
-	public void setTransFat(MeasurableUnit transFat) {
+	public void setTransFat(Measurement transFat) {
 		TransFat = transFat;
 	}
 	
@@ -155,20 +157,20 @@ public class NutritionFacts{
 	 * @param transFat the transFat (in grams) to set
 	 */
 	public void setTransFat(double transFatInGrams) {
-		TransFat = new MeasurableUnit(transFatInGrams, MeasurementUnit.MetricUnits.GRAMS);
+		TransFat = new Measurement(transFatInGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
 	 * @return the cholesterol
 	 */
-	public MeasurableUnit getCholesterol() {
+	public Measurement getCholesterol() {
 		return Cholesterol;
 	}
 
 	/**
 	 * @param cholesterol the cholesterol to set
 	 */
-	public void setCholesterol(MeasurableUnit cholesterol) {
+	public void setCholesterol(Measurement cholesterol) {
 		Cholesterol = cholesterol;
 	}
 	
@@ -176,20 +178,20 @@ public class NutritionFacts{
 	 * @param cholesterol the cholesterol (in milligrams) to set
 	 */
 	public void setCholesterol(double cholesterolInMilligrams) {
-		Cholesterol = new MeasurableUnit(cholesterolInMilligrams, MeasurementUnit.MetricUnits.MILLIGRAMS);
+		Cholesterol = new Measurement(cholesterolInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
 	}
 
 	/**
 	 * @return the sodium
 	 */
-	public MeasurableUnit getSodium() {
+	public Measurement getSodium() {
 		return Sodium;
 	}
 
 	/**
 	 * @param sodium the sodium to set
 	 */
-	public void setSodium(MeasurableUnit sodium) {
+	public void setSodium(Measurement sodium) {
 		Sodium = sodium;
 	}
 	
@@ -197,20 +199,20 @@ public class NutritionFacts{
 	 * @param sodium the sodium (in milligrams) to set
 	 */
 	public void setSodium(double sodiumInMilligrams) {
-		Sodium = new MeasurableUnit(sodiumInMilligrams, MeasurementUnit.MetricUnits.MILLIGRAMS);
+		Sodium = new Measurement(sodiumInMilligrams, Measurement.MetricUnits.MILLIGRAMS);
 	}
 
 	/**
 	 * @return the totalCarbohydrate
 	 */
-	public MeasurableUnit getTotalCarbohydrate() {
+	public Measurement getTotalCarbohydrate() {
 		return TotalCarbohydrate;
 	}
 
 	/**
 	 * @param totalCarbohydrate the totalCarbohydrate to set
 	 */
-	public void setTotalCarbohydrate(MeasurableUnit totalCarbohydrate) {
+	public void setTotalCarbohydrate(Measurement totalCarbohydrate) {
 		TotalCarbohydrate = totalCarbohydrate;
 	}
 	
@@ -218,20 +220,20 @@ public class NutritionFacts{
 	 * @param totalCarbohydrate the totalCarbohydrate (in grams) to set
 	 */
 	public void setTotalCarbohydrate(double totalCarbohydrateInGrams) {
-		TotalCarbohydrate = new MeasurableUnit(totalCarbohydrateInGrams, MeasurementUnit.MetricUnits.GRAMS);
+		TotalCarbohydrate = new Measurement(totalCarbohydrateInGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
 	 * @return the dietaryFiber
 	 */
-	public MeasurableUnit getDietaryFiber() {
+	public Measurement getDietaryFiber() {
 		return DietaryFiber;
 	}
 
 	/**
 	 * @param dietaryFiber the dietaryFiber to set
 	 */
-	public void setDietaryFiber(MeasurableUnit dietaryFiber) {
+	public void setDietaryFiber(Measurement dietaryFiber) {
 		DietaryFiber = dietaryFiber;
 	}
 	
@@ -239,20 +241,20 @@ public class NutritionFacts{
 	 * @param dietaryFiber the dietaryFiber (in grams) to set
 	 */
 	public void setDietaryFiber(double dietaryFiberInGrams) {
-		DietaryFiber = new MeasurableUnit(dietaryFiberInGrams,  MeasurementUnit.MetricUnits.GRAMS);
+		DietaryFiber = new Measurement(dietaryFiberInGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
 	 * @return the sugars
 	 */
-	public MeasurableUnit getSugars() {
+	public Measurement getSugars() {
 		return Sugars;
 	}
 
 	/**
 	 * @param sugars the sugars to set
 	 */
-	public void setSugars(MeasurableUnit sugars) {
+	public void setSugars(Measurement sugars) {
 		Sugars = sugars;
 	}
 	
@@ -260,20 +262,20 @@ public class NutritionFacts{
 	 * @param sugars the sugars (in grams) to set
 	 */
 	public void setSugars(double sugarsInGrams) {
-		Sugars = new MeasurableUnit(sugarsInGrams, MeasurementUnit.MetricUnits.GRAMS);
+		Sugars = new Measurement(sugarsInGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
 	 * @return the protein
 	 */
-	public MeasurableUnit getProtein() {
+	public Measurement getProtein() {
 		return Protein;
 	}
 
 	/**
 	 * @param protein the protein to set
 	 */
-	public void setProtein(MeasurableUnit protein) {
+	public void setProtein(Measurement protein) {
 		Protein = protein;
 	}
 	
@@ -281,7 +283,7 @@ public class NutritionFacts{
 	 * @param protein the protein (in grams) to set
 	 */
 	public void setProtein(double proteinInGrams) {
-		Protein = new MeasurableUnit(proteinInGrams, MeasurementUnit.MetricUnits.GRAMS);
+		Protein = new Measurement(proteinInGrams, Measurement.MetricUnits.GRAMS);
 	}
 
 	/**
@@ -396,4 +398,41 @@ public class NutritionFacts{
 		
 		return sb.toString().trim();
 	}
+        
+        /**
+         * Scales quantity fields of each nutrient field of a NutritionFacts into a new NutritionFacts.
+         * @param nutritionFacts A NutritionFact instance
+         * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
+         * @return The new NutritionFact with the scaled field.
+         */
+        public static NutritionFacts scaleNutritionFacts(NutritionFacts nutritionFacts, double scaleFactor)
+        {
+            NutritionFacts newNutritionFacts = null;
+            try {
+                newNutritionFacts = (NutritionFacts)nutritionFacts.clone();
+                newNutritionFacts.setCalories(nutritionFacts.getCalories().scale(scaleFactor));
+                newNutritionFacts.setTotalFat(nutritionFacts.getTotalFat().scale(scaleFactor));
+                newNutritionFacts.setSaturatedFat(nutritionFacts.getSaturatedFat().scale(scaleFactor));
+                newNutritionFacts.setTransFat(nutritionFacts.getTransFat().scale(scaleFactor));
+                newNutritionFacts.setCholesterol(nutritionFacts.getCholesterol().scale(scaleFactor));
+                newNutritionFacts.setSodium(nutritionFacts.getSodium().scale(scaleFactor));
+                newNutritionFacts.setTotalCarbohydrate(nutritionFacts.getTotalCarbohydrate().scale(scaleFactor));
+                newNutritionFacts.setDietaryFiber(nutritionFacts.getDietaryFiber().scale(scaleFactor));
+                newNutritionFacts.setSugars(nutritionFacts.getSugars().scale(scaleFactor));
+                newNutritionFacts.setProtein(nutritionFacts.getProtein().scale(scaleFactor));
+            } catch (CloneNotSupportedException ex) {
+                Application.dumpException("The was a problem cloning the Nutrition Facts object. Clone is not supported.", ex);
+            }
+            return newNutritionFacts;
+        }
+        
+        /**
+         * Scales quantity fields of each nutrient field into a new NutritionFacts.
+         * @param scaleFactor The scale factor, e.g. 0.5, 2.0, 5.0, ...
+         * @return The new NutritionFact with the scaled field.
+         */
+        public NutritionFacts scale(double scaleFactor)
+        {
+            return NutritionFacts.scaleNutritionFacts(this, scaleFactor);
+        }
 }

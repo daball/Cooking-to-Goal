@@ -1,57 +1,41 @@
 package com.customfit.ctg.model;
 
 /**
- * The model of an ingredient
- * @author Drew
+ * An ingredient is anything with a name apparently.
+ * 
+ * It did have another field with GroceryCategory,
+ * but I am curious about it's function. --David
+ * 
+ * @author Drew, David
  */
 public class Ingredient{
 
-	private String name;
-	private GroceryCategory category;
-
-
-	/**
-	 * Constructs an Ingredient
-	 * @param name
-	 */
-	public Ingredient(String name){
-		this.setName(name);
-	}
+    /**
+     * The name of the Ingredient.
+     */
+    private String name;
+    
+    /**
+     * Constructs an Ingredient with a name.
+     * @param name The name of the Ingredient.
+     */
+    public Ingredient(String name){
+            this.setName(name);
+    }
 	
-	/**
-	 * Constructs an Ingredient
-	 * @param name
-	 */
-	public Ingredient(String name, GroceryCategory category){
-		this.setName(name);
-		this.setCategory(category);
-	}
+    /**
+     * Gets the name of the Ingredient.
+     * @return The name of the Ingredient.
+     */
+    public String getName() {
+            return name;
+    }
 
-	/**
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * @return the category
-	 */
-	public GroceryCategory getCategory() {
-		return category;
-	}
-
-	/**
-	 * @param category the category to set
-	 */
-	public void setCategory(GroceryCategory category) {
-		this.category = category;
-	}
-
-	/**
-	 * @param name the name to set
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
+    /**
+     * Sets the name of the Ingredient.
+     * @param name The name of the Ingredient.
+     */
+    public void setName(String name) {
+            this.name = name;
+    }
 }
