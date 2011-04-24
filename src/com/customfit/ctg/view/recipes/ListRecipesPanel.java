@@ -177,11 +177,11 @@ public class ListRecipesPanel extends SubPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitle)
                     .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,28 +214,27 @@ public class ListRecipesPanel extends SubPanel {
         UserManagement.viewProfile();
     }//GEN-LAST:event_linkLabelHomeActionPerformed
 
-    private void linkLabelAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNewActionPerformed
-        //tell controller to create a new recipe
-        RecipeManagement.createRecipe();
-    }//GEN-LAST:event_linkLabelAddNewActionPerformed
+    private void jButtonViewRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewRecipeActionPerformed
+        //if a row is selected
+        if (this.jTableRecipes.getSelectedRowCount() > 0) {
+            //grab Recipe
+            Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
+            //tell RecipeManagement to view recipe
+            RecipeManagement.viewRecipe(recipe);
+        }
+}//GEN-LAST:event_jButtonViewRecipeActionPerformed
 
     private void jTableRecipesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRecipesMouseClicked
         //if double-clicked
         if (evt.getClickCount() == 2)
             //same as view recipe
             jButtonViewRecipeActionPerformed(null);
-    }//GEN-LAST:event_jTableRecipesMouseClicked
+}//GEN-LAST:event_jTableRecipesMouseClicked
 
-    private void jButtonViewRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewRecipeActionPerformed
-        //if a row is selected
-        if (this.jTableRecipes.getSelectedRowCount() > 0)
-        {
-            //grab Recipe
-            Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
-            //tell RecipeManagement to view recipe
-            RecipeManagement.viewRecipe(recipe);
-        }
-    }//GEN-LAST:event_jButtonViewRecipeActionPerformed
+    private void linkLabelAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNewActionPerformed
+        //tell controller to create a new recipe
+        RecipeManagement.createRecipe();
+}//GEN-LAST:event_linkLabelAddNewActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

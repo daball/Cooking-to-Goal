@@ -81,9 +81,11 @@ public class UserManagement {
     public static void viewProfile(User user)
     {
         //create profile panel
-        ProfilePanel profilePanel = new ProfilePanel();
-        //load the user into the profile panel
+        HomePanel profilePanel = new HomePanel();
+        //load the user data into the profile panel
         profilePanel.setUser(user);
+        //load the recipe data into the profile panel
+        //profilePanel.set
         //display panel in main frame
         Application.getMainFrame().setPanel(profilePanel);
     }

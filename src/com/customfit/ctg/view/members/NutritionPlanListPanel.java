@@ -51,13 +51,13 @@ public class NutritionPlanListPanel extends SubPanel {
         jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Edit User", "Logout" }));
 
         //manually coded (netbeans issue?) on-select event
-        jTableRecipes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent evt) {
-                jTableRecipesValueChanged(evt);
-            }
-        }
-        );
+//        jTableRecipes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent evt) {
+//                jTableRecipesValueChanged(evt);
+//            }
+//        }
+//        );
     }
 
     /** This method is called from within the constructor to
@@ -147,6 +147,7 @@ public class NutritionPlanListPanel extends SubPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTableRecipes1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableRecipes1.getTableHeader().setReorderingAllowed(false);
         jTableRecipes1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -186,7 +187,7 @@ public class NutritionPlanListPanel extends SubPanel {
                         .addComponent(jButtonRemoveIngredient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nutrition Plans", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -214,6 +215,7 @@ public class NutritionPlanListPanel extends SubPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTableRecipes2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableRecipes2.getTableHeader().setReorderingAllowed(false);
         jTableRecipes2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -243,7 +245,7 @@ public class NutritionPlanListPanel extends SubPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -316,7 +318,7 @@ public class NutritionPlanListPanel extends SubPanel {
     }//GEN-LAST:event_jTableRecipes1MouseClicked
 
     private void jButtonRemoveIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveIngredientActionPerformed
-        removeIngredient();
+        //removeIngredient();
 }//GEN-LAST:event_jButtonRemoveIngredientActionPerformed
 
     private void jTableRecipes2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRecipes2MouseClicked
@@ -324,9 +326,9 @@ public class NutritionPlanListPanel extends SubPanel {
     }//GEN-LAST:event_jTableRecipes2MouseClicked
 
     private void jButtonAddIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddIngredientActionPerformed
-        DefaultTableModel dtm = (DefaultTableModel)jTableIngredients.getModel();
-        dtm.addRow(new Object [] {null, null, null});
-        jTableIngredients.setModel(dtm);
+//        DefaultTableModel dtm = (DefaultTableModel)jTableIngredients.getModel();
+//        dtm.addRow(new Object [] {null, null, null});
+//        jTableIngredients.setModel(dtm);
 }//GEN-LAST:event_jButtonAddIngredientActionPerformed
 
 
@@ -376,26 +378,26 @@ public class NutritionPlanListPanel extends SubPanel {
      * 
      * @param recipes List of recipes.
      */
-    public void setRecipeList(List<Recipe> recipes) {
-        this.recipes = recipes;
-        
-        DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
-        
-        //clear old results
-        while (tableModel.getRowCount() > 0)
-        {
-            tableModel.removeRow(0);
-        }
-
-        //add recipes to list
-        for (Recipe recipe : recipes)
-        {
-            Object[] row = {recipe.getName(), new Long(Math.round(recipe.getRating() * 5.0)).toString()};
-            tableModel.addRow(row);
-        }
-        
-        jTableRecipes.setModel(tableModel);
-    }
+//    public void setRecipeList(List<Recipe> recipes) {
+//        this.recipes = recipes;
+//        
+//        DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
+//        
+//        //clear old results
+//        while (tableModel.getRowCount() > 0)
+//        {
+//            tableModel.removeRow(0);
+//        }
+//
+//        //add recipes to list
+//        for (Recipe recipe : recipes)
+//        {
+//            Object[] row = {recipe.getName(), new Long(Math.round(recipe.getRating() * 5.0)).toString()};
+//            tableModel.addRow(row);
+//        }
+//        
+//        jTableRecipes.setModel(tableModel);
+//    }
     
     @Override
     public void refresh()

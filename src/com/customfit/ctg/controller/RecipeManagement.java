@@ -19,6 +19,14 @@ import javax.swing.JOptionPane;
 public class RecipeManagement {
 
     /**
+     * Gets the List of Recipes from the database.
+     */
+    public static List<Recipe> getAllRecipes()
+    {
+        //recipes not provided, so go get them
+        return Application.getDataDriver().selectAllRecipes();
+    }
+    /**
      * Activates Browse Recipes application feature, which displays
      * a Browse Recipes JPanel in the main JFrame from the list
      * of all known recipes in the Controller's default database.
@@ -26,7 +34,7 @@ public class RecipeManagement {
     public static void browseRecipes()
     {
         //recipes not provided, so go get them
-        List<Recipe> recipes = Application.getDataDriver().selectAllRecipes();
+        List<Recipe> recipes = getAllRecipes();
 
         //now pass them to the overloaded method
         browseRecipes(recipes);
@@ -44,7 +52,7 @@ public class RecipeManagement {
         //create panel
         NutritionPlanListPanel recipeListPanel = new NutritionPlanListPanel(NutritionPlanListPanel.ListMode.LIST_BROWSE);
         //tell panel about our recipes
-        recipeListPanel.setRecipeList(recipes);
+        //recipeListPanel.setRecipeList(recipes);
         //display panel in main frame
         Application.getMainFrame().setPanel(recipeListPanel);
     }
