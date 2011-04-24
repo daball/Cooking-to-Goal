@@ -88,6 +88,16 @@ public class User
     }
     
     /**
+     * Gets the user's members.
+     * 
+     * @return The user's members.
+     */
+    public List<Member> getMembers()
+    {
+        return members;
+    }
+    
+    /**
      * Gets the list of meals for the user.
      * 
      * @return The list of meals for the user.
