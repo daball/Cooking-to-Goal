@@ -12,7 +12,7 @@ import org.junit.After;
 import org.junit.Before;
 import com.customfit.ctg.controller.Application;
 import com.customfit.ctg.controller.RecipeManagement;
-import com.customfit.ctg.model.MeasurableUnit;
+import com.customfit.ctg.model.Measurement;
 import com.customfit.ctg.model.MeasurementUnit;
 import com.customfit.ctg.model.NutritionFacts;
 import com.customfit.ctg.model.Recipe;
@@ -27,8 +27,8 @@ public class RecipeManagementTests extends TestCase {
 	private static final String TEST_RECIPE_NAME		= "Test Recipe";
 	//private static final String TEST_RECIPE_DESCRIPTION 	= "This is a recipe description.";
 	private static final String TEST_RECIPE_INSTRUCTIONS 	= "Sample instructions.";
-	private static final MeasurableUnit
-								TEST_RECIPE_SERVING_SIZE 	= new MeasurableUnit(1.0, "Serving");
+	private static final Measurement
+								TEST_RECIPE_SERVING_SIZE 	= new Measurement(1.0, "Serving");
 	private static final double TEST_RECIPE_SERVINGS 		= 1.0;
 	private static final double TEST_RECIPE_RATING 			= 1.0;
 	private static List<RecipeIngredient>

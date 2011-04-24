@@ -1,5 +1,6 @@
 package com.customfit.ctg.controller;
 
+import com.customfit.ctg.view.members.NutritionPlanListPanel;
 import com.customfit.ctg.view.meal.MealMenuPanel;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.SubPanel;
@@ -41,7 +42,7 @@ public class RecipeManagement {
     public static void browseRecipes(List<Recipe> recipes)
     {
         //create panel
-        DesignNutritionPlan recipeListPanel = new DesignNutritionPlan(DesignNutritionPlan.ListMode.LIST_BROWSE);
+        NutritionPlanListPanel recipeListPanel = new NutritionPlanListPanel(NutritionPlanListPanel.ListMode.LIST_BROWSE);
         //tell panel about our recipes
         recipeListPanel.setRecipeList(recipes);
         //display panel in main frame

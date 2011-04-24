@@ -1,4 +1,4 @@
-package com.customfit.ctg.view.recipes;
+package com.customfit.ctg.view.members;
 
 import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
@@ -13,7 +13,7 @@ import javax.swing.event.*;
  *
  * @author Ryan Spoon, David
  */
-public class DesignNutritionPlan extends SubPanel {
+public class NutritionPlanListPanel extends SubPanel {
 
     /**
      * This gets stored whenever the controller passes it this way.
@@ -34,8 +34,8 @@ public class DesignNutritionPlan extends SubPanel {
      */
     private ListMode listMode;
     
-    /** Creates new form DesignNutritionPlan */
-    public DesignNutritionPlan(ListMode listMode) {
+    /** Creates new form NutritionPlanListPanel */
+    public NutritionPlanListPanel(ListMode listMode) {
         initComponents();
         
         //setup list mode
@@ -186,7 +186,7 @@ public class DesignNutritionPlan extends SubPanel {
                         .addComponent(jButtonRemoveIngredient, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 179, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nutrition Plans", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -243,7 +243,7 @@ public class DesignNutritionPlan extends SubPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

@@ -160,7 +160,7 @@
                       <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable1" pref="179" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable1" pref="151" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -269,7 +269,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="linkLabelAddNew" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable2" pref="190" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable2" pref="162" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

@@ -1,10 +1,11 @@
-/*
+    // Variables declaration - do not modify
+    // End of variables declaration/*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
 
 /*
- * ListMembers.java
+ * ListMembersPanel.java
  *
  * Created on Apr 23, 2011, 8:12:22 PM
  */
@@ -15,10 +16,10 @@ package com.customfit.ctg.view.users;
  *
  * @author David
  */
-public class ListMembers extends javax.swing.JFrame {
+public class ListMembersPanel extends javax.swing.JFrame {
 
-    /** Creates new form ListMembers */
-    public ListMembers() {
+    /** Creates new form ListMembersPanel */
+    public ListMembersPanel() {
         initComponents();
     }
 
@@ -53,7 +54,7 @@ public class ListMembers extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ListMembers().setVisible(true);
+                new ListMembersPanel().setVisible(true);
             }
         });
     }

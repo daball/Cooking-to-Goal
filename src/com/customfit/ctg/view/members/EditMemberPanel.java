@@ -4,21 +4,21 @@
  */
 
 /*
- * EditMember.java
+ * EditMemberPanel.java
  *
  * Created on Apr 23, 2011, 8:18:19 PM
  */
 
-package com.customfit.ctg.view.users;
+package com.customfit.ctg.view.members;
 
 /**
  *
  * @author David
  */
-public class EditMember extends javax.swing.JFrame {
+public class EditMemberPanel extends javax.swing.JFrame {
 
-    /** Creates new form EditMember */
-    public EditMember() {
+    /** Creates new form EditMemberPanel */
+    public EditMemberPanel() {
         initComponents();
     }
 
@@ -53,7 +53,7 @@ public class EditMember extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditMember().setVisible(true);
+                new EditMemberPanel().setVisible(true);
             }
         });
     }

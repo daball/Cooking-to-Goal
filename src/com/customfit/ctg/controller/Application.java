@@ -33,7 +33,8 @@ public class Application {
      * Launches the application. Our implementation ignores args.
      * @param args Command-line arguments.
      */
-    public static void launch(String[] args){		
+    public static void launch(String[] args)
+    {		
         //setup filesystem data connection
         flatFileDriver = DataManager.acquireFlatFileDriver();
 
@@ -65,7 +66,6 @@ public class Application {
         });
     }
 
-
     /**
      * Gracefully shuts down the application.
      * @param exitCode Exit code to return to the operation system.
@@ -88,7 +88,8 @@ public class Application {
      * 
      * @return The only MainFrame you should ever need.
      */
-    public static MainFrame getMainFrame() {
+    public static MainFrame getMainFrame()
+    {
         return mainFrame;
     }
 
@@ -98,7 +99,8 @@ public class Application {
      * 
      * @return The only DataDriver you should ever need.
      */
-    public static DataDriver getDataDriver() {
+    public static DataDriver getDataDriver()
+    {
         return dataDriver;
     }
 
@@ -108,7 +110,8 @@ public class Application {
      * 
      * @return The only FlatFileDriver you should ever need.
      */
-    public static FlatFileDriver getFlatFileDriver() {
+    public static FlatFileDriver getFlatFileDriver()
+    {
         return flatFileDriver;
     }
 

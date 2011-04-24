@@ -23,6 +23,14 @@ public class UserManagement {
     private static User currentUser;
     
     /**
+     * Gets currently logged in user.
+     * @return Currently logged in user.
+     */
+    public static User getCurrentUser() {
+        return currentUser;
+    }
+    
+    /**
      * Activates Register User application feature, which in this case
      * displays a Register User JPanel to prepare a new User object
      * for storage. If you already have a User object, use the
@@ -195,7 +203,7 @@ public class UserManagement {
         else
         {
             //if it is, then welcome guest to new application
-            FirstTimePanel firstTimePanel = new FirstTimePanel();
+            FirstTimeUserPanel firstTimePanel = new FirstTimeUserPanel();
             //display panel in main frame
             Application.getMainFrame().setPanel(firstTimePanel);
        }
@@ -213,6 +221,7 @@ public class UserManagement {
         //show user profile home
         UserManagement.viewProfile();
     }
+    
     /**
      * Logs current user out and presents user with login screen.
      */
@@ -224,11 +233,4 @@ public class UserManagement {
         UserManagement.presentLogin();
     }
     
-    /**
-     * Gets currently logged in user.
-     * @return Currently logged in user.
-     */
-    public static User getCurrentUser() {
-        return currentUser;
-    }
 }

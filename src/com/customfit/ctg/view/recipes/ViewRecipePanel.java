@@ -1,14 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * ViewRecipePanel.java
- *
- * Created on Apr 22, 2011, 4:20:01 AM
- */
-
 package com.customfit.ctg.view.recipes;
 
 /**

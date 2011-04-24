@@ -13,7 +13,7 @@ import javax.swing.event.*;
  *
  * @author Ryan Spoon, David
  */
-public class RecipeListPanel extends SubPanel {
+public class ListRecipesPanel extends SubPanel {
 
     /**
      * This gets stored whenever the controller passes it this way.
@@ -34,8 +34,8 @@ public class RecipeListPanel extends SubPanel {
      */
     private ListMode listMode;
     
-    /** Creates new form RecipeListPanel */
-    public RecipeListPanel(ListMode listMode) {
+    /** Creates new form ListRecipesPanel */
+    public ListRecipesPanel(ListMode listMode) {
         initComponents();
         
         //setup list mode
@@ -177,7 +177,7 @@ public class RecipeListPanel extends SubPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitle)
                     .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -190,8 +190,7 @@ public class RecipeListPanel extends SubPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonViewRecipe))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonViewRecipe)))
         );
     }// </editor-fold>//GEN-END:initComponents
 

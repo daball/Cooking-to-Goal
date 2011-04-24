@@ -4,7 +4,7 @@
  */
 
 /*
- * FirstTimePanel.java
+ * FirstTimeUserPanel.java
  *
  * Created on Apr 21, 2011, 8:26:15 AM
  */
@@ -18,10 +18,10 @@ import com.customfit.ctg.view.SubPanel;
  *
  * @author David
  */
-public class FirstTimePanel extends SubPanel {
+public class FirstTimeUserPanel extends SubPanel {
 
-    /** Creates new form FirstTimePanel */
-    public FirstTimePanel() {
+    /** Creates new form FirstTimeUserPanel */
+    public FirstTimeUserPanel() {
         initComponents();
     }
 
@@ -40,14 +40,14 @@ public class FirstTimePanel extends SubPanel {
         linkLabelGetStarted = new com.customfit.ctg.view.LinkLabel();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
-        jLabelTitle.setText("First Time Setup");
+        jLabelTitle.setText("Getting Started");
 
         jScrollPane2.setBorder(null);
 
         jTextPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
         jTextPane1.setBorder(null);
         jTextPane1.setEditable(false);
-        jTextPane1.setText("Welcome to your new Cooking to Goal nutritional planning tool. This program will let you plan your upcoming meals so that you can try to reach your nutritional goals. It appears that this is your first time using the software.");
+        jTextPane1.setText("Welcome to the Cooking to Goal nutritional planning tool.\n\nThis program will let you plan your upcoming meals so that you can try to reach your nutritional goals.\n\nSince this is your first time using the software, you will need to set up a user account to use the application.");
         jTextPane1.setFocusable(false);
         jTextPane1.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jTextPane1.setOpaque(false);
@@ -68,9 +68,9 @@ public class FirstTimePanel extends SubPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                     .addComponent(linkLabelGetStarted, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE))
+                    .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(

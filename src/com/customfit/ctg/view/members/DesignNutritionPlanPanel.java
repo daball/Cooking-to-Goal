@@ -4,21 +4,21 @@
  */
 
 /*
- * EditNutritionPlan.java
+ * DesignNutritionPlanPanel.java
  *
  * Created on Apr 23, 2011, 8:15:36 PM
  */
 
-package com.customfit.ctg.view.users;
+package com.customfit.ctg.view.members;
 
 /**
  *
  * @author David
  */
-public class EditNutritionPlan extends javax.swing.JFrame {
+public class DesignNutritionPlanPanel extends javax.swing.JFrame {
 
-    /** Creates new form EditNutritionPlan */
-    public EditNutritionPlan() {
+    /** Creates new form DesignNutritionPlanPanel */
+    public DesignNutritionPlanPanel() {
         initComponents();
     }
 
@@ -64,7 +64,6 @@ public class EditNutritionPlan extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jTableNutritionFacts.setSelectionMode();
         jTableNutritionFacts.getTableHeader().setReorderingAllowed(false);
         scrollPaneNutrition.setViewportView(jTableNutritionFacts);
 
@@ -93,7 +92,7 @@ public class EditNutritionPlan extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EditNutritionPlan().setVisible(true);
+                new DesignNutritionPlanPanel().setVisible(true);
             }
         });
     }
