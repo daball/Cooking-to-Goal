@@ -11,11 +11,14 @@
 
 package com.customfit.ctg.view.members;
 
+import com.customfit.ctg.controller.UserManagement;
+import com.customfit.ctg.view.SubPanel;
+
 /**
  *
  * @author David
  */
-public class FirstTimeMemberPanel extends javax.swing.JPanel {
+public class FirstTimeMemberPanel extends SubPanel {
 
     /** Creates new form FirstTimeMemberPanel */
     public FirstTimeMemberPanel() {
