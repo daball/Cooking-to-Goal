@@ -48,11 +48,11 @@ public class RecipeManagement {
     public static void browseRecipes(List<Recipe> recipes)
     {
         //create panel
-        //ListRecipesPanel recipeListPanel = new ListRecipesPanel(ListRecipesPanel.ListMode.LIST_BROWSE);
+        ListRecipesPanel recipeListPanel = new ListRecipesPanel(ListRecipesPanel.ListMode.LIST_BROWSE);
         //tell panel about our recipes
-        //recipeListPanel.setRecipeList(recipes);
+        recipeListPanel.setRecipeList(recipes);
         //display panel in main frame
-        //Application.getMainFrame().setPanel(recipeListPanel);
+        Application.getMainFrame().setPanel(recipeListPanel);
     }
 
     /**
