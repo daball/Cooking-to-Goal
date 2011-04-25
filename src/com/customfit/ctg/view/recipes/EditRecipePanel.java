@@ -71,6 +71,39 @@ public class EditRecipePanel extends CreateEditPanel {
                 }
             }
         });
+        //listen for ingredient table events
+        DefaultTableModel ingredientModel = (DefaultTableModel)jTableIngredients.getModel();
+        ingredientModel.addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                DefaultTableModel membersModel = (DefaultTableModel) jTableIngredients.getModel();
+                //if column is Amount
+                if (e.getColumn() == 0)
+                {
+                    //then make sure we insert the right unit on each one
+                    for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
+                    {
+                        Measurement measurement = new Measurement((String)membersModel.getValueAt(row, e.getColumn()));
+                        if (!measurement.toString().equals((String)membersModel.getValueAt(row, e.getColumn())))
+                            membersModel.setValueAt(measurement.toString(), row, e.getColumn());
+                    }
+                }
+//                //if column is Member
+//                else if (e.getColumn() == 1)
+//                {
+//                    //check for name identical to this one
+//                    for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
+//                        if (((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(jTextFieldUser.getText()) ||
+//                                ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals("") ||
+//                                    (getCreateEditMode() == CreateEditMode.EDIT &&
+//                                    ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(user.getName())))
+//                            membersModel.setValueAt("Member's Name", row, e.getColumn());
+//                }
+                validateForm();
+            }
+        });
+
     }
 
     /** This method is called from within the constructor to
@@ -82,7 +115,7 @@ public class EditRecipePanel extends CreateEditPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSave = new javax.swing.JButton();
+        jButtonSave = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         lblName1 = new javax.swing.JLabel();
@@ -106,10 +139,11 @@ public class EditRecipePanel extends CreateEditPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaInstructions = new javax.swing.JTextArea();
 
-        btnSave.setText("Save");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
+        jButtonSave.setText("Save");
+        jButtonSave.setEnabled(false);
+        jButtonSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
+                jButtonSaveActionPerformed(evt);
             }
         });
 
@@ -120,13 +154,19 @@ public class EditRecipePanel extends CreateEditPanel {
             }
         });
 
-        lblName.setFont(new java.awt.Font("Tahoma", 1, 11));
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblName.setText("Name: ");
 
-        lblName1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        lblName1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblName1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblName1.setText("Rating: ");
+
+        jTextName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextNameKeyReleased(evt);
+            }
+        });
 
         scrollPaneNutrition.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nutrition Facts", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
         scrollPaneNutrition.setFont(new java.awt.Font("Tahoma", 1, 11));
@@ -223,7 +263,7 @@ public class EditRecipePanel extends CreateEditPanel {
                     .addComponent(jButtonRemoveIngredient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAddIngredient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
         );
 
         starVotingPanel.setScale(5);
@@ -250,6 +290,11 @@ public class EditRecipePanel extends CreateEditPanel {
         lblName3.setText("Serving Size:");
 
         jTextFieldServingSize.setText("1.0");
+        jTextFieldServingSize.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldServingSizeKeyReleased(evt);
+            }
+        });
 
         jComboBoxServingSizeUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -257,6 +302,11 @@ public class EditRecipePanel extends CreateEditPanel {
 
         jTextAreaInstructions.setColumns(20);
         jTextAreaInstructions.setRows(5);
+        jTextAreaInstructions.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextAreaInstructionsKeyReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextAreaInstructions);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -267,7 +317,7 @@ public class EditRecipePanel extends CreateEditPanel {
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -284,32 +334,30 @@ public class EditRecipePanel extends CreateEditPanel {
                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextName))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lblName3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextFieldServingSize, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBoxServingSizeUnit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(starVotingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jSpinnerMakes, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextName))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblName3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextFieldServingSize, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComboBoxServingSizeUnit, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(starVotingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jSpinnerMakes, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPaneNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSave)
+                        .addComponent(jButtonSave)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel)))
                 .addContainerGap())
@@ -321,9 +369,9 @@ public class EditRecipePanel extends CreateEditPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitle)
                     .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -344,13 +392,15 @@ public class EditRecipePanel extends CreateEditPanel {
                                     .addComponent(lblName3, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jTextFieldServingSize, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(scrollPaneNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(scrollPaneNutrition, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                        .addGap(1, 1, 1)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSave)
+                    .addComponent(jButtonSave)
                     .addComponent(btnCancel))
                 .addContainerGap())
         );
@@ -371,7 +421,7 @@ public class EditRecipePanel extends CreateEditPanel {
         this.jComboBoxMeMenu.setSelectedIndex(0);
 }//GEN-LAST:event_jComboBoxMeMenuActionPerformed
 
-    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+    private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
         //if its a new recipe
         if (this.getCreateEditMode() == CreateEditMode.CREATE)
             //then save it and go back to the last panel
@@ -379,7 +429,7 @@ public class EditRecipePanel extends CreateEditPanel {
         //if its an existing recipe
         else if (this.getCreateEditMode() == CreateEditMode.EDIT)
             RecipeManagement.updateRecipeAndGoBack(this.recipe.getName(), this.getRecipe());
-    }//GEN-LAST:event_btnSaveActionPerformed
+    }//GEN-LAST:event_jButtonSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
         //go back to the last panel
@@ -395,6 +445,18 @@ public class EditRecipePanel extends CreateEditPanel {
         dtm.addRow(new Object [] {null, null, null});
         jTableIngredients.setModel(dtm);
     }//GEN-LAST:event_jButtonAddIngredientActionPerformed
+
+    private void jTextNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNameKeyReleased
+        this.validateForm();
+    }//GEN-LAST:event_jTextNameKeyReleased
+
+    private void jTextFieldServingSizeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldServingSizeKeyReleased
+        this.validateForm();
+    }//GEN-LAST:event_jTextFieldServingSizeKeyReleased
+
+    private void jTextAreaInstructionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaInstructionsKeyReleased
+        this.validateForm();
+    }//GEN-LAST:event_jTextAreaInstructionsKeyReleased
 
     private void removeIngredient() {
         int currentRow = jTableIngredients.getSelectedRow();
@@ -422,9 +484,9 @@ public class EditRecipePanel extends CreateEditPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
-    private javax.swing.JButton btnSave;
     private javax.swing.JButton jButtonAddIngredient;
     private javax.swing.JButton jButtonRemoveIngredient;
+    private javax.swing.JButton jButtonSave;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JComboBox jComboBoxServingSizeUnit;
     private javax.swing.JLabel jLabelTitle;
@@ -515,5 +577,24 @@ public class EditRecipePanel extends CreateEditPanel {
      */
     public SubPanel getPreviousPanel() {
         return previousPanel;
+    }
+    
+    /**
+     * Makes sure we are good to save before actually enabling the save button.
+     */
+    private void validateForm()
+    {
+        boolean disableSaves = false;
+        if (this.jTextName.getText().trim().length() < 5)
+            disableSaves = true;
+        else if (this.jTextFieldServingSize.getText().trim().isEmpty())
+            disableSaves = true;
+        else if (this.jTableIngredients.getModel().getRowCount() <= 0)
+            disableSaves = true;
+        else if (this.jTextAreaInstructions.getText().trim().isEmpty())
+            disableSaves = true;
+        else if (this.getCreateEditMode() == CreateEditMode.EDIT && this.recipe.equals(this.getRecipe()))
+            disableSaves = true;
+        this.jButtonSave.setEnabled(!disableSaves);
     }
 }
