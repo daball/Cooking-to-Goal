@@ -71,7 +71,7 @@
               <Border info="null"/>
             </Property>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Welcome to the Cooking to Goal nutritional planner.&#xa;&#xa;This application will let you plan your upcoming meals so that you can try to reach your nutritional goals.&#xa;&#xa;This wizard will guide you through setting up your user profile for the first time."/>
+            <Property name="text" type="java.lang.String" value="Welcome to the Cooking to Goal nutritional planner. This application will let you plan your upcoming meals so that you can try to reach your nutritional goals.&#xa;&#xa;In the following page, you can set up your profile for the first time."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>

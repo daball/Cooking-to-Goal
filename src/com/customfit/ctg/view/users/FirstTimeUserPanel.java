@@ -47,7 +47,7 @@ public class FirstTimeUserPanel extends SubPanel {
         jTextPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
         jTextPane1.setBorder(null);
         jTextPane1.setEditable(false);
-        jTextPane1.setText("Welcome to the Cooking to Goal nutritional planner.\n\nThis application will let you plan your upcoming meals so that you can try to reach your nutritional goals.\n\nThis wizard will guide you through setting up your user profile for the first time.");
+        jTextPane1.setText("Welcome to the Cooking to Goal nutritional planner. This application will let you plan your upcoming meals so that you can try to reach your nutritional goals.\n\nIn the following page, you can set up your profile for the first time.");
         jTextPane1.setFocusable(false);
         jTextPane1.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jTextPane1.setOpaque(false);

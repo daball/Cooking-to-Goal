@@ -39,10 +39,10 @@ public class UserManagement {
      */
     public static void registerUser()
     {
-        //create register panel
-        RegisterPanel registerPanel = new RegisterPanel();
+        //create panel
+        EditProfilePanel newUserPanel = new EditProfilePanel(CreateEditMode.CREATE);
         //display panel in main frame
-        Application.getMainFrame().setPanel(registerPanel);
+        Application.getMainFrame().setPanel(newUserPanel);
     }
 
     /**
@@ -113,12 +113,12 @@ public class UserManagement {
     {
         //get currently loaded frame
         SubPanel currentPanel = Application.getMainFrame().getPanel();
-        //create edit user panel
-        EditAccountPanel editAccountPanel = new EditAccountPanel(currentPanel);
+        //create panel
+        EditProfilePanel editProfilePanel = new EditProfilePanel(CreateEditMode.CREATE.EDIT);
         //load the user into the profile panel
-        editAccountPanel.setUser(user);
+        editProfilePanel.setUser(user);
         //display panel in main frame
-        Application.getMainFrame().setPanel(editAccountPanel);
+        Application.getMainFrame().setPanel(editProfilePanel);
     }
 
     /**
@@ -130,7 +130,7 @@ public class UserManagement {
      * 
      * @return Boolean indicating the success of the operation. 
      */
-    public static boolean updateRegistrationAndGoHome(String originalUserName, User newUser)
+    public static boolean updateRegistrationAndGoBack(String originalUserName, User newUser)
     {
         boolean status = Application.getDataDriver().updateUserByName(originalUserName, newUser);
          //check for errors

@@ -1,6 +1,10 @@
 <?xml version="1.1" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroupDirection">
+    </Component>
+  </NonVisualComponents>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -19,17 +23,9 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jPanel1" max="32767" attributes="1"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
                   <Group type="102" attributes="0">
-                      <Component id="jLabelTitle" pref="185" max="32767" attributes="0"/>
+                      <Component id="jLabelTitle" pref="180" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="522" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane2" min="-2" pref="508" max="-2" attributes="0"/>
-                      <EmptySpace pref="199" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -38,40 +34,43 @@
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="jTextFieldUser" min="-2" pref="168" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="linkLabelDelete" alignment="1" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonMaximumDirection" min="-2" max="-2" attributes="1"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jRadioButtonMinimumDirection" min="-2" max="-2" attributes="1"/>
                           </Group>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jRadioButton2" alignment="0" max="32767" attributes="1"/>
-                                          <Component id="jRadioButton1" alignment="0" min="-2" pref="145" max="-2" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace min="-2" pref="106" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jLabel2" pref="137" max="32767" attributes="1"/>
-                                          <Component id="jLabel4" alignment="0" pref="137" max="32767" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jComboBox1" max="32767" attributes="1"/>
-                                          <Component id="jTextFieldUser2" alignment="0" pref="132" max="32767" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="433" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="465" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jLabel2" pref="144" max="32767" attributes="1"/>
+                      <EmptySpace min="-2" pref="558" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jComboBoxTargetNutrient" alignment="1" min="-2" pref="132" max="-2" attributes="1"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel4" max="32767" attributes="1"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextFieldTargetAmount" min="-2" pref="132" max="-2" attributes="1"/>
                           </Group>
+                      </Group>
+                      <EmptySpace min="-2" pref="430" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButtonCancel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="linkLabelDelete" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="363" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
+                          <Component id="jLabel3" alignment="0" pref="692" max="32767" attributes="1"/>
+                          <Component id="jScrollPane2" alignment="1" pref="692" max="32767" attributes="1"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -82,40 +81,40 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="1"/>
                   <Component id="jTextFieldUser" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jRadioButton1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jRadioButtonMaximumDirection" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jRadioButtonMinimumDirection" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="1"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxTargetNutrient" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="1"/>
-                  <Component id="jTextFieldUser2" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                  <Component id="jTextFieldTargetAmount" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonSave" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonCancel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="linkLabelDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="linkLabelDelete" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -127,7 +126,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Edit User Profile"/>
+        <Property name="text" type="java.lang.String" value="Edit Profile"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
@@ -176,21 +175,29 @@
         <Property name="text" type="java.lang.String" value="Would you like to scale your weekly menu based on a maximum or minimum nutritional amount?"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonMaximumDirection">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupDirection"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Maximum Amount"/>
+        <Property name="actionCommand" type="java.lang.String" value="Maximum"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="jRadioButtonMinimumDirection">
       <Properties>
+        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+          <ComponentRef name="buttonGroupDirection"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Minimum Amount"/>
+        <Property name="actionCommand" type="java.lang.String" value="Minimum"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Additional family members and guests to track">
+            <TitledBorder title="Additional members to track">
               <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
             </TitledBorder>
           </Border>
@@ -200,14 +207,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
                   <Component id="jButtonAddMember" min="-2" pref="31" max="-2" attributes="1"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonRemoveMember" min="-2" pref="30" max="-2" attributes="1"/>
-                  <EmptySpace pref="616" max="32767" attributes="0"/>
+                  <EmptySpace pref="613" max="32767" attributes="0"/>
               </Group>
-              <Component id="scrollPaneIngedients" alignment="0" pref="685" max="32767" attributes="2"/>
+              <Component id="scrollPaneIngedients" alignment="0" pref="680" max="32767" attributes="2"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -215,10 +221,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jButtonRemoveMember" alignment="0" max="32767" attributes="1"/>
-                      <Component id="jButtonAddMember" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jButtonAddMember" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneIngedients" pref="133" max="32767" attributes="0"/>
+                  <Component id="scrollPaneIngedients" pref="85" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -231,16 +237,13 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="jTableIngredients">
+            <Component class="javax.swing.JTable" name="jTableMembers">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="2" rowCount="0">
-                    <Column editable="true" title="Name" type="java.lang.String"/>
-                    <Column editable="true" title="Target Goal Amount" type="java.lang.String"/>
+                    <Column editable="true" title="Member" type="java.lang.String"/>
+                    <Column editable="true" title="Target Amount Per Day" type="java.lang.Double"/>
                   </Table>
-                </Property>
-                <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
-                  <JTableSelectionModel selectionMode="-1"/>
                 </Property>
                 <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                   <TableHeader reorderingAllowed="false" resizingAllowed="true"/>
@@ -277,12 +280,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Target Nutrition:"/>
+        <Property name="text" type="java.lang.String" value="Target Nutrient:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="jTextFieldUser2">
+    <Component class="javax.swing.JTextField" name="jTextFieldTargetAmount">
       <Events>
-        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldUser2KeyReleased"/>
+        <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldTargetAmountKeyReleased"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -293,7 +296,7 @@
         <Property name="text" type="java.lang.String" value="Target Amount Per Day:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jComboBoxTargetNutrient">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="3">
