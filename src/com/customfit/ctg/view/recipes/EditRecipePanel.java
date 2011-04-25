@@ -3,9 +3,9 @@ package com.customfit.ctg.view.recipes;
 import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.table.DefaultTableModel;
+import java.util.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
 /**
  * This is the main panel for managing the recipes that are available
@@ -39,6 +39,31 @@ public class EditRecipePanel extends CreateEditPanel {
         allUnits.add("");
         allUnits.addAll(Arrays.asList(Measurement.getAllMeasurementUnits()));
         this.jComboBoxServingSizeUnit.setModel(new javax.swing.DefaultComboBoxModel(allUnits.toArray(new String[] {})));
+        //clear out the nutrition info box for reflection
+        DefaultTableModel nutritionTableModel = (DefaultTableModel) this.jTableNutritionFacts.getModel();
+        for (String nutrient: NutritionFacts.getAllValidNutrients())
+        {
+            nutritionTableModel.addRow(new Object[] { nutrient , });
+        }
+        //listen for nutrition table events
+        nutritionTableModel.addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                //update unit on nutrition table
+                DefaultTableModel nutritionTableModel = (DefaultTableModel) jTableNutritionFacts.getModel();
+                for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
+                {
+                    if (nutritionTableModel.getValueAt(row, e.getColumn()) != null && !((String)nutritionTableModel.getValueAt(row, e.getColumn())).isEmpty())
+                    {
+                        Measurement measurement = new Measurement((String)nutritionTableModel.getValueAt(row, e.getColumn()));
+                        measurement.setUnit(NutritionFacts.getUnitForNutrient((String)nutritionTableModel.getValueAt(row, 0)));
+                        if (!measurement.toString().equals((String)nutritionTableModel.getValueAt(row, e.getColumn())))
+                            nutritionTableModel.setValueAt(measurement.toString(), row, e.getColumn());
+                    }
+                }
+            }
+        });
     }
 
     /** This method is called from within the constructor to
@@ -101,23 +126,14 @@ public class EditRecipePanel extends CreateEditPanel {
 
         jTableNutritionFacts.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {"Calories", null},
-                {"Total Fat (g)", null},
-                {"     Saturated Fat (g)", null},
-                {"     Trans Fat (g)", null},
-                {"Cholesterol (mg)", null},
-                {"Sodium (mg)", null},
-                {"Total Carbohydrate (g)", null},
-                {"     Dietary Fiber (g)", null},
-                {"     Sugars (g)", null},
-                {"Protein (g)", null}
+
             },
             new String [] {
                 "Name", "Amount"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Float.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
