@@ -2,6 +2,7 @@ package com.customfit.ctg.view;
 
 import com.customfit.ctg.controller.*;
 import java.awt.Color;
+import java.util.*;
 import javax.swing.*;
 
 /**
@@ -16,6 +17,16 @@ public class MainFrame extends javax.swing.JFrame {
      * Holds the current SubPanel the main frame is displaying.
      */
     private SubPanel panel;
+    
+    /**
+     * Holds the panel history.
+     */
+    private Stack<SubPanel> panelHistory = new Stack<SubPanel>();
+
+    /**
+     * Holds the panel future history.
+     */
+    private Queue<SubPanel> panelFutureHistory = new LinkedList<SubPanel>();
     
     /**
      * Holds the original title bar when object was created.
@@ -105,6 +116,30 @@ public class MainFrame extends javax.swing.JFrame {
      * @param p The SubPanel you would like the main frame to display.
      */
     public void setPanel(SubPanel panel) {
+        //if there is any panel loaded
+        if (this.panel != null)
+        {
+            //add old panel to history
+            this.panelHistory.push(this.panel);
+            //then remove prior panel from component model
+            this.jScrollPane1.remove(this.panel);
+        }
+        //update panel reference
+        this.panel = panel;
+        //add new panel to component model
+        this.jScrollPane1.setViewportView(this.panel);
+        //update title bar
+        this.setTitle(this.panel.getTitle() + " - " + this.initalTitle);
+    }
+    
+    /**
+     * Pops the first panel off the stack and loads it into view.
+     */
+    public void goBack(){
+        //add old panel to future history
+        this.panelFutureHistory.add(this.panel);
+        //grab the last panel loaded
+        SubPanel panel = this.panelHistory.pop();
         //if there is any panel loaded
         if (this.panel != null)
             //then remove prior panel from component model

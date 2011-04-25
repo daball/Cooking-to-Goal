@@ -17,9 +17,9 @@ public class User
     private String name;
 
     /**
-     * The plans for the members.
+     * The user's members.
      */
-    private NutritionPlan nutritionPlan;
+    private List<Member> members;
     
     /**
      * The list of meals for the user.
@@ -34,20 +34,21 @@ public class User
     public User(String name)
     {
         this.name = name;
-        this.nutritionPlan = new NutritionPlan(name);
+        this.members = new ArrayList<Member>();
+        this.members.add(new Member(name));
     }
 
     /**
      * Constructs a user with the information provided.
      * 
      * @param name The user's name.
-     * @param nutritionPlan The nutrition plan for the user.
+     * @param members The user's members.
      * @param meals The list of meals for the user.
      */
-    public User(String name, NutritionPlan nutritionPlan, List<Meal> meals)
+    public User(String name, List<Member> members, List<Meal> meals)
     {
         this.name = name;
-        this.nutritionPlan = nutritionPlan;
+        this.members = members;
         this.meals = meals;
     }
 
@@ -69,22 +70,18 @@ public class User
     public void setName(String name)
     {
         this.name = name; 
-        if (this.nutritionPlan == null)
-            this.nutritionPlan = new NutritionPlan(name);
-        else
-            this.nutritionPlan.setName(name);
     }
     
     /**
-     * Gets the List of NutritionPlans for the user.
+     * Gets the user's members.
      * 
-     * @return The list of nutrition plans for the user.
+     * @return The user's members.
      */
-    public NutritionPlan getNutritionPlan()
+    public List<Member> getMembers()
     {
-            return nutritionPlan;
+        return members;
     }
-        
+    
     /**
      * Gets the list of meals for the user.
      * 
