@@ -295,7 +295,7 @@ public class EditProfilePanel extends CreateEditPanel {
                         .addComponent(jButtonSave)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(18, 18, 18)
                         .addComponent(linkLabelDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(4, 4, 4))
             .addGroup(layout.createSequentialGroup()
