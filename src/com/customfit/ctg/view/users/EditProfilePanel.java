@@ -3,12 +3,13 @@ package com.customfit.ctg.view.users;
 import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
-import java.util.ArrayList;
-import javax.swing.ButtonModel;
-import javax.swing.table.DefaultTableModel;
+import java.util.*;
+import javax.swing.*;
+import javax.swing.event.*;
+import javax.swing.table.*;
 
 /**
- * Presents the user a way to manage account settings.
+ * Presents the user with a way to edit their user profile.
  * 
  * @author David
  */
@@ -25,13 +26,50 @@ public class EditProfilePanel extends CreateEditPanel {
         
         this.setCreateEditMode(createEditMode);
         
+        //fix the form for creation mode when selected at instantiation
         if (createEditMode == CreateEditMode.CREATE)
         {
             this.jLabelTitle.setText("Register a New User");
-            this.jTextPane1.setText("Please complete the following information in order to register a new user.\n\n" +  this.jTextPane1.getText());
+            this.jTextPaneInstructions.setText("Please complete the following information in order to register a new user.\n\n" +  this.jTextPaneInstructions.getText());
             this.jButtonSave.setText("Register User");
             this.linkLabelDelete.setVisible(false);
         }
+        
+        //add the proper nutrients to the drop down
+        this.jComboBoxTargetNutrient.removeAllItems();
+        for (String nutrient: NutritionFacts.getAllValidNutrients())
+        {
+            this.jComboBoxTargetNutrient.addItem(nutrient);
+        }
+        
+        //listen for member table events
+        DefaultTableModel dtm = (DefaultTableModel)jTableMembers.getModel();
+        dtm.addTableModelListener(new TableModelListener() {
+
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                //if column is Member
+                if (e.getColumn() == 0)
+                {
+                    //check for name identical to this one
+                    for (int row = e.getFirstRow(); row < e.getLastRow(); row++)
+                        if (((String)jTableMembers.getModel().getValueAt(row, e.getColumn())).equals(jTextFieldUser.getText()))
+                            jTableMembers.getModel().setValueAt("Member's Name", row, e.getColumn());
+                }
+                //else if column is Target
+                else if (e.getColumn() == 1)
+                {
+                    //then make sure we insert the right unit on each one
+                    for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
+                    {
+                        Measurement measurement = new Measurement((String)jTableMembers.getModel().getValueAt(row, e.getColumn()));
+                        measurement.setUnit(NutritionFacts.getUnitForNutrient((String)jComboBoxTargetNutrient.getSelectedItem()));
+                        if (!measurement.toString().equals((String)jTableMembers.getModel().getValueAt(row, e.getColumn())))
+                            jTableMembers.getModel().setValueAt(measurement.toString(), row, e.getColumn());
+                    }
+                }
+            }
+        });
     }
     
     /** This method is called from within the constructor to
@@ -50,7 +88,6 @@ public class EditProfilePanel extends CreateEditPanel {
         jButtonSave = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
         linkLabelDelete = new com.customfit.ctg.view.LinkLabel();
-        jLabel3 = new javax.swing.JLabel();
         jRadioButtonMaximumDirection = new javax.swing.JRadioButton();
         jRadioButtonMinimumDirection = new javax.swing.JRadioButton();
         jPanel1 = new javax.swing.JPanel();
@@ -63,13 +100,18 @@ public class EditProfilePanel extends CreateEditPanel {
         jLabel4 = new javax.swing.JLabel();
         jComboBoxTargetNutrient = new javax.swing.JComboBox();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        jTextPaneInstructions = new javax.swing.JTextPane();
+        jLabelNutrientUnit = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextPane2 = new javax.swing.JTextPane();
+
+        setPreferredSize(new java.awt.Dimension(550, 345));
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Edit Profile");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel1.setText("Name:");
+        jLabel1.setText("Your Name:");
 
         jTextFieldUser.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -99,9 +141,6 @@ public class EditProfilePanel extends CreateEditPanel {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel3.setText("Would you like to scale your weekly menu based on a maximum or minimum nutritional amount?");
-
         buttonGroupDirection.add(jRadioButtonMaximumDirection);
         jRadioButtonMaximumDirection.setText("Maximum Amount");
         jRadioButtonMaximumDirection.setActionCommand("Maximum");
@@ -117,17 +156,19 @@ public class EditProfilePanel extends CreateEditPanel {
 
             },
             new String [] {
-                "Member", "Target Amount Per Day"
+                "Member", "Targeted Nutrient Amount Per Day"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Double.class
+                java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
+        jTableMembers.setCellSelectionEnabled(true);
+        jTableMembers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableMembers.getTableHeader().setReorderingAllowed(false);
         scrollPaneIngedients.setViewportView(jTableMembers);
 
@@ -154,8 +195,8 @@ public class EditProfilePanel extends CreateEditPanel {
                 .addComponent(jButtonAddMember, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveMember, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(613, Short.MAX_VALUE))
-            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                .addContainerGap(495, Short.MAX_VALUE))
+            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,81 +205,108 @@ public class EditProfilePanel extends CreateEditPanel {
                     .addComponent(jButtonRemoveMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonAddMember, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel2.setText("Target Nutrient:");
+        jLabel2.setText("Targeted Nutrient:");
 
+        jTextFieldTargetAmount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTargetAmountActionPerformed(evt);
+            }
+        });
         jTextFieldTargetAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldTargetAmountKeyReleased(evt);
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11));
-        jLabel4.setText("Target Amount Per Day:");
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setText("per day");
 
         jComboBoxTargetNutrient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Calories", "Fat", "Sodium" }));
+        jComboBoxTargetNutrient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxTargetNutrientActionPerformed(evt);
+            }
+        });
 
         jScrollPane2.setBorder(null);
 
-        jTextPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
-        jTextPane1.setBorder(null);
-        jTextPane1.setEditable(false);
-        jTextPane1.setText("Please enter your name and your nutritional goals. You may specify a minimum goal or a maximum goal.  This will affect your meal portioning sizes and other calculations.");
-        jTextPane1.setFocusable(false);
-        jTextPane1.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        jTextPane1.setOpaque(false);
-        jTextPane1.setVerifyInputWhenFocusTarget(false);
-        jScrollPane2.setViewportView(jTextPane1);
+        jTextPaneInstructions.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
+        jTextPaneInstructions.setBorder(null);
+        jTextPaneInstructions.setEditable(false);
+        jTextPaneInstructions.setText("Please enter your name and your nutritional goals. You may specify a minimum goal or a maximum goal.  This will affect your meal portioning sizes and other calculations.");
+        jTextPaneInstructions.setFocusable(false);
+        jTextPaneInstructions.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jTextPaneInstructions.setOpaque(false);
+        jTextPaneInstructions.setVerifyInputWhenFocusTarget(false);
+        jScrollPane2.setViewportView(jTextPaneInstructions);
+
+        jLabelNutrientUnit.setText("units");
+
+        jScrollPane3.setBorder(null);
+
+        jTextPane2.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
+        jTextPane2.setBorder(null);
+        jTextPane2.setEditable(false);
+        jTextPane2.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jTextPane2.setText("Would you like to scale your weekly menu based on a maximum or minimum nutritional amount?");
+        jTextPane2.setFocusable(false);
+        jTextPane2.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        jTextPane2.setOpaque(false);
+        jTextPane2.setVerifyInputWhenFocusTarget(false);
+        jScrollPane3.setViewportView(jTextPane2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                        .addGap(522, 522, 522))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(34, 34, 34)
-                                .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(jRadioButtonMaximumDirection)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButtonMinimumDirection)))
-                        .addContainerGap(465, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                            .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
-                        .addGap(558, 558, 558))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jComboBoxTargetNutrient, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextFieldTargetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(430, 430, 430))
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jRadioButtonMaximumDirection)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jRadioButtonMinimumDirection)))
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jButtonSave)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(linkLabelDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(363, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 692, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(linkLabelDelete, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(4, 4, 4))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2)
+                .addGap(10, 10, 10)
+                .addComponent(jComboBoxTargetNutrient, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextFieldTargetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabelNutrientUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel4)
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -252,21 +320,20 @@ public class EditProfilePanel extends CreateEditPanel {
                     .addComponent(jLabel1)
                     .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRadioButtonMaximumDirection)
                     .addComponent(jRadioButtonMinimumDirection))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jComboBoxTargetNutrient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextFieldTargetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(jComboBoxTargetNutrient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTargetAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabelNutrientUnit)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
@@ -323,8 +390,7 @@ public class EditProfilePanel extends CreateEditPanel {
 
     private void jButtonAddMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMemberActionPerformed
         DefaultTableModel dtm = (DefaultTableModel)jTableMembers.getModel();
-        dtm.addRow(new Object [] {null, null, null});
-        jTableMembers.setModel(dtm);
+        dtm.addRow(new Object [] {"Member's Name", "0.0 " + NutritionFacts.getUnitForNutrient((String)jComboBoxTargetNutrient.getSelectedItem())});
 }//GEN-LAST:event_jButtonAddMemberActionPerformed
 
     private void jButtonRemoveMemberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMemberActionPerformed
@@ -332,8 +398,6 @@ public class EditProfilePanel extends CreateEditPanel {
         if (currentRow != -1) {
             DefaultTableModel dtm = (DefaultTableModel)jTableMembers.getModel();
             dtm.removeRow(currentRow);
-
-            jTableMembers.setModel(dtm);
             if (currentRow < jTableMembers.getRowCount())
                 jTableMembers.setRowSelectionInterval(currentRow, currentRow);
         }
@@ -342,6 +406,26 @@ public class EditProfilePanel extends CreateEditPanel {
     private void jTextFieldTargetAmountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTargetAmountKeyReleased
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldTargetAmountKeyReleased
+
+    private void jComboBoxTargetNutrientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTargetNutrientActionPerformed
+        if (this.jComboBoxTargetNutrient.getItemCount() > 0 && this.jComboBoxTargetNutrient.getSelectedItem() != null)
+        {
+            String newUnit = NutritionFacts.getUnitForNutrient((String)this.jComboBoxTargetNutrient.getSelectedItem());
+            //update unit for the nutrient
+            this.jLabelNutrientUnit.setText(newUnit);
+            //update unit for every member
+            for (int memberRow = 0; memberRow < this.jTableMembers.getModel().getRowCount(); memberRow++)
+            {
+                Measurement measurement = new Measurement((String)this.jTableMembers.getModel().getValueAt(0, 1));
+                measurement.setUnit(newUnit);
+                this.jTableMembers.getModel().setValueAt(measurement.toString(), memberRow, 1);
+            }
+        }
+    }//GEN-LAST:event_jComboBoxTargetNutrientActionPerformed
+
+    private void jTextFieldTargetAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTargetAmountActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTargetAmountActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -353,17 +437,19 @@ public class EditProfilePanel extends CreateEditPanel {
     private javax.swing.JComboBox jComboBoxTargetNutrient;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabelNutrientUnit;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JRadioButton jRadioButtonMaximumDirection;
     private javax.swing.JRadioButton jRadioButtonMinimumDirection;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableMembers;
     private javax.swing.JTextField jTextFieldTargetAmount;
     private javax.swing.JTextField jTextFieldUser;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JTextPane jTextPane2;
+    private javax.swing.JTextPane jTextPaneInstructions;
     private com.customfit.ctg.view.LinkLabel linkLabelDelete;
     private javax.swing.JScrollPane scrollPaneIngedients;
     // End of variables declaration//GEN-END:variables
@@ -385,26 +471,60 @@ public class EditProfilePanel extends CreateEditPanel {
      * @param user 
      */
     public void setUser(User user) {
-        //store user in here
+        //store user
         this.user = user;
-        //fill out form with current user data
+        //set user name box
         this.jTextFieldUser.setText(user.getName());
+        //set the min/max radio
+        Enumeration<AbstractButton> directionButtons = this.buttonGroupDirection.getElements();
+        while (directionButtons.hasMoreElements())
+        {
+            AbstractButton buttonDirection = directionButtons.nextElement();
+            if (buttonDirection.getActionCommand().equals("Maximum")
+                    && this.user.getOwnMember().getGoalDirection() == GoalDirection.MAXIMUM_GOAL)
+            {
+                this.buttonGroupDirection.setSelected(buttonDirection.getModel(), true);
+            }
+            else if (buttonDirection.getActionCommand().equals("Minimum")
+                    && this.user.getOwnMember().getGoalDirection() == GoalDirection.MINIMUM_GOAL)
+            {
+                this.buttonGroupDirection.setSelected(buttonDirection.getModel(), true);
+            }
+        }
+        //set targeted nutrient
+        for (int n = 0; n < this.jComboBoxTargetNutrient.getItemCount(); n++)
+        {
+            if (((String)this.jComboBoxTargetNutrient.getItemAt(n)).equals(user.getTrackedNutrient()))
+                this.jComboBoxTargetNutrient.setSelectedIndex(n);
+        }
+        //set own nutrient information
+        Member ownMember = user.getOwnMember();
+        this.jTextFieldTargetAmount.setText(Double.valueOf(ownMember.getGoal().getQuantity()).toString());
+        this.jLabelNutrientUnit.setText(ownMember.getGoal().getUnit());
+        this.jComboBoxTargetNutrient.setSelectedItem(user.getTrackedNutrient());
+        //set other member targets
+        DefaultTableModel membersTableModel = (DefaultTableModel) this.jTableMembers.getModel();
+        for (Member member : user.getAllOtherMembers())
+        {
+            membersTableModel.addRow(new Object[]{
+                member.getName(), member.getGoal().toString()
+            });
+        }
     }
     
     /**
-     * Sets the User for which the form will be laid out.
-     * @param user 
+     * Generates a User object based on the form data.
+     * 
+     * @param user User made from the form data.
      */
     public User getUser()
     {
-        NutritionFacts nutritionGoals = NutritionFacts.EmptyNutritionFacts;
         ArrayList<Member> members = new ArrayList<Member>();
         {
-            //run this for the user itself
+            //build user's member
             String memberName = this.jTextFieldUser.getText();
             Double amount = Double.parseDouble(this.jTextFieldTargetAmount.getText());
             Measurement goal = new Measurement(amount, (String)jComboBoxTargetNutrient.getSelectedItem());
-            GoalDirection goalDirection = GoalDirection.MAXIMUM_GOAL;
             if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Maximum"))
                 members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
             else if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Minimum"))
@@ -412,11 +532,10 @@ public class EditProfilePanel extends CreateEditPanel {
         }
         for (int memberRow = 0; memberRow < this.jTableMembers.getModel().getRowCount(); memberRow++)
         {
-            //run this for all the members
+            //build all other members
             String memberName = (String)this.jTableMembers.getModel().getValueAt(memberRow, 0);
-            Double amount = (Double)this.jTableMembers.getModel().getValueAt(memberRow, 1);
-            Measurement goal = new Measurement(amount, (String)jComboBoxTargetNutrient.getSelectedItem());
-            GoalDirection goalDirection = GoalDirection.MAXIMUM_GOAL;
+            String amount = (String)this.jTableMembers.getModel().getValueAt(memberRow, 1);
+            Measurement goal = new Measurement(amount);
             ButtonModel model = (ButtonModel)this.buttonGroupDirection.getSelection();
             if (model.getActionCommand().equals("Maximum"))
                 members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
@@ -424,16 +543,20 @@ public class EditProfilePanel extends CreateEditPanel {
                 members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
         }
         if (this.getCreateEditMode() == CreateEditMode.CREATE)
+            //create a new user
             return new User(
                     this.jTextFieldUser.getText(),
                     members,
-                    new ArrayList<Meal>()
+                    new ArrayList<Meal>(),
+                    (String)this.jComboBoxTargetNutrient.getSelectedItem()
                     );
         else if (this.getCreateEditMode() == CreateEditMode.EDIT)
+            //create a new user from the existing user (i.e., keep meals)
             return new User(
                     this.jTextFieldUser.getText(),
                     members,
-                    this.user.getMeals()
+                    this.user.getMeals(),
+                    (String)this.jComboBoxTargetNutrient.getSelectedItem()
                     );
         else
             return null;

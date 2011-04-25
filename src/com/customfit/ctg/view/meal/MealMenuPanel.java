@@ -303,7 +303,7 @@ public class MealMenuPanel extends SubPanel {
 
     private void linkLabelHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelHomeActionPerformed
         //tell controller to go home
-        UserManagement.viewProfile();
+        UserManagement.viewHome();
     }//GEN-LAST:event_linkLabelHomeActionPerformed
 
     private void linkLabelAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNewActionPerformed

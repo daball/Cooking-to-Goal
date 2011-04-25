@@ -59,6 +59,8 @@ public class UserManagement {
      */
     public static boolean registerUserAndPresentLogin(User user)
     {
+        //save it here
+        UserManagement.currentUser = user;
         //send it over to the database
         boolean status = Application.getDataDriver().insertUser(user);
         //check for errors
@@ -66,20 +68,20 @@ public class UserManagement {
             //if failed, tell user about the failure
             JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem registering your user.", "Error", JOptionPane.ERROR_MESSAGE);
         else
-            //otherwise, assume success and present login
-            UserManagement.presentLogin();
+            //otherwise, assume success and present home
+            UserManagement.viewHome(user);
         //return status
         return status;
     }
 
     /**
-     * Activates View Profile application feature, which displays
+     * Activates View Home application feature, which displays
      * a View Profile JPanel to display the profile of the provided
      * User object.
      * 
      * @param user The user for which there is a profile to show in view.
      */
-    public static void viewProfile(User user)
+    public static void viewHome(User user)
     {
         //create profile panel
         HomePanel profilePanel = new HomePanel();
@@ -92,14 +94,14 @@ public class UserManagement {
     }
     
     /**
-     * Activates View Profile application feature, which displays
+     * Activates View Home application feature, which displays
      * a View Profile JPanel to display the profile of the provided
      * User object, for the currently logged in user.
      */
-    public static void viewProfile()
+    public static void viewHome()
     {
         //call overload
-        viewProfile(currentUser);
+        viewHome(currentUser);
     }
 
     /**
@@ -133,13 +135,16 @@ public class UserManagement {
     public static boolean updateRegistrationAndGoBack(String originalUserName, User newUser)
     {
         boolean status = Application.getDataDriver().updateUserByName(originalUserName, newUser);
+        UserManagement.currentUser = newUser;
          //check for errors
         if (!status)
             //if failed, tell user about the failure
             JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem updating your user registration.", "Error", JOptionPane.ERROR_MESSAGE);
         else
+        {
             //now login user
             UserManagement.finishLogin(newUser);
+        }
        return status;
     }
 
@@ -222,7 +227,7 @@ public class UserManagement {
         //save login
         currentUser = user;
         //show user profile home
-        UserManagement.viewProfile();
+        UserManagement.viewHome();
     }
     
     /**

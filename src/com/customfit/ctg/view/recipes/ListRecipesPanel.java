@@ -211,7 +211,7 @@ public class ListRecipesPanel extends SubPanel {
 
     private void linkLabelHomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelHomeActionPerformed
         //tell controller to go home
-        UserManagement.viewProfile();
+        UserManagement.viewHome();
     }//GEN-LAST:event_linkLabelHomeActionPerformed
 
     private void jButtonEditRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditRecipeActionPerformed

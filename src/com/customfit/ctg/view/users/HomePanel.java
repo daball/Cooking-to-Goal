@@ -234,7 +234,7 @@ public class HomePanel extends SubPanel {
         //if user hit Profile Home
         if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Profile Home"))
             //then tell the controller about it
-            UserManagement.viewProfile();
+            UserManagement.viewHome();
         //if user hit Edit User
         else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit User"))
             //then tell the controller about it
@@ -261,7 +261,7 @@ public class HomePanel extends SubPanel {
     }//GEN-LAST:event_linkLabelAddNew2ActionPerformed
 
     private void linkLabelEditUserSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelEditUserSettingsActionPerformed
-        UserManagement.viewProfile();
+        UserManagement.viewHome();
     }//GEN-LAST:event_linkLabelEditUserSettingsActionPerformed
 
 

@@ -14,7 +14,7 @@ public class Member {
     private String name;
 
     /**
-     * The goal set out in the NutritionPlan.
+     * The nutritional goal set for the Member.
      */
     private Measurement goal;
 

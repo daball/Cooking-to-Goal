@@ -47,7 +47,8 @@ public class Meal {
      * 
      * @param date The date/time the meal.
      */
-    public void setDate(Date date) {
+    public void setDate(Date date)
+    {
         this.date = date;
     }
 
@@ -56,7 +57,8 @@ public class Meal {
      * 
      * @return The list of members that will be dining at the meal.
      */
-    public int getMemberCount() {
+    public int getMemberCount()
+    {
         return this.memberCount;
     }
 
@@ -64,7 +66,8 @@ public class Meal {
      * Sets the list of members that will be dining at the meal.
      * @param memberCount The list of members that will be dining at the meal.
      */
-    public void setMemberCount(int memberCount) {
+    public void setMemberCount(int memberCount)
+    {
         this.memberCount = memberCount;
     }
 
@@ -73,7 +76,8 @@ public class Meal {
      * 
      * @return The name of the meal.
      */
-    public String getName() {
+    public String getName()
+    {
         return this.name;
     }
 
@@ -82,7 +86,8 @@ public class Meal {
      * 
      * @param name The name of the meal.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
 
@@ -91,7 +96,8 @@ public class Meal {
      * 
      * @return The list of recipes that constitutes a meal.
      */
-    public List<Recipe> getRecipes() {
+    public List<Recipe> getRecipes()
+    {
         return recipes;
     }
 
@@ -100,8 +106,13 @@ public class Meal {
      * 
      * @param recipes The list of recipes that constitutes a meal.
      */
-    public void setRecipes(List<Recipe> recipes) {
+    public void setRecipes(List<Recipe> recipes)
+    {
         this.recipes = recipes;
     }
+    
+//    public void scaleAllRecipesToMemberNutritionalPlans() {
+//
+//    }
     
 }

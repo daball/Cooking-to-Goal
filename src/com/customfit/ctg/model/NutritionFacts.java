@@ -1,6 +1,8 @@
 package com.customfit.ctg.model;
 
 import com.customfit.ctg.controller.*;
+import java.lang.reflect.*;
+import java.util.*;
 
 /**
  * A NutritionFacts model for nutrition facts table.
@@ -560,5 +562,240 @@ public class NutritionFacts{
     {
         return NutritionFacts.scaleNutritionFacts(this, scaleFactor);
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    public static String[] getAllValidNutrients()
+    {
+        String[] nutrients = new String[] {};
+        ArrayList<String> nutrientList = new ArrayList<String>();
+        //use an empty nutrition facts
+        NutritionFacts sampleNutritionFacts = NutritionFacts.EmptyNutritionFacts;
+        Measurement sampleMeasurement = new Measurement(0.0, "units");
+        for (Field field : sampleNutritionFacts.getClass().getDeclaredFields())
+        {
+            if (field.getType().getName().equals(Measurement.class.getName()))
+            {
+                String nutrientName = field.getName();
+                char[] nutrientNameLetters = nutrientName.toCharArray();
+                nutrientName = "";
+                for (char letter : nutrientNameLetters)
+                {
+                    //add spaces between the words
+                    String letterString = new String(new char[] { letter });
+                    if (letterString.matches("[A-Z]"))
+                        nutrientName += " ";
+                    nutrientName += letterString;
+                }
+                //trim white space around the edges
+                nutrientName = nutrientName.trim();
+                //capitalize first letter
+                nutrientName = nutrientName.substring(0, 1).toUpperCase()
+                        + nutrientName.substring(1, nutrientName.length());
+                //add indents as needed
+                if (nutrientName.equals("Saturated Fat") || nutrientName.equals("Trans Fat")
+                        || nutrientName.equals("Dietary Fiber") || nutrientName.equals("Sugars"))
+                    nutrientName = "     " + nutrientName;
+                nutrientList.add(nutrientName);
+            }
+        }
+        return nutrientList.toArray(nutrients);
+    }
+    
+    /**
+     * Returns the unit name used for an nutrient name.
+     * 
+     * @param nutrientName Nutrient name as returned by
+     * the getAllValidNutrients() static method.
+     * 
+     * @return Measurement unit for the nutrient.
+     */
+    public static String getUnitForNutrient(String nutrientName)
+    {
+        if (nutrientName.trim().isEmpty())
+            return "units";
+            
+        //remove spaces (makeItCamelCaseLikeThis)
+        nutrientName = nutrientName.trim();
+        String nutrientFieldName = nutrientName.substring(0, 1).toLowerCase() +
+                nutrientName.substring(1, nutrientName.length()).replaceAll(" ", "");
+        String nutrientFieldSetterName = "set" + nutrientName.replaceAll(" ", "");
+        String nutrientFieldGetterName = "get" + nutrientName.replaceAll(" ", "");
+        
+        //use an empty nutrition facts
+        NutritionFacts sampleNutritionFacts = NutritionFacts.EmptyNutritionFacts;
+        for (Field field : sampleNutritionFacts.getClass().getDeclaredFields())
+        {
+            //call the setter
+            if (field.getType().getName().equals(Measurement.class.getName()) &&
+                    field.getName().toLowerCase().equals(nutrientFieldName.toLowerCase()))
+            {
+                for (Method method: sampleNutritionFacts.getClass().getDeclaredMethods())
+                {
+                    if (method.getName().equals(nutrientFieldSetterName) && (method.getParameterTypes()[0].isPrimitive() ||
+                            method.getParameterTypes()[0].getClass().getName().equals(Double.class.getName())))
+                    {
+                        try {
+                            method.invoke(sampleNutritionFacts, Double.valueOf(0.0).doubleValue());
+                        } catch (IllegalAccessException ex) {
+                            Application.dumpException("Error getting unit for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        } catch (IllegalArgumentException ex) {
+                            Application.dumpException("Error getting unit for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        } catch (InvocationTargetException ex) {
+                            Application.dumpException("Error getting unit for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        }
+                    }
+                }
+                //call the getter
+                Object measurementObject = null;
+                for (Method method: sampleNutritionFacts.getClass().getDeclaredMethods())
+                {                        
+                    if (method.getName().equals(nutrientFieldGetterName) && !method.getReturnType().isPrimitive() &&
+                            method.getReturnType().getName().equals(Measurement.class.getName()))
+                    {
+                        try {
+                            measurementObject = method.invoke(sampleNutritionFacts, null);
+                        } catch (IllegalAccessException ex) {
+                            Application.dumpException("Error getting unit for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
+                        } catch (IllegalArgumentException ex) {
+                            Application.dumpException("Error getting unit for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
+                        } catch (InvocationTargetException ex) {
+                            Application.dumpException("Error getting unit for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
+                        }
+                    }
+                }
+                //cast back to a Measurement
+                Measurement measurement = null;
+                if (measurementObject != null)
+                    measurement = (Measurement) measurementObject;
+                //STEAL the measurement unit directly out of the getter function, which implements things perfectly
+                if (measurement != null)
+                    return measurement.getUnit();
+            }
+        }
+        //otherwise tell a lie
+        return "units";
+    }
 
+    /**
+     * Get the Measurement for a nutrient.
+     * 
+     * @param nutrientName Nutrient name as returned by
+     * the getAllValidNutrients() static method.
+     * 
+     * @return Measurement of the specified nutrient.
+     */
+    public Measurement getNutrient(String nutrientName)
+    {
+        if (nutrientName.trim().isEmpty())
+            return null;
+            
+        //remove spaces (makeItCamelCaseLikeThis)
+        nutrientName = nutrientName.trim();
+        String nutrientFieldName = nutrientName.substring(0, 1).toLowerCase() +
+                nutrientName.substring(1, nutrientName.length()).replaceAll(" ", "");
+        String nutrientFieldSetterName = "set" + nutrientName.replaceAll(" ", "");
+        String nutrientFieldGetterName = "get" + nutrientName.replaceAll(" ", "");
+        
+        //use an empty nutrition facts
+        for (Field field : this.getClass().getDeclaredFields())
+        {
+            //call the setter
+            if (field.getType().getName().equals(Measurement.class.getName()) &&
+                    field.getName().toLowerCase().equals(nutrientFieldName.toLowerCase()))
+            {
+                for (Method method: this.getClass().getDeclaredMethods())
+                {
+                    if (method.getName().equals(nutrientFieldSetterName) && (method.getParameterTypes()[0].isPrimitive() ||
+                            method.getParameterTypes()[0].getClass().getName().equals(Double.class.getName())))
+                    {
+                        try {
+                            method.invoke(this, Double.valueOf(0.0).doubleValue());
+                        } catch (IllegalAccessException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        } catch (IllegalArgumentException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        } catch (InvocationTargetException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        }
+                    }
+                }
+                //call the getter
+                Object measurementObject = null;
+                for (Method method: this.getClass().getDeclaredMethods())
+                {                        
+                    if (method.getName().equals(nutrientFieldGetterName) && !method.getReturnType().isPrimitive() &&
+                            method.getReturnType().getName().equals(Measurement.class.getName()))
+                    {
+                        try {
+                            measurementObject = method.invoke(this, null);
+                        } catch (IllegalAccessException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
+                        } catch (IllegalArgumentException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
+                        } catch (InvocationTargetException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
+                        }
+                    }
+                }
+                //cast back to a Measurement
+                Measurement measurement = null;
+                if (measurementObject != null)
+                    measurement = (Measurement) measurementObject;
+                //STEAL the measurement unit directly out of the getter function, which implements things perfectly
+                if (measurement != null)
+                    return measurement;
+            }
+        }
+        //otherwise drop nothing
+        return null;
+    }
+    
+    /**
+     * Sets the Measurement for a nutrient.
+     * 
+     * @param nutrientName Nutrient name as returned by
+     * the getAllValidNutrients() static method.
+     * @param measurementQuantity Measurement quantity of the specified nutrient.
+     */
+    public void setNutrient(String nutrientName, double measurementQuantity)
+    {
+        if (nutrientName.trim().isEmpty())
+            return;
+            
+        //remove spaces (makeItCamelCaseLikeThis)
+        nutrientName = nutrientName.trim();
+        String nutrientFieldName = nutrientName.substring(0, 1).toLowerCase() +
+                nutrientName.substring(1, nutrientName.length()).replaceAll(" ", "");
+        String nutrientFieldSetterName = "set" + nutrientName.replaceAll(" ", "");
+        String nutrientFieldGetterName = "get" + nutrientName.replaceAll(" ", "");
+        
+        //use an empty nutrition facts
+        for (Field field : this.getClass().getDeclaredFields())
+        {
+            //call the setter
+            if (field.getType().getName().equals(Measurement.class.getName()) &&
+                    field.getName().toLowerCase().equals(nutrientFieldName.toLowerCase()))
+            {
+                for (Method method: this.getClass().getDeclaredMethods())
+                {
+                    if (method.getName().equals(nutrientFieldSetterName) && (method.getParameterTypes()[0].isPrimitive() ||
+                            method.getParameterTypes()[0].getClass().getName().equals(Double.class.getName())))
+                    {
+                        try {
+                            method.invoke(this, measurementQuantity);
+                        } catch (IllegalAccessException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        } catch (IllegalArgumentException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        } catch (InvocationTargetException ex) {
+                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

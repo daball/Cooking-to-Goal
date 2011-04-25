@@ -261,4 +261,5 @@ public class Recipe {
     {
         return Recipe.scaleRecipeToServings(this, toServings);
     }
+    
 }
