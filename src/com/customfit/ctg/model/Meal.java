@@ -26,11 +26,11 @@ public class Meal {
      * The list of recipes that constitutes a meal.
      */
     private List<Recipe> recipes = new ArrayList<Recipe>();
-
+    
     /**
-     * The number of members that will be dining at the meal.
+     * The list of members that constitutes a meal.
      */
-    private int memberCount;
+    private List<Member> members = new ArrayList<Member>();
 
     /**
      * Gets the date/time the meal.
@@ -50,25 +50,6 @@ public class Meal {
     public void setDate(Date date)
     {
         this.date = date;
-    }
-
-    /**
-     * Gets the list of members that will be dining at the meal.
-     * 
-     * @return The list of members that will be dining at the meal.
-     */
-    public int getMemberCount()
-    {
-        return this.memberCount;
-    }
-
-    /**
-     * Sets the list of members that will be dining at the meal.
-     * @param memberCount The list of members that will be dining at the meal.
-     */
-    public void setMemberCount(int memberCount)
-    {
-        this.memberCount = memberCount;
     }
 
     /**
@@ -111,8 +92,31 @@ public class Meal {
         this.recipes = recipes;
     }
     
-//    public void scaleAllRecipesToMemberNutritionalPlans() {
-//
-//    }
+    public void scaleAllRecipesToMemberNutritionalPlans() {
+
+    }
     
+    @Override
+    public boolean equals(Object object)
+    {
+       Meal meal = (Meal)object;
+       if (this.name.equals(meal.name)
+               && this.date.equals(meal.date)
+               && this.recipes.size() == meal.recipes.size()
+               && this.members.size() == meal.members.size())
+       {
+           for (int recipe = 0; recipe < this.recipes.size(); recipe++)
+           {
+               if (!this.recipes.get(recipe).equals(meal.recipes.get(recipe)))
+                   return false;
+           }
+           for (int member = 0; member < this.members.size(); member++)
+           {
+               if (!this.members.get(member).equals(meal.members.get(member)))
+                   return false;
+           }
+           return true;
+       }
+       return false;
+    }   
 }

@@ -105,7 +105,7 @@ public class EditProfilePanel extends CreateEditPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPane2 = new javax.swing.JTextPane();
 
-        setPreferredSize(new java.awt.Dimension(550, 345));
+        setPreferredSize(new java.awt.Dimension(575, 345));
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Edit Profile");
@@ -195,8 +195,8 @@ public class EditProfilePanel extends CreateEditPanel {
                 .addComponent(jButtonAddMember, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveMember, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(495, Short.MAX_VALUE))
-            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 562, Short.MAX_VALUE)
+                .addContainerGap(503, Short.MAX_VALUE))
+            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,7 +222,7 @@ public class EditProfilePanel extends CreateEditPanel {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel4.setText("per day");
 
         jComboBoxTargetNutrient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Calories", "Fat", "Sodium" }));
@@ -268,7 +268,7 @@ public class EditProfilePanel extends CreateEditPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
                             .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -277,7 +277,7 @@ public class EditProfilePanel extends CreateEditPanel {
                         .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 568, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jRadioButtonMaximumDirection)
@@ -306,7 +306,7 @@ public class EditProfilePanel extends CreateEditPanel {
                 .addComponent(jLabelNutrientUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(196, Short.MAX_VALUE))
+                .addContainerGap(204, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -344,21 +344,7 @@ public class EditProfilePanel extends CreateEditPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTextFieldUserKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldUserKeyReleased
-        //if user name is longer than two characters
-        if (this.jTextFieldUser.getText().length() > 2)
-        {
-            //now check and see that the data is dirty
-            if (this.user != null && this.jTextFieldUser.getText().equals(this.user.getName()))
-                //disable sign up if it isn't
-                this.jButtonSave.setEnabled(false);
-            else
-                //otherwise permit registration
-                this.jButtonSave.setEnabled(true);
-        }
-        //otherwise
-        else
-            //disable sign up
-            this.jButtonSave.setEnabled(false);
+        this.validateForm();
 }//GEN-LAST:event_jTextFieldUserKeyReleased
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
@@ -560,5 +546,22 @@ public class EditProfilePanel extends CreateEditPanel {
                     );
         else
             return null;
+    }
+    
+    /**
+     * Makes sure we are good to save before actually enabling the save button.
+     */
+    private void validateForm()
+    {
+        boolean disableSaves = false;
+        if (this.jTextFieldUser.getText().trim().length() <= 2)
+            disableSaves = true;
+        else if (this.buttonGroupDirection.getSelection() == null)
+            disableSaves = true;
+        else if (this.jTextFieldUser.getText().trim().length() == 0)
+            disableSaves = true;
+        else if (this.getCreateEditMode() == CreateEditMode.EDIT && this.user.equals(this.getUser()))
+            disableSaves = true;
+        this.jButtonSave.setEnabled(!disableSaves);
     }
 }

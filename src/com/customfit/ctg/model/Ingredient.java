@@ -38,4 +38,13 @@ public class Ingredient{
     public void setName(String name) {
             this.name = name;
     }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+       Ingredient ingredient = (Ingredient)object;
+       if (this.name.equals(ingredient.name))
+           return true;
+       return false;
+    }
 }

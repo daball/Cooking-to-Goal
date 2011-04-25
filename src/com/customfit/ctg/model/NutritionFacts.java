@@ -798,4 +798,16 @@ public class NutritionFacts{
             }
         }
     }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+       NutritionFacts nutritionFacts = (NutritionFacts)object;
+       for (String nutrient: getAllValidNutrients())
+       {
+           if (!getNutrient(nutrient).equals(nutritionFacts.getNutrient(nutrient)))
+               return false;
+       }
+       return true;
+    }
 }

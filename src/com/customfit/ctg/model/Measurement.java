@@ -204,6 +204,16 @@ public class Measurement implements Comparable<Measurement> {
     {
         return Measurement.measurementToOunces(this);
     }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+       Measurement measurement = (Measurement)object;
+       if (this.unit.equals(measurement.unit)
+               && this.quantity == measurement.quantity)
+           return true;
+       return false;
+    }
 
     /**
      * Represents a sample of the US Customary measurement units.

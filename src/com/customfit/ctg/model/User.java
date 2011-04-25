@@ -313,4 +313,28 @@ public class User
 
         return meals;
    }
+   
+    @Override
+    public boolean equals(Object object)
+    {
+       User user = (User)object;
+       if (this.name.equals(user.name)
+               && this.trackedNutrient.equals(user.trackedNutrient)
+               && this.meals.size() == user.meals.size()
+               && this.members.size() == user.members.size())
+       {
+           for (int meal = 0; meal < this.meals.size(); meal++)
+           {
+               if (!this.meals.get(meal).equals(user.meals.get(meal)))
+                   return false;
+           }
+           for (int member = 0; member < this.members.size(); member++)
+           {
+               if (!this.members.get(member).equals(user.members.get(member)))
+                   return false;
+           }
+           return true;
+       }
+       return false;
+    }
 }

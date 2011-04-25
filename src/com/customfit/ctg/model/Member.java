@@ -94,4 +94,15 @@ public class Member {
     public void setGoalDirection(GoalDirection goalDirection) {
         this.goalDirection = goalDirection;
     }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+       Member member = (Member)object;
+       if (this.name.equals(member.name)
+               && this.goal.equals(member.goal)
+               && this.goalDirection == member.goalDirection)
+           return true;
+       return false;
+    }
 }

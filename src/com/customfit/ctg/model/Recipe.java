@@ -262,4 +262,26 @@ public class Recipe {
         return Recipe.scaleRecipeToServings(this, toServings);
     }
     
+    @Override
+    public boolean equals(Object object)
+    {
+       Recipe recipe = (Recipe)object;
+       if (this.name.equals(recipe.name)
+               && this.instructions.equals(recipe.instructions)
+               && this.servings == recipe.servings
+               && this.servingSize.equals(recipe.servingSize)
+               && this.rating == recipe.rating
+               && this.ingredients.size() == recipe.ingredients.size()
+               && this.nutritionInformation.equals(recipe.nutritionInformation))
+       {
+           for (int ingredient = 0; ingredient < this.ingredients.size(); ingredient++)
+           {
+               if (!this.ingredients.get(ingredient).equals(recipe.ingredients.get(ingredient)))
+                   return false;
+           }
+           return true;
+       }
+       return false;
+    }
+   
 }

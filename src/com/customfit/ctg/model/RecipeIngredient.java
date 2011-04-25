@@ -117,5 +117,15 @@ public class RecipeIngredient extends Ingredient{
     {
         return RecipeIngredient.scaleRecipeIngredient(this, scaleFactor);
     }
+    
+    @Override
+    public boolean equals(Object object)
+    {
+       RecipeIngredient recipeIngredient = (RecipeIngredient)object;
+       if (super.equals(object)
+               && this.amount.equals(recipeIngredient.amount))
+           return true;
+       return false;
+    }
 
 }
