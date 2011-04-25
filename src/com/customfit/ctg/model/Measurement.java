@@ -1,6 +1,11 @@
 package com.customfit.ctg.model;
 
 import com.customfit.ctg.controller.*;
+import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * A Measurement represents what, in science, is typically
@@ -244,6 +249,25 @@ public class Measurement implements Comparable<Measurement> {
             TABLESPOONS,
             TEASPOONS
         };
+        
+        public static String[] getAllUSAUnits()
+        {
+            ArrayList<String> fields = new ArrayList<String>();
+            USAUnits usaUnits = new USAUnits();
+            for (Field field : usaUnits.getClass().getDeclaredFields())
+            {
+                if (field.getType().getName().equals(new String().getClass().getName()))
+                    try {
+                        fields.add((String)field.get(new USAUnits()));
+                    } catch (IllegalAccessException ex) {
+                        Application.dumpException("Error getting unit from USAUnits.", ex);
+                    } catch (IllegalArgumentException ex) {
+                        Application.dumpException("Error getting unit from USAUnits.", ex);
+                    }
+            }
+            return fields.toArray(new String[] {});
+        }
+
     }
 
     /**
@@ -261,6 +285,24 @@ public class Measurement implements Comparable<Measurement> {
             GRAMS,
             MILLIGRAMS
         };
+        
+        public static String[] getAllMetricUnits()
+        {
+            ArrayList<String> fields = new ArrayList<String>();
+            MetricUnits metricUnits = new MetricUnits();
+            for (Field field : metricUnits.getClass().getFields())
+            {
+                if (field.getType().getName().equals(new String().getClass().getName()))
+                    try {
+                        fields.add((String)field.get(new MetricUnits()));
+                    } catch (IllegalAccessException ex) {
+                        Application.dumpException("Error getting unit from MetricUnits.", ex);
+                    } catch (IllegalArgumentException ex) {
+                        Application.dumpException("Error getting unit from MetricUnits.", ex);
+                    }
+            }
+            return fields.toArray(new String[] {});
+        }
     }
 
     /**
@@ -275,6 +317,52 @@ public class Measurement implements Comparable<Measurement> {
         public static final String[] ALL_UNITS = new String[] {
             CALORIES
         };
+        
+        public static String[] getAllFoodUnits()
+        {
+            ArrayList<String> fields = new ArrayList<String>();
+            FoodUnits foodUnits = new FoodUnits();
+            for (Field field : foodUnits.getClass().getDeclaredFields())
+            {
+                if (field.getType().getName().equals(new String().getClass().getName()))
+                    try {
+                        fields.add((String)field.get(new FoodUnits()));
+                    } catch (IllegalAccessException ex) {
+                        Application.dumpException("Error getting unit from FoodUnits.", ex);
+                    } catch (IllegalArgumentException ex) {
+                        Application.dumpException("Error getting unit from FoodUnits.", ex);
+                    }
+            }
+            return fields.toArray(new String[] {});
+        }
    }	
 
+
+    /**
+     * Lists all USAUnits, MetricUnits, and FoodUnits into an array.
+     * 
+     * @return All units array.
+     */
+    public static String[] getAllUnits()
+    {
+        ArrayList<String> allUnits = new ArrayList<String>();
+        allUnits.addAll(Arrays.asList(USAUnits.getAllUSAUnits()));
+        allUnits.addAll(Arrays.asList(MetricUnits.getAllMetricUnits()));
+        allUnits.addAll(Arrays.asList(FoodUnits.getAllFoodUnits()));
+        return allUnits.toArray(new String[] {});
+    }
+    
+    /**
+     * Lists all USAUnits and MetricUnits into an array. Ignores FoodUnits.
+     * 
+     * @return All units array.
+     */
+    public static String[] getAllMeasurementUnits()
+    {
+        ArrayList<String> allUnits = new ArrayList<String>();
+        allUnits.addAll(Arrays.asList(USAUnits.getAllUSAUnits()));
+        allUnits.addAll(Arrays.asList(MetricUnits.getAllMetricUnits()));
+        return allUnits.toArray(new String[] {});
+    }
+   
 }

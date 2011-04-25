@@ -3,6 +3,8 @@ package com.customfit.ctg.view.recipes;
 import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
+import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,20 +35,10 @@ public class EditRecipePanel extends CreateEditPanel {
         //setup the me-menu in the right-top corner
         this.jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Edit User", "Logout" }));
         //clear out the built-in combo box for units
-        this.jComboBoxServingSizeUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] {
-            "", //empty for just one of something i guess, let em have it just in case
-            Measurement.USAUnits.CUPS,
-            Measurement.USAUnits.DRY_OUNCES,
-            Measurement.USAUnits.GALLONS,
-            Measurement.USAUnits.LIQUID_OUNCES,
-            Measurement.USAUnits.PINTS,
-            Measurement.USAUnits.POUNDS,
-            Measurement.USAUnits.QUARTS,
-            Measurement.USAUnits.TABLESPOONS,
-            Measurement.USAUnits.TEASPOONS,
-            Measurement.MetricUnits.GRAMS,
-            Measurement.MetricUnits.MILLIGRAMS
-            }));
+        ArrayList<String> allUnits = new ArrayList<String>();
+        allUnits.add("");
+        allUnits.addAll(Arrays.asList(Measurement.getAllMeasurementUnits()));
+        this.jComboBoxServingSizeUnit.setModel(new javax.swing.DefaultComboBoxModel(allUnits.toArray(new String[] {})));
     }
 
     /** This method is called from within the constructor to

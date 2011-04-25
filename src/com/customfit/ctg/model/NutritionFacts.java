@@ -597,7 +597,7 @@ public class NutritionFacts{
                 //add indents as needed
                 if (nutrientName.equals("Saturated Fat") || nutrientName.equals("Trans Fat")
                         || nutrientName.equals("Dietary Fiber") || nutrientName.equals("Sugars"))
-                    nutrientName = "     " + nutrientName;
+                    nutrientName = "    " + nutrientName;
                 nutrientList.add(nutrientName);
             }
         }
