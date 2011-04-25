@@ -19,7 +19,7 @@ public class StarRatingTableCellRenderer extends DefaultTableCellRenderer
             ratingPanel.setRating((double)value);
             ratingPanel.setEditable(false);
             
-            table.setRowHeight(ratingPanel.getIconHeight());
+            table.setRowHeight(ratingPanel.getIconHeight()+3);
 
             return ratingPanel;
         }
