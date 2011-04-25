@@ -332,7 +332,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="com.customfit.ctg.view.StarVotingPanel" name="starVotingPanel">
+    <Container class="com.customfit.ctg.view.StarRatingPanel" name="starVotingPanel">
       <Properties>
         <Property name="scale" type="int" value="5"/>
       </Properties>

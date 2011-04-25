@@ -23,7 +23,7 @@ public class ViewRecipePanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblName3 = new javax.swing.JLabel();
-        starVotingPanel = new com.customfit.ctg.view.StarVotingPanel();
+        starVotingPanel = new com.customfit.ctg.view.StarRatingPanel();
         jLabelTitle = new javax.swing.JLabel();
         jComboBoxMeMenu = new javax.swing.JComboBox();
 
@@ -105,7 +105,7 @@ public class ViewRecipePanel extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JLabel lblName3;
-    private com.customfit.ctg.view.StarVotingPanel starVotingPanel;
+    private com.customfit.ctg.view.StarRatingPanel starVotingPanel;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -96,7 +96,7 @@ public class EditRecipePanel extends CreateEditPanel {
         jTableIngredients = new javax.swing.JTable();
         jButtonAddIngredient = new javax.swing.JButton();
         jButtonRemoveIngredient = new javax.swing.JButton();
-        starVotingPanel = new com.customfit.ctg.view.StarVotingPanel();
+        starVotingPanel = new com.customfit.ctg.view.StarRatingPanel();
         jSpinnerMakes = new javax.swing.JSpinner();
         lblName2 = new javax.swing.JLabel();
         lblName3 = new javax.swing.JLabel();
@@ -443,7 +443,7 @@ public class EditRecipePanel extends CreateEditPanel {
     private javax.swing.JLabel lblName3;
     private javax.swing.JScrollPane scrollPaneIngedients;
     private javax.swing.JScrollPane scrollPaneNutrition;
-    private com.customfit.ctg.view.StarVotingPanel starVotingPanel;
+    private com.customfit.ctg.view.StarRatingPanel starVotingPanel;
     // End of variables declaration//GEN-END:variables
 
     /**

@@ -1,20 +1,19 @@
 package com.customfit.ctg.view;
 
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.event.MouseEvent;
+import java.awt.*;
+import java.awt.event.*;
+import java.awt.image.*;
 import java.beans.*;
-import java.io.Serializable;
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
+import java.io.*;
+import javax.swing.*;
 
 /**
- * StarVotingPanel is a rating voting JPanel that displays a number of
+ * StarRatingPanel is a rating voting JPanel that displays a number of
  * stars for scoring something.
  * 
  * @author David
  */
-public class StarVotingPanel extends JPanel implements Serializable
+public class StarRatingPanel extends JPanel implements Icon, Serializable
 {
     
     /**
@@ -54,10 +53,10 @@ public class StarVotingPanel extends JPanel implements Serializable
     private ImageIcon imageIconStarOn;
 
     /**
-     * Creates a new StarVotingPanel, which displays a number of
+     * Creates a new StarRatingPanel, which displays a number of
      * stars for scoring something.
      */
-    public StarVotingPanel()
+    public StarRatingPanel()
     {
         initComponents();
         scaleSupport = new PropertyChangeSupport(this);
@@ -69,7 +68,7 @@ public class StarVotingPanel extends JPanel implements Serializable
         this.setMinimumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
         this.setMaximumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
     }
-
+    
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -122,12 +121,12 @@ public class StarVotingPanel extends JPanel implements Serializable
     
     private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
         if (this.editable)
-            this.paintScore(this.getGraphics(), mousePositionToScoreValue(evt));
+            this.paintScore(this, this.getGraphics(), 0, 0, mousePositionToScoreValue(evt));
     }//GEN-LAST:event_formMouseEntered
 
     private void formMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseMoved
         if (this.editable)
-            this.paintScore(this.getGraphics(), mousePositionToScoreValue(evt));
+            this.paintScore(this, this.getGraphics(), 0, 0, mousePositionToScoreValue(evt));
     }//GEN-LAST:event_formMouseMoved
 
     private void formMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMousePressed
@@ -250,7 +249,7 @@ public class StarVotingPanel extends JPanel implements Serializable
     @Override
     public void paint(Graphics g)
     {
-        paintScore(g, this.score);
+        paintScore(this, g, 0, 0, this.score);
     }
     
     /**
@@ -259,7 +258,7 @@ public class StarVotingPanel extends JPanel implements Serializable
      * @param g A valid Graphics instance.
      * @param score The rating to redraw.
      */
-    public void paintScore(Graphics g, int score)
+    public void paintScore(Component c, Graphics g, int x, int y, int score)
     {
         //do superclass first
         super.paint(g);
@@ -271,14 +270,14 @@ public class StarVotingPanel extends JPanel implements Serializable
             {
                 //draw bright star
                 if (this.imageIconStarOn != null)
-                    imageIconStarOn.paintIcon(this, g, s*this.imageIconStarOn.getIconWidth(), 0);
+                    imageIconStarOn.paintIcon(c, g, x + s*this.imageIconStarOn.getIconWidth(), y);
             }
             //isn't checked
             else
             {
                 //draw gray star
                 if (this.imageIconStarOff != null)
-                    imageIconStarOff.paintIcon(this, g, s*this.imageIconStarOff.getIconWidth(), 0);
+                    imageIconStarOff.paintIcon(c, g, x + s*this.imageIconStarOff.getIconWidth(), y);
             }
         }
     }
@@ -306,5 +305,27 @@ public class StarVotingPanel extends JPanel implements Serializable
     public void removeEditableChangeListener(PropertyChangeListener listener) {
         editableSupport.removePropertyChangeListener(listener);
     }
+
+    @Override
+    public void paintIcon(Component c, Graphics g, int x, int y) {
+        paintScore(c, g, x, y, this.score);
+    }
+
+    @Override
+    public int getIconWidth() {
+        return this.scale * this.imageIconStarOff.getIconWidth();
+    }
+
+    @Override
+    public int getIconHeight() {
+        return this.imageIconStarOff.getIconHeight();
+    }
     
+    public ImageIcon toImageIcon() {
+        //first create an image
+        Image image = new BufferedImage(this.getIconWidth(), this.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
+        this.paintIcon(this, image.getGraphics(), 0, 0);
+        return new ImageIcon(image);
+    }
+
 }

@@ -4,6 +4,7 @@ import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import java.util.*;
+import javax.swing.Icon;
 import javax.swing.table.*;
 import javax.swing.event.*;
 
@@ -58,6 +59,7 @@ public class ListRecipesPanel extends SubPanel {
             }
         }
         );
+        
     }
 
     /** This method is called from within the constructor to
@@ -110,7 +112,7 @@ public class ListRecipesPanel extends SubPanel {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
@@ -132,6 +134,7 @@ public class ListRecipesPanel extends SubPanel {
             }
         });
         scrollPaneTable.setViewportView(jTableRecipes);
+        jTableRecipes.getColumnModel().getColumn(1).setCellRenderer(new StarRatingTableCellRenderer());
 
         linkLabelAddNew.setText("Add a new recipe");
         linkLabelAddNew.addActionListener(new java.awt.event.ActionListener() {
@@ -186,7 +189,7 @@ public class ListRecipesPanel extends SubPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 149, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonEditRecipe)
@@ -292,7 +295,7 @@ public class ListRecipesPanel extends SubPanel {
         //add recipes to list
         for (Recipe recipe : recipes)
         {
-            Object[] row = {recipe.getName(), new Long(Math.round(recipe.getRating() * 5.0)).toString()};
+            Object[] row = {recipe.getName(), recipe.getRating()};
             tableModel.addRow(row);
         }
         
