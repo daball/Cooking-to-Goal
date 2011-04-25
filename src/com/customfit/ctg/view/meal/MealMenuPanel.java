@@ -387,6 +387,38 @@ public class MealMenuPanel extends SubPanel {
         
         jTableRecipes.setModel(tableModel);
     }
+
+    /**
+     * Sets the initial list of meals passed into the view.
+     *
+     * @param meals List of meals.
+     */
+    public void setMenuList(List<Meal> meals) {
+        this.recipes = recipes;
+
+        DefaultTableModel tableModel = (DefaultTableModel)jTableMenu.getModel();
+
+        //clear old results
+        while (tableModel.getRowCount() > 0)
+        {
+            tableModel.removeRow(0);
+        }
+
+        //add recipes to list
+        for (Meal meal : meals)
+        {
+            Object[] row = {meal.getName(), null};
+            tableModel.addRow(row);
+            for (Recipe recipe : meal.getRecipes())
+            {
+                Object[] rrow = {recipe.getName(), new Long(Math.round(recipe.getRating() * 5.0)).toString()};
+                tableModel.addRow(rrow);
+            }
+
+        }
+
+        jTableMenu.setModel(tableModel);
+    }
     
     @Override
     public void refresh()
