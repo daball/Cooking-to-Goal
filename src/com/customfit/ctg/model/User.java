@@ -76,6 +76,9 @@ public class User
      */
     public void setName(String name)
     {
+        //set the name of one's own member
+        this.getOwnMember().setName(name);
+        //set one's own name
         this.name = name; 
     }
     
