@@ -21,14 +21,12 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
      */
     private int scale = 1;
     public static final String PROP_SCALE = "scale";
-    private PropertyChangeSupport scaleSupport;
     
     /**
      * Number of stars to score.
      */
     private int score = 0;
     public static final String PROP_SCORE = "score";
-    private PropertyChangeSupport scoreSupport;
     
     /**
      * Boolean that indicates whether or not the star panel is editable.
@@ -40,7 +38,6 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
      */
     private boolean editable = true;
     public static final String PROP_EDITABLE = "editable";
-    private PropertyChangeSupport editableSupport;
 
     /**
      * Holds the star-off.png icon.
@@ -58,15 +55,14 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
      */
     public StarRatingPanel()
     {
+        super();
         initComponents();
-        scaleSupport = new PropertyChangeSupport(this);
-        scoreSupport = new PropertyChangeSupport(this);
-        editableSupport = new PropertyChangeSupport(this);
         this.imageIconStarOff = new ImageIcon(getClass().getResource("/art/export/star-off.png"));
         this.imageIconStarOn = new ImageIcon(getClass().getResource("/art/export/star-on.png"));
         this.setPreferredSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
         this.setMinimumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
         this.setMaximumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
+        this.enableEvents(AWTEvent.COMPONENT_EVENT_MASK);
     }
     
     /** This method is called from within the constructor to
@@ -172,7 +168,7 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
         this.setMinimumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.scale, this.imageIconStarOff.getIconHeight()));
         this.setMaximumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.scale, this.imageIconStarOff.getIconHeight()));
         this.repaint();
-        scoreSupport.firePropertyChange(PROP_SCALE, oldScale, scale);
+        this.firePropertyChange(PROP_SCALE, oldScale, scale);
     }
     
     /**
@@ -193,7 +189,7 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
         int oldScore = score;
         this.score = score;
         this.repaint();
-        scoreSupport.firePropertyChange(PROP_SCORE, oldScore, score);
+        this.firePropertyChange(PROP_SCORE, oldScore, this.score);
     }
     
     /**
@@ -202,7 +198,7 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
      * @param percentage Percentage of checked stars.
      */
     public void setRating(double percentage) {
-        this.score = new Double(Math.ceil(this.scale * percentage)).intValue();
+        this.setScore(new Double(Math.ceil(this.scale * percentage)).intValue());
     }
     
     /**
@@ -238,7 +234,9 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
      */
     public void setEditable(boolean editable)
     {
+        boolean oldEditable = this.editable;
         this.editable = editable;
+        this.firePropertyChange(PROP_EDITABLE, oldEditable, this.editable);
     }
     
     /**
@@ -280,30 +278,6 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
                     imageIconStarOff.paintIcon(c, g, x + s*this.imageIconStarOff.getIconWidth(), y);
             }
         }
-    }
-
-    public void addScaleChangeListener(PropertyChangeListener listener) {
-        scaleSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removeScaleChangeListener(PropertyChangeListener listener) {
-        scaleSupport.removePropertyChangeListener(listener);
-    }
-    
-    public void addScoreChangeListener(PropertyChangeListener listener) {
-        scoreSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removeScoreChangeListener(PropertyChangeListener listener) {
-        scoreSupport.removePropertyChangeListener(listener);
-    }
-    
-    public void addEditableChangeListener(PropertyChangeListener listener) {
-        editableSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removeEditableChangeListener(PropertyChangeListener listener) {
-        editableSupport.removePropertyChangeListener(listener);
     }
 
     @Override

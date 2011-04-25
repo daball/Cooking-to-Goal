@@ -3,6 +3,8 @@ package com.customfit.ctg.view.recipes;
 import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
@@ -50,6 +52,16 @@ public class EditRecipePanel extends CreateEditPanel {
         {
             nutritionTableModel.addRow(new Object[] { nutrient , });
         }
+        //listen for star rating events
+        this.starRatingPanel.addPropertyChangeListener(new PropertyChangeListener() {
+
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                validateForm();
+                if (evt.getPropertyName() == "score")
+                System.out.println("property change hit.");
+            }
+        });
         //listen for nutrition table events
         nutritionTableModel.addTableModelListener(new TableModelListener() {
 
@@ -129,7 +141,7 @@ public class EditRecipePanel extends CreateEditPanel {
         jTableIngredients = new javax.swing.JTable();
         jButtonAddIngredient = new javax.swing.JButton();
         jButtonRemoveIngredient = new javax.swing.JButton();
-        starVotingPanel = new com.customfit.ctg.view.StarRatingPanel();
+        starRatingPanel = new com.customfit.ctg.view.StarRatingPanel();
         jSpinnerMakes = new javax.swing.JSpinner();
         lblName2 = new javax.swing.JLabel();
         lblName3 = new javax.swing.JLabel();
@@ -154,11 +166,11 @@ public class EditRecipePanel extends CreateEditPanel {
             }
         });
 
-        lblName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblName.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblName.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblName.setText("Name: ");
 
-        lblName1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblName1.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblName1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblName1.setText("Rating: ");
 
@@ -266,16 +278,16 @@ public class EditRecipePanel extends CreateEditPanel {
                 .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE))
         );
 
-        starVotingPanel.setScale(5);
+        starRatingPanel.setScale(5);
 
-        javax.swing.GroupLayout starVotingPanelLayout = new javax.swing.GroupLayout(starVotingPanel);
-        starVotingPanel.setLayout(starVotingPanelLayout);
-        starVotingPanelLayout.setHorizontalGroup(
-            starVotingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout starRatingPanelLayout = new javax.swing.GroupLayout(starRatingPanel);
+        starRatingPanel.setLayout(starRatingPanelLayout);
+        starRatingPanelLayout.setHorizontalGroup(
+            starRatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
-        starVotingPanelLayout.setVerticalGroup(
-            starVotingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        starRatingPanelLayout.setVerticalGroup(
+            starRatingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
@@ -348,7 +360,7 @@ public class EditRecipePanel extends CreateEditPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(lblName1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(starVotingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(starRatingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -382,7 +394,7 @@ public class EditRecipePanel extends CreateEditPanel {
                                 .addGap(28, 28, 28)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(lblName1)
-                                    .addComponent(starVotingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(starRatingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jSpinnerMakes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -505,7 +517,7 @@ public class EditRecipePanel extends CreateEditPanel {
     private javax.swing.JLabel lblName3;
     private javax.swing.JScrollPane scrollPaneIngedients;
     private javax.swing.JScrollPane scrollPaneNutrition;
-    private com.customfit.ctg.view.StarRatingPanel starVotingPanel;
+    private com.customfit.ctg.view.StarRatingPanel starRatingPanel;
     // End of variables declaration//GEN-END:variables
 
     /**
@@ -517,7 +529,7 @@ public class EditRecipePanel extends CreateEditPanel {
     {
         this.recipe = recipe;
         this.jTextName.setText(recipe.getName());
-        this.starVotingPanel.setRating(recipe.getRating());
+        this.starRatingPanel.setRating(recipe.getRating());
         this.jSpinnerMakes.setValue(recipe.getServings());
         this.jTextFieldServingSize.setText(Double.valueOf(recipe.getServingSize().getQuantity()).toString());
         this.jComboBoxServingSizeUnit.setSelectedItem(recipe.getServingSize().getUnit());
@@ -548,7 +560,7 @@ public class EditRecipePanel extends CreateEditPanel {
     {
         Recipe recipe = new Recipe();
         recipe.setName(this.jTextName.getText().trim());
-        recipe.setRating(this.starVotingPanel.getRating());
+        recipe.setRating(this.starRatingPanel.getRating());
         recipe.setServings((double)this.jSpinnerMakes.getValue());
         if (this.jTextFieldServingSize.getText().isEmpty()) this.jTextFieldServingSize.setText("1.0");
         recipe.getServingSize().setQuantity(Double.parseDouble(this.jTextFieldServingSize.getText()));

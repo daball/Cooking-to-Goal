@@ -43,7 +43,7 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="lblName1" min="-2" pref="51" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="starVotingPanel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="starRatingPanel" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="lblName2" min="-2" pref="51" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
                               <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="lblName1" min="-2" max="-2" attributes="0"/>
-                                  <Component id="starVotingPanel" min="-2" max="-2" attributes="0"/>
+                                  <Component id="starRatingPanel" min="-2" max="-2" attributes="0"/>
                                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                                       <Component id="lblName2" alignment="3" min="-2" pref="18" max="-2" attributes="0"/>
                                       <Component id="jSpinnerMakes" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -336,7 +336,7 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="com.customfit.ctg.view.StarRatingPanel" name="starVotingPanel">
+    <Container class="com.customfit.ctg.view.StarRatingPanel" name="starRatingPanel">
       <Properties>
         <Property name="scale" type="int" value="5"/>
       </Properties>

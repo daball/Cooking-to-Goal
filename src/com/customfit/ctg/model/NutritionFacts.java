@@ -785,9 +785,11 @@ public class NutritionFacts{
     public boolean equals(Object object)
     {
        NutritionFacts nutritionFacts = (NutritionFacts)object;
-       for (String nutrient: getAllValidNutrients())
+       for (String nutrientName: getAllValidNutrients())
        {
-           if (!getNutrient(nutrient).equals(nutritionFacts.getNutrient(nutrient)))
+           Measurement nutrient = getNutrient(nutrientName);
+           Measurement otherNutrient = nutritionFacts.getNutrient(nutrientName);
+           if (nutrient != null && otherNutrient != null && !nutrient.equals(otherNutrient))
                return false;
        }
        return true;

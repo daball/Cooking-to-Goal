@@ -212,13 +212,16 @@ public class Measurement implements Comparable<Measurement> {
     }
     
     @Override
-    public boolean equals(Object object)
+    public boolean equals(Object obj)
     {
-       Measurement measurement = (Measurement)object;
-       if (this.unit.equals(measurement.unit)
-               && this.quantity == measurement.quantity)
-           return true;
-       return false;
+        if (obj == null)
+            return false;
+        Measurement measurement = (Measurement)obj;
+        if (this.unit != null && measurement.unit != null && !this.unit.equals(measurement.unit))
+           return false;
+        else if (this.quantity != measurement.quantity)
+           return false;
+        return true;
     }
 
     /**
