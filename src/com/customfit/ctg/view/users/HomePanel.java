@@ -218,7 +218,7 @@ public class HomePanel extends SubPanel {
         //if user hit Profile Home
         if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Profile Home"))
             //then tell the controller about it
-            UserManagement.viewProfile();
+            UserManagement.viewHome();
         //if user hit Edit User
         else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit User"))
             //then tell the controller about it
