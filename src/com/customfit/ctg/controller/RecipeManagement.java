@@ -77,7 +77,7 @@ public class RecipeManagement {
      * 
      * @return Boolean indicating the success of the operation. 
      */
-    public static boolean createRecipeAndGoBack(Recipe recipe, SubPanel previousPanel)
+    public static boolean createRecipeAndGoBack(Recipe recipe)
     {
         //send it over to the database
         boolean status = Application.getDataDriver().insertRecipe(recipe);
@@ -88,9 +88,9 @@ public class RecipeManagement {
         else
         {
             //otherwise, assume success and go back
-            Application.getMainFrame().setPanel(previousPanel);
+            Application.getMainFrame().goBack();
             //refresh data on previous panel
-            previousPanel.refresh();
+            Application.getMainFrame().getPanel().refresh();
         }
         //return status
         return status;
@@ -146,9 +146,23 @@ public class RecipeManagement {
      * 
      * @return Boolean indicating the success of the operation. 
      */
-    public static boolean updateRecipe(String originalRecipeName, Recipe newRecipe)
+    public static boolean updateRecipeAndGoBack(String originalRecipeName, Recipe newRecipe)
     {
-        return Application.getDataDriver().updateRecipeByName(originalRecipeName, newRecipe);
+        //send it over to the database
+        boolean status = Application.getDataDriver().updateRecipeByName(originalRecipeName, newRecipe);
+        //check for errors
+        if (!status)
+            //if failed, tell user about the failure
+            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem updating your recipe.", "Error", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            //otherwise, assume success and go back
+            Application.getMainFrame().goBack();
+            //refresh data on previous panel
+            Application.getMainFrame().getPanel().refresh();
+        }
+        //return status
+        return status;
     }
 
     /**

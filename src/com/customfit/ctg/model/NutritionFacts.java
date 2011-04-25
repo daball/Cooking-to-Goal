@@ -628,10 +628,10 @@ public class NutritionFacts{
         NutritionFacts sampleNutritionFacts = NutritionFacts.EmptyNutritionFacts;
         for (Field field : sampleNutritionFacts.getClass().getDeclaredFields())
         {
-            //call the setter
             if (field.getType().getName().equals(Measurement.class.getName()) &&
                     field.getName().toLowerCase().equals(nutrientFieldName.toLowerCase()))
             {
+                //call the setter
                 for (Method method: sampleNutritionFacts.getClass().getDeclaredMethods())
                 {
                     if (method.getName().equals(nutrientFieldSetterName) && (method.getParameterTypes()[0].isPrimitive() ||
@@ -696,35 +696,18 @@ public class NutritionFacts{
         nutrientName = nutrientName.trim();
         String nutrientFieldName = nutrientName.substring(0, 1).toLowerCase() +
                 nutrientName.substring(1, nutrientName.length()).replaceAll(" ", "");
-        String nutrientFieldSetterName = "set" + nutrientName.replaceAll(" ", "");
         String nutrientFieldGetterName = "get" + nutrientName.replaceAll(" ", "");
         
-        //use an empty nutrition facts
-        for (Field field : this.getClass().getDeclaredFields())
+        Field[] fields = this.getClass().getDeclaredFields();
+        Method[] methods = this.getClass().getDeclaredMethods();
+        for (Field field : fields)
         {
-            //call the setter
             if (field.getType().getName().equals(Measurement.class.getName()) &&
                     field.getName().toLowerCase().equals(nutrientFieldName.toLowerCase()))
             {
-                for (Method method: this.getClass().getDeclaredMethods())
-                {
-                    if (method.getName().equals(nutrientFieldSetterName) && (method.getParameterTypes()[0].isPrimitive() ||
-                            method.getParameterTypes()[0].getClass().getName().equals(Double.class.getName())))
-                    {
-                        try {
-                            method.invoke(this, Double.valueOf(0.0).doubleValue());
-                        } catch (IllegalAccessException ex) {
-                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
-                        } catch (IllegalArgumentException ex) {
-                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
-                        } catch (InvocationTargetException ex) {
-                            Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the setter must be called " + nutrientFieldSetterName + " and that such fields existed. It was the invocation of the setter that failed.", ex);
-                        }
-                    }
-                }
                 //call the getter
                 Object measurementObject = null;
-                for (Method method: this.getClass().getDeclaredMethods())
+                for (Method method : methods)
                 {                        
                     if (method.getName().equals(nutrientFieldGetterName) && !method.getReturnType().isPrimitive() &&
                             method.getReturnType().getName().equals(Measurement.class.getName()))
@@ -738,15 +721,15 @@ public class NutritionFacts{
                         } catch (InvocationTargetException ex) {
                             Application.dumpException("Error getting measurement for nutrient. Requested unit for \"" + nutrientName + "\". Determined that the object field name must be " + nutrientFieldName + " and the getter must be called " + nutrientFieldGetterName + " and that such fields existed. It was the invocation of the getter that failed.", ex);
                         }
+                        //cast back to a Measurement
+                        Measurement measurement = null;
+                        if (measurementObject != null)
+                            measurement = (Measurement) measurementObject;
+                        //STEAL the measurement unit directly out of the getter function, which implements things perfectly
+                        if (measurement != null)
+                            return measurement;
                     }
                 }
-                //cast back to a Measurement
-                Measurement measurement = null;
-                if (measurementObject != null)
-                    measurement = (Measurement) measurementObject;
-                //STEAL the measurement unit directly out of the getter function, which implements things perfectly
-                if (measurement != null)
-                    return measurement;
             }
         }
         //otherwise drop nothing
@@ -770,15 +753,14 @@ public class NutritionFacts{
         String nutrientFieldName = nutrientName.substring(0, 1).toLowerCase() +
                 nutrientName.substring(1, nutrientName.length()).replaceAll(" ", "");
         String nutrientFieldSetterName = "set" + nutrientName.replaceAll(" ", "");
-        String nutrientFieldGetterName = "get" + nutrientName.replaceAll(" ", "");
         
         //use an empty nutrition facts
         for (Field field : this.getClass().getDeclaredFields())
         {
-            //call the setter
             if (field.getType().getName().equals(Measurement.class.getName()) &&
                     field.getName().toLowerCase().equals(nutrientFieldName.toLowerCase()))
             {
+                //call the setter
                 for (Method method: this.getClass().getDeclaredMethods())
                 {
                     if (method.getName().equals(nutrientFieldSetterName) && (method.getParameterTypes()[0].isPrimitive() ||

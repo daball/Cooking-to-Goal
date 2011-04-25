@@ -19,6 +19,11 @@ public class EditRecipePanel extends CreateEditPanel {
      * Holds the panel that was open right before this panel was instantiated.
      */
     private SubPanel previousPanel;
+    
+    /**
+     * Holds the original recipe the way it was.
+     */
+    private Recipe recipe;
 
     /** Creates new form OldRecipeListPanel */
     public EditRecipePanel(CreateEditMode createEditMode) {
@@ -234,6 +239,8 @@ public class EditRecipePanel extends CreateEditPanel {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
+        jSpinnerMakes.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(0.0d), null, Double.valueOf(0.25d)));
+
         lblName2.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblName2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblName2.setText("Makes:");
@@ -298,7 +305,7 @@ public class EditRecipePanel extends CreateEditPanel {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(lblName2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jSpinnerMakes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(jSpinnerMakes, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(scrollPaneNutrition, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -368,7 +375,10 @@ public class EditRecipePanel extends CreateEditPanel {
         //if its a new recipe
         if (this.getCreateEditMode() == CreateEditMode.CREATE)
             //then save it and go back to the last panel
-            RecipeManagement.createRecipeAndGoBack(this.getRecipe(), this.getPreviousPanel());
+            RecipeManagement.createRecipeAndGoBack(this.getRecipe());
+        //if its an existing recipe
+        else if (this.getCreateEditMode() == CreateEditMode.EDIT)
+            RecipeManagement.updateRecipeAndGoBack(this.recipe.getName(), this.getRecipe());
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
@@ -385,14 +395,6 @@ public class EditRecipePanel extends CreateEditPanel {
         dtm.addRow(new Object [] {null, null, null});
         jTableIngredients.setModel(dtm);
     }//GEN-LAST:event_jButtonAddIngredientActionPerformed
-
-    private void updateRecipeList() {
-        DefaultTableModel dtm = (DefaultTableModel)jTableNutritionFacts.getModel();
-
-        Object[] o = {"hey", 4};
-        dtm.addRow(o);
-        jTableNutritionFacts.setModel(dtm);
-    }
 
     private void removeIngredient() {
         int currentRow = jTableIngredients.getSelectedRow();
@@ -451,6 +453,7 @@ public class EditRecipePanel extends CreateEditPanel {
      */
     public void setRecipe(Recipe recipe)
     {
+        this.recipe = recipe;
         this.jTextName.setText(recipe.getName());
         this.starVotingPanel.setRating(recipe.getRating());
         this.jSpinnerMakes.setValue(recipe.getServings());
@@ -461,7 +464,7 @@ public class EditRecipePanel extends CreateEditPanel {
             DefaultTableModel dtm = (DefaultTableModel)this.jTableIngredients.getModel();
             Object[] objArray = new Object[]
                     {
-                        ingredient.getAmount(),
+                        ingredient.getAmount().toString(),
                         ingredient.getName()
                     };
             dtm.addRow(objArray);
@@ -471,8 +474,8 @@ public class EditRecipePanel extends CreateEditPanel {
         {
             String nutrient = (String)this.jTableNutritionFacts.getModel().getValueAt(nutritionRow, 0);
             Measurement measurement = recipe.getNutritionInformation().getNutrient(nutrient);
-            if (measurement.getQuantity() > 0)
-                this.jTableNutritionFacts.getModel().setValueAt(measurement, nutritionRow, 1);
+            if (measurement != null && measurement.getQuantity() > 0)
+                this.jTableNutritionFacts.getModel().setValueAt(measurement.toString(), nutritionRow, 1);
         }
     }
     
@@ -484,7 +487,7 @@ public class EditRecipePanel extends CreateEditPanel {
         Recipe recipe = new Recipe();
         recipe.setName(this.jTextName.getText().trim());
         recipe.setRating(this.starVotingPanel.getRating());
-        recipe.setServings(Double.longBitsToDouble((Integer)this.jSpinnerMakes.getValue()));
+        recipe.setServings((double)this.jSpinnerMakes.getValue());
         if (this.jTextFieldServingSize.getText().isEmpty()) this.jTextFieldServingSize.setText("1.0");
         recipe.getServingSize().setQuantity(Double.parseDouble(this.jTextFieldServingSize.getText()));
         recipe.getServingSize().setUnit((String)this.jComboBoxServingSizeUnit.getSelectedItem());
