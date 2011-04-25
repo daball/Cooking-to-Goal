@@ -60,6 +60,8 @@ public class EditRecipePanel extends CreateEditPanel {
                         measurement.setUnit(NutritionFacts.getUnitForNutrient((String)nutritionTableModel.getValueAt(row, 0)));
                         if (!measurement.toString().equals((String)nutritionTableModel.getValueAt(row, e.getColumn())))
                             nutritionTableModel.setValueAt(measurement.toString(), row, e.getColumn());
+                        if (measurement.getQuantity() <= 0.0)
+                            nutritionTableModel.setValueAt("", row, e.getColumn());
                     }
                 }
             }
@@ -468,26 +470,9 @@ public class EditRecipePanel extends CreateEditPanel {
         for (int nutritionRow = 0; nutritionRow < this.jTableNutritionFacts.getModel().getRowCount(); nutritionRow++)
         {
             String nutrient = (String)this.jTableNutritionFacts.getModel().getValueAt(nutritionRow, 0);
-            if (nutrient.startsWith("Calories"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getCalories().getQuantity(), nutritionRow, 1);
-            else if (nutrient.trim().startsWith("Total Fat"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getTotalFat().getQuantity(), nutritionRow, 1);
-            else if (nutrient.trim().startsWith("Saturated Fat"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getSaturatedFat().getQuantity(), nutritionRow, 1);
-            else if (nutrient.trim().startsWith("Trans Fat"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getTransFat().getQuantity(), nutritionRow, 1);
-            else if (nutrient.startsWith("Cholesterol"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getCholesterol().getQuantity(), nutritionRow, 1);
-            else if (nutrient.startsWith("Sodium"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getSodium().getQuantity(), nutritionRow, 1);
-            else if (nutrient.startsWith("Total Carbohydrate"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getTotalCarbohydrate().getQuantity(), nutritionRow, 1);
-            else if (nutrient.trim().startsWith("Dietary Fiber"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getDietaryFiber().getQuantity(), nutritionRow, 1);
-            else if (nutrient.trim().startsWith("Sugars"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getSugars().getQuantity(), nutritionRow, 1);
-            else if (nutrient.startsWith("Protein"))
-                this.jTableNutritionFacts.getModel().setValueAt(recipe.getNutritionInformation().getProtein().getQuantity(), nutritionRow, 1);
+            Measurement measurement = recipe.getNutritionInformation().getNutrient(nutrient);
+            if (measurement.getQuantity() > 0)
+                this.jTableNutritionFacts.getModel().setValueAt(measurement, nutritionRow, 1);
         }
     }
     
@@ -515,30 +500,8 @@ public class EditRecipePanel extends CreateEditPanel {
         for (int nutritionRow = 0; nutritionRow < this.jTableNutritionFacts.getModel().getRowCount(); nutritionRow++)
         {
             String nutrient = (String)this.jTableNutritionFacts.getModel().getValueAt(nutritionRow, 0);
-            Float amount = (Float)this.jTableNutritionFacts.getModel().getValueAt(nutritionRow, 1);
-            if (amount != null && amount != 0)
-            {
-                if (nutrient.equals("Calories"))
-                    recipe.getNutritionInformation().setCalories(amount);
-                else if (nutrient.trim().startsWith("Total Fat"))
-                    recipe.getNutritionInformation().setTotalFat(amount);
-                else if (nutrient.trim().startsWith("Saturated Fat"))
-                    recipe.getNutritionInformation().setSaturatedFat(amount);
-                else if (nutrient.trim().startsWith("Trans Fat"))
-                    recipe.getNutritionInformation().setTransFat(amount);
-                else if (nutrient.startsWith("Cholesterol"))
-                    recipe.getNutritionInformation().setCholesterol(amount);
-                else if (nutrient.startsWith("Sodium"))
-                    recipe.getNutritionInformation().setSodium(amount);
-                else if (nutrient.startsWith("Total Carbohydrate"))
-                    recipe.getNutritionInformation().setTotalCarbohydrate(amount);
-                else if (nutrient.trim().startsWith("Dietary Fiber"))
-                    recipe.getNutritionInformation().setDietaryFiber(amount);
-                else if (nutrient.trim().startsWith("Sugars"))
-                    recipe.getNutritionInformation().setSugars(amount);
-                else if (nutrient.startsWith("Protein"))
-                    recipe.getNutritionInformation().setProtein(amount);
-            }
+            if (this.jTableNutritionFacts.getModel().getValueAt(nutritionRow, 1) != null)
+                recipe.getNutritionInformation().setNutrient(nutrient, new Measurement((String)this.jTableNutritionFacts.getModel().getValueAt(nutritionRow, 1)).getQuantity());
         }
         return recipe;
     }

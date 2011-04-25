@@ -48,13 +48,16 @@ public class EditProfilePanel extends CreateEditPanel {
 
             @Override
             public void tableChanged(TableModelEvent e) {
+                DefaultTableModel membersModel = (DefaultTableModel) jTableMembers.getModel();
                 //if column is Member
                 if (e.getColumn() == 0)
                 {
                     //check for name identical to this one
-                    for (int row = e.getFirstRow(); row < e.getLastRow(); row++)
-                        if (((String)jTableMembers.getModel().getValueAt(row, e.getColumn())).equals(jTextFieldUser.getText()))
-                            jTableMembers.getModel().setValueAt("Member's Name", row, e.getColumn());
+                    for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
+                        if (((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(jTextFieldUser.getText()) ||
+                                ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(user.getName()) ||
+                                ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(""))
+                            membersModel.setValueAt("Member's Name", row, e.getColumn());
                 }
                 //else if column is Target
                 else if (e.getColumn() == 1)
@@ -62,10 +65,10 @@ public class EditProfilePanel extends CreateEditPanel {
                     //then make sure we insert the right unit on each one
                     for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
                     {
-                        Measurement measurement = new Measurement((String)jTableMembers.getModel().getValueAt(row, e.getColumn()));
+                        Measurement measurement = new Measurement((String)membersModel.getValueAt(row, e.getColumn()));
                         measurement.setUnit(NutritionFacts.getUnitForNutrient((String)jComboBoxTargetNutrient.getSelectedItem()));
-                        if (!measurement.toString().equals((String)jTableMembers.getModel().getValueAt(row, e.getColumn())))
-                            jTableMembers.getModel().setValueAt(measurement.toString(), row, e.getColumn());
+                        if (!measurement.toString().equals((String)membersModel.getValueAt(row, e.getColumn())))
+                            membersModel.setValueAt(measurement.toString(), row, e.getColumn());
                     }
                 }
             }
