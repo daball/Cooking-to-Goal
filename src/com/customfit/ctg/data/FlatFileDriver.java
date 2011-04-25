@@ -5,6 +5,8 @@ import com.customfit.ctg.model.*;
 import com.thoughtworks.xstream.XStream;
 import java.util.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The FlatFileDriver class represents one of the DataDriverInterfaces
@@ -445,7 +447,13 @@ public class FlatFileDriver implements DataDriver {
 		try
 		{
 			file = new File(recipeDataDirectory.getCanonicalPath() + File.separator + recipeName + RECIPE_FILE_SUFFIX);
-			return this.deleteRecipeFile(file);
+			boolean status = this.deleteRecipeFile(file);
+                        try {
+                            Thread.currentThread().sleep(200);
+                        } catch (InterruptedException ex) {
+                            Application.dumpException("Thread sleep interrupted. Not a major problem either.", ex);
+                        }
+                        return status;
 		}
 		catch (IOException ex)
 		{

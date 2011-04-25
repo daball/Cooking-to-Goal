@@ -30,7 +30,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane2" alignment="0" pref="576" max="32767" attributes="1"/>
+                          <Component id="jScrollPane2" alignment="0" pref="555" max="32767" attributes="1"/>
                           <Component id="jLabelTitle" alignment="0" min="-2" pref="278" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -42,7 +42,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane3" pref="576" max="32767" attributes="3"/>
+                      <Component id="jScrollPane3" pref="555" max="32767" attributes="3"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -78,7 +78,7 @@
               <Component id="jLabelNutrientUnit" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="1"/>
-              <EmptySpace pref="204" max="32767" attributes="0"/>
+              <EmptySpace pref="183" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -177,6 +177,9 @@
         <Property name="text" type="java.lang.String" value="Maximum Amount"/>
         <Property name="actionCommand" type="java.lang.String" value="Maximum"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMaximumDirectionActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="jRadioButtonMinimumDirection">
       <Properties>
@@ -186,6 +189,9 @@
         <Property name="text" type="java.lang.String" value="Minimum Amount"/>
         <Property name="actionCommand" type="java.lang.String" value="Minimum"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jRadioButtonMinimumDirectionActionPerformed"/>
+      </Events>
     </Component>
     <Container class="javax.swing.JPanel" name="jPanel1">
       <Properties>
@@ -205,9 +211,9 @@
                   <Component id="jButtonAddMember" min="-2" pref="31" max="-2" attributes="1"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButtonRemoveMember" min="-2" pref="30" max="-2" attributes="1"/>
-                  <EmptySpace pref="503" max="32767" attributes="0"/>
+                  <EmptySpace pref="482" max="32767" attributes="0"/>
               </Group>
-              <Component id="scrollPaneIngedients" alignment="0" pref="570" max="32767" attributes="2"/>
+              <Component id="scrollPaneIngedients" alignment="0" pref="549" max="32767" attributes="2"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -283,7 +289,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="jTextFieldTargetAmount">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTargetAmountActionPerformed"/>
         <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldTargetAmountKeyReleased"/>
       </Events>
     </Component>

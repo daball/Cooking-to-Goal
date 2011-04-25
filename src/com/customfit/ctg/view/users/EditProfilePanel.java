@@ -55,8 +55,9 @@ public class EditProfilePanel extends CreateEditPanel {
                     //check for name identical to this one
                     for (int row = e.getFirstRow(); row <= e.getLastRow(); row++)
                         if (((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(jTextFieldUser.getText()) ||
-                                ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(user.getName()) ||
-                                ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(""))
+                                ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals("") ||
+                                    (getCreateEditMode() == CreateEditMode.EDIT &&
+                                    ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(user.getName())))
                             membersModel.setValueAt("Member's Name", row, e.getColumn());
                 }
                 //else if column is Target
@@ -71,6 +72,7 @@ public class EditProfilePanel extends CreateEditPanel {
                             membersModel.setValueAt(measurement.toString(), row, e.getColumn());
                     }
                 }
+                validateForm();
             }
         });
     }
@@ -147,10 +149,20 @@ public class EditProfilePanel extends CreateEditPanel {
         buttonGroupDirection.add(jRadioButtonMaximumDirection);
         jRadioButtonMaximumDirection.setText("Maximum Amount");
         jRadioButtonMaximumDirection.setActionCommand("Maximum");
+        jRadioButtonMaximumDirection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMaximumDirectionActionPerformed(evt);
+            }
+        });
 
         buttonGroupDirection.add(jRadioButtonMinimumDirection);
         jRadioButtonMinimumDirection.setText("Minimum Amount");
         jRadioButtonMinimumDirection.setActionCommand("Minimum");
+        jRadioButtonMinimumDirection.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonMinimumDirectionActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Additional members to track", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -198,8 +210,8 @@ public class EditProfilePanel extends CreateEditPanel {
                 .addComponent(jButtonAddMember, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonRemoveMember, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(503, Short.MAX_VALUE))
-            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 570, Short.MAX_VALUE)
+                .addContainerGap(482, Short.MAX_VALUE))
+            .addComponent(scrollPaneIngedients, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,11 +226,6 @@ public class EditProfilePanel extends CreateEditPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLabel2.setText("Targeted Nutrient:");
 
-        jTextFieldTargetAmount.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextFieldTargetAmountActionPerformed(evt);
-            }
-        });
         jTextFieldTargetAmount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldTargetAmountKeyReleased(evt);
@@ -271,7 +278,7 @@ public class EditProfilePanel extends CreateEditPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
                             .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
@@ -280,7 +287,7 @@ public class EditProfilePanel extends CreateEditPanel {
                         .addComponent(jTextFieldUser, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 576, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jRadioButtonMaximumDirection)
@@ -309,7 +316,7 @@ public class EditProfilePanel extends CreateEditPanel {
                 .addComponent(jLabelNutrientUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addContainerGap(204, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,7 +400,7 @@ public class EditProfilePanel extends CreateEditPanel {
 }//GEN-LAST:event_jButtonRemoveMemberActionPerformed
 
     private void jTextFieldTargetAmountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldTargetAmountKeyReleased
-        // TODO add your handling code here:
+        this.validateForm();
     }//GEN-LAST:event_jTextFieldTargetAmountKeyReleased
 
     private void jComboBoxTargetNutrientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxTargetNutrientActionPerformed
@@ -410,11 +417,16 @@ public class EditProfilePanel extends CreateEditPanel {
                 this.jTableMembers.getModel().setValueAt(measurement.toString(), memberRow, 1);
             }
         }
+        this.validateForm();
     }//GEN-LAST:event_jComboBoxTargetNutrientActionPerformed
 
-    private void jTextFieldTargetAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTargetAmountActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTargetAmountActionPerformed
+    private void jRadioButtonMaximumDirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMaximumDirectionActionPerformed
+        this.validateForm();
+    }//GEN-LAST:event_jRadioButtonMaximumDirectionActionPerformed
+
+    private void jRadioButtonMinimumDirectionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMinimumDirectionActionPerformed
+        this.validateForm();
+    }//GEN-LAST:event_jRadioButtonMinimumDirectionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -517,7 +529,7 @@ public class EditProfilePanel extends CreateEditPanel {
             if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Maximum"))
                 members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
             else if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Minimum"))
-                members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
+                members.add(new Member(memberName, goal, GoalDirection.MINIMUM_GOAL));
         }
         for (int memberRow = 0; memberRow < this.jTableMembers.getModel().getRowCount(); memberRow++)
         {
@@ -561,7 +573,7 @@ public class EditProfilePanel extends CreateEditPanel {
             disableSaves = true;
         else if (this.buttonGroupDirection.getSelection() == null)
             disableSaves = true;
-        else if (this.jTextFieldUser.getText().trim().length() == 0)
+        else if (this.jTextFieldTargetAmount.getText().trim().isEmpty())
             disableSaves = true;
         else if (this.getCreateEditMode() == CreateEditMode.EDIT && this.user.equals(this.getUser()))
             disableSaves = true;
