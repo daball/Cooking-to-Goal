@@ -76,7 +76,7 @@ public class ListRecipesPanel extends SubPanel {
         scrollPaneTable = new javax.swing.JScrollPane();
         jTableRecipes = new javax.swing.JTable();
         linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
-        jButtonViewRecipe = new javax.swing.JButton();
+        jButtonEditRecipe = new javax.swing.JButton();
         linkLabelHome = new com.customfit.ctg.view.LinkLabel();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
@@ -140,10 +140,10 @@ public class ListRecipesPanel extends SubPanel {
             }
         });
 
-        jButtonViewRecipe.setText("View Recipe");
-        jButtonViewRecipe.addActionListener(new java.awt.event.ActionListener() {
+        jButtonEditRecipe.setText("Edit Recipe");
+        jButtonEditRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonViewRecipeActionPerformed(evt);
+                jButtonEditRecipeActionPerformed(evt);
             }
         });
 
@@ -158,20 +158,20 @@ public class ListRecipesPanel extends SubPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(scrollPaneTable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonViewRecipe)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(jButtonEditRecipe)
                         .addGap(18, 18, 18)
-                        .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
+                    .addComponent(linkLabelAddNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -181,16 +181,16 @@ public class ListRecipesPanel extends SubPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelTitle)
                     .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(scrollPaneTable, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonViewRecipe)))
+                    .addComponent(jButtonEditRecipe)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,21 +214,21 @@ public class ListRecipesPanel extends SubPanel {
         UserManagement.viewProfile();
     }//GEN-LAST:event_linkLabelHomeActionPerformed
 
-    private void jButtonViewRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewRecipeActionPerformed
+    private void jButtonEditRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditRecipeActionPerformed
         //if a row is selected
         if (this.jTableRecipes.getSelectedRowCount() > 0) {
             //grab Recipe
             Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
             //tell RecipeManagement to view recipe
-            RecipeManagement.viewRecipe(recipe);
+            RecipeManagement.editRecipe(recipe);
         }
-}//GEN-LAST:event_jButtonViewRecipeActionPerformed
+}//GEN-LAST:event_jButtonEditRecipeActionPerformed
 
     private void jTableRecipesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRecipesMouseClicked
         //if double-clicked
         if (evt.getClickCount() == 2)
             //same as view recipe
-            jButtonViewRecipeActionPerformed(null);
+            jButtonEditRecipeActionPerformed(null);
 }//GEN-LAST:event_jTableRecipesMouseClicked
 
     private void linkLabelAddNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddNewActionPerformed
@@ -238,7 +238,7 @@ public class ListRecipesPanel extends SubPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonViewRecipe;
+    private javax.swing.JButton jButtonEditRecipe;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
@@ -253,11 +253,11 @@ public class ListRecipesPanel extends SubPanel {
         //check for selected value
         if (this.jTableRecipes.getSelectedRowCount() == 0)
             //if none then disable login button
-            this.jButtonViewRecipe.setEnabled(false);
+            this.jButtonEditRecipe.setEnabled(false);
         //otherwise
         else
             //if valid then enable login button
-            this.jButtonViewRecipe.setEnabled(true);
+            this.jButtonEditRecipe.setEnabled(true);
     } 
     
     /**

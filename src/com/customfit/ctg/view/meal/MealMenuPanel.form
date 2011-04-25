@@ -23,16 +23,16 @@
                       <EmptySpace min="10" pref="10" max="10" attributes="0"/>
                       <Component id="linkLabelHome" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane2" alignment="0" pref="556" max="32767" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="389" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" alignment="0" pref="594" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jLabelTitle" min="-2" pref="166" max="-2" attributes="0"/>
+                      <EmptySpace pref="360" max="32767" attributes="0"/>
                       <Component id="jComboBoxMeMenu" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jPanel2" max="32767" attributes="1"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jPanel2" min="-2" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" min="-2" max="-2" attributes="1"/>
+                      <Component id="jPanel1" max="32767" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -51,8 +51,8 @@
               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jPanel1" max="32767" attributes="1"/>
-                  <Component id="jPanel2" alignment="0" max="32767" attributes="1"/>
+                  <Component id="jPanel2" max="32767" attributes="1"/>
+                  <Component id="jPanel1" alignment="0" max="32767" attributes="1"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="linkLabelHome" min="-2" max="-2" attributes="0"/>
@@ -140,13 +140,13 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                  <Component id="listDate" pref="199" max="32767" attributes="0"/>
+                  <Component id="listDate" pref="175" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jButtonAddRecipe" min="-2" pref="31" max="-2" attributes="1"/>
                   <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   <Component id="jButtonRemoveRecipe" min="-2" pref="30" max="-2" attributes="1"/>
               </Group>
-              <Component id="scrollPaneTable1" alignment="1" pref="274" max="32767" attributes="0"/>
+              <Component id="scrollPaneTable1" alignment="1" pref="250" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -160,7 +160,7 @@
                       <Component id="listDate" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable1" pref="179" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable1" pref="165" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -261,7 +261,7 @@
                   <Component id="linkLabelAddNew" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
-              <Component id="scrollPaneTable2" alignment="0" pref="252" max="32767" attributes="0"/>
+              <Component id="scrollPaneTable2" alignment="0" pref="314" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
@@ -269,7 +269,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="linkLabelAddNew" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable2" pref="190" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable2" pref="176" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -316,7 +316,7 @@
         </Container>
         <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddNew">
           <Properties>
-            <Property name="text" type="java.lang.String" value="(Add a new recipe)"/>
+            <Property name="text" type="java.lang.String" value="(Add a new recipe to this list)"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddNewActionPerformed"/>
