@@ -130,6 +130,16 @@ public class Meal
     }
     
     /**
+     * Gets the list of members that constitutes a meal.
+     * 
+     * @return The list of members that constitutes a meal.
+     */
+    public List<Member> getMembers()
+    {
+        return members;
+    }
+    
+    /**
      * Scales any Recipe for any Member's daily nutritional target.
      * 
      * Use Recipe.scale(double scaleFactor) to scale it smaller than that.
@@ -214,6 +224,7 @@ public class Meal
             }
         }
         Meal newMeal = new Meal(meal);
+        //replace recipes with scaled recipes
         newMeal.recipes = newRecipes;
         return newMeal;
     }
