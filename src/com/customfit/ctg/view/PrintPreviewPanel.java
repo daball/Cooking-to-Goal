@@ -8,7 +8,6 @@
 package com.customfit.ctg.view;
 
 import com.customfit.ctg.controller.Application;
-import com.customfit.ctg.view.SubPanel;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -22,16 +21,18 @@ import javax.swing.JPanel;
 public class PrintPreviewPanel extends SubPanel {
 
     Printable printComponent;
+    JPanel tempPanel;
     
     /** Creates new form PrintPanel */
-    public PrintPreviewPanel(JPanel p) {
-        initComponents();
-        
+    public PrintPreviewPanel(AbstractPrintPanel p) {
+   
         if(p instanceof Printable){
-            this.printComponent = (Printable) p;
-            this.printPanel = p;
-//            this.add(p);
-            this.revalidate();
+            this.printComponent = p;
+//            this.printPanel.invalidate();
+              this.tempPanel = p;
+//            this.printPanel.revalidate();
+//            this.revalidate();
+
         }
         else{
              JOptionPane.showMessageDialog(this.getParent(), 
@@ -39,7 +40,19 @@ public class PrintPreviewPanel extends SubPanel {
                      "Unable to Print", 
                      JOptionPane.ERROR_MESSAGE);
             System.err.println("Must supply a Printable JPanel");
+//            Application.getMainFrame().goBack();
         }
+        System.out.println("\npreInit\ntempPanel: " + tempPanel + "\nprintPanel: " + printPanel);
+                initComponents();
+        System.out.println("\npostInit\ntempPanel: " + tempPanel + "\nprintPanel: " + printPanel);
+    }
+    
+    /**
+     * @return the panel to be printed
+     */
+    private JPanel getPrintPanel(){
+        System.out.println("\ngetPrintPanel()\ntempPanel: " + tempPanel + "\nprintPanel: " + printPanel);
+        return this.tempPanel;
     }
     
     /**
@@ -66,7 +79,7 @@ public class PrintPreviewPanel extends SubPanel {
     private void initComponents() {
 
         jLabelTitle = new javax.swing.JLabel();
-        printPanel = new TestPrintPanel();
+        printPanel = new javax.swing.JPanel();
         printButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
@@ -130,6 +143,12 @@ public class PrintPreviewPanel extends SubPanel {
                     .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
+
+        this.remove(printPanel);
+        printPanel = getPrintPanel();
+        this.add(printPanel);
+        printPanel.revalidate();
+        this.revalidate();
     }// </editor-fold>//GEN-END:initComponents
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
