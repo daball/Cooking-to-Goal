@@ -13,19 +13,17 @@ package com.customfit.ctg.view;
 import com.customfit.ctg.controller.RecipeManagement;
 import com.customfit.ctg.model.Recipe;
 import com.customfit.ctg.model.RecipeIngredient;
-import com.customfit.ctg.view.SubPanel;
 import java.awt.Graphics;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.util.List;
-import javax.swing.JLabel;
 
 /**
  *
  * @author Drew
  */
-public class TestPrintPanel extends SubPanel implements Printable {
+public class TestPrintPanel extends AbstractPrintPanel {
 
     /** Creates new form PrintPanel */
     public TestPrintPanel() {
@@ -47,16 +45,6 @@ public class TestPrintPanel extends SubPanel implements Printable {
         this.jTextArea2.setText(recipe.getInstructions());
     }
 
-    @Override
-    public int print(Graphics g, PageFormat pf, int pageIndex)
-                    throws PrinterException {
-            if(pageIndex > 0)
-                return Printable.NO_SUCH_PAGE;
-
-            this.paint(g);
-            
-            return Printable.PAGE_EXISTS;
-    }
 
 
     /** This method is called from within the constructor to

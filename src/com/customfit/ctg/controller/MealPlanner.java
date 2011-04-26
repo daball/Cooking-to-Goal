@@ -26,7 +26,7 @@ public class MealPlanner { // implements Observable
     {
         //recipes not provided, so go get them
         List<Recipe> recipes = Application.getDataDriver().selectAllRecipes();
-        List<Meal> meals = UserManagement.getCurrentUser().getMeals();
+        List<Meal> meals = UserManagement.getCurrentUser().getAllMeals();
 
         //now pass them to the overloaded method
         browseMenu(recipes, meals);
@@ -56,12 +56,12 @@ public class MealPlanner { // implements Observable
      * @param recipe
      * @param meal
      */
-    public static void addRecipeToMeal(Recipe recipe, String mealName) {
-        User cUser = UserManagement.getCurrentUser();
-        Meal meal = cUser.getMealByName(mealName);
-        if (meal != null)
-            meal.getRecipes().add(recipe);
-    }
+//    public static void addRecipeToMeal(Recipe recipe, String mealName) {
+//        User cUser = UserManagement.getCurrentUser();
+//        Meal meal = cUser.getMealByName(mealName);
+//        if (meal != null)
+//            meal.getRecipes().add(recipe);
+//    }
 
     /**
      * Add the recipe to the meal.
@@ -71,8 +71,8 @@ public class MealPlanner { // implements Observable
      */
     public static void addRecipeToMeal(Recipe recipe, int mealIndex) {
         User cUser = UserManagement.getCurrentUser();
-        if (mealIndex >=0 && mealIndex < cUser.getMeals().size()) {
-            Meal meal = cUser.getMeals().get(mealIndex);
+        if (mealIndex >=0 && mealIndex < cUser.getAllMeals().size()) {
+            Meal meal = cUser.getAllMeals().get(mealIndex);
             if (meal != null)
                 meal.getRecipes().add(recipe);
         }
@@ -84,15 +84,15 @@ public class MealPlanner { // implements Observable
      * @param recipe
      * @param meal
      */
-    public static void removeRecipeFromMeal(String recipeName, String mealName) {
-        User cUser = UserManagement.getCurrentUser();
-        Meal meal = cUser.getMealByName(mealName);
-        if (meal != null) {
-            int rindex = getRecipeIndexInMeal(meal, recipeName);
-            if (rindex > 0)
-                meal.getRecipes().remove(rindex);
-        }
-    }
+//    public static void removeRecipeFromMeal(String recipeName, String mealName) {
+//        User cUser = UserManagement.getCurrentUser();
+//        Meal meal = cUser.getMealByName(mealName);
+//        if (meal != null) {
+//            int rindex = getRecipeIndexInMeal(meal, recipeName);
+//            if (rindex > 0)
+//                meal.getRecipes().remove(rindex);
+//        }
+//    }
 
     /**
      * Remove the recipe from the meal.
@@ -103,8 +103,8 @@ public class MealPlanner { // implements Observable
     public static void removeRecipeFromMeal(int mealIndex, int recipeIndex) {
         User cUser = UserManagement.getCurrentUser();
         if (mealIndex >= 0 && recipeIndex >= 0) {
-            if (mealIndex < cUser.getMeals().size()) {
-                Meal meal =  cUser.getMeals().get(mealIndex);
+            if (mealIndex < cUser.getAllMeals().size()) {
+                Meal meal =  cUser.getAllMeals().get(mealIndex);
                 if (recipeIndex < meal.getRecipes().size()) {
                     Recipe r = meal.getRecipes().get(recipeIndex);
                     meal.getRecipes().remove(r);
@@ -135,17 +135,18 @@ public class MealPlanner { // implements Observable
      */
     public static List<Meal> getAllMeals()
     {
-        return UserManagement.getCurrentUser().getMeals();
+        return UserManagement.getCurrentUser().getAllMeals();
     }
 
     public static void createDefaultMeals() {
         User cUser = UserManagement.getCurrentUser();
-        cUser.addMeal(new Meal("Monday"));
-        cUser.addMeal(new Meal("Tuesday"));
-        cUser.addMeal(new Meal("Wednesday"));
-        cUser.addMeal(new Meal("Thursday"));
-        cUser.addMeal(new Meal("Friday"));
-        cUser.addMeal(new Meal("Saturday"));
-        cUser.addMeal(new Meal("Sunday"));
+        cUser.getAllMeals().add(new Meal("Monday"));
+        cUser.getAllMeals().add(new Meal("Tuesday"));
+        cUser.getAllMeals().add(new Meal("Wednesday"));
+        cUser.getAllMeals().add(new Meal("Thursday"));
+        cUser.getAllMeals().add(new Meal("Friday"));
+        cUser.getAllMeals().add(new Meal("Saturday"));
+        cUser.getAllMeals().add(new Meal("Sunday"));
+
     }
 }
