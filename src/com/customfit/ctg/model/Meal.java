@@ -113,11 +113,6 @@ public class Meal {
     public boolean equals(Object object)
     {
        Meal meal = (Meal)object;
-       //if (this.name.equals(meal.name)
-       //        && this.date.equals(meal.date)
-       //        && this.recipes.size() == meal.recipes.size()
-       //        && this.members.size() == meal.members.size())
-       //{
        if (Application.isEquals(this.name,meal.name)
            && Application.isEquals(this.date,meal.date)
            && this.recipes.size() == meal.recipes.size()

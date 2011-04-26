@@ -341,6 +341,34 @@ public class User
    {
         this.meals.add(meal);
    }
+
+   /**
+     * Get the total goals store for all members.
+     *
+     * @return
+     */
+    public Measurement getTotalGoal() {
+        Measurement goal = null;
+        for (Member m : getAllMembers()) {
+            goal.setQuantity(goal.getQuantity() + m.getGoal().getQuantity());
+        }
+        return goal;
+    }
+
+    /**
+     * Get the total goals store for all members.
+     *
+     * @return
+     */
+    public void scaleAllMeals() {
+        Measurement goal = null;
+        //difference = target_goal - menu_total
+        //AmountToRemove = difference/RecipeCount
+
+        for (Meal m : getMeals()) {
+            
+        }
+    }
    
     @Override
     public boolean equals(Object object)
