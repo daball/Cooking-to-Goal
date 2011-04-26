@@ -12,6 +12,7 @@
 package com.customfit.ctg.view.meal;
 
 import com.customfit.ctg.controller.*;
+import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 
 /**
@@ -22,9 +23,17 @@ public class EditMealPanel extends CreateEditPanel {
 
     private CreateEditMode createEditMode = CreateEditMode.EDIT;
     
+    private Meal meal;
+    
     /** Creates new form EditMealPanel */
     public EditMealPanel(CreateEditMode createEditMode) {
         initComponents();
+        
+        //customize form for edit mode
+        if (this.getCreateEditMode() == CreateEditMode.CREATE)
+            this.jLabelTitle.setText("Insert a New Meal Plan");
+        else if (this.getCreateEditMode() == CreateEditMode.EDIT)
+            this.jLabelTitle.setText("Edit Meal Plan");
         
         //setup the me-menu in the right-top corner
         jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"User: " + UserManagement.getCurrentUser().getName(), "Profile Home", "Edit Profile", "Logout" }));
@@ -59,7 +68,7 @@ public class EditMealPanel extends CreateEditPanel {
         jXComboBoxMeal = new org.jdesktop.swingx.JXComboBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButtonSave = new javax.swing.JButton();
+        jButtonOK = new javax.swing.JButton();
         jButtonCancel = new javax.swing.JButton();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
@@ -70,7 +79,7 @@ public class EditMealPanel extends CreateEditPanel {
         jTextPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
         jTextPane1.setBorder(null);
         jTextPane1.setEditable(false);
-        jTextPane1.setText("Enter the meal parameters.");
+        jTextPane1.setText("For what event do you want to plan this meal?");
         jTextPane1.setFocusable(false);
         jTextPane1.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jTextPane1.setOpaque(false);
@@ -92,7 +101,7 @@ public class EditMealPanel extends CreateEditPanel {
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Meal:");
 
-        jButtonSave.setText("Save");
+        jButtonOK.setText("OK");
 
         jButtonCancel.setText("Cancel");
 
@@ -104,24 +113,29 @@ public class EditMealPanel extends CreateEditPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 274, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                                .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jXComboBoxMeal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jXDatePickerDate, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jXComboBoxMeal, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jXDatePickerDate, javax.swing.GroupLayout.DEFAULT_SIZE, 176, Short.MAX_VALUE)))
+                        .addGap(68, 68, 68))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButtonSave)
+                        .addComponent(jButtonOK)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButtonCancel)))
-                .addContainerGap())
+                        .addComponent(jButtonCancel)
+                        .addContainerGap(166, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -132,7 +146,7 @@ public class EditMealPanel extends CreateEditPanel {
                     .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jXDatePickerDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -140,11 +154,11 @@ public class EditMealPanel extends CreateEditPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(jXComboBoxMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonSave)
+                    .addComponent(jButtonOK)
                     .addComponent(jButtonCancel))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -171,7 +185,7 @@ public class EditMealPanel extends CreateEditPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.plaf.DatePickerAddon datePickerAddon1;
     private javax.swing.JButton jButtonCancel;
-    private javax.swing.JButton jButtonSave;
+    private javax.swing.JButton jButtonOK;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -182,4 +196,35 @@ public class EditMealPanel extends CreateEditPanel {
     private org.jdesktop.swingx.JXDatePicker jXDatePickerDate;
     // End of variables declaration//GEN-END:variables
 
+    /**
+     * Sets Meal into the panel and updates the GUI to match.
+     * 
+     * @param meal Meal to load.
+     */
+    public void setMeal(Meal meal)
+    {
+        //set all the parameters from meal
+        //set name
+        this.jXComboBoxMeal.setSelectedItem(meal.getName());
+        //set date
+        this.jXDatePickerDate.setDate(meal.getDate());
+        //save meal for later
+        this.meal = meal;
+    }
+    
+    /**
+     * Gets a new Meal based on the information in the form.
+     * 
+     * @param meal Meal based on the user input.
+     */
+    public void getMeal(Meal meal)
+    {
+        //build a Meal object from the old one
+        Meal meal = new Meal(meal);
+        //update the fields
+        meal.setName((String)this.jXComboBoxMeal.getSelectedItem());
+        meal.setDate(jXDatePickerDate.getDate());
+        //return the new Meal
+        return meal;
+    }
 }
