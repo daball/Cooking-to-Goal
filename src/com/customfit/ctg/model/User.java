@@ -75,6 +75,8 @@ public class User
         this.name = name; 
     }
     
+    /* MEMBER METHODS */
+    
     /**
      * Gets all of the the user's members.
      * 
@@ -84,17 +86,7 @@ public class User
     {
         return members;
     }
-    
-    /**
-     * Gets the list of meals for the user.
-     * 
-     * @return The list of meals for the user.
-     */
-    public List<Meal> getMeals()
-    {
-        return meals;
-    }
-    
+       
     /**
      * Gets the member by name.
      * 
@@ -170,6 +162,18 @@ public class User
         return members;
     }
     
+    /* MEAL METHODS */
+    
+    /**
+     * Gets the list of meals for the user.
+     * 
+     * @return The list of meals for the user.
+     */
+    public List<Meal> getAllMeals()
+    {
+        return meals;
+    }
+    
     /**
      * Gets a List of Meals for the date period specified.
      * 
@@ -197,13 +201,11 @@ public class User
         endDate = calendarEnd.getTime();
         
         List<Meal> meals = new ArrayList<Meal>();
-        for (Meal meal : this.getMeals())
-        {
+        for (Meal meal : this.getAllMeals())
             if (meal.getDate().after(startDate) && meal.getDate().before(endDate))
-            {
                 meals.add(meal);
-            }
-        }
+            else if (meal.getDate().equals(startDate) || meal.getDate().equals(endDate))
+                meals.add(meal);
 
         return meals;
     }
@@ -233,19 +235,10 @@ public class User
         calendarEnd.set(Calendar.MILLISECOND, 999);
         Date endDate = calendarEnd.getTime();
         
-        List<Meal> meals = new ArrayList<Meal>();
-        for (Meal meal : this.getMeals())
-        {
-            if (meal.getDate().after(startDate) && meal.getDate().before(endDate))
-            {
-                meals.add(meal);
-            }
-        }
-
-        return meals;
+        return this.getMealsByDateRange(startDate, endDate);
    }
    
-   /**
+    /**
      * Gets a list of meals starting on the date specified and
      * all the way up to 7 days later.
      * 
@@ -256,8 +249,8 @@ public class User
      * 
      * @return List of Meals.
      */
-   public List<Meal> getMealsForWeekStartingOn(Date startDate)
-   {
+    public List<Meal> getMealsForWeekStartingOn(Date startDate)
+    {
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTime(startDate);
         calendarStart.set(Calendar.HOUR, 0);
@@ -265,7 +258,7 @@ public class User
         calendarStart.set(Calendar.SECOND, 0);
         calendarStart.set(Calendar.MILLISECOND, 0);
         startDate = calendarStart.getTime();
-        
+
         Calendar calendarEnd = Calendar.getInstance();
         calendarEnd.setTime(startDate);
         calendarEnd.add(Calendar.DATE, 7);
@@ -274,58 +267,55 @@ public class User
         calendarEnd.set(Calendar.SECOND, 59);
         calendarEnd.set(Calendar.MILLISECOND, 999);
         Date endDate = calendarEnd.getTime();
-        
-        List<Meal> meals = new ArrayList<Meal>();
-        for (Meal meal : this.getMeals())
-        {
-            if (meal.getDate().after(startDate) && meal.getDate().before(endDate))
-            {
-                meals.add(meal);
-            }
-        }
 
-        return meals;
-   }
-   /**
-     * Gets a meal based on it's name.
-     *
-     * @param name Name of the meal.
-     *
-     * @return a Meal.
-     */
-   public Meal getMealByName(String name)
-   {
-        for (Meal meal : this.getMeals())
-        {
-            if (meal.getName().equals(name))
-            {
-                return meal;
-            }
-        }
-        return null;
-   }
+        return this.getMealsByDateRange(startDate, endDate);
+    }
 
-   /**
-     * Add a meal to the meal list.
-     *
-     * @param meal The meal to be added.
+    /* AGGREGATE METHODS */
+    
+    /**
+     * Gets a List of Meals for a Member.
+     * 
+     * @param meals Meals to choose from.
+     * @param member Member.
+     * 
+     * @return List of Meals.
      */
-   public void addMeal(Meal meal)
-   {
-        this.meals.add(meal);
-   }
-
-   /**
-     * Get the total goals store for all members.
-     *
-     * @return
+    public static List<Meal> getMealsWithMember(List<Meal> meals, String memberName)
+    {
+        List<Meal> newMeals = new ArrayList<Meal>();
+        for (Meal meal : meals)
+            for (Member aMember : meal.getMembers())
+                if (aMember.getName().equals(memberName))
+                {
+                    newMeals.add(meal);
+                    break; //break from outer for loop
+                }
+        return newMeals;
+    }
+    
+    /**
+     * Gets a List of Meals for a Member.
+     * 
+     * @param member Member.
+     * 
+     * @return List of Meals.
      */
-    public Measurement getTotalGoal() {
-        Measurement goal = null;
-        for (Member m : getAllMembers()) {
-            goal.setQuantity(goal.getQuantity() + m.getGoal().getQuantity());
-        }
-        return goal;
+    public List<Meal> getMemberMeals(String memberName)
+    {
+        return User.getMealsWithMember(this.meals, memberName);
+    }
+    
+    /**
+     * Gets a List of Meals for a Member.
+     * 
+     * @param member Member.
+     * 
+     * @return List of Meals.
+     */
+    public List<Meal> getMemberMeals(Member member)
+    {
+        return this.getMemberMeals(member.getName());
     }
 
     /**
@@ -338,12 +328,26 @@ public class User
         //difference = target_goal - menu_total
         //AmountToRemove = difference/RecipeCount
 
-        for (Meal m : getMeals()) {
+        for (Meal m : getAllMeals()) {
             
         }
     }
     
-   /**
+    /**
+     * Get the total goals store for all members.
+     *
+     * @return
+     */
+    public Measurement getTotalGoal() {
+        Measurement goal = null;
+        for (Member m : getAllMembers()) {
+            goal.setQuantity(goal.getQuantity() + m.getGoal().getQuantity());
+            goal.setUnit(m.getGoal().getUnit());
+        }
+        return goal;
+    }
+    
+    /**
      * Gets the nutrient being tracked by the member matching the user name.
      * 
      * @return The nutrient to track.

@@ -28,7 +28,7 @@ public class HomePanel extends SubPanel {
         initComponents();
         
         //setup the me-menu in the right-top corner
-        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Profile Home","Edit User", "Logout" }));
+        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"User: " + UserManagement.getCurrentUser().getName(), "Profile Home", "Edit Profile", "Logout" }));
     }
 
     /** This method is called from within the constructor to
@@ -220,7 +220,7 @@ public class HomePanel extends SubPanel {
             //then tell the controller about it
             UserManagement.viewHome();
         //if user hit Edit User
-        else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit User"))
+        else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit Profile"))
             //then tell the controller about it
             UserManagement.editRegistration(UserManagement.getCurrentUser());
         //if user hit Logout

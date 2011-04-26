@@ -567,7 +567,7 @@ public class EditProfilePanel extends CreateEditPanel {
             return new User(
                     this.jTextFieldUser.getText(),
                     members,
-                    this.user.getMeals()
+                    this.user.getAllMeals()
                     );
         else
             return null;

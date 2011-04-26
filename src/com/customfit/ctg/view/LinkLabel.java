@@ -39,7 +39,6 @@ public class LinkLabel extends JLabel implements Serializable {
     * The normal text set by the user.
     */
     private String text;
-    private PropertyChangeSupport textSupport;
     public static final String PROP_TEXT = "text";
     public static final String PROP_TEXT_DEFAULT = "LinkLabel";
     
@@ -65,7 +64,6 @@ public class LinkLabel extends JLabel implements Serializable {
     private void setup(String text)
     {
         //enable javabeans property
-        textSupport = new PropertyChangeSupport(this);
         setVerticalAlignment( CENTER );
         setHorizontalAlignment( CENTER );
         setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
@@ -79,9 +77,8 @@ public class LinkLabel extends JLabel implements Serializable {
     */
     @Override
     public void setText(String text){
-        if (this.textSupport != null)
-            //notify ide
-            this.textSupport.firePropertyChange(PROP_TEXT, this.text, text);
+        //notify ide
+        this.firePropertyChange(PROP_TEXT, this.text, text);
         //set text
         this.text = text;
         //then tell super() to do all the hard stuff
@@ -139,12 +136,5 @@ public class LinkLabel extends JLabel implements Serializable {
                 listener.actionPerformed(evt);
             }
         }
-    }
-    public void addTextChangeListener(PropertyChangeListener listener) {
-        textSupport.addPropertyChangeListener(listener);
-    }
-
-    public void removeTextChangeListener(PropertyChangeListener listener) {
-        textSupport.removePropertyChangeListener(listener);
     }
 }
