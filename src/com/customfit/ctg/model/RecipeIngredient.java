@@ -127,5 +127,35 @@ public class RecipeIngredient extends Ingredient{
            return true;
        return false;
     }
+    
+    /**
+     * Creates a new RecipeIngredient object with the sum of the two amounts and the unit
+     * and ingredient name from the RecipeIngredient on the left.
+     * 
+     * @param recipeIngredientLeft A RecipeIngredient object. (This one must have the amount.unit and name specified.)
+     * @param recipeIngredientRight A RecipeIngredient object. (The amount.unit and name will be ignored.)
+     * 
+     * @return A new RecipeIngredient object with the sum of the two amounts.
+     */
+    public static RecipeIngredient addRecipeIngredients(RecipeIngredient recipeIngredientLeft, RecipeIngredient recipeIngredientRight)
+    {
+        return new RecipeIngredient(recipeIngredientLeft.getName(), recipeIngredientLeft.amount.add(recipeIngredientRight.amount));
+    }
 
+    /**
+     * Creates a new RecipeIngredient object with the sum of the quantities of this RecipeIngredient
+     * and the one you specified. The input measurement's unit will be ignored and only
+     * the quantities will be merged into the new Measurement object. The unit from this
+     * instance will be passed into the new Measurement object.
+     * 
+     * @param recipeIngredient The RecipeIngredient object you would like to add into this one.
+     * 
+     * @return A new Measurement object with the sum of the two quantities.
+     */
+    public RecipeIngredient add(RecipeIngredient recipeIngredient)
+    {
+        //put this on the left
+        return RecipeIngredient.addRecipeIngredients(this, recipeIngredient);
+    }
+    
 }
