@@ -355,10 +355,10 @@ public class Recipe {
      * 
      * @return The ideal Recipe for the nutritional goal specified.
      */
-   public Recipe scaleToNutritionalTarget(String nutrientName, Measurement goal)
-   {
+    public Recipe scaleToNutritionalTarget(String nutrientName, Measurement goal)
+    {
        return Recipe.scaleToNutritionalTarget(this, nutrientName, goal);
-   }
+    }
   
     @Override
     public boolean equals(Object object)
@@ -382,4 +382,61 @@ public class Recipe {
        return false;
     }
     
+    /**
+     * Adds two Recipe objects together into a new Recipe object.
+     * 
+     * It merges ingredients, summing them if they are on both sides.
+     * It adds servings together into the output.
+     * It also accumulates nutrition information for both Recipes.
+     * 
+     * @param recipeLeft A recipe object.
+     * @param recipeRight Another recipe object.
+     * 
+     * @return A new Recipe object with the fields summed together.
+     */
+    public static Recipe addRecipes(Recipe recipeLeft, Recipe recipeRight)
+    {
+        //copy the left recipe to a new container object
+        Recipe newRecipe = new Recipe(recipeLeft);
+        //add servings from both
+        newRecipe.servings += recipeRight.servings;
+        //add nutrition info from both
+        newRecipe.nutritionInformation.add(recipeRight.nutritionInformation);
+        //assemble new ingredients
+        newRecipe.ingredients = new ArrayList<RecipeIngredient>();
+        //step one: add known ingredients together
+        for (RecipeIngredient ingredientLeft: recipeLeft.ingredients)
+            //get the ingredient on the right that matches the one on the left
+            for (RecipeIngredient ingredientRight: recipeRight.ingredients)
+                //if the two ingredients have matching names
+                if (ingredientLeft.getName().equals(ingredientRight.getName()))
+                    //then add them together on the newIngredients list
+                    newRecipe.ingredients.add(ingredientLeft.add(ingredientRight));
+        //step two: add unknown ingredients from right to left as is
+        for (RecipeIngredient ingredientRight: recipeRight.ingredients)
+            //if the ingredient is unknown
+            if (!newRecipe.ingredients.contains(ingredientRight))
+                //then add it
+                newRecipe.ingredients.add(ingredientRight);
+        //return new recipe
+        return newRecipe;
+    }
+    
+     /**
+     * Adds a Recipe object to this one and returns a new Recipe object
+     * to the output.
+     * 
+     * It merges ingredients, summing them if they are on both sides.
+     * It adds servings together into the output.
+     * It also accumulates nutrition information for both Recipes.
+     * 
+     * @param recipeLeft A recipe object to add with this one.
+     * 
+     * @return A new Recipe object with the fields summed together.
+     */
+    public Recipe add(Recipe recipe)
+    {
+        return Recipe.addRecipes(this, recipe);
+    }
+            
 }
