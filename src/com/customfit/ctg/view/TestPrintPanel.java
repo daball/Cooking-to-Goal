@@ -31,18 +31,27 @@ public class TestPrintPanel extends AbstractPrintPanel {
         
         List<Recipe> recipes = RecipeManagement.getAllRecipes();
         
-        Recipe recipe = recipes.get(0);
-        List<RecipeIngredient> ingredients = recipe.getIngredients();
-        
-        String text = "";
-        
-        for(RecipeIngredient i : ingredients){
-            text += i.getAmount() + "\t" + i.getName() + "\n";
+        if(recipes.size() > 0){
+	        Recipe recipe = recipes.get(0);
+	        
+	        List<RecipeIngredient> ingredients = recipe.getIngredients();
+	        
+	        String text = "";
+	        
+	        for(RecipeIngredient i : ingredients){
+	            text += i.getAmount() + "\t" + i.getName() + "\n";
+	        }
+	        
+	        this.jTextField1.setText(recipe.getName());
+	        this.jTextArea1.setText(text);
+	        this.jTextArea2.setText(recipe.getInstructions());
         }
-        
-        this.jTextField1.setText(recipe.getName());
-        this.jTextArea1.setText(text);
-        this.jTextArea2.setText(recipe.getInstructions());
+        else{
+        	String text = "no data";
+	        this.jTextField1.setText(text);
+	        this.jTextArea1.setText(text);
+	        this.jTextArea2.setText(text);
+        }
     }
 
 

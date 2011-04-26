@@ -11,7 +11,6 @@ import com.customfit.ctg.controller.Application;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -25,36 +24,14 @@ public class PrintPreviewPanel extends SubPanel {
     
     /** Creates new form PrintPanel */
     public PrintPreviewPanel(AbstractPrintPanel p) {
-   
-        if(p instanceof Printable){
-            this.printComponent = p;
-//            this.printPanel.invalidate();
-              this.tempPanel = p;
-//            this.printPanel.revalidate();
-//            this.revalidate();
+    
+        initComponents();
+ 
+        this.printComponent = p;
+        this.printPanel.setViewportView(p);
 
-        }
-        else{
-             JOptionPane.showMessageDialog(this.getParent(), 
-                     "Unable to print the supplied object.", 
-                     "Unable to Print", 
-                     JOptionPane.ERROR_MESSAGE);
-            System.err.println("Must supply a Printable JPanel");
-//            Application.getMainFrame().goBack();
-        }
-        System.out.println("\npreInit\ntempPanel: " + tempPanel + "\nprintPanel: " + printPanel);
-                initComponents();
-        System.out.println("\npostInit\ntempPanel: " + tempPanel + "\nprintPanel: " + printPanel);
     }
-    
-    /**
-     * @return the panel to be printed
-     */
-    private JPanel getPrintPanel(){
-        System.out.println("\ngetPrintPanel()\ntempPanel: " + tempPanel + "\nprintPanel: " + printPanel);
-        return this.tempPanel;
-    }
-    
+     
     /**
      * Extends SubPanel functionality by returning the title as being the
      * same as on the panel itself.
@@ -79,25 +56,12 @@ public class PrintPreviewPanel extends SubPanel {
     private void initComponents() {
 
         jLabelTitle = new javax.swing.JLabel();
-        printPanel = new javax.swing.JPanel();
         printButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        printPanel = new javax.swing.JScrollPane();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Print Preview");
-
-        printPanel.setBorder(new javax.swing.border.LineBorder(java.awt.Color.lightGray, 1, true));
-
-        javax.swing.GroupLayout printPanelLayout = new javax.swing.GroupLayout(printPanel);
-        printPanel.setLayout(printPanelLayout);
-        printPanelLayout.setHorizontalGroup(
-            printPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 295, Short.MAX_VALUE)
-        );
-        printPanelLayout.setVerticalGroup(
-            printPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 234, Short.MAX_VALUE)
-        );
 
         printButton.setText("Print");
         printButton.addActionListener(new java.awt.event.ActionListener() {
@@ -125,8 +89,8 @@ public class PrintPreviewPanel extends SubPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(printButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -135,20 +99,14 @@ public class PrintPreviewPanel extends SubPanel {
                 .addGap(12, 12, 12)
                 .addComponent(jLabelTitle)
                 .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(printButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cancelButton))
-                    .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
                 .addContainerGap())
         );
-
-        this.remove(printPanel);
-        printPanel = getPrintPanel();
-        this.add(printPanel);
-        printPanel.revalidate();
-        this.revalidate();
     }// </editor-fold>//GEN-END:initComponents
 
     private void printButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printButtonActionPerformed
@@ -170,6 +128,6 @@ public class PrintPreviewPanel extends SubPanel {
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JButton printButton;
-    private javax.swing.JPanel printPanel;
+    private javax.swing.JScrollPane printPanel;
     // End of variables declaration//GEN-END:variables
 }
