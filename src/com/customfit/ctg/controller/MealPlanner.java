@@ -1,10 +1,10 @@
 package com.customfit.ctg.controller;
 
-import com.customfit.ctg.model.Meal;
-import com.customfit.ctg.model.Recipe;
-import com.customfit.ctg.model.User;
-import com.customfit.ctg.view.meal.MealMenuPanel;
-import java.util.List;
+import com.customfit.ctg.model.*;
+import com.customfit.ctg.view.*;
+import com.customfit.ctg.view.meal.*;
+import java.util.*;
+import javax.swing.*;
 
 
 /**
@@ -147,6 +147,54 @@ public class MealPlanner { // implements Observable
         cUser.getAllMeals().add(new Meal("Friday"));
         cUser.getAllMeals().add(new Meal("Saturday"));
         cUser.getAllMeals().add(new Meal("Sunday"));
+
+    }
+    
+    /**
+     * You insert a Date and it loads the Insert Meal panel.
+     * 
+     * @param date The initial date to set the meal to.
+     */
+    public static void insertMealPlan(Date date)
+    {
+        //create panel
+        EditMealPanel newMealPanel = new EditMealPanel(CreateEditMode.CREATE);
+        //begin building a new meal
+        Meal meal = new Meal("", date);
+        //tell panel about new meal
+        newMealPanel.setMeal(meal);
+        //display panel in main frame
+        Application.getMainFrame().setPanel(newMealPanel);
+    }
+    
+    /**
+     * The Insert Meal panel calls this back when the meal has been prepared.
+     * It inserts the meal into your user's meal plans, saves the user to
+     * disk, and then loads the last panel, presumably the weekly meal view.
+     * 
+     * @param meal The meal to insert into the database.
+     * 
+     * @return Boolean indicating the success of the operation. 
+     */
+    public static boolean insertMealPlan(Meal meal)
+    {
+        //update the user object by adding the new meal
+        UserManagement.getCurrentUser().getAllMeals().add(meal);
+        //send it over to the database
+        boolean status = Application.getDataDriver().updateUserByName(UserManagement.getCurrentUser().getName(), UserManagement.getCurrentUser());
+        //check for errors
+        if (!status)
+            //if failed, tell user about the failure
+            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem creating your meal plan.", "Error", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            //otherwise, assume success and go back
+            Application.getMainFrame().goBack();
+            //refresh data on previous panel
+            Application.getMainFrame().getPanel().refresh();
+        }
+        //return status
+        return status;
 
     }
 }
