@@ -16,7 +16,7 @@ public class StarRatingTableCellRenderer extends DefaultTableCellRenderer
         {
             StarRatingPanel ratingPanel = new StarRatingPanel();
             ratingPanel.setScale(5);
-            ratingPanel.setRating((double)value);
+            ratingPanel.setRating((Double)value);
             ratingPanel.setEditable(false);
             
             table.setRowHeight(ratingPanel.getIconHeight()+3);

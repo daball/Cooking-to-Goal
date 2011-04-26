@@ -599,7 +599,7 @@ public class EditRecipePanel extends CreateEditPanel {
         Recipe recipe = new Recipe();
         recipe.setName(this.jTextName.getText().trim());
         recipe.setRating(this.starRatingPanel.getRating());
-        recipe.setServings((double)this.jSpinnerMakes.getValue());
+        recipe.setServings((Double)this.jSpinnerMakes.getValue());
         if (this.jTextFieldServingSize.getText().isEmpty()) this.jTextFieldServingSize.setText("1.0");
         recipe.getServingSize().setQuantity(Double.parseDouble(this.jTextFieldServingSize.getText()));
         recipe.getServingSize().setUnit((String)this.jComboBoxServingSizeUnit.getSelectedItem());
