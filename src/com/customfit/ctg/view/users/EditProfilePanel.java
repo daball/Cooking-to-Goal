@@ -527,9 +527,15 @@ public class EditProfilePanel extends CreateEditPanel {
             Double amount = Double.parseDouble(this.jTextFieldTargetAmount.getText());
             Measurement goal = new Measurement(amount, (String)jComboBoxTargetNutrient.getSelectedItem());
             if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Maximum"))
-                members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
+                members.add(new Member(memberName,
+                        (String)this.jComboBoxTargetNutrient.getSelectedItem(),
+                        goal,
+                        GoalDirection.MAXIMUM_GOAL));
             else if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Minimum"))
-                members.add(new Member(memberName, goal, GoalDirection.MINIMUM_GOAL));
+                members.add(new Member(memberName,
+                        (String)this.jComboBoxTargetNutrient.getSelectedItem(),
+                        goal,
+                        GoalDirection.MINIMUM_GOAL));
         }
         for (int memberRow = 0; memberRow < this.jTableMembers.getModel().getRowCount(); memberRow++)
         {
@@ -539,25 +545,29 @@ public class EditProfilePanel extends CreateEditPanel {
             Measurement goal = new Measurement(amount);
             ButtonModel model = (ButtonModel)this.buttonGroupDirection.getSelection();
             if (model.getActionCommand().equals("Maximum"))
-                members.add(new Member(memberName, goal, GoalDirection.MAXIMUM_GOAL));
+                members.add(new Member(memberName,
+                        (String)this.jComboBoxTargetNutrient.getSelectedItem(),
+                        goal,
+                        GoalDirection.MAXIMUM_GOAL));
             else if (model.getActionCommand().equals("Minimum"))
-                members.add(new Member(memberName, goal, GoalDirection.MINIMUM_GOAL));
+                members.add(new Member(memberName,
+                        (String)this.jComboBoxTargetNutrient.getSelectedItem(),
+                        goal,
+                        GoalDirection.MINIMUM_GOAL));
         }
         if (this.getCreateEditMode() == CreateEditMode.CREATE)
             //create a new user
             return new User(
                     this.jTextFieldUser.getText(),
                     members,
-                    new ArrayList<Meal>(),
-                    (String)this.jComboBoxTargetNutrient.getSelectedItem()
+                    new ArrayList<Meal>()
                     );
         else if (this.getCreateEditMode() == CreateEditMode.EDIT)
             //create a new user from the existing user (i.e., keep meals)
             return new User(
                     this.jTextFieldUser.getText(),
                     members,
-                    this.user.getMeals(),
-                    (String)this.jComboBoxTargetNutrient.getSelectedItem()
+                    this.user.getMeals()
                     );
         else
             return null;
