@@ -48,6 +48,19 @@ public class Recipe {
     /**
      * Constructs an empty Recipe with some default parameters.
      */
+    public Recipe(Recipe recipe) {
+        this.name = recipe.name;
+        this.instructions = recipe.instructions;
+        this.servingSize = recipe.servingSize;
+        this.servings = recipe.servings;
+        this.rating = recipe.rating;
+        this.ingredients = recipe.ingredients;
+        this.nutritionInformation = recipe.nutritionInformation;
+    }
+    
+    /**
+     * Constructs an exsting Recipe by copying fields.
+     */
     public Recipe() {
     }
 
@@ -210,13 +223,57 @@ public class Recipe {
     {
             return this.getName();
     }
-
+    
+    /**
+     * Scales a Recipe's Ingredients, Serving Size, and Nutritional Information
+     * to match the scaled factor.
+     * 
+     * @param recipe Recipe to scale.
+     * @param scaleFactor The factor to scale it by.
+     * 
+     * @return A new Recipe object with scaled fields.
+     */
+    public static Recipe scaleRecipe(Recipe recipe, double scaleFactor)
+    {
+        //rebuild and scale ingredients
+        ArrayList<RecipeIngredient> newIngredientsList = new ArrayList<RecipeIngredient>();
+        for (RecipeIngredient ingredient: recipe.getIngredients())
+        {
+            if (ingredient.getAmount() == null)
+                newIngredientsList.add(ingredient);
+            else
+                newIngredientsList.add(ingredient.scale(scaleFactor));
+        }
+        //build the new Recipe and return
+        return new Recipe(        
+                recipe.getName(),
+                recipe.getInstructions(),
+                recipe.getServingSize().scale(scaleFactor),
+                recipe.getServings(),
+                recipe.getRating(),
+                newIngredientsList,
+                recipe.getNutritionInformation().scale(scaleFactor));
+    }
+    
+    /**
+     * Scales this Recipe's Ingredients, Serving Size, and Nutritional Information
+     * to match the scaled factor.
+     * 
+     * @param scaleFactor The factor to scale the Recipe by.
+     * 
+     * @return A new Recipe object with scaled fields.
+     */
+    public Recipe scale(double scaleFactor)
+    {
+        return Recipe.scaleRecipe(this, scaleFactor);
+    }
+    
     /**
      * Scales a Recipe to a certain number of servings.
      * 
      * This method scales the Ingredient List amount and
-     * the NutritionFacts nutrient fields' quantity to match
-     * the new servings.
+     * the NutritionFacts nutrient fields' quantities to match
+     * the new size of the Recipe.
      * 
      * Serving size will be unaffected. The new servings amount
      * will be stored in the mutated object.
@@ -230,31 +287,21 @@ public class Recipe {
     {
         //get the scale factor, which is (fromServings / toServings)
         double scaleFactor = recipe.getServings() / toServings;
-        //rebuild and scale ingredients
-        ArrayList<RecipeIngredient> newIngredientsList = new ArrayList<RecipeIngredient>();
-        for (RecipeIngredient ingredient: recipe.getIngredients())
-        {
-            if (ingredient.getAmount() == null)
-                newIngredientsList.add(ingredient);
-            else
-                newIngredientsList.add(ingredient.scale(scaleFactor));
-        }
-        //build the new Recipe and return
-        Recipe newRecipe = new Recipe(
-                recipe.getName(),
-                recipe.getInstructions(),
-                recipe.getServingSize(),
-                toServings,
-                recipe.getRating(),
-                newIngredientsList,
-                recipe.getNutritionInformation().scale(scaleFactor));
+        //scale it
+        Recipe newRecipe = recipe.scale(scaleFactor);
+        //then fix the serving size back, it was servings count that we were tampering
+        newRecipe.servingSize = recipe.servingSize;
+        newRecipe.servings = toServings;
+        //return adjusted Recipe
         return newRecipe;
     }
 
     /**
-     * Scales a Recipe to a certain number of servings.
+     * Scales this Recipe to a certain number of servings.
+     * 
      * @param recipe The Recipe to scale.
      * @param toServings The number of servings to scale to.
+     * 
      * @return A new Recipe that has been scaled.
      */
     public Recipe scaleToServings(int toServings)
@@ -262,6 +309,57 @@ public class Recipe {
         return Recipe.scaleRecipeToServings(this, toServings);
     }
     
+    /**
+     * Scales a Recipe to a nutritional target. This assumes that the member
+     * will eat that one meal for the day, and that's it. 
+     * 
+     * If this is not the case and the member plans on eating more than one meal
+     * for the day, then just call .scale(double factor) behind it with some fraction like
+     * 1.0/3.0'rd of the day.
+     * 
+     * @param nutrientName The nutrient to scale to recipe to.
+     * @param goal The member's nutritional target.
+     * 
+     * @return The ideal Recipe for the nutritional goal specified.
+     */
+    public static Recipe scaleToNutritionalTarget(Recipe recipe, String nutrientName, Measurement goal)
+    {
+        //get the nutrient from the recipe
+        Measurement nutrient = recipe.nutritionInformation.getNutrient(nutrientName);
+        //check for nutrient existance, it may not exist. if it doesn't, then there is nothing to scale toward
+        if (nutrient != null)
+        {
+            //gather information
+            double recipeNutrientQuantity = nutrient.getQuantity();
+            double goalQuantity = goal.getQuantity();
+            //calculate how many times you would have to make a recipe to reach your exact goal
+            double scaleFactor = goalQuantity / recipeNutrientQuantity;
+            //now scale the Recipe
+            return recipe.scale(scaleFactor);
+        }            
+        else
+            //nothing else to do here, make a copy of self and go on
+            return new Recipe(recipe);
+    }
+    
+     /**
+     * Scales this Recipe to a nutritional target. This assumes that the member
+     * will eat that one meal for the day, and that's it. 
+     * 
+     * If this is not the case and the member plans on eating more than one meal
+     * for the day, then just call .scale(double factor) behind it with some fraction like
+     * 1.0/3.0'rd of the day.
+     * 
+     * @param nutrientName The nutrient to scale to recipe to.
+     * @param goal The member's nutritional target.
+     * 
+     * @return The ideal Recipe for the nutritional goal specified.
+     */
+   public Recipe scaleToNutritionalTarget(String nutrientName, Measurement goal)
+   {
+       return Recipe.scaleToNutritionalTarget(this, nutrientName, goal);
+   }
+  
     @Override
     public boolean equals(Object object)
     {
@@ -283,5 +381,5 @@ public class Recipe {
        }
        return false;
     }
-   
+    
 }
