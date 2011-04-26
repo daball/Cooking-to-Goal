@@ -56,12 +56,81 @@ public class MealPlanner { // implements Observable
      * @param recipe
      * @param meal
      */
-    public static void addRecipeToMenu(Recipe recipe, Meal meal) {
+    public static void addRecipeToMeal(Recipe recipe, String mealName) {
         User cUser = UserManagement.getCurrentUser();
-        List<Meal> meals = cUser.getMeals();
-        //for each m in meals
-            //if (m.equals(meal)) {
-                //m.addRecipe(recipe);
-            //}
+        Meal meal = cUser.getMealByName(mealName);
+        if (meal != null)
+            meal.getRecipes().add(recipe);
+    }
+
+    /**
+     * Remove the recipe from the meal.
+     *
+     * @param recipe
+     * @param meal
+     */
+    public static void removeRecipeFromMeal(String recipeName, String mealName) {
+        User cUser = UserManagement.getCurrentUser();
+        Meal meal = cUser.getMealByName(mealName);
+        if (meal != null) {
+            int rindex = getRecipeIndexInMeal(meal, recipeName);
+            if (rindex > 0)
+                meal.getRecipes().remove(rindex);
+        }
+    }
+
+    /**
+     * Remove the recipe from the meal.
+     *
+     * @param mealIndex
+     * @param recipeIndex
+     */
+    public static void removeRecipeFromMeal(int mealIndex, int recipeIndex) {
+        User cUser = UserManagement.getCurrentUser();
+        if (mealIndex >= 0 && recipeIndex >= 0) {
+            if (mealIndex < cUser.getMeals().size()) {
+                Meal meal =  cUser.getMeals().get(mealIndex);
+                if (recipeIndex < meal.getRecipes().size()) {
+                    Recipe r = meal.getRecipes().get(recipeIndex);
+                    meal.getRecipes().remove(r);
+                }
+            }
+        }
+    }
+
+    /**
+     * Get the index for the recipe in a given meal.
+     *
+     * @param meal The meal to get the index from.
+     * @param mealName The meal's name to search for
+     * @return Returns the index.  -1 if no match is found.
+     */
+    public static int getRecipeIndexInMeal(Meal meal, String recipeName) {
+        int index = 0;
+        for (Recipe r : meal.getRecipes()) {
+            if (r.getName().equals(recipeName))
+                return index;
+            index++;
+        }
+        return -1;
+    }
+
+    /**
+     * Gets the list of meals from the current user.
+     */
+    public static List<Meal> getAllMeals()
+    {
+        return UserManagement.getCurrentUser().getMeals();
+    }
+
+    public static void createDefaultMeals() {
+        User cUser = UserManagement.getCurrentUser();
+        cUser.addMeal(new Meal("Monday"));
+        cUser.addMeal(new Meal("Tuesday"));
+        cUser.addMeal(new Meal("Wednesday"));
+        cUser.addMeal(new Meal("Thursday"));
+        cUser.addMeal(new Meal("Friday"));
+        cUser.addMeal(new Meal("Saturday"));
+        cUser.addMeal(new Meal("Sunday"));
     }
 }

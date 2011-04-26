@@ -313,6 +313,62 @@ public class User
 
         return meals;
    }
+   /**
+     * Gets a meal based on it's name.
+     *
+     * @param name Name of the meal.
+     *
+     * @return a Meal.
+     */
+   public Meal getMealByName(String name)
+   {
+        for (Meal meal : this.getMeals())
+        {
+            if (meal.getName().equals(name))
+            {
+                return meal;
+            }
+        }
+        return null;
+   }
+
+   /**
+     * Add a meal to the meal list.
+     *
+     * @param meal The meal to be added.
+     */
+   public void addMeal(Meal meal)
+   {
+        this.meals.add(meal);
+   }
+
+   /**
+     * Get the total goals store for all members.
+     *
+     * @return
+     */
+    public Measurement getTotalGoal() {
+        Measurement goal = null;
+        for (Member m : getAllMembers()) {
+            goal.setQuantity(goal.getQuantity() + m.getGoal().getQuantity());
+        }
+        return goal;
+    }
+
+    /**
+     * Get the total goals store for all members.
+     *
+     * @return
+     */
+    public void scaleAllMeals() {
+        Measurement goal = null;
+        //difference = target_goal - menu_total
+        //AmountToRemove = difference/RecipeCount
+
+        for (Meal m : getMeals()) {
+            
+        }
+    }
    
     @Override
     public boolean equals(Object object)

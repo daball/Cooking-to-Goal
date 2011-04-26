@@ -137,4 +137,17 @@ public class Application {
         System.err.println("Stack trace:");
         System.err.print(exception.getStackTrace());	
     }
+
+    /**
+     * This is a simple way to check if two objects are equal
+     * and to still account for null values.
+     *
+     * @param o1 object 1
+     * @param o2 object 2
+     * @return
+     */
+    public static boolean isEquals(final Object o1, final Object o2) {
+        return o1 == null ? o2 == null : o1.equals(o2);
+    }
+
 }

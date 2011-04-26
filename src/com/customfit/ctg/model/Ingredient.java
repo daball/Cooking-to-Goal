@@ -1,5 +1,7 @@
 package com.customfit.ctg.model;
 
+import com.customfit.ctg.controller.Application;
+
 /**
  * An ingredient is anything with a name apparently.
  * 
@@ -43,7 +45,7 @@ public class Ingredient{
     public boolean equals(Object object)
     {
        Ingredient ingredient = (Ingredient)object;
-       if (this.name.equals(ingredient.name))
+       if (Application.isEquals(this.name,ingredient.name))
            return true;
        return false;
     }
