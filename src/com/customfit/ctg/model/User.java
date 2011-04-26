@@ -211,7 +211,7 @@ public class User
     /**
      * Gets a List of Meals for the date specified.
      * 
-     * @param date The date (time is ignored in liue of 00:00:00.000).
+     * @param date The date (time is ignored in lieu of 00:00:00.000).
      * 
      * @return List of Meals.
      */
