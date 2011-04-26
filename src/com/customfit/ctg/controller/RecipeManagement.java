@@ -190,4 +190,31 @@ public class RecipeManagement {
     {
         return deleteRecipe(recipe.getName());
     }
+    
+    /**
+     * 
+     */
+    public static void printRecipe(String recipeName){
+    	// TODO: Implement
+    	// get recipe by name
+    	
+    	// create recipe view JPanel (implements Printable)
+    	
+    	// pass JPanel to print preview panel and display
+    }
+    
+    /**
+     * 
+     */
+    public static void printShoppingList(){
+    	// TODO: Implement
+    	// obtain the shopping list
+    	
+    	// create shopping list view JPanel (implements Printable)
+    	    	
+    	// pass JPanel to print preview panel and display
+    	PrintPreviewPanel ppPanel = new PrintPreviewPanel(new TestPrintPanel());
+    	
+    	Application.getMainFrame().setPanel(ppPanel);
+    }
 }
