@@ -3,8 +3,8 @@ package com.customfit.ctg.view.recipes;
 import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.*;
 import javax.swing.event.*;
 import javax.swing.table.*;
@@ -53,13 +53,32 @@ public class EditRecipePanel extends CreateEditPanel {
             nutritionTableModel.addRow(new Object[] { nutrient , });
         }
         //listen for star rating events
-        this.starRatingPanel.addPropertyChangeListener(new PropertyChangeListener() {
+        this.starRatingPanel.addMouseListener(new MouseListener() {
 
             @Override
-            public void propertyChange(PropertyChangeEvent evt) {
+            public void mouseClicked(MouseEvent e) {
                 validateForm();
-                if (evt.getPropertyName() == "score")
-                System.out.println("property change hit.");
+                System.out.println("mouse clicked hit.");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+//                throw new UnsupportedOperationException("Not supported yet.");
             }
         });
         //listen for nutrition table events
@@ -81,6 +100,7 @@ public class EditRecipePanel extends CreateEditPanel {
                             nutritionTableModel.setValueAt("", row, e.getColumn());
                     }
                 }
+                validateForm();
             }
         });
         //listen for ingredient table events
@@ -292,6 +312,11 @@ public class EditRecipePanel extends CreateEditPanel {
         );
 
         jSpinnerMakes.setModel(new javax.swing.SpinnerNumberModel(Double.valueOf(1.0d), Double.valueOf(0.0d), null, Double.valueOf(0.25d)));
+        jSpinnerMakes.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerMakesStateChanged(evt);
+            }
+        });
 
         lblName2.setFont(new java.awt.Font("Tahoma", 1, 11));
         lblName2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -309,6 +334,11 @@ public class EditRecipePanel extends CreateEditPanel {
         });
 
         jComboBoxServingSizeUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxServingSizeUnit.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxServingSizeUnitItemStateChanged(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructions", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
@@ -469,6 +499,14 @@ public class EditRecipePanel extends CreateEditPanel {
     private void jTextAreaInstructionsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextAreaInstructionsKeyReleased
         this.validateForm();
     }//GEN-LAST:event_jTextAreaInstructionsKeyReleased
+
+    private void jComboBoxServingSizeUnitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxServingSizeUnitItemStateChanged
+        this.validateForm();
+    }//GEN-LAST:event_jComboBoxServingSizeUnitItemStateChanged
+
+    private void jSpinnerMakesStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerMakesStateChanged
+        this.validateForm();
+    }//GEN-LAST:event_jSpinnerMakesStateChanged
 
     private void removeIngredient() {
         int currentRow = jTableIngredients.getSelectedRow();

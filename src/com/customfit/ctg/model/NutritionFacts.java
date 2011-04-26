@@ -564,8 +564,9 @@ public class NutritionFacts{
     }
     
     /**
+     * Gets an array of valid nutrient strings for use with this object.
      * 
-     * @return 
+     * @return Array of strings.
      */
     public static String[] getAllValidNutrients()
     {

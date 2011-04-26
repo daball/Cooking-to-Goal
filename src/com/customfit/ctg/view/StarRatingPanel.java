@@ -13,8 +13,11 @@ import javax.swing.*;
  * 
  * @author David
  */
-public class StarRatingPanel extends JPanel implements Icon, Serializable
+public class StarRatingPanel extends JComponent implements Icon, Serializable
 {
+    
+    PropertyChangeSupport propertyChangeSupport = new PropertyChangeSupport(this);
+//    ActionMap actionMap = new ActionMap();
     
     /**
      * Number of stars to use.
@@ -62,7 +65,6 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
         this.setPreferredSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
         this.setMinimumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
         this.setMaximumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.score, this.imageIconStarOff.getIconHeight()));
-        this.enableEvents(AWTEvent.COMPONENT_EVENT_MASK);
     }
     
     /** This method is called from within the constructor to
@@ -168,7 +170,7 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
         this.setMinimumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.scale, this.imageIconStarOff.getIconHeight()));
         this.setMaximumSize(new Dimension(this.imageIconStarOff.getIconWidth()*this.scale, this.imageIconStarOff.getIconHeight()));
         this.repaint();
-        this.firePropertyChange(PROP_SCALE, oldScale, scale);
+        this.propertyChangeSupport.firePropertyChange(PROP_SCALE, Integer.valueOf(oldScale), Integer.valueOf(scale));
     }
     
     /**
@@ -189,7 +191,7 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
         int oldScore = score;
         this.score = score;
         this.repaint();
-        this.firePropertyChange(PROP_SCORE, oldScore, this.score);
+        this.propertyChangeSupport.firePropertyChange(PROP_SCORE, Integer.valueOf(oldScore), Integer.valueOf(this.score));
     }
     
     /**
@@ -236,7 +238,7 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
     {
         boolean oldEditable = this.editable;
         this.editable = editable;
-        this.firePropertyChange(PROP_EDITABLE, oldEditable, this.editable);
+        this.propertyChangeSupport.firePropertyChange(PROP_EDITABLE, Boolean.valueOf(oldEditable), Boolean.valueOf(this.editable));
     }
     
     /**
@@ -302,4 +304,28 @@ public class StarRatingPanel extends JPanel implements Icon, Serializable
         return new ImageIcon(image);
     }
 
+    public void addStarRatingPropertyChangeSupport(PropertyChangeListener listener)
+    {
+        this.propertyChangeSupport.addPropertyChangeListener(listener);
+    }
+    
+    public void addStarRatingPropertyChangeSupport(String property, PropertyChangeListener listener)
+    {
+        this.propertyChangeSupport.addPropertyChangeListener(property, listener);
+    }
+    
+    public void removeStarRatingPropertyChangeSupport(PropertyChangeListener listener)
+    {
+        this.propertyChangeSupport.removePropertyChangeListener(listener);
+    }
+    
+//    public void addStarRatingActionSupport(String action, ActionListener listener)
+//    {
+//        this.actionMap. addPropertyChangeListener(property, listener);
+//    }
+//    
+//    public void removeStarRatingActionSupport(ActionListener listener)
+//    {
+//        this.actionMap..removePropertyChangeListener(listener);
+//    }
 }
