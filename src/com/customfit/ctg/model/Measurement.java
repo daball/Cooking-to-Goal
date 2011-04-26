@@ -223,6 +223,37 @@ public class Measurement implements Comparable<Measurement> {
            return false;
         return true;
     }
+    
+    /**
+     * Creates a new Measurement object with the sum of the two quantities and the unit
+     * from the measurement of the left.
+     * 
+     * @param measurementLeft A Measurement object. (This one must have the unit specified.)
+     * @param measurementRight A Measurement object. (The unit will be ignored.)
+     * 
+     * @return Measurement object with the sum of the two quantities.
+     */
+    public static Measurement addMeasurements(Measurement measurementLeft, Measurement measurementRight)
+    {
+        return new Measurement(measurementLeft.quantity+measurementRight.quantity,
+                measurementLeft.unit);
+    }
+            
+    /**
+     * Creates a new Measurement object with the sum of the quantities of this Measurement
+     * and the one you specified. The input Measurement's unit will be ignored and only
+     * the quantities will be merged into the new Measurement object. The unit from this
+     * instance will be passed into the new Measurement object.
+     * 
+     * @param measurement The Measurement object you would like to add into this one.
+     * 
+     * @return A new Measurement object with the sum of the two quantities.
+     */
+    public Measurement add(Measurement measurement)
+    {
+        //put this on the left
+        return Measurement.addMeasurements(this, measurement);
+    }
 
     /**
      * Represents a sample of the US Customary measurement units.
