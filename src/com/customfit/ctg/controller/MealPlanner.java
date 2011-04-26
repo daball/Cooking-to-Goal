@@ -64,6 +64,21 @@ public class MealPlanner { // implements Observable
     }
 
     /**
+     * Add the recipe to the meal.
+     *
+     * @param recipe
+     * @param meal
+     */
+    public static void addRecipeToMeal(Recipe recipe, int mealIndex) {
+        User cUser = UserManagement.getCurrentUser();
+        if (mealIndex >=0 && mealIndex < cUser.getMeals().size()) {
+            Meal meal = cUser.getMeals().get(mealIndex);
+            if (meal != null)
+                meal.getRecipes().add(recipe);
+        }
+    }
+
+    /**
      * Remove the recipe from the meal.
      *
      * @param recipe
