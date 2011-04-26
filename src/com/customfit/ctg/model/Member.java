@@ -50,7 +50,8 @@ public class Member {
      * 
      * @return The member's name.
      */
-    public String getName() {
+    public String getName()
+    {
         return name;
     }
 
@@ -59,7 +60,8 @@ public class Member {
      * 
      * @param name The member's name.
      */
-    public void setName(String name) {
+    public void setName(String name)
+    {
         this.name = name;
     }
     
@@ -68,7 +70,8 @@ public class Member {
      * 
      * @return The goal for the Member.
      */
-    public Measurement getGoal() {
+    public Measurement getGoal()
+    {
         return this.goal;
     }
 
@@ -77,21 +80,24 @@ public class Member {
      * 
      * @param goal The goal for the Member.
      */
-    public void setGoal(Measurement goal) {
+    public void setGoal(Measurement goal)
+    {
         this.goal = goal;
     }
 
     /**
      * Gets the direction of the nutritional goals.
      */
-    public GoalDirection getGoalDirection() {
+    public GoalDirection getGoalDirection()
+    {
         return this.goalDirection;
     }
 
     /**
      * Sets the direction of the nutritional goals.
      */
-    public void setGoalDirection(GoalDirection goalDirection) {
+    public void setGoalDirection(GoalDirection goalDirection)
+    {
         this.goalDirection = goalDirection;
     }
     
