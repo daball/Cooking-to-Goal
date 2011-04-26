@@ -241,7 +241,7 @@ public class HomePanel extends SubPanel {
     }//GEN-LAST:event_linkLabelEditWeeklyMenuActionPerformed
 
     private void linkLabelPrintShoppingListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelPrintShoppingListActionPerformed
-        // TODO add your handling code here:
+        RecipeManagement.printShoppingList();
     }//GEN-LAST:event_linkLabelPrintShoppingListActionPerformed
 
     private void linkLabelEditUserSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelEditUserSettingsActionPerformed
