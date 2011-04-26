@@ -98,7 +98,7 @@ public class MealMenuPanel extends SubPanel {
         linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
-        jLabelTitle.setText("Meal Menu");
+        jLabelTitle.setText("Weekly Meal Plan");
 
         jScrollPane2.setBorder(null);
 
@@ -194,7 +194,7 @@ public class MealMenuPanel extends SubPanel {
                     .addComponent(jButtonAddRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonRemoveRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Available Recipes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -251,7 +251,7 @@ public class MealMenuPanel extends SubPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);

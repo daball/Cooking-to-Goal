@@ -67,7 +67,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Meal Menu"/>
+        <Property name="text" type="java.lang.String" value="Weekly Meal Plan"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -156,7 +156,7 @@
                       <Component id="jButtonRemoveRecipe" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable1" pref="143" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable1" pref="129" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -255,7 +255,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="linkLabelAddNew" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable2" pref="154" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable2" pref="140" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
