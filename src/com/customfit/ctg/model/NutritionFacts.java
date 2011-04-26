@@ -124,6 +124,25 @@ public class NutritionFacts{
     }
     
     /**
+     * Creates a new NutritionFacts like the one you specify.
+     * 
+     * @param nutritionFacts NutritionFacts to model.
+     */
+    public NutritionFacts(NutritionFacts nutritionFacts)
+    {
+        this.Calories = nutritionFacts.Calories;
+        this.totalFat = nutritionFacts.totalFat;
+        this.saturatedFat = nutritionFacts.saturatedFat;
+        this.transFat = nutritionFacts.transFat;
+        this.cholesterol = nutritionFacts.cholesterol;
+        this.sodium = nutritionFacts.sodium;
+        this.totalCarbohydrate = nutritionFacts.totalCarbohydrate;
+        this.dietaryFiber = nutritionFacts.dietaryFiber;
+        this.sugars = nutritionFacts.sugars;
+        this.protein = nutritionFacts.protein;
+    }
+    
+    /**
      * Creates a new NutritionFacts with the information provided.
      * 
      * @param calories Calories in NutritionFacts.
@@ -795,4 +814,60 @@ public class NutritionFacts{
        }
        return true;
     }
+    
+    /**
+     * Creates a new NutritionFacts object out of the existing one and adds the
+     * quantity you measured. If the nutrient field didn't exist (was null) then
+     * it will insert your quantity.
+     * 
+     * @param nutritionFacts The NutritionFacts object you would like to add into this one.
+     * 
+     * @return A new NutritionFacts object with the added nutrient quantity.
+     */
+    public NutritionFacts addNutrient(String nutrientName, Measurement quantity)
+    {
+        //make a new NutritionFacts like the one you specify.
+        NutritionFacts newNutritionFacts = new NutritionFacts(this);
+        Measurement currentNutrient = newNutritionFacts.getNutrient(nutrientName);
+        if (currentNutrient != null)
+            //put this on the left
+            currentNutrient = currentNutrient.add(quantity);
+        else
+            currentNutrient = quantity;
+        newNutritionFacts.setNutrient(nutrientName, currentNutrient.getQuantity());
+        return newNutritionFacts;
+    }
+    
+    /**
+     * Creates a new NutritionFacts object with the sums of all the nutrient quantities.
+     * 
+     * @param nutritionFactsLeft A NutritionFacts object.
+     * @param nutritionFactsRight A NutritionFacts object.
+     * 
+     * @return NutritionFacts object with the sums of all the nutrient quantities.
+     */
+    public static NutritionFacts addNutritionFacts(NutritionFacts nutritionFactsLeft, NutritionFacts nutritionFactsRight)
+    {
+       NutritionFacts newNutritionFacts = new NutritionFacts(nutritionFactsLeft);
+       for (String nutrientName: getAllValidNutrients())
+       {
+           newNutritionFacts.addNutrient(nutrientName, nutritionFactsRight.getNutrient(nutrientName));
+       }
+       return newNutritionFacts;
+    }
+    
+    /**
+     * Creates a new NutritionFacts object out of the existing one and adds the
+     * quantity you measured. If the nutrient field didn't exist (was null) then
+     * it will insert your quantity.
+     * 
+     * @param nutritionFacts The NutritionFacts object you would like to add into this one.
+     * 
+     * @return A new NutritionFacts object with the added nutrient quantity.
+     */
+    public NutritionFacts add(NutritionFacts nutritionFacts)
+    {
+        return NutritionFacts.addNutritionFacts(this, nutritionFacts);
+    }
+
 }
