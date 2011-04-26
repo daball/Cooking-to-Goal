@@ -24,6 +24,11 @@ public class Member {
     private GoalDirection goalDirection = GoalDirection.MAXIMUM_GOAL;
 
     /**
+     * The nutrient to track.
+     */
+    private String trackedNutrient = "";
+    
+    /**
      * Constructs a Member with a single, active empty nutrition plan with
      * the member name provided.
      * 
@@ -37,10 +42,13 @@ public class Member {
      * Constructs a Member with information provided.
      * 
      * @param name The member's name.
+     * @param trackedNutrient The nutrient to track.
      * @param goal The nutritional goal for the Member.
+     * @param goalDirection The direction of the goal.
      */
-    public Member(String name, Measurement goal, GoalDirection goalDirection) {
+    public Member(String name, String trackedNutrient, Measurement goal, GoalDirection goalDirection) {
         this.name = name;
+        this.trackedNutrient = trackedNutrient;
         this.goal = goal;
         this.goalDirection = goalDirection;
     }
@@ -100,12 +108,33 @@ public class Member {
     {
         this.goalDirection = goalDirection;
     }
-    
+
+   /**
+     * Gets the nutrient to track.
+     * 
+     * @return The nutrient to track.
+     */
+    public String getTrackedNutrient()
+    {
+        return trackedNutrient;
+    }
+
+    /**
+     * Sets the nutrient to track.
+     * 
+     * @param trackedNutrient The nutrient to track.
+     */
+    public void setTrackedNutrient(String trackedNutrient)
+    {
+        this.trackedNutrient = trackedNutrient;
+    }
+ 
     @Override
     public boolean equals(Object object)
     {
        Member member = (Member)object;
        if (this.name.equals(member.name)
+               && this.trackedNutrient.equals(member.trackedNutrient)
                && this.goal.equals(member.goal)
                && this.goalDirection == member.goalDirection)
            return true;

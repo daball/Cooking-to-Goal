@@ -27,11 +27,6 @@ public class User
     private List<Meal> meals = new LinkedList<Meal>();
     
     /**
-     * The nutrient to track.
-     */
-    private String trackedNutrient = "";
-    
-    /**
      * Constructs a user with the name provided.
      * 
      * @param name The user's name.
@@ -49,14 +44,12 @@ public class User
      * @param name The user's name.
      * @param members All the user's members.
      * @param meals The list of meals for the user.
-     * @param trackedNutrient The nutrient to track.
      */
-    public User(String name, List<Member> members, List<Meal> meals, String trackedNutrient)
+    public User(String name, List<Member> members, List<Meal> meals)
     {
         this.name = name;
         this.members = members;
         this.meals = meals;
-        this.trackedNutrient = trackedNutrient;                
     }
 
     /**
@@ -177,26 +170,6 @@ public class User
         return members;
     }
     
-    /**
-     * Gets the nutrient to track.
-     * 
-     * @return The nutrient to track.
-     */
-    public String getTrackedNutrient()
-    {
-        return trackedNutrient;
-    }
-
-    /**
-     * Sets the nutrient to track.
-     * 
-     * @param trackedNutrient The nutrient to track.
-     */
-    public void setTrackedNutrient(String trackedNutrient)
-    {
-        this.trackedNutrient = trackedNutrient;
-    }
-  
     /**
      * Gets a List of Meals for the date period specified.
      * 
@@ -375,7 +348,6 @@ public class User
     {
        User user = (User)object;
        if (this.name.equals(user.name)
-               && this.trackedNutrient.equals(user.trackedNutrient)
                && this.meals.size() == user.meals.size()
                && this.members.size() == user.members.size())
        {
