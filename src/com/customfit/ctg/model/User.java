@@ -342,6 +342,16 @@ public class User
             
         }
     }
+    
+   /**
+     * Gets the nutrient being tracked by the member matching the user name.
+     * 
+     * @return The nutrient to track.
+     */
+    public String getTrackedNutrient()
+    {
+        return this.getOwnMember().getTrackedNutrient();
+    }
    
     @Override
     public boolean equals(Object object)
