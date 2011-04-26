@@ -313,6 +313,34 @@ public class User
 
         return meals;
    }
+   /**
+     * Gets a meal based on it's name.
+     *
+     * @param name Name of the meal.
+     *
+     * @return a Meal.
+     */
+   public Meal getMealByName(String name)
+   {
+        for (Meal meal : this.getMeals())
+        {
+            if (meal.getName().equals(name))
+            {
+                return meal;
+            }
+        }
+        return null;
+   }
+
+   /**
+     * Add a meal to the meal list.
+     *
+     * @param meal The meal to be added.
+     */
+   public void addMeal(Meal meal)
+   {
+        this.meals.add(meal);
+   }
    
     @Override
     public boolean equals(Object object)

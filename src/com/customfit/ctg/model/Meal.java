@@ -32,6 +32,19 @@ public class Meal {
      */
     private List<Member> members = new ArrayList<Member>();
 
+    public Meal() {
+        //leave everything blank
+    }
+
+    public Meal(String name) {
+        this.setName(name);
+    }
+
+    public Meal(String name, Date date) {
+        this.setName(name);
+        this.setDate(date);
+    }
+
     /**
      * Gets the date/time the meal.
      * 
@@ -100,10 +113,15 @@ public class Meal {
     public boolean equals(Object object)
     {
        Meal meal = (Meal)object;
-       if (this.name.equals(meal.name)
-               && this.date.equals(meal.date)
-               && this.recipes.size() == meal.recipes.size()
-               && this.members.size() == meal.members.size())
+       //if (this.name.equals(meal.name)
+       //        && this.date.equals(meal.date)
+       //        && this.recipes.size() == meal.recipes.size()
+       //        && this.members.size() == meal.members.size())
+       //{
+       if (Application.isEquals(this.name,meal.name)
+           && Application.isEquals(this.date,meal.date)
+           && this.recipes.size() == meal.recipes.size()
+           && this.members.size() == meal.members.size())
        {
            for (int recipe = 0; recipe < this.recipes.size(); recipe++)
            {
