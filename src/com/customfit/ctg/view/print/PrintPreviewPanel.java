@@ -1,21 +1,13 @@
-/*
- * PrintPanel.java
- * A Print Preview frame to contain Printable objects.
- * Created on Apr 25, 2011, 1:10:06 PM
- * 
- * @author Drew
- */
-package com.customfit.ctg.view;
+package com.customfit.ctg.view.print;
 
-import com.customfit.ctg.controller.Application;
-import java.awt.Dimension;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-import javax.swing.JPanel;
+import com.customfit.ctg.controller.*;
+import com.customfit.ctg.view.*;
+import java.awt.print.*;
+import javax.swing.*;
 
 /**
- *
+ * A Print Preview frame to contain Printable objects.
+ * 
  * @author Drew
  */
 public class PrintPreviewPanel extends SubPanel {
@@ -44,9 +36,7 @@ public class PrintPreviewPanel extends SubPanel {
         //set title
         return "Print Preview";
     }
-    
-    
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -92,12 +82,6 @@ public class PrintPreviewPanel extends SubPanel {
                 jDesktopPane1ComponentResized(evt);
             }
         });
-
-        printPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                printPanelComponentResized(evt);
-            }
-        });
         printPanel.setBounds(130, 110, 180, 236);
         jDesktopPane1.add(printPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
@@ -138,11 +122,6 @@ public class PrintPreviewPanel extends SubPanel {
         this.setSize(WIDTH, WIDTH);
     }//GEN-LAST:event_cancelButtonActionPerformed
 
-    private void printPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_printPanelComponentResized
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_printPanelComponentResized
-
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
         //make the scrollable panel with the print panel inside
         //80% of the height of the outer panel
@@ -155,7 +134,7 @@ public class PrintPreviewPanel extends SubPanel {
             //80% of the width of the outer panel
             previewPaneWidth = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().width).doubleValue() - 20.0).intValue();
             //then the proportion of width
-            previewPaneHeight = new Double((new Integer(previewPaneHeight)).doubleValue() * 11.0 / 8.5).intValue();
+            previewPaneHeight = new Double((new Integer(previewPaneHeight)).doubleValue() / 11.0 * 8.5).intValue();
         }
         this.printPanel.setSize(previewPaneWidth, previewPaneHeight);
         

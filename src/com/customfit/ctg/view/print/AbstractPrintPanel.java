@@ -2,22 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.customfit.ctg.view;
+package com.customfit.ctg.view.print;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import javax.swing.BorderFactory;
-import javax.swing.JComponent;
-
-import javax.swing.JPanel;
-import javax.swing.RepaintManager;
-import javax.swing.border.Border;
+import java.awt.*;
+import java.awt.print.*;
+import javax.swing.*;
+import javax.swing.border.*;
 
 /**
  * Extend this abstract class to create a 
@@ -37,11 +27,11 @@ abstract class AbstractPrintPanel extends JPanel implements Printable {
 
             // Get the Graphics2D context for the component
             Graphics2D g2 = (Graphics2D) g;
-            System.out.print("imageable X:" + pf.getImageableX() + ", ");
-            System.out.print("Y:" + pf.getImageableY() + ", ");
-            System.out.print("W:" + pf.getImageableWidth() + ", ");
-            System.out.print("H:" + pf.getImageableHeight());
-            this.setSize(new Double(pf.getImageableWidth()).intValue(), new Double(pf.getImageableHeight()).intValue());
+//            System.out.print("imageable X:" + pf.getImageableX() + ", ");
+//            System.out.print("Y:" + pf.getImageableY() + ", ");
+//            System.out.print("W:" + pf.getImageableWidth() + ", ");
+//            System.out.print("H:" + pf.getImageableHeight());
+            //this.setSize(new Double(pf.getImageableWidth()).intValue(), new Double(pf.getImageableHeight()).intValue());
             // Move to 0,0 in printer
             g2.translate(pf.getImageableX(), pf.getImageableY());
 //            for (Component component : this.getComponents())
@@ -63,7 +53,7 @@ abstract class AbstractPrintPanel extends JPanel implements Printable {
 //                    //component.setSize(100, component.getHeight());
 //            
 //            // Get the bounds of the printable size
-//            Rectangle page =  new Rectangle((int)pf.getImageableWidth(), (int)pf.getImageableHeight());
+            Rectangle page =  new Rectangle((int)pf.getImageableWidth(), (int)pf.getImageableHeight());
 //            
 //            
 //            // Translate the component to the printable size
@@ -111,7 +101,7 @@ abstract class AbstractPrintPanel extends JPanel implements Printable {
       @Override
       public void setSize(int width, int height)
       {
-          int newHeight = new Double((new Integer(width).doubleValue() / 8.5) * 11.0).intValue();
+          int newHeight = new Double(new Integer(width).doubleValue() / 8.5 * 11.0).intValue();
           super.setSize(width, newHeight);
       }
       

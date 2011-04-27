@@ -8,7 +8,7 @@
  *
  * Created on Apr 25, 2011, 1:28:33 PM
  */
-package com.customfit.ctg.view;
+package com.customfit.ctg.view.print;
 
 import com.customfit.ctg.model.Recipe;
 import com.customfit.ctg.model.RecipeIngredient;
@@ -71,7 +71,7 @@ public class RecipePrintPanel extends AbstractPrintPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextPaneInstructions = new javax.swing.JTextPane();
 
-        jLabelName.setFont(new java.awt.Font("Times New Roman", 3, 24)); // NOI18N
+        jLabelName.setFont(new java.awt.Font("Times New Roman", 3, 24));
         jLabelName.setText("Recipe");
 
         starRatingPanel.setScale(5);
@@ -87,7 +87,7 @@ public class RecipePrintPanel extends AbstractPrintPanel {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        jLabelMakes.setFont(new java.awt.Font("Times New Roman", 2, 11)); // NOI18N
+        jLabelMakes.setFont(new java.awt.Font("Times New Roman", 2, 11));
         jLabelMakes.setText("Makes 5, 3.0 ounce servings.");
 
         jScrollPane1.setBorder(null);
@@ -95,18 +95,19 @@ public class RecipePrintPanel extends AbstractPrintPanel {
         jTextPaneIngredients.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(jTextPaneIngredients);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 16));
         jLabel1.setText("Ingredients");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nutrition Facts");
 
         jScrollPane2.setBorder(null);
 
-        jTextPaneNutritionFacts.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextPaneNutritionFacts.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jScrollPane2.setViewportView(jTextPaneNutritionFacts);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 1, 16)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 16));
         jLabel3.setText("Instructions");
 
         jScrollPane3.setBorder(null);
@@ -122,29 +123,31 @@ public class RecipePrintPanel extends AbstractPrintPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 392, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 409, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(114, 114, 114)
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabelMakes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
-                            .addComponent(jLabelName, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE))
+                            .addComponent(jLabelMakes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)
+                            .addComponent(jLabelName, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(starRatingPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jScrollPane2)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jScrollPane2))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel3)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -159,13 +162,13 @@ public class RecipePrintPanel extends AbstractPrintPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelMakes)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
