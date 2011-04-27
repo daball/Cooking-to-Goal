@@ -49,7 +49,7 @@ public class ListRecipesPanel extends SubPanel {
             this.jLabelTitle.setText("Search Recipes");
         
         //setup the me-menu in the right-top corner
-        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"Account: " + UserManagement.getCurrentUser().getName(), "Edit User", "Logout" }));
+        jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"User: " + UserManagement.getCurrentUser().getName(), "Profile Home", "Edit Profile", "Logout" }));
 
         //manually coded (netbeans issue?) on-select event
         jTableRecipes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
@@ -201,11 +201,15 @@ public class ListRecipesPanel extends SubPanel {
     private void jComboBoxMeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMeMenuActionPerformed
         // process me menu
         
+        //if user hit Profile Home
+        if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Profile Home"))
+            //then tell the controller about it
+            UserManagement.viewHome();
         //if user hit Edit User
-        if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit User"))
+        else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Edit Profile"))
             //then tell the controller about it
             UserManagement.editRegistration(UserManagement.getCurrentUser());
-        //if user hit Edit User
+        //if user hit Logout
         else if (((String)this.jComboBoxMeMenu.getSelectedItem()).equals("Logout"))
             //ask controller for logout
             UserManagement.logout();
