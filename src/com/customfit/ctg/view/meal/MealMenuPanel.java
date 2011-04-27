@@ -467,14 +467,26 @@ public class MealMenuPanel extends SubPanel {
     }//GEN-LAST:event_jTableRecipesMouseClicked
 
     private void jButtonAddMealOrRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMealOrRecipeActionPerformed
-        //if a row is selected
+        //build a list of recipes
+        List<Recipe> recipes = new ArrayList<Recipe>();
+        for (int recipeRow: this.jTableRecipes.getSelectedRows())
+            for (Recipe recipe: this.recipes)
+                if (recipe.getName().equals((String)this.jTableRecipes.getModel().getValueAt(recipeRow, 0)))
+                    recipes.add(recipe);
+
         int selectedMenuRow = this.jTableMenu.getSelectedRow();
-        int selectedRecipeRow = this.jTableRecipes.getSelectedRow();
         if (this.jTableMenu.getSelectedRowCount() > 0) {
             Object mealObject = jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 1);
-//            if (mealObject == null)
+            if (mealObject == null)
+            {
                 //tell controller to create a new meal
-//                MealPlanner.insertMealPlan();
+                Calendar calendarToday = Calendar.getInstance();
+                Calendar calendarStart = Calendar.getInstance();
+                calendarStart.setTime(this.getStartDate());
+                while (calendarToday.get(Calendar.DAY_OF_WEEK) > calendarStart.get(Calendar.DAY_OF_WEEK))
+                    calendarStart.add(Calendar.DATE, 1);
+                MealPlanner.insertMealPlan(calendarStart.getTime(), recipes);
+            }
 //            int mealIndex = (Integer) ;
 //            if (this.jTableRecipes.getSelectedRowCount() > 0) {
 //                //grab Recipe
@@ -531,7 +543,7 @@ public class MealMenuPanel extends SubPanel {
      * 
      * @param recipes List of recipes.
      */
-    public void setRecipeList(List<Recipe> recipes) {
+    public void setRecipes(List<Recipe> recipes) {
         this.recipes = recipes;
 
         DefaultTableModel tableModel = (DefaultTableModel) jTableRecipes.getModel();
@@ -592,6 +604,6 @@ public class MealMenuPanel extends SubPanel {
             setMenuList(UserManagement.getCurrentUser().getMealsByDateRange(this.getStartDate(), this.getEndDate()));
             System.out.println("Get data from " + this.getStartDate().toString() + " to " + this.getEndDate().toString());
         }
-        setRecipeList(RecipeManagement.getAllRecipes());
+        setRecipes(RecipeManagement.getAllRecipes());
     }
 }

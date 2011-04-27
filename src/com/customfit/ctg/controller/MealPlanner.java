@@ -44,7 +44,7 @@ public class MealPlanner { // implements Observable
         //create panel
         MealMenuPanel mealMenuPanel = new MealMenuPanel();
         //tell panel about our recipes
-        mealMenuPanel.setRecipeList(recipes);
+        mealMenuPanel.setRecipes(recipes);
         mealMenuPanel.setMenuList(meals);
         //display panel in main frame
         Application.getMainFrame().setPanel(mealMenuPanel);
