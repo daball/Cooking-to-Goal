@@ -313,11 +313,11 @@ public class MealMenuPanel extends SubPanel {
 
             },
             new String [] {
-                "Name", "Rating"
+                "Recipe", "Rating"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Double.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false
@@ -338,6 +338,7 @@ public class MealMenuPanel extends SubPanel {
             }
         });
         scrollPaneTable2.setViewportView(jTableRecipes);
+        jTableRecipes.getColumnModel().getColumn(1).setCellRenderer(new StarRatingTableCellRenderer());
 
         linkLabelAddNew.setText("(Add a new recipe to this list)");
         linkLabelAddNew.addActionListener(new java.awt.event.ActionListener() {
@@ -580,7 +581,9 @@ public class MealMenuPanel extends SubPanel {
         //TODO implement: refresh data
         if (this.getStartDate() != null && this.getEndDate() != null)
         {
+            setMenuList(UserManagement.getCurrentUser().getMealsByDateRange(this.getStartDate(), this.getEndDate()));
             System.out.println("Get data from " + this.getStartDate().toString() + " to " + this.getEndDate().toString());
         }
+        setRecipeList(RecipeManagement.getAllRecipes());
     }
 }
