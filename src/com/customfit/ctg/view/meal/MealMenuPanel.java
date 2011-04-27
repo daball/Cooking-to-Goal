@@ -4,7 +4,7 @@ import com.customfit.ctg.controller.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import java.util.*;
-import javax.swing.JTable;
+import javax.swing.*;
 import javax.swing.table.*;
 import javax.swing.event.*;
 
@@ -15,6 +15,7 @@ import javax.swing.event.*;
  * @author Ryan Spoon, David
  */
 public class MealMenuPanel extends SubPanel {
+    public static final int WEEKS_TO_SHOW = 52;
 
     /**
      * This gets stored whenever the controller passes it this way.
@@ -41,10 +42,120 @@ public class MealMenuPanel extends SubPanel {
                 jTableRecipesValueChanged(evt);
             }
         });
-
+        
+        //figure out which weeks to display
         makeMenuColInvisible();
+        
+        //setup combo box for weeks
+        calculateWeeksForComboBox();
     }
 
+    private void calculateWeeksForComboBox()
+    {
+        //first remove all the old combo box data
+        DefaultComboBoxModel comboBoxModel = (DefaultComboBoxModel)this.jComboBoxWeeks.getModel();
+        
+        //clear old results
+        comboBoxModel.removeAllElements();
+        
+        //get a Calendar
+        Calendar calendarToday = Calendar.getInstance();
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarEnd = Calendar.getInstance();
+        
+        //go to the first day of the week
+        if (calendarStart.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY)
+        {
+            switch (calendarStart.get(Calendar.DAY_OF_WEEK))
+            {
+                case Calendar.SUNDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.SATURDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.FRIDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.THURSDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.WEDNESDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.TUESDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+            }
+        }
+        //rewind 4 weeks
+        calendarStart.add(Calendar.DATE, 7*WEEKS_TO_SHOW/2*-1);
+        calendarEnd.add(Calendar.DATE, 7*WEEKS_TO_SHOW/2*-1);
+        //then add 6 days to end date
+        calendarEnd.add(Calendar.DATE, 6);
+
+        //loop through weeks to display the comboBoxText
+        int selectedWeek = 0;
+        for (int week = 0; week < WEEKS_TO_SHOW; week++)
+        {
+            StringBuilder dateString = new StringBuilder();
+            dateString.append((calendarStart.get(Calendar.MONTH)+1));
+            dateString.append("/");
+            dateString.append(calendarStart.get(Calendar.DATE));
+            dateString.append("/");
+            dateString.append(calendarStart.get(Calendar.YEAR));
+            dateString.append(" - ");
+            dateString.append((calendarEnd.get(Calendar.MONTH)+1));
+            dateString.append("/");
+            dateString.append(calendarEnd.get(Calendar.DATE));
+            dateString.append("/");
+            dateString.append(calendarEnd.get(Calendar.YEAR));
+            //insert dateString
+            comboBoxModel.addElement(dateString.toString());
+            //check selected week
+            if (calendarToday.after(calendarStart) && calendarToday.before(calendarEnd))
+                selectedWeek = week;
+            //add 7 days, lather, rinse, repeat
+            calendarStart.add(Calendar.DATE, 7);
+            calendarEnd.add(Calendar.DATE, 7);
+        }
+        
+        //then set the selected one
+        this.jComboBoxWeeks.setSelectedIndex(selectedWeek);
+    }
+    
+    public Date getStartDate()
+    {
+        String dateString = (String)this.jComboBoxWeeks.getSelectedItem();
+        if (dateString == null)
+            return null;
+        String[] dateStrings = dateString.split(" - ");
+        dateString = dateStrings[0];
+        dateStrings = dateString.split("/");
+        int month = Integer.parseInt(dateStrings[0]) - 1;
+        int date = Integer.parseInt(dateStrings[1]);
+        int year = Integer.parseInt(dateStrings[2]);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date);
+        return calendar.getTime();
+    }
+    
+    public Date getEndDate()
+    {
+        String dateString = (String)this.jComboBoxWeeks.getSelectedItem();
+        if (dateString == null)
+            return null;
+        String[] dateStrings = dateString.split(" - ");
+        dateString = dateStrings[1];
+        dateStrings = dateString.split("/");
+        int month = Integer.parseInt(dateStrings[0]) - 1;
+        int date = Integer.parseInt(dateStrings[1]);
+        int year = Integer.parseInt(dateStrings[2]);
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(year, month, date);
+        return calendar.getTime();
+    }
+    
     private void makeMenuColInvisible() {
         jTableMenu.removeColumn(jTableMenu.getColumnModel().getColumn(2));
         jTableMenu.removeColumn(jTableMenu.getColumnModel().getColumn(2));
@@ -69,8 +180,8 @@ public class MealMenuPanel extends SubPanel {
         scrollPaneTable1 = new javax.swing.JScrollPane();
         jTableMenu = new javax.swing.JTable();
         jButtonAddMealOrRecipe = new javax.swing.JButton();
-        jXDatePickerForMeal = new org.jdesktop.swingx.JXDatePicker();
         jLabel1 = new javax.swing.JLabel();
+        jComboBoxWeeks = new javax.swing.JComboBox();
         jPanel2 = new javax.swing.JPanel();
         scrollPaneTable2 = new javax.swing.JScrollPane();
         jTableRecipes = new javax.swing.JTable();
@@ -154,14 +265,15 @@ public class MealMenuPanel extends SubPanel {
             }
         });
 
-        jXDatePickerForMeal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jXDatePickerForMealActionPerformed(evt);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+        jLabel1.setText("Week:");
+
+        jComboBoxWeeks.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxWeeks.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBoxWeeksItemStateChanged(evt);
             }
         });
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("Date:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,11 +282,11 @@ public class MealMenuPanel extends SubPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(scrollPaneTable1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
+                    .addComponent(scrollPaneTable1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jXDatePickerForMeal, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxWeeks, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButtonAddMealOrRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -186,12 +298,12 @@ public class MealMenuPanel extends SubPanel {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jXDatePickerForMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel1))
+                        .addComponent(jLabel1)
+                        .addComponent(jComboBoxWeeks, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jButtonAddMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonRemoveMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a recipe to prepare your meal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -248,7 +360,7 @@ public class MealMenuPanel extends SubPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 112, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -261,10 +373,10 @@ public class MealMenuPanel extends SubPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 610, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 615, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 274, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 279, Short.MAX_VALUE)
                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -363,14 +475,15 @@ public class MealMenuPanel extends SubPanel {
 
 }//GEN-LAST:event_jButtonAddMealOrRecipeActionPerformed
 
-    private void jXDatePickerForMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jXDatePickerForMealActionPerformed
-        //TODO Get list of meals and relayout meal panel
-    }//GEN-LAST:event_jXDatePickerForMealActionPerformed
+    private void jComboBoxWeeksItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBoxWeeksItemStateChanged
+        this.refresh();
+    }//GEN-LAST:event_jComboBoxWeeksItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonAddMealOrRecipe;
     private javax.swing.JButton jButtonRemoveMealOrRecipe;
     private javax.swing.JComboBox jComboBoxMeMenu;
+    private javax.swing.JComboBox jComboBoxWeeks;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
@@ -379,7 +492,6 @@ public class MealMenuPanel extends SubPanel {
     private javax.swing.JTable jTableMenu;
     private javax.swing.JTable jTableRecipes;
     private javax.swing.JTextPane jTextPane1;
-    private org.jdesktop.swingx.JXDatePicker jXDatePickerForMeal;
     private com.customfit.ctg.view.LinkLabel linkLabelAddNew;
     private com.customfit.ctg.view.LinkLabel linkLabelHome;
     private javax.swing.JScrollPane scrollPaneTable1;
@@ -466,5 +578,9 @@ public class MealMenuPanel extends SubPanel {
     @Override
     public void refresh() {
         //TODO implement: refresh data
+        if (this.getStartDate() != null && this.getEndDate() != null)
+        {
+            System.out.println("Get data from " + this.getStartDate().toString() + " to " + this.getEndDate().toString());
+        }
     }
 }
