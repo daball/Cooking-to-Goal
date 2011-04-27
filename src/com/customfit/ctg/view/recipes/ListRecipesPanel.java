@@ -79,6 +79,9 @@ public class ListRecipesPanel extends SubPanel {
         linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
         jButtonEditRecipe = new javax.swing.JButton();
         linkLabelHome = new com.customfit.ctg.view.LinkLabel();
+        jButtonDelete = new javax.swing.JButton();
+        linkLabelAddToMeal = new com.customfit.ctg.view.LinkLabel();
+        jButtonPrint = new javax.swing.JButton();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
         jLabelTitle.setText("Recipe Listing");
@@ -125,7 +128,7 @@ public class ListRecipesPanel extends SubPanel {
                 return canEdit [columnIndex];
             }
         });
-        jTableRecipes.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jTableRecipes.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
         jTableRecipes.getTableHeader().setReorderingAllowed(false);
         jTableRecipes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -142,7 +145,7 @@ public class ListRecipesPanel extends SubPanel {
             }
         });
 
-        jButtonEditRecipe.setText("Edit Recipe");
+        jButtonEditRecipe.setText("Edit");
         jButtonEditRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonEditRecipeActionPerformed(evt);
@@ -156,24 +159,52 @@ public class ListRecipesPanel extends SubPanel {
             }
         });
 
+        jButtonDelete.setText("Delete");
+        jButtonDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonDeleteActionPerformed(evt);
+            }
+        });
+
+        linkLabelAddToMeal.setText("Add Recipe to your Meal");
+        linkLabelAddToMeal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabelAddToMealActionPerformed(evt);
+            }
+        });
+
+        jButtonPrint.setText("Print");
+        jButtonPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPrintActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(scrollPaneTable, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(scrollPaneTable)
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabelTitle)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 244, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 259, Short.MAX_VALUE)
                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addComponent(jButtonEditRecipe)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
-                    .addComponent(linkLabelAddNew, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonEditRecipe)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonPrint)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonDelete)
+                        .addGap(18, 18, 18)
+                        .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -186,12 +217,16 @@ public class ListRecipesPanel extends SubPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 121, Short.MAX_VALUE)
+                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditRecipe)
+                    .addComponent(jButtonPrint)
+                    .addComponent(jButtonDelete)
                     .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -243,15 +278,61 @@ public class ListRecipesPanel extends SubPanel {
         RecipeManagement.createRecipe();
 }//GEN-LAST:event_linkLabelAddNewActionPerformed
 
+    private void jButtonDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDeleteActionPerformed
+        //if a row is selected
+        if (this.jTableRecipes.getSelectedRowCount() > 0)
+        {
+            //get each selected row
+            for (int row : this.jTableRecipes.getSelectedRows())
+            {
+                //grab Recipe
+                Recipe recipe = this.recipes.get(row);
+                //tell controller to delete recipe
+                RecipeManagement.deleteRecipe(recipe);
+            }
+        }
+    }//GEN-LAST:event_jButtonDeleteActionPerformed
+
+    private void linkLabelAddToMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddToMealActionPerformed
+        //if a row is selected
+        if (this.jTableRecipes.getSelectedRowCount() > 0) {
+            //make a list
+            List<Recipe> recipes = new ArrayList<Recipe>();
+            //get each selected row
+            for (int row : this.jTableRecipes.getSelectedRows())
+            {
+                //grab Recipe
+                Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
+                //add me to the list
+                recipes.add(recipe);
+            }
+            //then call up the controller for a new panel
+            MealPlanner.insertMealPlan(Calendar.getInstance().getTime(), recipes);
+        }
+}//GEN-LAST:event_linkLabelAddToMealActionPerformed
+
+    private void jButtonPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPrintActionPerformed
+        //if a row is selected
+        if (this.jTableRecipes.getSelectedRowCount() > 0) {
+            //grab Recipe
+            Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
+            //tell RecipeManagement to view recipe
+            RecipeManagement.printRecipe(recipe);
+        }
+    }//GEN-LAST:event_jButtonPrintActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonDelete;
     private javax.swing.JButton jButtonEditRecipe;
+    private javax.swing.JButton jButtonPrint;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTableRecipes;
     private javax.swing.JTextPane jTextPane1;
     private com.customfit.ctg.view.LinkLabel linkLabelAddNew;
+    private com.customfit.ctg.view.LinkLabel linkLabelAddToMeal;
     private com.customfit.ctg.view.LinkLabel linkLabelHome;
     private javax.swing.JScrollPane scrollPaneTable;
     // End of variables declaration//GEN-END:variables

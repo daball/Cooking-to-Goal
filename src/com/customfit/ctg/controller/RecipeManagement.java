@@ -1,6 +1,6 @@
 package com.customfit.ctg.controller;
 
-import com.customfit.ctg.view.print.PrintPreviewPanel;
+import com.customfit.ctg.view.print.*;
 import com.customfit.ctg.model.*;
 import com.customfit.ctg.view.*;
 import com.customfit.ctg.view.print.*;
@@ -96,33 +96,6 @@ public class RecipeManagement {
         }
         //return status
         return status;
-    }
-
-    /**
-     * Activates View Recipe application feature, which displays
-     * a View Recipe JPanel to display the contents of the provided
-     * Recipe object.
-     * 
-     * @param recipe The recipe to show in view.
-     */
-    public static void viewRecipe(Recipe recipe)
-    {
-            //method stub:
-            //	replace this CLI-code with GUI-initiation code
-            System.out.println("viewRecipe(): Recipe " + "Name" + ": " + recipe.getName());
-            //System.out.println("\tviewRecipe(): Recipe " + "Description" + ":\n" + recipe.getDescription());
-            System.out.println("\tviewRecipe(): Recipe " + "Instructions" + ":\n" + recipe.getInstructions());
-            System.out.println("\tviewRecipe(): Recipe " + "Rating" + ": " + recipe.getRating());
-            System.out.println("\tviewRecipe(): Recipe " + "Serving Size" + ": " + recipe.getServingSize());
-            System.out.println("\tviewRecipe(): Recipe " + "Ingredients" + ":\n" + recipe.getIngredients());
-            System.out.println("\tviewRecipe(): Recipe " + "Nutrition Information" + ":\n" + recipe.getNutritionInformation());
-            /* 
-             * example pseudocode:
-             * 		instantiate JPanel for viewing Recipe
-             * 		pass recipe to a special function in JPanel for processing List<Recipe>
-             * 		Controller.getMainFrame().openPanel( list panel )
-             * TODO: replace this with GUI initialization code for Create Recipe
-             */
     }
 
     /**
