@@ -87,7 +87,14 @@ public class RecipeIngredient extends Ingredient{
      */
     public String toString()
     {
-        return this.getAmount() + " " + this.getName();
+        if (this.getName() != null && this.getAmount() != null)
+            return this.getAmount() + " " + this.getName();
+        else if (this.getName() != null)
+            return this.getAmount().toString();
+        else if (this.getAmount() != null)
+            return this.getName();
+        else
+            return "";
     }
     
     /**
