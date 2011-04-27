@@ -339,10 +339,9 @@ public class User
      * @return
      */
     public Measurement getTotalGoal() {
-        Measurement goal = null;
+        Measurement goal = new Measurement(0.0, getOwnMember().getGoal().getUnit());
         for (Member m : getAllMembers()) {
-            goal.setQuantity(goal.getQuantity() + m.getGoal().getQuantity());
-            goal.setUnit(m.getGoal().getUnit());
+            goal = goal.add(m.getGoal());
         }
         return goal;
     }

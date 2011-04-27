@@ -23,23 +23,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jScrollPane2" alignment="0" pref="680" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Component id="jScrollPane5" alignment="0" pref="690" max="32767" attributes="1"/>
+                  <Component id="jScrollPane2" alignment="0" pref="690" max="32767" attributes="0"/>
                   <Component id="linkLabelEditUserSettings" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="linkLabelManageRecipes" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="linkLabelEditWeeklyMenu" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="linkLabelPrintShoppingList" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabelTitle" min="-2" pref="185" max="-2" attributes="0"/>
-                      <EmptySpace pref="427" max="32767" attributes="0"/>
+                      <EmptySpace pref="437" max="32767" attributes="0"/>
                       <Component id="jComboBoxMeMenu" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jScrollPane7" alignment="0" pref="680" max="32767" attributes="1"/>
-                  <Component id="jScrollPane6" alignment="0" pref="680" max="32767" attributes="1"/>
-                  <Component id="jScrollPane5" alignment="0" pref="680" max="32767" attributes="1"/>
+                  <Component id="jScrollPane7" alignment="0" pref="690" max="32767" attributes="1"/>
+                  <Component id="jScrollPane6" alignment="0" pref="690" max="32767" attributes="1"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="linkLabelManageRecipes" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="linkLabelEditWeeklyMenu" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="linkLabelPrintShoppingList" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="558" max="32767" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -47,13 +52,13 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <EmptySpace min="11" pref="11" max="11" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabelTitle" min="-2" max="-2" attributes="0"/>
                   <Component id="jComboBoxMeMenu" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
@@ -65,7 +70,7 @@
               <Component id="jLabel1" min="-2" pref="15" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane6" min="-2" max="-2" attributes="1"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="linkLabelManageRecipes" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
@@ -75,7 +80,7 @@
               <Component id="linkLabelEditWeeklyMenu" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="linkLabelPrintShoppingList" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="27" max="32767" attributes="0"/>
+              <EmptySpace pref="56" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -110,7 +115,7 @@
               <Border info="null"/>
             </Property>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="Welcome to the Cooking to Goal nutritional planner. This application is designed to help you try to reach the nutritional goals that you plan for yourself and anyone else you want to manage. &lt;This should go as a welcome on the login page.-Ryan&gt;&#xa;&#xa;Welcome to your personalized home. Establish meal plans by creating a menu for you, your family, and friend."/>
+            <Property name="text" type="java.lang.String" value="Welcome to the Cooking to Goal nutritional planner. This application is designed to help you try to reach the nutritional goals that you plan for yourself and anyone else you want to manage.&#xa;&#xa;Welcome to your personalized home. Establish meal plans by creating a menu for you, your family, and friends."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
@@ -171,7 +176,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPaneMealPlanNote">
+        <Component class="javax.swing.JTextPane" name="jTextMealPlanning">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f0" green="f0" id="control" palette="3" red="f0" type="palette"/>
@@ -203,7 +208,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPane2">
+        <Component class="javax.swing.JTextPane" name="jTextRecipes">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f0" green="f0" id="control" palette="3" red="f0" type="palette"/>
@@ -251,7 +256,7 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextPane" name="jTextPaneMealPlanNote1">
+        <Component class="javax.swing.JTextPane" name="jTextUserSettings">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="f0" green="f0" id="control" palette="3" red="f0" type="palette"/>
