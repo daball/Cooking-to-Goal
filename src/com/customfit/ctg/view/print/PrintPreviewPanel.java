@@ -52,6 +52,7 @@ public class PrintPreviewPanel extends SubPanel {
         cancelButton = new javax.swing.JButton();
         jScrollPaneOuter = new javax.swing.JScrollPane();
         jDesktopPane1 = new javax.swing.JDesktopPane();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         printPanel = new javax.swing.JScrollPane();
 
         jToolBar1.setRollover(true);
@@ -82,8 +83,28 @@ public class PrintPreviewPanel extends SubPanel {
                 jDesktopPane1ComponentResized(evt);
             }
         });
-        printPanel.setBounds(130, 110, 180, 236);
-        jDesktopPane1.add(printPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jInternalFrame1.setIconifiable(true);
+        jInternalFrame1.setMaximizable(true);
+        jInternalFrame1.setResizable(true);
+        jInternalFrame1.setTitle("Print Preview");
+        jInternalFrame1.setVisible(true);
+
+        printPanel.setBorder(null);
+
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+        );
+
+        jInternalFrame1.setBounds(10, 10, 380, 290);
+        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jScrollPaneOuter.setViewportView(jDesktopPane1);
 
@@ -91,17 +112,17 @@ public class PrintPreviewPanel extends SubPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
+                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -128,8 +149,7 @@ public class PrintPreviewPanel extends SubPanel {
         int previewPaneHeight = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().height).doubleValue() - 20.0).intValue();
         //then the proportion of height
         int previewPaneWidth = new Double((new Integer(previewPaneHeight)).doubleValue() * 8.5 / 11.0).intValue();
-        if (previewPaneWidth > this.jScrollPaneOuter.getWidth())
-        {
+        if (previewPaneWidth > this.jScrollPaneOuter.getWidth()) {
             //if this happens, try swapping the order
             //80% of the width of the outer panel
             previewPaneWidth = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().width).doubleValue() - 20.0).intValue();
@@ -143,11 +163,12 @@ public class PrintPreviewPanel extends SubPanel {
         int previewPanelY = (new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().height).doubleValue()).intValue() - previewPaneHeight) / 2;
         this.printPanel.setLocation(previewPanelX, previewPanelY);
         System.out.println("W=" + previewPaneWidth + ";H=" + previewPaneHeight + ";X=" + previewPanelX + ";Y=" + previewPanelY);
-    }//GEN-LAST:event_jDesktopPane1ComponentResized
+}//GEN-LAST:event_jDesktopPane1ComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JScrollPane jScrollPaneOuter;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
