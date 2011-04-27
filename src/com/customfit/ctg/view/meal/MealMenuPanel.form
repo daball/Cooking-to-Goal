@@ -168,7 +168,7 @@
                       <Component id="jButtonRemoveMealOrRecipe" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable1" pref="111" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable1" pref="97" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -294,7 +294,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="linkLabelAddNew" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable2" pref="122" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable2" pref="108" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

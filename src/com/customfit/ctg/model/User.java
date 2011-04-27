@@ -24,7 +24,7 @@ public class User
     /**
      * The list of meals for the user.
      */
-    private List<Meal> meals = new LinkedList<Meal>();
+    private List<Meal> meals = new ArrayList<Meal>();
     
     /**
      * Constructs a user with the name provided.
@@ -200,12 +200,15 @@ public class User
         calendarEnd.set(Calendar.MILLISECOND, 999);
         endDate = calendarEnd.getTime();
 
-        List<Meal> meals = new ArrayList<Meal>();
-        for (Meal meal : this.getAllMeals())
+        ArrayList<Meal> meals = new ArrayList<Meal>();
+        List<Meal> allMeals = this.getAllMeals();
+        if (!allMeals.isEmpty()) for (Meal meal : allMeals)
+        {
             if (meal.getDate().after(startDate) && meal.getDate().before(endDate))
                 meals.add(meal);
             else if (meal.getDate().equals(startDate) || meal.getDate().equals(endDate))
                 meals.add(meal);
+        }
         
         return meals;
     }

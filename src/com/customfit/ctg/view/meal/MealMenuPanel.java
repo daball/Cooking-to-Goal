@@ -26,11 +26,6 @@ public class MealMenuPanel extends SubPanel {
     public MealMenuPanel() {
         initComponents();
 
-        //temp default configuration for meals
-        if (MealPlanner.getAllMeals().isEmpty()) {
-            MealPlanner.createDefaultMeals();
-        }
-
         //setup the me-menu in the right-top corner
         jComboBoxMeMenu.setModel(new javax.swing.DefaultComboBoxModel(new String[] {"User: " + UserManagement.getCurrentUser().getName(), "Profile Home", "Edit Profile", "Logout" }));
 

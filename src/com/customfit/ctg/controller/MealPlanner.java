@@ -44,8 +44,9 @@ public class MealPlanner { // implements Observable
         //create panel
         MealMenuPanel mealMenuPanel = new MealMenuPanel();
         //tell panel about our recipes
-        mealMenuPanel.setRecipes(recipes);
-        mealMenuPanel.setMeals(meals);
+//        mealMenuPanel.setRecipes(recipes);
+//        mealMenuPanel.setMeals(meals);
+        mealMenuPanel.refresh();
         //display panel in main frame
         Application.getMainFrame().setPanel(mealMenuPanel);
     }
@@ -138,18 +139,6 @@ public class MealPlanner { // implements Observable
         return UserManagement.getCurrentUser().getAllMeals();
     }
 
-    public static void createDefaultMeals() {
-        User cUser = UserManagement.getCurrentUser();
-        cUser.getAllMeals().add(new Meal("Monday"));
-        cUser.getAllMeals().add(new Meal("Tuesday"));
-        cUser.getAllMeals().add(new Meal("Wednesday"));
-        cUser.getAllMeals().add(new Meal("Thursday"));
-        cUser.getAllMeals().add(new Meal("Friday"));
-        cUser.getAllMeals().add(new Meal("Saturday"));
-        cUser.getAllMeals().add(new Meal("Sunday"));
-
-    }
-    
     /**
      * You insert a Date and it loads the Insert Meal Plan panel.
      * 
