@@ -91,8 +91,6 @@ public class RecipeManagement {
         {
             //otherwise, assume success and go back
             Application.getMainFrame().goBack();
-            //refresh data on previous panel
-            Application.getMainFrame().getPanel().refresh();
         }
         //return status
         return status;
@@ -133,8 +131,6 @@ public class RecipeManagement {
         {
             //otherwise, assume success and go back
             Application.getMainFrame().goBack();
-            //refresh data on previous panel
-            Application.getMainFrame().getPanel().refresh();
         }
         //return status
         return status;
@@ -160,9 +156,6 @@ public class RecipeManagement {
             if (!status)
                 //if failed, tell user about the failure
                 JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem deleting your recipe.", "Error", JOptionPane.ERROR_MESSAGE);
-            else
-                //if all went well go back
-                Application.getMainFrame().goBack();
         }
         return status;
     }

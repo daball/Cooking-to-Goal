@@ -562,7 +562,10 @@ public class EditRecipePanel extends CreateEditPanel {
 
     private void linkLabelDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelDeleteActionPerformed
         if (this.getCreateEditMode() == CreateEditMode.EDIT)
-            RecipeManagement.deleteRecipe(this.recipe);
+            if (RecipeManagement.deleteRecipe(this.recipe))
+                //if all went well go back
+                Application.getMainFrame().goBack();
+
     }//GEN-LAST:event_linkLabelDeleteActionPerformed
 
     private void removeIngredient() {
