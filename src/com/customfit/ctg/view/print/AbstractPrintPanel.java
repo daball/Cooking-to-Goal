@@ -4,6 +4,7 @@
  */
 package com.customfit.ctg.view.print;
 
+import com.customfit.ctg.view.*;
 import java.awt.*;
 import java.awt.print.*;
 import javax.swing.*;
@@ -16,7 +17,7 @@ import javax.swing.border.*;
  * 
  * @author Drew
  */
-abstract class AbstractPrintPanel extends JPanel implements Printable {
+abstract class AbstractPrintPanel extends SubPanel implements Printable {
    
 	
     @Override

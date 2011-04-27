@@ -1,13 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/*
- * PrintPanel.java
- *
- * Created on Apr 25, 2011, 1:28:33 PM
- */
 package com.customfit.ctg.view.print;
 
 import com.customfit.ctg.model.Recipe;
@@ -92,18 +82,20 @@ public class RecipePrintPanel extends AbstractPrintPanel {
 
         jScrollPane1.setBorder(null);
 
+        jTextPaneIngredients.setEditable(false);
         jTextPaneIngredients.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jScrollPane1.setViewportView(jTextPaneIngredients);
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 16));
         jLabel1.setText("Ingredients");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Nutrition Facts");
 
         jScrollPane2.setBorder(null);
 
+        jTextPaneNutritionFacts.setEditable(false);
         jTextPaneNutritionFacts.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jScrollPane2.setViewportView(jTextPaneNutritionFacts);
 
@@ -112,6 +104,7 @@ public class RecipePrintPanel extends AbstractPrintPanel {
 
         jScrollPane3.setBorder(null);
 
+        jTextPaneInstructions.setEditable(false);
         jTextPaneInstructions.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
         jScrollPane3.setViewportView(jTextPaneInstructions);
 

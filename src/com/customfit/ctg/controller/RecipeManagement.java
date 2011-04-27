@@ -225,7 +225,7 @@ public class RecipeManagement {
     	// create shopping list view JPanel (implements Printable)
     	    	
     	// pass JPanel to print preview panel and display
-    	PrintPreviewPanel ppPanel = new PrintPreviewPanel(new RecipePrintPanel());
+    	PrintPreviewPanel ppPanel = new PrintPreviewPanel(new ShoppingListPrintPanel());
     	
     	Application.getMainFrame().setPanel(ppPanel);
     }
