@@ -367,21 +367,21 @@ public class EditRecipePanel extends CreateEditPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         );
 
-        linkLabelAddToMeal.setText("Add this Recipe to your Meal");
+        linkLabelAddToMeal.setText("Create a new meal plan");
         linkLabelAddToMeal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddToMealActionPerformed(evt);
             }
         });
 
-        linkLabelPrint.setText("Print this Recipe");
+        linkLabelPrint.setText("Print this recipe");
         linkLabelPrint.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelPrintActionPerformed(evt);
             }
         });
 
-        linkLabelDelete.setText("Delete this Recipe");
+        linkLabelDelete.setText("Delete this recipe");
         linkLabelDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelDeleteActionPerformed(evt);

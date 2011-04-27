@@ -166,7 +166,7 @@ public class ListRecipesPanel extends SubPanel {
             }
         });
 
-        linkLabelAddToMeal.setText("Add recipe to your meal");
+        linkLabelAddToMeal.setText("Create a new meal plan");
         linkLabelAddToMeal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddToMealActionPerformed(evt);
