@@ -150,5 +150,7 @@ public class MainFrame extends javax.swing.JFrame {
         this.jScrollPane1.setViewportView(this.panel);
         //update title bar
         this.setTitle(this.panel.getTitle() + " - " + this.initalTitle);
+        //switch to always refresh, even if warned
+        this.panel.refresh();
     }
 }

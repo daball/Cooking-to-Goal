@@ -87,8 +87,6 @@ public class UserManagement {
         HomePanel profilePanel = new HomePanel();
         //load the user data into the profile panel
         profilePanel.setUser(user);
-        //load the data into the profile panel
-        profilePanel.refresh();
         //display panel in main frame
         Application.getMainFrame().setPanel(profilePanel);
     }

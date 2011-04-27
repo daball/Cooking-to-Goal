@@ -289,10 +289,10 @@ public class ListRecipesPanel extends SubPanel {
                 Recipe recipe = this.recipes.get(row);
                 //tell controller to delete recipe
                 RecipeManagement.deleteRecipe(recipe);
+                //then refresh
+                this.refresh();
             }
         }
-        //then refresh
-        this.refresh();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void linkLabelAddToMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddToMealActionPerformed
