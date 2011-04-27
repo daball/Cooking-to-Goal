@@ -30,6 +30,7 @@ public class EditMealPanel extends CreateEditPanel {
         initComponents();
         
         //customize form for edit mode
+        this.setCreateEditMode(createEditMode);
         if (this.getCreateEditMode() == CreateEditMode.CREATE)
             this.jLabelTitle.setText("Insert a Meal Plan");
         else if (this.getCreateEditMode() == CreateEditMode.EDIT)
