@@ -42,7 +42,7 @@ public class MealPlanner { // implements Observable
     public static void browseMenu(List<Recipe> recipes, List<Meal> meals)
     {
         //create panel
-        MealMenuPanel mealMenuPanel = new MealMenuPanel(MealMenuPanel.ListMode.LIST_BROWSE);
+        MealMenuPanel mealMenuPanel = new MealMenuPanel();
         //tell panel about our recipes
         mealMenuPanel.setRecipeList(recipes);
         mealMenuPanel.setMenuList(meals);
