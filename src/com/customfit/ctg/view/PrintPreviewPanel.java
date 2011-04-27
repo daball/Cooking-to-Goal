@@ -117,6 +117,7 @@ public class PrintPreviewPanel extends SubPanel {
 				job.print();
 			}
 			catch(PrinterException pe){}
+			Application.getMainFrame().goBack();
 		}
     }//GEN-LAST:event_printButtonActionPerformed
 
