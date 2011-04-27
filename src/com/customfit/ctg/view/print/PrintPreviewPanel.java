@@ -46,14 +46,31 @@ public class PrintPreviewPanel extends SubPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPaneOuter = new javax.swing.JScrollPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        printPanel = new javax.swing.JScrollPane();
         jToolBar1 = new javax.swing.JToolBar();
         printButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JToolBar.Separator();
         cancelButton = new javax.swing.JButton();
-        jScrollPaneOuter = new javax.swing.JScrollPane();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
-        jInternalFrame1 = new javax.swing.JInternalFrame();
-        printPanel = new javax.swing.JScrollPane();
+
+        jScrollPaneOuter.setBackground(java.awt.SystemColor.controlDkShadow);
+        jScrollPaneOuter.setBorder(null);
+
+        jDesktopPane1.setBackground(java.awt.SystemColor.controlDkShadow);
+        jDesktopPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jDesktopPane1ComponentResized(evt);
+            }
+        });
+
+        printPanel.setBorder(null);
+        printPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+        printPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        printPanel.setBounds(0, 0, 420, 310);
+        jDesktopPane1.add(printPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jScrollPaneOuter.setViewportView(jDesktopPane1);
 
         jToolBar1.setRollover(true);
 
@@ -74,55 +91,21 @@ public class PrintPreviewPanel extends SubPanel {
         });
         jToolBar1.add(cancelButton);
 
-        jScrollPaneOuter.setBackground(java.awt.SystemColor.controlDkShadow);
-        jScrollPaneOuter.setBorder(null);
-
-        jDesktopPane1.setBackground(java.awt.SystemColor.controlDkShadow);
-        jDesktopPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentResized(java.awt.event.ComponentEvent evt) {
-                jDesktopPane1ComponentResized(evt);
-            }
-        });
-
-        jInternalFrame1.setIconifiable(true);
-        jInternalFrame1.setMaximizable(true);
-        jInternalFrame1.setResizable(true);
-        jInternalFrame1.setTitle("Print Preview");
-        jInternalFrame1.setVisible(true);
-
-        printPanel.setBorder(null);
-
-        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
-        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
-        jInternalFrame1Layout.setHorizontalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 370, Short.MAX_VALUE)
-        );
-        jInternalFrame1Layout.setVerticalGroup(
-            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
-        );
-
-        jInternalFrame1.setBounds(10, 10, 380, 290);
-        jDesktopPane1.add(jInternalFrame1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jScrollPaneOuter.setViewportView(jDesktopPane1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE))
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 410, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 420, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE))
+                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 310, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -168,7 +151,6 @@ public class PrintPreviewPanel extends SubPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JScrollPane jScrollPaneOuter;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar jToolBar1;
