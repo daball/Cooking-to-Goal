@@ -247,6 +247,15 @@ public class Meal
     }
     
     @Override
+    /**
+     * Returns the name of the meal.
+     */
+    public String toString()
+    {
+        return this.getName();
+    }
+    
+    @Override
     public boolean equals(Object object)
     {
        Meal meal = (Meal)object;
