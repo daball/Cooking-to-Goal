@@ -8,6 +8,7 @@
 package com.customfit.ctg.view;
 
 import com.customfit.ctg.controller.Application;
+import java.awt.Dimension;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -28,8 +29,8 @@ public class PrintPreviewPanel extends SubPanel {
         initComponents();
  
         this.printComponent = p;
-        this.printPanel.setViewportView(p);
 
+        this.printPanel.setViewportView(p);
     }
      
     /**
@@ -40,8 +41,8 @@ public class PrintPreviewPanel extends SubPanel {
     @Override
     public String getTitle()
     {
-        //grab title from on the panel
-        return this.jLabelTitle.getText();
+        //set title
+        return "Print Preview";
     }
     
     
@@ -55,13 +56,15 @@ public class PrintPreviewPanel extends SubPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelTitle = new javax.swing.JLabel();
+        jToolBar1 = new javax.swing.JToolBar();
         printButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JToolBar.Separator();
         cancelButton = new javax.swing.JButton();
+        jScrollPaneOuter = new javax.swing.JScrollPane();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         printPanel = new javax.swing.JScrollPane();
 
-        jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
-        jLabelTitle.setText("Print Preview");
+        jToolBar1.setRollover(true);
 
         printButton.setText("Print");
         printButton.addActionListener(new java.awt.event.ActionListener() {
@@ -69,43 +72,52 @@ public class PrintPreviewPanel extends SubPanel {
                 printButtonActionPerformed(evt);
             }
         });
+        jToolBar1.add(printButton);
+        jToolBar1.add(jSeparator1);
 
-        cancelButton.setText("Cancel");
+        cancelButton.setText("Close");
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
+        jToolBar1.add(cancelButton);
+
+        jScrollPaneOuter.setBackground(java.awt.SystemColor.controlDkShadow);
+        jScrollPaneOuter.setBorder(null);
+
+        jDesktopPane1.setBackground(java.awt.SystemColor.controlDkShadow);
+        jDesktopPane1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jDesktopPane1ComponentResized(evt);
+            }
+        });
+
+        printPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                printPanelComponentResized(evt);
+            }
+        });
+        printPanel.setBounds(130, 110, 180, 236);
+        jDesktopPane1.add(printPanel, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jScrollPaneOuter.setViewportView(jDesktopPane1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jToolBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 414, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(printButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(cancelButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 305, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(10, 10, 10)
+                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabelTitle)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(printButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cancelButton))
-                    .addComponent(printPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 236, Short.MAX_VALUE))
-                .addContainerGap())
+                .addComponent(jToolBar1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPaneOuter, javax.swing.GroupLayout.DEFAULT_SIZE, 472, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -123,12 +135,65 @@ public class PrintPreviewPanel extends SubPanel {
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         Application.getMainFrame().goBack();
+        this.setSize(WIDTH, WIDTH);
     }//GEN-LAST:event_cancelButtonActionPerformed
+
+    private void printPanelComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_printPanelComponentResized
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_printPanelComponentResized
+
+    private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
+        //make the scrollable panel with the print panel inside
+        //80% of the height of the outer panel
+        int previewPaneHeight = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().height).doubleValue() * 0.80).intValue();
+        //then the proportion of height
+        int previewPaneWidth = new Double((new Integer(previewPaneHeight)).doubleValue() * 8.5 / 11.0).intValue();
+        if (previewPaneWidth > this.jScrollPaneOuter.getWidth())
+        {
+            //if this happens, try swapping the order
+            //80% of the width of the outer panel
+            previewPaneWidth = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().width).doubleValue() * 0.80).intValue();
+            //then the proportion of width
+            previewPaneHeight = new Double((new Integer(previewPaneHeight)).doubleValue() * 11.0 / 8.5).intValue();
+        }
+        this.printPanel.setSize(previewPaneWidth, previewPaneHeight);
+        
+        //now figure out the X and Y positions
+        int previewPanelX = (new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().width).doubleValue()).intValue() - previewPaneWidth) / 2;
+        int previewPanelY = (new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().height).doubleValue()).intValue() - previewPaneHeight) / 2;
+        this.printPanel.setLocation(previewPanelX, previewPanelY);
+        System.out.println("W=" + previewPaneWidth + ";H=" + previewPaneHeight + ";X=" + previewPanelX + ";Y=" + previewPanelY);
+    }//GEN-LAST:event_jDesktopPane1ComponentResized
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
-    private javax.swing.JLabel jLabelTitle;
+    private javax.swing.JDesktopPane jDesktopPane1;
+    private javax.swing.JScrollPane jScrollPaneOuter;
+    private javax.swing.JToolBar.Separator jSeparator1;
+    private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton printButton;
     private javax.swing.JScrollPane printPanel;
     // End of variables declaration//GEN-END:variables
+      
+//    @Override
+//    public void setSize(int width, int height)
+//    {
+//        int newHeight = new Double((new Integer(width).doubleValue() / 8.5) * 11.0).intValue();
+//        super.setSize(width, newHeight);
+//        //do what you should
+////        super.setSize(width, height);
+//        //but also set the size for our printable area so that it's in
+//        //proportion to the paper (8.5x11)
+//        int printHeight = this.jPanelOuter.getVisibleRect().height;
+//        int printWidth = new Double((new Integer(printHeight)).doubleValue() / 8.5 * 11.0).intValue();
+//        this.printPanel.setSize(printWidth, printHeight);
+//    }
+//
+//    @Override
+//    public void setSize(Dimension dimension)
+//    {
+//        setSize(dimension.width, dimension.height);
+//    }
+
 }
