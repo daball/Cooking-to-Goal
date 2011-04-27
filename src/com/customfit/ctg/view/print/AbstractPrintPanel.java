@@ -34,6 +34,11 @@ abstract class AbstractPrintPanel extends SubPanel implements Printable {
 //            System.out.print("H:" + pf.getImageableHeight());
             //this.setSize(new Double(pf.getImageableWidth()).intValue(), new Double(pf.getImageableHeight()).intValue());
             // Move to 0,0 in printer
+            double scaleX = pf.getImageableWidth() / this.getWidth();
+            double scaleY = pf.getImageableHeight() / this.getHeight();
+            double scale = Math.min(scaleX, scaleY);
+            g2.scale(scale, scale);
+            
             g2.translate(pf.getImageableX(), pf.getImageableY());
 //            for (Component component : this.getComponents())
 //                if (component.getWidth() > pf.getImageableWidth())
@@ -54,12 +59,14 @@ abstract class AbstractPrintPanel extends SubPanel implements Printable {
 //                    //component.setSize(100, component.getHeight());
 //            
 //            // Get the bounds of the printable size
-            Rectangle page =  new Rectangle((int)pf.getImageableWidth(), (int)pf.getImageableHeight());
+//            Rectangle page =  new Rectangle((int)pf.getImageableWidth(), (int)pf.getImageableHeight());
 //            
 //            
 //            // Translate the component to the printable size
 //            g2.translate(-page.x, -page.y);
 //            g2.setClip(page.x, page.y, page.width, page.height);
+            
+
             
             // Change the background to white to save ink
             Color oldBg = this.getBackground();
