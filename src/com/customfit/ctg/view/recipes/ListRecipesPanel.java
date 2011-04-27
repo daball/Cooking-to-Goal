@@ -340,12 +340,22 @@ public class ListRecipesPanel extends SubPanel {
     private void jTableRecipesValueChanged(javax.swing.event.ListSelectionEvent evt) {                                       
         //check for selected value
         if (this.jTableRecipes.getSelectedRowCount() == 0)
-            //if none then disable login button
+        {
+            //if none then disable recipe buttons
+            this.linkLabelAddToMeal.setVisible(false);
+            this.jButtonDelete.setEnabled(false);
+            this.jButtonPrint.setEnabled(false);
             this.jButtonEditRecipe.setEnabled(false);
+        }
         //otherwise
         else
-            //if valid then enable login button
+        {
+            //if valid then enable recipe button
+            this.linkLabelAddToMeal.setVisible(true);
+            this.jButtonDelete.setEnabled(true);
+            this.jButtonPrint.setEnabled(true);
             this.jButtonEditRecipe.setEnabled(true);
+        }
     } 
     
     /**
@@ -368,7 +378,7 @@ public class ListRecipesPanel extends SubPanel {
     public void setRecipeList(List<Recipe> recipes) {
         this.recipes = recipes;
         
-        DefaultTableModel tableModel = (DefaultTableModel)jTableRecipes.getModel();
+        DefaultTableModel tableModel = (DefaultTableModel)this.jTableRecipes.getModel();
         
         //clear old results
         while (tableModel.getRowCount() > 0)
@@ -381,6 +391,21 @@ public class ListRecipesPanel extends SubPanel {
         {
             Object[] row = {recipe.getName(), recipe.getRating()};
             tableModel.addRow(row);
+        }
+        
+        if (recipes.size() == 0 || this.jTableRecipes.getSelectedRowCount() == 0)
+        {
+            this.linkLabelAddToMeal.setVisible(false);
+            this.jButtonDelete.setEnabled(false);
+            this.jButtonPrint.setEnabled(false);
+            this.jButtonEditRecipe.setEnabled(false);
+        }
+        else
+        {
+            this.linkLabelAddToMeal.setVisible(true);
+            this.jButtonDelete.setEnabled(true);
+            this.jButtonPrint.setEnabled(true);
+            this.jButtonEditRecipe.setEnabled(true);
         }
         
         jTableRecipes.setModel(tableModel);
