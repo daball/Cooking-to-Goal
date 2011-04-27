@@ -163,7 +163,7 @@
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelDelete">
       <Properties>
-        <Property name="text" type="java.lang.String" value="I want to delete my user account."/>
+        <Property name="text" type="java.lang.String" value="I want to delete my user profile."/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelDeleteActionPerformed"/>

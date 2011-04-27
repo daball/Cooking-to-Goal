@@ -160,14 +160,14 @@ public class UserManagement {
     {
         boolean status = false;
         //be sure to ask for a confirmation first, if they click OK
-        if (JOptionPane.showConfirmDialog(Application.getMainFrame(), "Are you sure you want to delete the user, " + userName + "? All profile data will be deleted. This cannot be reversed.", "Delete User Confirmation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+        if (JOptionPane.showConfirmDialog(Application.getMainFrame(), "Are you sure you want to delete the profile for " + userName + "? All profile data will be deleted. This cannot be reversed.", "Delete Profile Confirmation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
         {
             //then do the delete
             status = Application.getDataDriver().deleteUserByName(userName);
              //check for errors
             if (!status)
                 //if failed, tell user about the failure
-                JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem deleting your user registration.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem deleting your profile.", "Error", JOptionPane.ERROR_MESSAGE);
             else
                 //if all went well go back to login screen, since the user is now dead
                 UserManagement.presentLogin();

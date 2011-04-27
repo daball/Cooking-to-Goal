@@ -139,7 +139,7 @@ public class EditProfilePanel extends CreateEditPanel {
             }
         });
 
-        linkLabelDelete.setText("I want to delete my user account.");
+        linkLabelDelete.setText("I want to delete my user profile.");
         linkLabelDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelDeleteActionPerformed(evt);
