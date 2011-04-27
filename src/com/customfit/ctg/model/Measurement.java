@@ -45,8 +45,16 @@ public class Measurement implements Comparable<Measurement> {
      */
     public Measurement(String measurableUnitString) {
         if (!measurableUnitString.trim().isEmpty())
-            //grab amount quantity
-            this.quantity = Double.parseDouble(measurableUnitString.replaceAll("[A-Z,a-z, ]", ""));
+        {
+            try
+            {
+                //grab amount quantity
+                this.quantity = Double.parseDouble(measurableUnitString.replaceAll("[A-Z,a-z, ]", ""));
+            }
+            catch (Exception e)
+            {
+            }
+        }
         //grab amount unit
         this.unit = measurableUnitString.replaceAll("\\.|[0-9]", "").trim();
     }
