@@ -61,7 +61,7 @@
                   <Component id="linkLabelAddToMeal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="scrollPaneTable" pref="65" max="32767" attributes="0"/>
+              <Component id="scrollPaneTable" pref="51" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jButtonEditRecipe" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -175,7 +175,7 @@
     </Container>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddNew">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add a new recipe"/>
+        <Property name="text" type="java.lang.String" value="Create a new recipe"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddNewActionPerformed"/>
@@ -207,7 +207,7 @@
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddToMeal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add Recipe to your Meal"/>
+        <Property name="text" type="java.lang.String" value="Add recipe to your meal"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddToMealActionPerformed"/>

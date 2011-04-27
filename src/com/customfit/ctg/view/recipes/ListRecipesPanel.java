@@ -138,7 +138,7 @@ public class ListRecipesPanel extends SubPanel {
         scrollPaneTable.setViewportView(jTableRecipes);
         jTableRecipes.getColumnModel().getColumn(1).setCellRenderer(new StarRatingTableCellRenderer());
 
-        linkLabelAddNew.setText("Add a new recipe");
+        linkLabelAddNew.setText("Create a new recipe");
         linkLabelAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddNewActionPerformed(evt);
@@ -166,7 +166,7 @@ public class ListRecipesPanel extends SubPanel {
             }
         });
 
-        linkLabelAddToMeal.setText("Add Recipe to your Meal");
+        linkLabelAddToMeal.setText("Add recipe to your meal");
         linkLabelAddToMeal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddToMealActionPerformed(evt);
@@ -221,7 +221,7 @@ public class ListRecipesPanel extends SubPanel {
                     .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 79, Short.MAX_VALUE)
+                .addComponent(scrollPaneTable, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonEditRecipe)

@@ -158,7 +158,7 @@ public class MealMenuPanel extends SubPanel {
     
     private void makeMenuColInvisible() {
         jTableMenu.removeColumn(jTableMenu.getColumnModel().getColumn(2));
-        jTableMenu.removeColumn(jTableMenu.getColumnModel().getColumn(2));
+        jTableMenu.removeColumn(jTableMenu.getColumnModel().getColumn(1));
     }
 
     /** This method is called from within the constructor to
@@ -231,14 +231,14 @@ public class MealMenuPanel extends SubPanel {
 
             },
             new String [] {
-                "Name", "Rating", "MealIndex", "recipeIndex"
+                "Meal", "MealObject", "RecipeIndex"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -306,7 +306,7 @@ public class MealMenuPanel extends SubPanel {
                 .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a recipe to prepare your meal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a recipe to add to your meal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jTableRecipes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -331,6 +331,7 @@ public class MealMenuPanel extends SubPanel {
                 return canEdit [columnIndex];
             }
         });
+        jTableRecipes.setColumnSelectionAllowed(true);
         jTableRecipes.getTableHeader().setReorderingAllowed(false);
         jTableRecipes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -338,9 +339,10 @@ public class MealMenuPanel extends SubPanel {
             }
         });
         scrollPaneTable2.setViewportView(jTableRecipes);
+        jTableRecipes.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTableRecipes.getColumnModel().getColumn(1).setCellRenderer(new StarRatingTableCellRenderer());
 
-        linkLabelAddNew.setText("(Add a new recipe to this list)");
+        linkLabelAddNew.setText("Create a new recipe");
         linkLabelAddNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddNewActionPerformed(evt);
@@ -402,6 +404,8 @@ public class MealMenuPanel extends SubPanel {
                 .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
+
+        jPanel2.getAccessibleContext().setAccessibleName("Select a recipe to add to your meal");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxMeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMeMenuActionPerformed
@@ -536,7 +540,7 @@ public class MealMenuPanel extends SubPanel {
 
         //add recipes to list
         for (Recipe recipe : recipes) {
-            Object[] row = {recipe.getName(), new Long(Math.round(recipe.getRating() * 5.0)).toString()};
+            Object[] row = {recipe.getName(), recipe.getRating()};
             tableModel.addRow(row);
         }
 
@@ -558,20 +562,16 @@ public class MealMenuPanel extends SubPanel {
 
         //add recipes to list
         for (Meal meal : meals) {
-            Object[] row = {"<html><b>" + meal.getName() + "</b></html>",
-                null,
-                meals.indexOf(meal),
-                -1};
+            Object[] row = {"<html><b>" + meal.getName() + "</b></html>", meal, -1};
             tableModel.addRow(row);
             for (Recipe recipe : meal.getRecipes()) {
-                Object[] rrow = {"       " + recipe.getName(),
-                    new Long(Math.round(recipe.getRating() * 5.0)).toString(),
-                    meals.indexOf(meal),
-                    meal.getRecipes().indexOf(recipe)};
+                Object[] rrow = {"       " + recipe.getName(), meal, meal.getRecipes().indexOf(recipe) };
                 tableModel.addRow(rrow);
             }
 
         }
+        Object[] row = {"<html><b>" + "New Meal Plan" + "</b></html>", null, -1};
+        tableModel.addRow(row);
 
         jTableMenu.setModel(tableModel);
     }

@@ -120,9 +120,9 @@ public class HomePanel extends SubPanel {
         });
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jLabel1.setText("Recipes");
+        jLabel1.setText("Your Recipes");
 
-        linkLabelManageRecipes.setText("Manage Available Recipes");
+        linkLabelManageRecipes.setText("Manage recipes");
         linkLabelManageRecipes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelManageRecipesActionPerformed(evt);
@@ -130,7 +130,7 @@ public class HomePanel extends SubPanel {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jLabel3.setText("Weekly Meal Planning");
+        jLabel3.setText("Weekly Planning");
 
         jScrollPane5.setBorder(null);
 
@@ -156,14 +156,14 @@ public class HomePanel extends SubPanel {
         jTextRecipes.setVerifyInputWhenFocusTarget(false);
         jScrollPane6.setViewportView(jTextRecipes);
 
-        linkLabelEditWeeklyMenu.setText("Edit Weekly Menu");
+        linkLabelEditWeeklyMenu.setText("Plan your weekly menu");
         linkLabelEditWeeklyMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelEditWeeklyMenuActionPerformed(evt);
             }
         });
 
-        linkLabelPrintShoppingList.setText("Print Shopping List");
+        linkLabelPrintShoppingList.setText("Print shopping list");
         linkLabelPrintShoppingList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelPrintShoppingListActionPerformed(evt);
@@ -183,16 +183,16 @@ public class HomePanel extends SubPanel {
         jScrollPane7.setViewportView(jTextUserSettings);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12));
-        jLabel4.setText("User Settings");
+        jLabel4.setText("Your Profile");
 
-        linkLabelEditUserSettings.setText("Edit User Settings");
+        linkLabelEditUserSettings.setText("Edit your profile");
         linkLabelEditUserSettings.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelEditUserSettingsActionPerformed(evt);
             }
         });
 
-        linkLabelAddNewRecipe.setText("Add a New Recipe");
+        linkLabelAddNewRecipe.setText("Create a new recipe");
         linkLabelAddNewRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddNewRecipeActionPerformed(evt);
@@ -214,24 +214,24 @@ public class HomePanel extends SubPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
                                     .addComponent(jLabel4)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
                                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
                                     .addComponent(jLabel1))
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
                                 .addGap(188, 188, 188))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 704, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addContainerGap(558, Short.MAX_VALUE))
+                                .addContainerGap(614, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -276,7 +276,7 @@ public class HomePanel extends SubPanel {
                 .addComponent(linkLabelEditWeeklyMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(linkLabelPrintShoppingList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

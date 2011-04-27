@@ -33,29 +33,29 @@
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane2" alignment="0" pref="680" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="704" max="32767" attributes="1"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabelTitle" min="-2" pref="185" max="-2" attributes="0"/>
-                                      <EmptySpace pref="427" max="32767" attributes="0"/>
+                                      <EmptySpace pref="451" max="32767" attributes="0"/>
                                       <Component id="jComboBoxMeMenu" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane6" alignment="0" pref="680" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane6" alignment="0" pref="704" max="32767" attributes="1"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane5" pref="502" max="32767" attributes="1"/>
+                              <Component id="jScrollPane5" pref="526" max="32767" attributes="1"/>
                               <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane7" pref="680" max="32767" attributes="1"/>
+                              <Component id="jScrollPane7" pref="704" max="32767" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="558" max="32767" attributes="0"/>
+                              <EmptySpace pref="614" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="10" pref="10" max="10" attributes="0"/>
@@ -111,7 +111,7 @@
               <Component id="linkLabelEditWeeklyMenu" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="linkLabelPrintShoppingList" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="21" max="32767" attributes="0"/>
+              <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -176,12 +176,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Recipes"/>
+        <Property name="text" type="java.lang.String" value="Your Recipes"/>
       </Properties>
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelManageRecipes">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Manage Available Recipes"/>
+        <Property name="text" type="java.lang.String" value="Manage recipes"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelManageRecipesActionPerformed"/>
@@ -192,7 +192,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Weekly Meal Planning"/>
+        <Property name="text" type="java.lang.String" value="Weekly Planning"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane5">
@@ -261,7 +261,7 @@
     </Container>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelEditWeeklyMenu">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit Weekly Menu"/>
+        <Property name="text" type="java.lang.String" value="Plan your weekly menu"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelEditWeeklyMenuActionPerformed"/>
@@ -269,7 +269,7 @@
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelPrintShoppingList">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Print Shopping List"/>
+        <Property name="text" type="java.lang.String" value="Print shopping list"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelPrintShoppingListActionPerformed"/>
@@ -312,12 +312,12 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="12" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="User Settings"/>
+        <Property name="text" type="java.lang.String" value="Your Profile"/>
       </Properties>
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelEditUserSettings">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit User Settings"/>
+        <Property name="text" type="java.lang.String" value="Edit your profile"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelEditUserSettingsActionPerformed"/>
@@ -325,7 +325,7 @@
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddNewRecipe">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add a New Recipe"/>
+        <Property name="text" type="java.lang.String" value="Create a new recipe"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddNewRecipeActionPerformed"/>
