@@ -91,7 +91,7 @@
               <Border info="null"/>
             </Property>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="To add a recipe to the menu, select the desired recipe under available recipes, select the day of the week, and click add.  If you would like to remove a recipe from the menu, select the recipe under menu, and click remove."/>
+            <Property name="text" type="java.lang.String" value="To add a recipe to the menu, select the desired recipe on the left, select the meal or select &quot;Create a new meal...&quot;, and click the plus (+) sign.  If you would like to remove a recipe from a meal, select the recipe under the meal and click the minus (-) sign.  To remove an entire meal, select the meal and click the minus (-) sign."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
@@ -168,7 +168,7 @@
                       <Component id="jButtonRemoveMealOrRecipe" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable1" pref="97" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable1" pref="69" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -294,7 +294,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <Component id="linkLabelAddNew" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="scrollPaneTable2" pref="108" max="32767" attributes="0"/>
+                  <Component id="scrollPaneTable2" pref="80" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

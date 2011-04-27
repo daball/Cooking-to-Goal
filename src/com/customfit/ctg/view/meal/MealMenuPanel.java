@@ -190,7 +190,7 @@ public class MealMenuPanel extends SubPanel {
         jTextPane1.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
         jTextPane1.setBorder(null);
         jTextPane1.setEditable(false);
-        jTextPane1.setText("To add a recipe to the menu, select the desired recipe under available recipes, select the day of the week, and click add.  If you would like to remove a recipe from the menu, select the recipe under menu, and click remove.");
+        jTextPane1.setText("To add a recipe to the menu, select the desired recipe on the left, select the meal or select \"Create a new meal...\", and click the plus (+) sign.  If you would like to remove a recipe from a meal, select the recipe under the meal and click the minus (-) sign.  To remove an entire meal, select the meal and click the minus (-) sign.");
         jTextPane1.setFocusable(false);
         jTextPane1.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jTextPane1.setOpaque(false);
@@ -298,7 +298,7 @@ public class MealMenuPanel extends SubPanel {
                     .addComponent(jButtonAddMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonRemoveMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a recipe to add to your meal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -358,7 +358,7 @@ public class MealMenuPanel extends SubPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -610,7 +610,7 @@ public class MealMenuPanel extends SubPanel {
             }
 
         }
-        Object[] row = {"<html><b>" + "Create a new meal plan..." + "</b></html>", null, null};
+        Object[] row = {"<html><b>" + "Create a new meal..." + "</b></html>", null, null};
         tableModel.addRow(row);
 
         jTableMenu.setModel(tableModel);
