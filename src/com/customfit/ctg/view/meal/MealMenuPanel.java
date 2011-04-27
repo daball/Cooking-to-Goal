@@ -21,36 +21,13 @@ public class MealMenuPanel extends SubPanel {
      */
     private List<Recipe> recipes;
 
-    /**
-     * The Recipe List has two behaviors.
-     */
-    public static enum ListMode {
-
-        LIST_BROWSE,
-        LIST_SEARCH
-    };
-    /**
-     * This determines the behavior of this list.
-     */
-    private ListMode listMode;
-
     /** Creates new form RecipeListPanel */
-    public MealMenuPanel(ListMode listMode) {
+    public MealMenuPanel() {
         initComponents();
 
         //temp default configuration for meals
         if (MealPlanner.getAllMeals().isEmpty()) {
             MealPlanner.createDefaultMeals();
-        }
-
-        //setup list mode
-        this.listMode = listMode;
-
-        //customize form for list mode
-        if (this.listMode == ListMode.LIST_BROWSE) {
-            this.jLabelTitle.setText("Browse Recipes");
-        } else if (this.listMode == ListMode.LIST_SEARCH) {
-            this.jLabelTitle.setText("Search Recipes");
         }
 
         //setup the me-menu in the right-top corner
@@ -88,17 +65,17 @@ public class MealMenuPanel extends SubPanel {
         jComboBoxMeMenu = new javax.swing.JComboBox();
         linkLabelHome = new com.customfit.ctg.view.LinkLabel();
         jPanel1 = new javax.swing.JPanel();
-        jButtonRemoveRecipe = new javax.swing.JButton();
+        jButtonRemoveMealOrRecipe = new javax.swing.JButton();
         scrollPaneTable1 = new javax.swing.JScrollPane();
         jTableMenu = new javax.swing.JTable();
-        jButtonAddRecipe = new javax.swing.JButton();
+        jButtonAddMealOrRecipe = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         scrollPaneTable2 = new javax.swing.JScrollPane();
         jTableRecipes = new javax.swing.JTable();
         linkLabelAddNew = new com.customfit.ctg.view.LinkLabel();
 
         jLabelTitle.setFont(new java.awt.Font("Tahoma", 3, 18));
-        jLabelTitle.setText("Weekly Meal Plan");
+        jLabelTitle.setText("Plan Your Weekly Menu");
 
         jScrollPane2.setBorder(null);
 
@@ -126,13 +103,13 @@ public class MealMenuPanel extends SubPanel {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Current Menu", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Adjust your meal plans", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
-        jButtonRemoveRecipe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/art/export/subtract-item.png"))); // NOI18N
-        jButtonRemoveRecipe.setDefaultCapable(false);
-        jButtonRemoveRecipe.addActionListener(new java.awt.event.ActionListener() {
+        jButtonRemoveMealOrRecipe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/art/export/subtract-item.png"))); // NOI18N
+        jButtonRemoveMealOrRecipe.setDefaultCapable(false);
+        jButtonRemoveMealOrRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRemoveRecipeActionPerformed(evt);
+                jButtonRemoveMealOrRecipeActionPerformed(evt);
             }
         });
 
@@ -168,10 +145,10 @@ public class MealMenuPanel extends SubPanel {
         });
         scrollPaneTable1.setViewportView(jTableMenu);
 
-        jButtonAddRecipe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/art/export/add-item.png"))); // NOI18N
-        jButtonAddRecipe.addActionListener(new java.awt.event.ActionListener() {
+        jButtonAddMealOrRecipe.setIcon(new javax.swing.ImageIcon(getClass().getResource("/art/export/add-item.png"))); // NOI18N
+        jButtonAddMealOrRecipe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonAddRecipeActionPerformed(evt);
+                jButtonAddMealOrRecipeActionPerformed(evt);
             }
         });
 
@@ -181,9 +158,9 @@ public class MealMenuPanel extends SubPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonAddRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonAddMealOrRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonRemoveRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonRemoveMealOrRecipe, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(173, Short.MAX_VALUE))
             .addComponent(scrollPaneTable1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
         );
@@ -191,13 +168,13 @@ public class MealMenuPanel extends SubPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonAddRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonRemoveRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonAddMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonRemoveMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 129, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Available Recipes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a recipe to prepare your meal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jTableRecipes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -266,8 +243,8 @@ public class MealMenuPanel extends SubPanel {
                         .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 360, Short.MAX_VALUE)
+                        .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -324,7 +301,7 @@ public class MealMenuPanel extends SubPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableMenuMouseClicked
 
-    private void jButtonRemoveRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveRecipeActionPerformed
+    private void jButtonRemoveMealOrRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMealOrRecipeActionPerformed
         //if a row is selected
         if (this.jTableMenu.getSelectedRowCount() > 0) {
             int mealIndex = (Integer) jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 2);
@@ -338,13 +315,13 @@ public class MealMenuPanel extends SubPanel {
             }
 
         }
-}//GEN-LAST:event_jButtonRemoveRecipeActionPerformed
+}//GEN-LAST:event_jButtonRemoveMealOrRecipeActionPerformed
 
     private void jTableRecipesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRecipesMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jTableRecipesMouseClicked
 
-    private void jButtonAddRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddRecipeActionPerformed
+    private void jButtonAddMealOrRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMealOrRecipeActionPerformed
         //if a row is selected
         int selectedMenuRow = this.jTableMenu.getSelectedRow();
         int selectedRecipeRow = this.jTableRecipes.getSelectedRow();
@@ -361,10 +338,10 @@ public class MealMenuPanel extends SubPanel {
             }
         }
 
-}//GEN-LAST:event_jButtonAddRecipeActionPerformed
+}//GEN-LAST:event_jButtonAddMealOrRecipeActionPerformed
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonAddRecipe;
-    private javax.swing.JButton jButtonRemoveRecipe;
+    private javax.swing.JButton jButtonAddMealOrRecipe;
+    private javax.swing.JButton jButtonRemoveMealOrRecipe;
     private javax.swing.JComboBox jComboBoxMeMenu;
     private javax.swing.JLabel jLabelTitle;
     private javax.swing.JPanel jPanel1;
@@ -458,10 +435,6 @@ public class MealMenuPanel extends SubPanel {
 
     @Override
     public void refresh() {
-        //refresh data
-        if (this.listMode == ListMode.LIST_BROWSE) {
-            this.setRecipeList(Application.getDataDriver().selectAllRecipes());
-            this.setMenuList(MealPlanner.getAllMeals());
-        }
+        //TODO implement: refresh data
     }
 }

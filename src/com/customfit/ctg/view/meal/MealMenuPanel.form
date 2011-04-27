@@ -25,8 +25,8 @@
                   </Group>
                   <Component id="jScrollPane2" alignment="0" pref="594" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabelTitle" min="-2" pref="166" max="-2" attributes="0"/>
-                      <EmptySpace pref="360" max="32767" attributes="0"/>
+                      <Component id="jLabelTitle" min="-2" pref="268" max="-2" attributes="0"/>
+                      <EmptySpace pref="258" max="32767" attributes="0"/>
                       <Component id="jComboBoxMeMenu" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -67,7 +67,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="18" style="3"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Weekly Meal Plan"/>
+        <Property name="text" type="java.lang.String" value="Plan Your Weekly Menu"/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane2">
@@ -128,7 +128,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Current Menu">
+            <TitledBorder title="Adjust your meal plans">
               <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
             </TitledBorder>
           </Border>
@@ -140,9 +140,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonAddRecipe" min="-2" pref="31" max="-2" attributes="1"/>
+                  <Component id="jButtonAddMealOrRecipe" min="-2" pref="31" max="-2" attributes="1"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jButtonRemoveRecipe" min="-2" pref="30" max="-2" attributes="1"/>
+                  <Component id="jButtonRemoveMealOrRecipe" min="-2" pref="30" max="-2" attributes="1"/>
                   <EmptySpace pref="173" max="32767" attributes="0"/>
               </Group>
               <Component id="scrollPaneTable1" alignment="1" pref="250" max="32767" attributes="0"/>
@@ -152,8 +152,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jButtonAddRecipe" max="32767" attributes="1"/>
-                      <Component id="jButtonRemoveRecipe" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jButtonAddMealOrRecipe" max="32767" attributes="1"/>
+                      <Component id="jButtonRemoveMealOrRecipe" alignment="0" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="scrollPaneTable1" pref="129" max="32767" attributes="0"/>
@@ -162,7 +162,7 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="jButtonRemoveRecipe">
+        <Component class="javax.swing.JButton" name="jButtonRemoveMealOrRecipe">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/art/export/subtract-item.png"/>
@@ -170,7 +170,7 @@
             <Property name="defaultCapable" type="boolean" value="false"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveRecipeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRemoveMealOrRecipeActionPerformed"/>
           </Events>
         </Component>
         <Container class="javax.swing.JScrollPane" name="scrollPaneTable1">
@@ -217,14 +217,14 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JButton" name="jButtonAddRecipe">
+        <Component class="javax.swing.JButton" name="jButtonAddMealOrRecipe">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/art/export/add-item.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddRecipeActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonAddMealOrRecipeActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -233,7 +233,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Available Recipes">
+            <TitledBorder title="Select a recipe to prepare your meal">
               <Font PropertyName="font" name="Tahoma" size="11" style="1"/>
             </TitledBorder>
           </Border>
