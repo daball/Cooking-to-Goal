@@ -35,29 +35,34 @@ public class HomePanel extends SubPanel {
         //String x = "";
         //System.out.println("field: " + x);
 
-        List<Member> allMembers = UserManagement.getCurrentUser().getAllMembers();
+        List<Member> allMembers = UserManagement.getCurrentUser().getAllOtherMembers();
+        List<Recipe> allRecipes = RecipeManagement.getAllRecipes();
         
         StringBuilder userStatusMessage = new StringBuilder();
-        userStatusMessage.append("You are currently tracking ");
-        userStatusMessage.append(allMembers.size());
-        userStatusMessage.append("member");
+        if (allMembers.isEmpty()) userStatusMessage.append("You are not currently tracking any");
+        else userStatusMessage.append("You are currently tracking " + allMembers.size());
+        userStatusMessage.append(" member");
         if (allMembers.size() != 1) userStatusMessage.append("s");
         userStatusMessage.append(" in addition to yourself. Your menu will scale based the weekly target of you and your other tracked members, which is a ");
         if (UserManagement.getCurrentUser().getOwnMember().getGoalDirection() == GoalDirection.MAXIMUM_GOAL)
             userStatusMessage.append("maximum");
         else if (UserManagement.getCurrentUser().getOwnMember().getGoalDirection() == GoalDirection.MINIMUM_GOAL)
             userStatusMessage.append("minimum");
-        userStatusMessage.append(" allowance ");
-        userStatusMessage.append(UserManagement.getCurrentUser().getTotalGoal().toString());
-        userStatusMessage.append(" of ");
-        userStatusMessage.append(UserManagement.getCurrentUser().getOwnMember().getTrackedNutrient());
+        userStatusMessage.append(" goal ");
+        Measurement totalGoal = UserManagement.getCurrentUser().getTotalGoal();
+        userStatusMessage.append(totalGoal.toString());
+        if (!UserManagement.getCurrentUser().getOwnMember().getTrackedNutrient().equals(totalGoal.getUnit()))
+            userStatusMessage.append(" of " + UserManagement.getCurrentUser().getOwnMember().getTrackedNutrient());
         userStatusMessage.append(" each day.");
         this.jTextUserSettings.setText(userStatusMessage.toString());
         
         StringBuilder recipeStatusMessage = new StringBuilder();
         recipeStatusMessage.append("You currently have ");
-        recipeStatusMessage.append(RecipeManagement.getAllRecipes().size());
-        recipeStatusMessage.append(" recipes in your inventory.");
+        if (allRecipes.isEmpty()) recipeStatusMessage.append("no");
+        else recipeStatusMessage.append(allRecipes.size());
+        recipeStatusMessage.append(" recipe");
+        if (allRecipes.size() != 1) recipeStatusMessage.append("s");
+        recipeStatusMessage.append(" in your inventory.");
         this.jTextRecipes.setText(recipeStatusMessage.toString());
         
         StringBuilder mealStatusMessage = new StringBuilder();
