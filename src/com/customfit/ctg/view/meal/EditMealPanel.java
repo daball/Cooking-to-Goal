@@ -217,6 +217,18 @@ public class EditMealPanel extends CreateEditPanel {
     // End of variables declaration//GEN-END:variables
 
     /**
+     * Extends SubPanel functionality by returning the title as being the
+     * same as on the panel itself.
+     * @return The title in the panel.
+     */
+    @Override
+    public String getTitle()
+    {
+        //grab title from on the panel
+        return this.jLabelTitle.getText();
+    }
+    
+    /**
      * Sets Meal into the panel and updates the GUI to match.
      * 
      * @param meal Meal to load.
