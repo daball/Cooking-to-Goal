@@ -5,8 +5,6 @@ import com.customfit.ctg.model.*;
 import com.thoughtworks.xstream.XStream;
 import java.util.*;
 import java.io.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * The FlatFileDriver class represents one of the DataDriverInterfaces
