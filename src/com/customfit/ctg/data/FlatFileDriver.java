@@ -69,6 +69,9 @@ public class FlatFileDriver implements DataDriver {
 		//map short names to objects for serialization
 		xStream.alias("recipe", Recipe.class);
 		xStream.alias("ingredient", RecipeIngredient.class);
+                xStream.alias("user", User.class);
+                xStream.alias("meal", Meal.class);
+                xStream.alias("member", Member.class);
 	}
 
 	/**
