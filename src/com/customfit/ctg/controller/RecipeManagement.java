@@ -203,17 +203,139 @@ public class RecipeManagement {
     }
     
     /**
-     * 
+     * Prints a shopping list of ingredients for a list of meals for this week
+     * starting whenever Monday was.
      */
-    public static void printShoppingList(){
-    	// TODO: Implement
-    	// obtain the shopping list
-    	
-    	// create shopping list view JPanel (implements Printable)
-    	    	
-    	// pass JPanel to print preview panel and display
-    	PrintPreviewPanel ppPanel = new PrintPreviewPanel(new ShoppingListPrintPanel());
-    	
-    	Application.getMainFrame().setPanel(ppPanel);
+    public static void printShoppingList()
+    {
+        //get a Calendar
+        Calendar calendarToday = Calendar.getInstance();
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarEnd = Calendar.getInstance();
+        
+        //go to the first day of the week
+        if (calendarStart.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY)
+        {
+            switch (calendarStart.get(Calendar.DAY_OF_WEEK))
+            {
+                case Calendar.SUNDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.SATURDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.FRIDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.THURSDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.WEDNESDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.TUESDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+            }
+        }
+        //then add 6 days to end date
+        calendarEnd.add(Calendar.DATE, 6);
+
+        //then print the report
+        RecipeManagement.printShoppingList(calendarStart.getTime(), calendarEnd.getTime());
+    }
+    
+    /**
+     * Prints a shopping list of ingredients for a list of meals.
+     * 
+     * @param meals List of meals.
+     */
+    public static void printShoppingList(Date startDate, Date endDate)
+    {
+        //get meal data from current user
+        List<Meal> meals = UserManagement.getCurrentUser().getMealsByDateRange(startDate, endDate);
+        ArrayList<RecipeIngredient> allMealIngredients = new ArrayList<RecipeIngredient> ();
+        
+        //now process every meal in the range for shared ingredients
+        for (Meal meal: meals)
+        {
+            for (Recipe recipe: meal.getRecipes())
+            {
+                for (RecipeIngredient mealIngredient: recipe.getIngredients())
+                {
+                    boolean found = false;
+                    int index = -1;
+                    for (RecipeIngredient allMealIngredientsIngredient: allMealIngredients)
+                    {
+                        if (allMealIngredientsIngredient.getName() == mealIngredient.getName())
+                        {
+                            found = true;
+                            index = allMealIngredients.indexOf(allMealIngredientsIngredient);
+                        }
+                    }
+                    
+                    if (found)
+                        allMealIngredients.set(index, allMealIngredients.get(index).add(mealIngredient));
+                    else
+                        allMealIngredients.add(mealIngredient);
+                }
+            }
+        }
+                
+        //get a Calendar
+        Calendar calendarToday = Calendar.getInstance();
+        Calendar calendarStart = Calendar.getInstance();
+        Calendar calendarEnd = Calendar.getInstance();
+        
+        //go to the first day of the week
+        if (calendarStart.get(Calendar.DAY_OF_WEEK) != Calendar.MONDAY)
+        {
+            switch (calendarStart.get(Calendar.DAY_OF_WEEK))
+            {
+                case Calendar.SUNDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.SATURDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.FRIDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.THURSDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.WEDNESDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+                case Calendar.TUESDAY:
+                    calendarStart.add(Calendar.DATE, -1);
+                    calendarEnd.add(Calendar.DATE, -1);
+            }
+        }
+        //then add 6 days to end date
+        calendarEnd.add(Calendar.DATE, 6);
+        
+        //then print the report
+        RecipeManagement.printShoppingList(allMealIngredients, startDate, endDate);
+    }
+    
+    /**
+     * Prints a shopping list of ingredients for the dates you provide with
+     * a list of ingredients that you provide.
+     * 
+     * @param ingredients List of ingredients.
+     * @param startDate Starting date for report.
+     * @param endDate Ending date for report.
+     */
+    public static void printShoppingList(List<RecipeIngredient> ingredients, Date startDate, Date endDate)
+    {
+        //create print panel
+        ShoppingListPrintPanel printPanel = new ShoppingListPrintPanel();
+        //tell print panel about our data
+        printPanel.setIngredientsAndDates(ingredients, startDate, endDate);
+        //create print preview panel
+    	PrintPreviewPanel printPriviewPanel = new PrintPreviewPanel(printPanel);
+    	//tell main frame to display preview
+    	Application.getMainFrame().setPanel(printPriviewPanel);
     }
 }
