@@ -356,6 +356,27 @@ public class User
         return this.getOwnMember().getTrackedNutrient();
     }
    
+    /**
+     * Helper function to take one of the aggregated meals
+     * and add a recipe back to it's original structure in the
+     * user.
+     * 
+     * @param meal Meal to alter.
+     * 
+     * @param recipe Recipe to add.
+     */
+    public void addRecipeToMeal(Meal meal, Recipe recipe)
+    {
+        for (Meal internalMeal : this.meals)
+        {
+            if (internalMeal.equals(meal))
+            {
+                internalMeal.getRecipes().add(recipe);
+                break;
+            }
+        }
+    }
+            
     @Override
     public boolean equals(Object object)
     {
