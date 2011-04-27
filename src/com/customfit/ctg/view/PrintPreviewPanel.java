@@ -146,14 +146,14 @@ public class PrintPreviewPanel extends SubPanel {
     private void jDesktopPane1ComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jDesktopPane1ComponentResized
         //make the scrollable panel with the print panel inside
         //80% of the height of the outer panel
-        int previewPaneHeight = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().height).doubleValue() * 0.80).intValue();
+        int previewPaneHeight = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().height).doubleValue() - 20.0).intValue();
         //then the proportion of height
         int previewPaneWidth = new Double((new Integer(previewPaneHeight)).doubleValue() * 8.5 / 11.0).intValue();
         if (previewPaneWidth > this.jScrollPaneOuter.getWidth())
         {
             //if this happens, try swapping the order
             //80% of the width of the outer panel
-            previewPaneWidth = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().width).doubleValue() * 0.80).intValue();
+            previewPaneWidth = new Double(new Integer(this.jScrollPaneOuter.getVisibleRect().width).doubleValue() - 20.0).intValue();
             //then the proportion of width
             previewPaneHeight = new Double((new Integer(previewPaneHeight)).doubleValue() * 11.0 / 8.5).intValue();
         }
