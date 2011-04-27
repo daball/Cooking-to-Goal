@@ -104,7 +104,10 @@ public class Measurement implements Comparable<Measurement> {
     @Override
     public String toString()
     {
+        if (this.getUnit() != null)
             return this.getQuantity() + " " + this.getUnit();
+        else
+            return new Double(this.getQuantity()).toString();
     }
 
     /**
