@@ -33,7 +33,7 @@ public abstract class SubPanel extends javax.swing.JPanel {
      */
     public void refresh()
     {
-        System.err.println("SubPanel.refreshData() was hit, but wasn't implemented (overridden). Override this method and set it to update data.");
+        System.err.println("SubPanel.refresh() was hit, but wasn't implemented (overridden). Override this method and set it to update data.");
     }
 
     /** This method is called from within the constructor to
