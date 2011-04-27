@@ -177,7 +177,21 @@ public class RecipeManagement {
      */
     public static boolean deleteRecipe(String recipeName)
     {
-        return Application.getDataDriver().deleteRecipeByName(recipeName);
+        boolean status = false;
+        //be sure to ask for a confirmation first, if they click OK
+        if (JOptionPane.showConfirmDialog(Application.getMainFrame(), "Are you sure you want to delete the recipe, " + recipeName + "? This cannot be reversed.", "Delete Recipe Confirmation", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION)
+        {
+            //then do the delete
+            status = Application.getDataDriver().deleteRecipeByName(recipeName);
+            //check for errors
+            if (!status)
+                //if failed, tell user about the failure
+                JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem deleting your recipe.", "Error", JOptionPane.ERROR_MESSAGE);
+            else
+                //if all went well go back
+                Application.getMainFrame().goBack();
+        }
+        return status;
     }
 
     /**

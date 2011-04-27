@@ -59,10 +59,12 @@
                       <Component id="jButtonSave" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="btnCancel" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="linkLabelAddToMeal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="linkLabelPrint" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="linkLabelDelete" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -122,6 +124,7 @@
                   <Component id="btnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="linkLabelAddToMeal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="linkLabelPrint" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="linkLabelDelete" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -457,7 +460,7 @@
     </Container>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddToMeal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Add this Recipe to your Meal..."/>
+        <Property name="text" type="java.lang.String" value="Add this Recipe to your Meal"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddToMealActionPerformed"/>
@@ -465,10 +468,18 @@
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelPrint">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Print this Recipe..."/>
+        <Property name="text" type="java.lang.String" value="Print this Recipe"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelPrintActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelDelete">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete this Recipe"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelDeleteActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
