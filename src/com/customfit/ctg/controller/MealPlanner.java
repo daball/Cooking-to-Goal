@@ -155,12 +155,12 @@ public class MealPlanner { // implements Observable
      * 
      * @param date The initial date to set the meal to.
      */
-    public static void insertMealPlan(Date date)
+    public static void insertMealPlan(Date date, List<Recipe> recipes)
     {
         //create panel
         EditMealPanel newMealPanel = new EditMealPanel(CreateEditMode.CREATE);
         //begin building a new meal
-        Meal meal = new Meal("", date);
+        Meal meal = new Meal("", date, recipes, UserManagement.getCurrentUser().getAllMembers());
         //tell panel about new meal
         newMealPanel.setMeal(meal);
         //display panel in main frame
