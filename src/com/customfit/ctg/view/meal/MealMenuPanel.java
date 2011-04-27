@@ -477,26 +477,29 @@ public class MealMenuPanel extends SubPanel {
         int selectedMenuRow = this.jTableMenu.getSelectedRow();
         if (this.jTableMenu.getSelectedRowCount() > 0) {
             Object mealObject = jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 1);
+            Calendar calendarToday = Calendar.getInstance();
+            Calendar calendarStart = Calendar.getInstance();
+            calendarStart.setTime(this.getStartDate());
+            while (calendarToday.get(Calendar.DAY_OF_WEEK) > calendarStart.get(Calendar.DAY_OF_WEEK))
+                calendarStart.add(Calendar.DATE, 1);
             if (mealObject == null)
             {
                 //tell controller to create a new meal
-                Calendar calendarToday = Calendar.getInstance();
-                Calendar calendarStart = Calendar.getInstance();
-                calendarStart.setTime(this.getStartDate());
-                while (calendarToday.get(Calendar.DAY_OF_WEEK) > calendarStart.get(Calendar.DAY_OF_WEEK))
-                    calendarStart.add(Calendar.DATE, 1);
                 MealPlanner.insertMealPlan(calendarStart.getTime(), recipes);
+                //and refresh data
+                this.refresh();
             }
-//            int mealIndex = (Integer) ;
-//            if (this.jTableRecipes.getSelectedRowCount() > 0) {
-//                //grab Recipe
-//                Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
-//                //add the recipe to the menu
-//                MealPlanner.addRecipeToMeal(recipe, mealIndex);
-//                this.refresh();
-//                selectTableRow(this.jTableMenu, selectedMenuRow);
-//                selectTableRow(this.jTableRecipes, selectedRecipeRow);
-//            }
+            else
+            {
+                //add these recipes to the selected meal
+                for (int recipeRow: this.jTableRecipes.getSelectedRows())
+                    for (Recipe recipe: this.recipes)
+                        if (recipe.getName().equals((String)this.jTableRecipes.getModel().getValueAt(recipeRow, 0)))
+                            UserManagement.getCurrentUser().addRecipeToMeal((Meal)mealObject, recipe);
+
+                //and refresh data
+                this.refresh();
+            }
         }
 
 }//GEN-LAST:event_jButtonAddMealOrRecipeActionPerformed
@@ -572,7 +575,9 @@ public class MealMenuPanel extends SubPanel {
      *
      * @param meals List of meals.
      */
-    public void setMenuList(List<Meal> meals) {
+    public void setMeals(List<Meal> meals) {
+        if (meals == null) { this.refresh(); return; }
+        
         DefaultTableModel tableModel = (DefaultTableModel) jTableMenu.getModel();
 
         //clear old results
@@ -598,12 +603,10 @@ public class MealMenuPanel extends SubPanel {
 
     @Override
     public void refresh() {
-        //TODO implement: refresh data
         if (this.getStartDate() != null && this.getEndDate() != null)
         {
-            setMenuList(UserManagement.getCurrentUser().getMealsByDateRange(this.getStartDate(), this.getEndDate()));
-            System.out.println("Get data from " + this.getStartDate().toString() + " to " + this.getEndDate().toString());
+            this.setMeals(UserManagement.getCurrentUser().getMealsByDateRange(this.getStartDate(), this.getEndDate()));
         }
-        setRecipes(RecipeManagement.getAllRecipes());
+        this.setRecipes(RecipeManagement.getAllRecipes());
     }
 }

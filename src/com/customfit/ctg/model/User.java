@@ -193,20 +193,20 @@ public class User
         startDate = calendarStart.getTime();
         
         Calendar calendarEnd = Calendar.getInstance();
-        calendarEnd.setTime(startDate);
+        calendarEnd.setTime(endDate);
         calendarEnd.set(Calendar.HOUR, 23);
         calendarEnd.set(Calendar.MINUTE, 59);
         calendarEnd.set(Calendar.SECOND, 59);
         calendarEnd.set(Calendar.MILLISECOND, 999);
         endDate = calendarEnd.getTime();
-        
+
         List<Meal> meals = new ArrayList<Meal>();
         for (Meal meal : this.getAllMeals())
             if (meal.getDate().after(startDate) && meal.getDate().before(endDate))
                 meals.add(meal);
             else if (meal.getDate().equals(startDate) || meal.getDate().equals(endDate))
                 meals.add(meal);
-
+        
         return meals;
     }
     

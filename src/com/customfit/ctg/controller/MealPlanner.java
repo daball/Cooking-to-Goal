@@ -26,7 +26,7 @@ public class MealPlanner { // implements Observable
     {
         //recipes not provided, so go get them
         List<Recipe> recipes = Application.getDataDriver().selectAllRecipes();
-        List<Meal> meals = UserManagement.getCurrentUser().getAllMeals();
+        List<Meal> meals = null;
 
         //now pass them to the overloaded method
         browseMenu(recipes, meals);
@@ -45,7 +45,7 @@ public class MealPlanner { // implements Observable
         MealMenuPanel mealMenuPanel = new MealMenuPanel();
         //tell panel about our recipes
         mealMenuPanel.setRecipes(recipes);
-        mealMenuPanel.setMenuList(meals);
+        mealMenuPanel.setMeals(meals);
         //display panel in main frame
         Application.getMainFrame().setPanel(mealMenuPanel);
     }
