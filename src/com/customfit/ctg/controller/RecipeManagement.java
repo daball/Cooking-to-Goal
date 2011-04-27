@@ -192,15 +192,25 @@ public class RecipeManagement {
     }
     
     /**
-     * 
+     * Displays the Print Preview dialog to print the Recipe that you feed it.
+     */
+    public static void printRecipe(Recipe recipe){
+        //create print panel
+        RecipePrintPanel recipePrintPanel = new RecipePrintPanel();
+        //send the recipe to the print panel
+        recipePrintPanel.setRecipe(recipe);
+        //create print preview panel
+    	PrintPreviewPanel printPreviewPanel = new PrintPreviewPanel(recipePrintPanel);
+        //display panel in main frame
+        Application.getMainFrame().setPanel(printPreviewPanel);
+    }
+    
+    /**
+     * Displays the Print Preview dialog to print the Recipe that you feed it.
      */
     public static void printRecipe(String recipeName){
-    	// TODO: Implement
-    	// get recipe by name
-    	
-    	// create recipe view JPanel (implements Printable)
-    	
-    	// pass JPanel to print preview panel and display
+        //lookup and send to override
+        RecipeManagement.printRecipe(Application.getDataDriver().selectRecipesByName(recipeName).get(0));
     }
     
     /**
@@ -213,7 +223,7 @@ public class RecipeManagement {
     	// create shopping list view JPanel (implements Printable)
     	    	
     	// pass JPanel to print preview panel and display
-    	PrintPreviewPanel ppPanel = new PrintPreviewPanel(new TestPrintPanel());
+    	PrintPreviewPanel ppPanel = new PrintPreviewPanel(new RecipePrintPanel());
     	
     	Application.getMainFrame().setPanel(ppPanel);
     }
