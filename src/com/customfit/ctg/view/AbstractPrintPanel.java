@@ -6,14 +6,18 @@ package com.customfit.ctg.view;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 
 import javax.swing.JPanel;
 import javax.swing.RepaintManager;
+import javax.swing.border.Border;
 
 /**
  * Extend this abstract class to create a 
@@ -33,9 +37,31 @@ abstract class AbstractPrintPanel extends JPanel implements Printable {
 
             // Get the Graphics2D context for the component
             Graphics2D g2 = (Graphics2D) g;
+            System.out.print("imageable X:" + pf.getImageableX() + ", ");
+            System.out.print("Y:" + pf.getImageableY() + ", ");
+            System.out.print("W:" + pf.getImageableWidth() + ", ");
+            System.out.print("H:" + pf.getImageableHeight());
+            this.setSize(new Double(pf.getImageableWidth()).intValue(), new Double(pf.getImageableHeight()).intValue());
             // Move to 0,0 in printer
             g2.translate(pf.getImageableX(), pf.getImageableY());
-            
+//            for (Component component : this.getComponents())
+//                if (component.getWidth() > pf.getImageableWidth())
+//                {
+//                    component.setSize(new Double(pf.getImageableWidth()).intValue()-50, component.getHeight());
+//                    if (component.getClass().isAssignableFrom(JComponent.class))
+//                    {
+//                        JComponent jComponent = (JComponent)component;
+//                        jComponent.setBorder(BorderFactory.createEmptyBorder());
+//                        for (Component subComponent: jComponent.getComponents())
+//                            if (component.getClass().isAssignableFrom(JComponent.class))
+//                            {
+//                                JComponent subJComponent = (JComponent)subJomponent;
+//                                subJComponent.setBorder(BorderFactory.createEmptyBorder());
+//                            }
+//                    }
+//                }
+//                    //component.setSize(100, component.getHeight());
+//            
 //            // Get the bounds of the printable size
 //            Rectangle page =  new Rectangle((int)pf.getImageableWidth(), (int)pf.getImageableHeight());
 //            
@@ -82,4 +108,16 @@ abstract class AbstractPrintPanel extends JPanel implements Printable {
         currentManager.setDoubleBufferingEnabled(true);
       }
 
+      @Override
+      public void setSize(int width, int height)
+      {
+          int newHeight = new Double((new Integer(width).doubleValue() / 8.5) * 11.0).intValue();
+          super.setSize(width, newHeight);
+      }
+      
+      @Override
+      public void setSize(Dimension dimension)
+      {
+          setSize(dimension.width, dimension.height);
+      }
 }
