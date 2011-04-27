@@ -167,6 +167,7 @@ public class EditRecipePanel extends CreateEditPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextAreaInstructions = new javax.swing.JTextArea();
         linkLabelAddToMeal = new com.customfit.ctg.view.LinkLabel();
+        linkLabelPrint = new com.customfit.ctg.view.LinkLabel();
 
         jButtonSave.setText("Save");
         jButtonSave.setEnabled(false);
@@ -366,6 +367,13 @@ public class EditRecipePanel extends CreateEditPanel {
             }
         });
 
+        linkLabelPrint.setText("Print this Recipe...");
+        linkLabelPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                linkLabelPrintActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -407,7 +415,9 @@ public class EditRecipePanel extends CreateEditPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCancel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(linkLabelPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -450,7 +460,8 @@ public class EditRecipePanel extends CreateEditPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButtonSave)
                     .addComponent(btnCancel)
-                    .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(linkLabelAddToMeal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(linkLabelPrint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -528,6 +539,10 @@ public class EditRecipePanel extends CreateEditPanel {
         MealPlanner.insertMealPlan(Calendar.getInstance().getTime(), recipes);
     }//GEN-LAST:event_linkLabelAddToMealActionPerformed
 
+    private void linkLabelPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelPrintActionPerformed
+        RecipeManagement.printRecipe(this.getRecipe());
+    }//GEN-LAST:event_linkLabelPrintActionPerformed
+
     private void removeIngredient() {
         int currentRow = jTableIngredients.getSelectedRow();
         if (currentRow != -1) {
@@ -574,6 +589,7 @@ public class EditRecipePanel extends CreateEditPanel {
     private javax.swing.JLabel lblName2;
     private javax.swing.JLabel lblName3;
     private com.customfit.ctg.view.LinkLabel linkLabelAddToMeal;
+    private com.customfit.ctg.view.LinkLabel linkLabelPrint;
     private javax.swing.JScrollPane scrollPaneIngedients;
     private javax.swing.JScrollPane scrollPaneNutrition;
     private com.customfit.ctg.view.StarRatingPanel starRatingPanel;
