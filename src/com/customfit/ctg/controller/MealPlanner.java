@@ -151,7 +151,7 @@ public class MealPlanner { // implements Observable
     }
     
     /**
-     * You insert a Date and it loads the Insert Meal panel.
+     * You insert a Date and it loads the Insert Meal Plan panel.
      * 
      * @param date The initial date to set the meal to.
      */
@@ -168,7 +168,7 @@ public class MealPlanner { // implements Observable
     }
     
     /**
-     * The Insert Meal panel calls this back when the meal has been prepared.
+     * The Insert Meal Plan panel calls this back when the meal has been prepared.
      * It inserts the meal into your user's meal plans, saves the user to
      * disk, and then loads the last panel, presumably the weekly meal view.
      * 
@@ -180,12 +180,61 @@ public class MealPlanner { // implements Observable
     {
         //update the user object by adding the new meal
         UserManagement.getCurrentUser().getAllMeals().add(meal);
-        //send it over to the database
+        //send the user over to the database
         boolean status = Application.getDataDriver().updateUserByName(UserManagement.getCurrentUser().getName(), UserManagement.getCurrentUser());
         //check for errors
         if (!status)
             //if failed, tell user about the failure
             JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem creating your meal plan.", "Error", JOptionPane.ERROR_MESSAGE);
+        else
+        {
+            //otherwise, assume success and go back
+            Application.getMainFrame().goBack();
+            //refresh data on previous panel
+            Application.getMainFrame().getPanel().refresh();
+        }
+        //return status
+        return status;
+
+    }
+    
+    /**
+     * Loads the Edit Meal Plan panel with the meal you specified.
+     * 
+     * @param meal The initial meal to display.
+     */
+    public static void editMealPlan(Meal meal)
+    {
+        //create panel
+        EditMealPanel newMealPanel = new EditMealPanel(CreateEditMode.EDIT);
+        //tell panel about new meal
+        newMealPanel.setMeal(meal);
+        //display panel in main frame
+        Application.getMainFrame().setPanel(newMealPanel);
+    }
+    
+    /**
+     * The Edit Meal Plan panel calls this back when the meal has been prepared.
+     * It inserts the meal into your user's meal plans, saves the user to
+     * disk, and then loads the last panel, presumably the weekly meal view.
+     * 
+     * @param 
+     * @param meal The meal to insert into the database.
+     * 
+     * @return Boolean indicating the success of the operation. 
+     */
+    public static boolean editMealPlan(Meal initialMeal, Meal newMeal)
+    {
+        //find and replace initial meal with new meal
+        for (int m = 0; m < UserManagement.getCurrentUser().getAllMeals().size(); m++)
+            if (UserManagement.getCurrentUser().getAllMeals().equals(initialMeal))
+                UserManagement.getCurrentUser().getAllMeals().set(m, newMeal);
+        //send the user over to the database
+        boolean status = Application.getDataDriver().updateUserByName(UserManagement.getCurrentUser().getName(), UserManagement.getCurrentUser());
+        //check for errors
+        if (!status)
+            //if failed, tell user about the failure
+            JOptionPane.showMessageDialog(Application.getMainFrame(), "There was a problem editing your meal plan.", "Error", JOptionPane.ERROR_MESSAGE);
         else
         {
             //otherwise, assume success and go back
