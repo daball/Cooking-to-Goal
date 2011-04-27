@@ -291,6 +291,8 @@ public class ListRecipesPanel extends SubPanel {
                 RecipeManagement.deleteRecipe(recipe);
             }
         }
+        //then refresh
+        this.refresh();
     }//GEN-LAST:event_jButtonDeleteActionPerformed
 
     private void linkLabelAddToMealActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_linkLabelAddToMealActionPerformed
