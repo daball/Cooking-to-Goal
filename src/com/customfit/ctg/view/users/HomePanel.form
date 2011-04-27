@@ -33,29 +33,29 @@
                       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane2" alignment="0" pref="704" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="702" max="32767" attributes="1"/>
                                   <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="jLabelTitle" min="-2" pref="185" max="-2" attributes="0"/>
-                                      <EmptySpace pref="451" max="32767" attributes="0"/>
+                                      <EmptySpace pref="449" max="32767" attributes="0"/>
                                       <Component id="jComboBoxMeMenu" min="-2" max="-2" attributes="0"/>
                                   </Group>
-                                  <Component id="jScrollPane6" alignment="0" pref="704" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane6" alignment="0" pref="702" max="32767" attributes="1"/>
                                   <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane5" pref="526" max="32767" attributes="1"/>
+                              <Component id="jScrollPane5" pref="524" max="32767" attributes="1"/>
                               <EmptySpace min="-2" pref="188" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jScrollPane7" pref="704" max="32767" attributes="1"/>
+                              <Component id="jScrollPane7" pref="702" max="32767" attributes="1"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="614" max="32767" attributes="0"/>
+                              <EmptySpace pref="612" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="10" pref="10" max="10" attributes="0"/>
@@ -261,7 +261,7 @@
     </Container>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelEditWeeklyMenu">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Plan your weekly menu"/>
+        <Property name="text" type="java.lang.String" value="Plan weekly menu"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelEditWeeklyMenuActionPerformed"/>
@@ -317,7 +317,7 @@
     </Component>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelEditUserSettings">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Edit your profile"/>
+        <Property name="text" type="java.lang.String" value="Edit profile"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelEditUserSettingsActionPerformed"/>

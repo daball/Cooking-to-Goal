@@ -43,7 +43,7 @@ public class ListRecipesPanel extends SubPanel {
         
         //customize form for list mode
         if (this.listMode == ListMode.LIST_BROWSE)
-            this.jLabelTitle.setText("Browse Recipes");
+            this.jLabelTitle.setText("Manage Recipes");
         else if (this.listMode == ListMode.LIST_SEARCH)
             this.jLabelTitle.setText("Search Recipes");
         
