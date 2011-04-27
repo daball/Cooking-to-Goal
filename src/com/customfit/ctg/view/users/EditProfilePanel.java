@@ -525,7 +525,7 @@ public class EditProfilePanel extends CreateEditPanel {
             //build user's member
             String memberName = this.jTextFieldUser.getText();
             Double amount = Double.parseDouble(this.jTextFieldTargetAmount.getText());
-            Measurement goal = new Measurement(amount, (String)jComboBoxTargetNutrient.getSelectedItem());
+            Measurement goal = new Measurement(amount, NutritionFacts.getUnitForNutrient((String)jComboBoxTargetNutrient.getSelectedItem()));
             if (this.buttonGroupDirection.getSelection().getActionCommand().equals("Maximum"))
                 members.add(new Member(memberName,
                         (String)this.jComboBoxTargetNutrient.getSelectedItem(),
