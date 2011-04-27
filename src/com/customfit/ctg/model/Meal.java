@@ -252,7 +252,9 @@ public class Meal
      */
     public String toString()
     {
-        return this.getName();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(this.getDate());
+        return calendar.getDisplayName(Calendar.DAY_OF_WEEK, Calendar.LONG, Locale.getDefault()) + " - " + this.getName();
     }
     
     @Override

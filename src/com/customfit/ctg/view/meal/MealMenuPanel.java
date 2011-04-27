@@ -438,7 +438,8 @@ public class MealMenuPanel extends SubPanel {
     }//GEN-LAST:event_linkLabelAddNewActionPerformed
 
     private void jTableMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMenuMouseClicked
-        // TODO add your handling code here:
+        //same as recipes clicked
+        jTableRecipesMouseClicked(evt);
     }//GEN-LAST:event_jTableMenuMouseClicked
 
     private void jButtonRemoveMealOrRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMealOrRecipeActionPerformed
@@ -458,7 +459,11 @@ public class MealMenuPanel extends SubPanel {
 }//GEN-LAST:event_jButtonRemoveMealOrRecipeActionPerformed
 
     private void jTableRecipesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRecipesMouseClicked
-        // TODO add your handling code here:
+        //toggle add button state
+        if (this.jTableRecipes.getSelectedRowCount() > 0 && this.jTableMenu.getSelectedRowCount() > 0)
+            this.jButtonAddMealOrRecipe.setEnabled(true);
+        else if (this.jTableRecipes.getSelectedRowCount() == 0 || this.jTableMenu.getSelectedRowCount() == 0)
+            this.jButtonAddMealOrRecipe.setEnabled(false);
     }//GEN-LAST:event_jTableRecipesMouseClicked
 
     private void jButtonAddMealOrRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddMealOrRecipeActionPerformed
@@ -466,16 +471,20 @@ public class MealMenuPanel extends SubPanel {
         int selectedMenuRow = this.jTableMenu.getSelectedRow();
         int selectedRecipeRow = this.jTableRecipes.getSelectedRow();
         if (this.jTableMenu.getSelectedRowCount() > 0) {
-            int mealIndex = (Integer) jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 2);
-            if (this.jTableRecipes.getSelectedRowCount() > 0) {
-                //grab Recipe
-                Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
-                //add the recipe to the menu
-                MealPlanner.addRecipeToMeal(recipe, mealIndex);
-                this.refresh();
-                selectTableRow(this.jTableMenu, selectedMenuRow);
-                selectTableRow(this.jTableRecipes, selectedRecipeRow);
-            }
+            Object mealObject = jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 1);
+//            if (mealObject == null)
+                //tell controller to create a new meal
+//                MealPlanner.insertMealPlan();
+//            int mealIndex = (Integer) ;
+//            if (this.jTableRecipes.getSelectedRowCount() > 0) {
+//                //grab Recipe
+//                Recipe recipe = this.recipes.get(this.jTableRecipes.getSelectedRow());
+//                //add the recipe to the menu
+//                MealPlanner.addRecipeToMeal(recipe, mealIndex);
+//                this.refresh();
+//                selectTableRow(this.jTableMenu, selectedMenuRow);
+//                selectTableRow(this.jTableRecipes, selectedRecipeRow);
+//            }
         }
 
 }//GEN-LAST:event_jButtonAddMealOrRecipeActionPerformed
@@ -504,12 +513,6 @@ public class MealMenuPanel extends SubPanel {
     // End of variables declaration//GEN-END:variables
 
     private void jTableRecipesValueChanged(javax.swing.event.ListSelectionEvent evt) {
-    }
-
-    private void selectTableRow(JTable table, int row) {
-        if (row >= 0 && row < this.jTableMenu.getRowCount()) {
-            table.changeSelection(row, 0,false, false);
-        }
     }
 
     /**
@@ -545,6 +548,11 @@ public class MealMenuPanel extends SubPanel {
         }
 
         jTableRecipes.setModel(tableModel);
+        
+        if (this.jTableRecipes.getSelectedRowCount() > 0)
+            this.jButtonAddMealOrRecipe.setEnabled(true);
+        else if (this.jTableRecipes.getSelectedRowCount() == 0)
+            this.jButtonAddMealOrRecipe.setEnabled(false);
     }
 
     /**
@@ -562,7 +570,7 @@ public class MealMenuPanel extends SubPanel {
 
         //add recipes to list
         for (Meal meal : meals) {
-            Object[] row = {"<html><b>" + meal.getName() + "</b></html>", meal, -1};
+            Object[] row = {"<html><b>" + meal.toString() + "</b></html>", meal, -1};
             tableModel.addRow(row);
             for (Recipe recipe : meal.getRecipes()) {
                 Object[] rrow = {"       " + recipe.getName(), meal, meal.getRecipes().indexOf(recipe) };
@@ -570,7 +578,7 @@ public class MealMenuPanel extends SubPanel {
             }
 
         }
-        Object[] row = {"<html><b>" + "New Meal Plan" + "</b></html>", null, -1};
+        Object[] row = {"<html><b>" + "Create a new meal plan..." + "</b></html>", null, -1};
         tableModel.addRow(row);
 
         jTableMenu.setModel(tableModel);
