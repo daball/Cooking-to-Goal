@@ -171,11 +171,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="OK"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOKActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButtonCancel">
       <Properties>
         <Property name="text" type="java.lang.String" value="Cancel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonCancelActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

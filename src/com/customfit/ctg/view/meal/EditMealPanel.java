@@ -102,8 +102,18 @@ public class EditMealPanel extends CreateEditPanel {
         jLabel2.setText("Meal:");
 
         jButtonOK.setText("OK");
+        jButtonOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOKActionPerformed(evt);
+            }
+        });
 
         jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -181,6 +191,16 @@ public class EditMealPanel extends CreateEditPanel {
         this.jComboBoxMeMenu.setSelectedIndex(0);
 }//GEN-LAST:event_jComboBoxMeMenuActionPerformed
 
+    private void jButtonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOKActionPerformed
+        //tell controller about OK button
+        MealPlanner.insertMealPlan(this.getMeal());
+    }//GEN-LAST:event_jButtonOKActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        //tell main window to go back
+        Application.getMainFrame().goBack();
+    }//GEN-LAST:event_jButtonCancelActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.jdesktop.swingx.plaf.DatePickerAddon datePickerAddon1;
@@ -215,16 +235,16 @@ public class EditMealPanel extends CreateEditPanel {
     /**
      * Gets a new Meal based on the information in the form.
      * 
-     * @param meal Meal based on the user input.
+     * @returns Meal based on the user input.
      */
-    public void getMeal(Meal meal)
+    public Meal getMeal()
     {
         //build a Meal object from the old one
-        Meal meal = new Meal(meal);
+        Meal newMeal = new Meal(meal);
         //update the fields
-        meal.setName((String)this.jXComboBoxMeal.getSelectedItem());
-        meal.setDate(jXDatePickerDate.getDate());
+        newMeal.setName((String)this.jXComboBoxMeal.getSelectedItem());
+        newMeal.setDate(jXDatePickerDate.getDate());
         //return the new Meal
-        return meal;
+        return newMeal;
     }
 }
