@@ -231,11 +231,11 @@ public class MealMenuPanel extends SubPanel {
 
             },
             new String [] {
-                "Meal", "MealObject", "RecipeIndex"
+                "Meal", "MealObject", "RecipeObject"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false
@@ -303,7 +303,7 @@ public class MealMenuPanel extends SubPanel {
                     .addComponent(jButtonAddMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonRemoveMealOrRecipe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable1, javax.swing.GroupLayout.DEFAULT_SIZE, 111, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Select a recipe to add to your meal", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
@@ -363,7 +363,7 @@ public class MealMenuPanel extends SubPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(linkLabelAddNew, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE))
+                .addComponent(scrollPaneTable2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -404,8 +404,6 @@ public class MealMenuPanel extends SubPanel {
                 .addComponent(linkLabelHome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-
-        jPanel2.getAccessibleContext().setAccessibleName("Select a recipe to add to your meal");
     }// </editor-fold>//GEN-END:initComponents
 
     private void jComboBoxMeMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxMeMenuActionPerformed
@@ -440,18 +438,40 @@ public class MealMenuPanel extends SubPanel {
     private void jTableMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMenuMouseClicked
         //same as recipes clicked
         jTableRecipesMouseClicked(evt);
+        if (this.jTableMenu.getSelectedRowCount() > 0)
+            this.jButtonRemoveMealOrRecipe.setEnabled(true);
+        else if (this.jTableMenu.getSelectedRowCount() == 0)
+            this.jButtonRemoveMealOrRecipe.setEnabled(false);
     }//GEN-LAST:event_jTableMenuMouseClicked
 
     private void jButtonRemoveMealOrRecipeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRemoveMealOrRecipeActionPerformed
         //if a row is selected
         if (this.jTableMenu.getSelectedRowCount() > 0) {
-            int mealIndex = (Integer) jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 2);
-            int recipeIndex = (Integer) jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 3);
+            Object mealObject = jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 1);
+            Object recipeObject = jTableMenu.getModel().getValueAt(jTableMenu.getSelectedRow(), 2);
+            
             //if a mealName exists (so not selecting a meal name
-
-
-            if (mealIndex >= 0 && recipeIndex >= 0) {
-                MealPlanner.removeRecipeFromMeal(mealIndex, recipeIndex);
+            if (mealObject != null) {
+                Meal meal = (Meal)mealObject;
+                if (recipeObject != null && meal.getRecipes().size() > 1)
+                {
+                    for (Meal allMealsMeal: UserManagement.getCurrentUser().getAllMeals())
+                        if (allMealsMeal.equals(meal))
+                        {
+                            allMealsMeal.getRecipes().remove((Recipe)recipeObject);
+                            break;
+                        }
+                }
+                else
+                {
+                    for (Meal allMealsMeal: UserManagement.getCurrentUser().getAllMeals())
+                        if (allMealsMeal.equals(meal))
+                        {
+                            UserManagement.getCurrentUser().getAllMeals().remove(allMealsMeal);
+                            break;
+                        }
+                }
+                Application.getDataDriver().updateUserByName(UserManagement.getCurrentUser().getName(), UserManagement.getCurrentUser());
                 this.refresh();
             }
 
@@ -587,18 +607,23 @@ public class MealMenuPanel extends SubPanel {
 
         //add recipes to list
         for (Meal meal : meals) {
-            Object[] row = {"<html><b>" + meal.toString() + "</b></html>", meal, -1};
+            Object[] row = {"<html><b>" + meal.toString() + "</b></html>", meal, null};
             tableModel.addRow(row);
             for (Recipe recipe : meal.getRecipes()) {
-                Object[] rrow = {"       " + recipe.getName(), meal, meal.getRecipes().indexOf(recipe) };
+                Object[] rrow = {"       " + recipe.getName(), meal, recipe };
                 tableModel.addRow(rrow);
             }
 
         }
-        Object[] row = {"<html><b>" + "Create a new meal plan..." + "</b></html>", null, -1};
+        Object[] row = {"<html><b>" + "Create a new meal plan..." + "</b></html>", null, null};
         tableModel.addRow(row);
 
         jTableMenu.setModel(tableModel);
+        
+        if (this.jTableMenu.getSelectedRowCount() > 0)
+            this.jButtonRemoveMealOrRecipe.setEnabled(true);
+        else if (this.jTableMenu.getSelectedRowCount() == 0)
+            this.jButtonRemoveMealOrRecipe.setEnabled(false);
     }
 
     @Override
