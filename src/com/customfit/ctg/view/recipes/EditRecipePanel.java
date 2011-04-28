@@ -377,7 +377,7 @@ public class EditRecipePanel extends CreateEditPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         );
 
-        linkLabelAddToMeal.setText("Add to new meal");
+        linkLabelAddToMeal.setText("Create a new meal plan");
         linkLabelAddToMeal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddToMealActionPerformed(evt);
