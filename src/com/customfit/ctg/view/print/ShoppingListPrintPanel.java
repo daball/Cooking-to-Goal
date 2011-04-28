@@ -31,8 +31,8 @@ public class ShoppingListPrintPanel extends AbstractPrintPanel {
         jLabelName.setFont(new java.awt.Font("Times New Roman", 3, 24));
         jLabelName.setText("Shopping List");
 
-        jLabelDates.setFont(new java.awt.Font("Times New Roman", 2, 11));
-        jLabelDates.setText("For the week starting on January 2, 2011, ending on December 31, 2011.");
+        jLabelDates.setFont(new java.awt.Font("Times New Roman", 2, 11)); // NOI18N
+        jLabelDates.setText("     ");
 
         jScrollPane1.setBorder(null);
 

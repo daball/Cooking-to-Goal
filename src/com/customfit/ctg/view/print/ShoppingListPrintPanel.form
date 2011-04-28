@@ -62,7 +62,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Times New Roman" size="11" style="2"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="For the week starting on January 2, 2011, ending on December 31, 2011."/>
+        <Property name="text" type="java.lang.String" value="     "/>
       </Properties>
     </Component>
     <Container class="javax.swing.JScrollPane" name="jScrollPane1">

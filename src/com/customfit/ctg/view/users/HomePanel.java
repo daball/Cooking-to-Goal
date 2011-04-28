@@ -65,11 +65,6 @@ public class HomePanel extends SubPanel {
         recipeStatusMessage.append(" in your inventory.");
         this.jTextRecipes.setText(recipeStatusMessage.toString());
         
-        StringBuilder mealStatusMessage = new StringBuilder();
-        mealStatusMessage.append("You currently have ");
-        mealStatusMessage.append("____");
-        mealStatusMessage.append(" meals planned for the next seven days.");
-        this.jTextMealPlanning.setText(mealStatusMessage.toString());
     }
 
     /** This method is called from within the constructor to
@@ -142,7 +137,7 @@ public class HomePanel extends SubPanel {
         jTextMealPlanning.setBackground(javax.swing.UIManager.getDefaults().getColor("control"));
         jTextMealPlanning.setBorder(null);
         jTextMealPlanning.setEditable(false);
-        jTextMealPlanning.setText("You have %COUNT% meals planned for the next seven days.");
+        jTextMealPlanning.setText("This section allows you to add and remove recipes from your weekly menu.");
         jTextMealPlanning.setFocusable(false);
         jTextMealPlanning.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jTextMealPlanning.setOpaque(false);
@@ -219,24 +214,24 @@ public class HomePanel extends SubPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                                     .addComponent(jLabel4)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 449, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 427, Short.MAX_VALUE)
                                         .addComponent(jComboBoxMeMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                                     .addComponent(jLabel1))
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 524, Short.MAX_VALUE)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
                                 .addGap(188, 188, 188))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 702, Short.MAX_VALUE)
+                                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 680, Short.MAX_VALUE)
                                 .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel3)
-                                .addContainerGap(612, Short.MAX_VALUE))
+                                .addContainerGap(590, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

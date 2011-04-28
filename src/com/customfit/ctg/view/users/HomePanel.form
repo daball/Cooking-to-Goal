@@ -216,7 +216,7 @@
               <Border info="null"/>
             </Property>
             <Property name="editable" type="boolean" value="false"/>
-            <Property name="text" type="java.lang.String" value="You have %COUNT% meals planned for the next seven days."/>
+            <Property name="text" type="java.lang.String" value="This section allows you to add and remove recipes from your weekly menu."/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]"/>
