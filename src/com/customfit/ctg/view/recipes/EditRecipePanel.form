@@ -461,7 +461,7 @@
     </Container>
     <Component class="com.customfit.ctg.view.LinkLabel" name="linkLabelAddToMeal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Create a new meal plan"/>
+        <Property name="text" type="java.lang.String" value="Add to a new meal plan"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="linkLabelAddToMealActionPerformed"/>
