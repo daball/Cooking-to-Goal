@@ -134,6 +134,8 @@ public class EditRecipePanel extends CreateEditPanel {
 //                                    ((String)membersModel.getValueAt(row, e.getColumn())).trim().equals(user.getName())))
 //                            membersModel.setValueAt("Member's Name", row, e.getColumn());
 //                }
+                jTableIngredients.setModel(membersModel);
+                jTableIngredients.revalidate();
                 validateForm();
             }
         });
@@ -219,9 +221,16 @@ public class EditRecipePanel extends CreateEditPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTableNutritionFacts.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -367,7 +376,7 @@ public class EditRecipePanel extends CreateEditPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
         );
 
-        linkLabelAddToMeal.setText("Create a new meal plan");
+        linkLabelAddToMeal.setText("Add to new meal");
         linkLabelAddToMeal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 linkLabelAddToMealActionPerformed(evt);
@@ -503,6 +512,9 @@ public class EditRecipePanel extends CreateEditPanel {
 }//GEN-LAST:event_jComboBoxMeMenuActionPerformed
 
     private void jButtonSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSaveActionPerformed
+        removeEmptyIngredientRows();
+        //if the form is invalid, then don't save
+        if (!this.validateForm()) return;
         //if its a new recipe
         if (this.getCreateEditMode() == CreateEditMode.CREATE)
             //then save it and go back to the last panel
@@ -523,8 +535,9 @@ public class EditRecipePanel extends CreateEditPanel {
 
     private void jButtonAddIngredientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddIngredientActionPerformed
         DefaultTableModel dtm = (DefaultTableModel)jTableIngredients.getModel();
-        dtm.addRow(new Object [] {null, null, null});
+        dtm.addRow(new Object [] {"", "", null});
         jTableIngredients.setModel(dtm);
+        jTableIngredients.revalidate();
     }//GEN-LAST:event_jButtonAddIngredientActionPerformed
 
     private void jTextNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextNameKeyReleased
@@ -568,6 +581,26 @@ public class EditRecipePanel extends CreateEditPanel {
 
     }//GEN-LAST:event_linkLabelDeleteActionPerformed
 
+    /**
+     * Delete any rows that have an empty cell.
+     */
+    private void removeEmptyIngredientRows() {
+        DefaultTableModel dtm = (DefaultTableModel)jTableIngredients.getModel();
+        for (int r=0; r<dtm.getRowCount(); r++) {
+            boolean empty = false;
+            for (int c=0; c<dtm.getColumnCount(); c++) {
+                if(dtm.getValueAt(r, c) == null) empty = true;
+                else if(dtm.getValueAt(r, c).equals("")) empty = true;
+            }
+            if(empty) {
+                dtm.removeRow(r);
+                r--; //this keeps it from skipping a row
+            }
+        }
+
+        jTableIngredients.setModel(dtm);
+        jTableIngredients.revalidate();
+    }
     private void removeIngredient() {
         int currentRow = jTableIngredients.getSelectedRow();
         if (currentRow != -1) {
@@ -575,6 +608,7 @@ public class EditRecipePanel extends CreateEditPanel {
             dtm.removeRow(currentRow);
 
             jTableIngredients.setModel(dtm);
+            jTableIngredients.revalidate();
             if (currentRow < jTableIngredients.getRowCount())
                 jTableIngredients.setRowSelectionInterval(currentRow, currentRow);
         }
@@ -695,7 +729,7 @@ public class EditRecipePanel extends CreateEditPanel {
     /**
      * Makes sure we are good to save before actually enabling the save button.
      */
-    private void validateForm()
+    private boolean validateForm()
     {
         boolean disableSaves = false;
         if (this.jTextName.getText().trim().length() < 5)
@@ -709,5 +743,6 @@ public class EditRecipePanel extends CreateEditPanel {
         else if (this.getCreateEditMode() == CreateEditMode.EDIT && this.recipe.equals(this.getRecipe()))
             disableSaves = true;
         this.jButtonSave.setEnabled(!disableSaves);
+        return !disableSaves;
     }
 }
