@@ -357,6 +357,7 @@ public class EditRecipePanel extends CreateEditPanel {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Instructions", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 11))); // NOI18N
 
         jTextAreaInstructions.setColumns(20);
+        jTextAreaInstructions.setLineWrap(true);
         jTextAreaInstructions.setRows(5);
         jTextAreaInstructions.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
